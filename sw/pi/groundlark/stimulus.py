@@ -65,8 +65,8 @@ def validate_changes(changes):
                 raise ValueError("gnss_antenna must be normal, open or short")
         elif name == "sensor_faults":
             actions = {"none", "timeout", "nack", "disconnect", "not_ready", "saturation", "short_read"}
-            if not isinstance(value, dict) or not set(value) <= {str(i) for i in range(1, 18)}:
-                raise ValueError("fault controls require sensor IDs 1..17")
+            if not isinstance(value, dict) or not set(value) <= {str(i) for i in range(1, 21)}:
+                raise ValueError("fault controls require sensor IDs 1..20")
             if any(type(action) is not str or action not in actions for action in value.values()):
                 raise ValueError("unknown timed fault action")
         elif name == "pressure_temperature_count":
@@ -201,7 +201,7 @@ def reading(sensor, cfg, scenario, now, seed):
     if sensor == 17:
         from .burrowlark import modeled_reading
         return modeled_reading(scenario, now, seed)
-    if sensor >= 10:
+    if 10 <= sensor <= 16:
         from .skylark import modeled_reading
         return modeled_reading(sensor, scenario, now, seed)
     state, displacement = scenario.state_at(now)
@@ -253,7 +253,7 @@ def reading(sensor, cfg, scenario, now, seed):
         value = wave.get("amplitude", 0) * (h * complex(math.cos(2*math.pi*f*now/1e9 + math.radians(wave.get("phase_deg", 0))), math.sin(2*math.pi*f*now/1e9 + math.radians(wave.get("phase_deg", 0))))).imag
         raw = dict(counts=quantize(value * cfg["geophone_gain"] / cfg["geophone_reference_v"] * 8388608, -8388608, 8388607), conversion_counter=(now // cfg["period_ns"]) & 255)
     elif sensor == 6: return Reading(dict(nav_pvt=nav_pvt(now, state, displacement)))
-    elif sensor == 7:
+    elif sensor in (7, 18, 19, 20):
         # Nominal model gain at cycle count 200; not a fitted calibration.
         if any(cfg[f"cycle_count_{axis}"] != 200 for axis in "xyz"): raise ValueError("magnetic model requires cycle count 200")
         values = body_vector(vector("magnetic_ut"), vector("head_orientation_deg"))

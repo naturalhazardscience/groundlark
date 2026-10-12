@@ -1,8 +1,8 @@
 {
   "groundlark-field-head": {
     "size": [
-      70,
-      45
+      96,
+      70
     ],
     "parts": [
       {
@@ -10,7 +10,7 @@
         "type": "FieldUsbConnector",
         "value": "USB-C DEVICE",
         "xy": [
-          67,
+          93,
           14
         ],
         "angle": 90,
@@ -27,7 +27,7 @@
         "type": "USB_R51",
         "value": "5.1k",
         "xy": [
-          61,
+          87,
           6
         ],
         "angle": 0,
@@ -44,7 +44,7 @@
         "type": "USB_R51",
         "value": "5.1k",
         "xy": [
-          60,
+          86,
           20
         ],
         "angle": 0,
@@ -61,7 +61,7 @@
         "type": "P_28",
         "value": "USBLC6-2SC6",
         "xy": [
-          60,
+          86,
           14
         ],
         "angle": 0,
@@ -78,7 +78,7 @@
         "type": "P_28",
         "value": "USBLC6-2SC6",
         "xy": [
-          57,
+          83,
           5
         ],
         "angle": 0,
@@ -95,7 +95,7 @@
         "type": "P_27",
         "value": "500mA PTC",
         "xy": [
-          66,
+          92,
           26
         ],
         "angle": 0,
@@ -112,7 +112,7 @@
         "type": "USB_LDO",
         "value": "AP2112K-3.3",
         "xy": [
-          58,
+          84,
           24
         ],
         "angle": 0,
@@ -135,7 +135,7 @@
         "type": "USB_CIN",
         "value": "2.2u",
         "xy": [
-          61,
+          87,
           28
         ],
         "angle": 0,
@@ -152,7 +152,7 @@
         "type": "P_13",
         "value": "4.7u",
         "xy": [
-          53,
+          79,
           24
         ],
         "angle": 0,
@@ -169,7 +169,7 @@
         "type": "USB_MCU",
         "value": "STM32F042K6T6",
         "xy": [
-          51,
+          77,
           14
         ],
         "angle": 0,
@@ -219,7 +219,7 @@
         "type": "P_6",
         "value": "100n",
         "xy": [
-          46,
+          72,
           8
         ],
         "angle": 0,
@@ -236,7 +236,7 @@
         "type": "P_6",
         "value": "100n",
         "xy": [
-          56,
+          82,
           19
         ],
         "angle": 0,
@@ -253,7 +253,7 @@
         "type": "P_6",
         "value": "100n",
         "xy": [
-          44,
+          70,
           16
         ],
         "angle": 0,
@@ -270,7 +270,7 @@
         "type": "P_6",
         "value": "100n",
         "xy": [
-          44,
+          70,
           12
         ],
         "angle": 0,
@@ -287,7 +287,7 @@
         "type": "IF_R64",
         "value": "10k",
         "xy": [
-          44,
+          70,
           5
         ],
         "angle": 0,
@@ -304,7 +304,7 @@
         "type": "IF_R64",
         "value": "10k",
         "xy": [
-          51,
+          77,
           5
         ],
         "angle": 0,
@@ -321,7 +321,7 @@
         "type": "USB_SWD",
         "value": "SWD / 3V3 SENSE",
         "xy": [
-          61,
+          87,
           32
         ],
         "angle": 0,
@@ -338,8 +338,8 @@
         "type": "P_5",
         "value": "BOOT0 jumper",
         "xy": [
-          36,
-          32
+          72,
+          43
         ],
         "angle": 0,
         "section": "02-controller",
@@ -355,7 +355,7 @@
         "type": "USB_SWITCH",
         "value": "TPS22919",
         "xy": [
-          39,
+          65,
           25
         ],
         "angle": 0,
@@ -379,7 +379,7 @@
         "type": "IF_R66",
         "value": "100k",
         "xy": [
-          39,
+          65,
           21
         ],
         "angle": 0,
@@ -396,7 +396,7 @@
         "type": "P_6",
         "value": "100n",
         "xy": [
-          35,
+          69,
           25
         ],
         "angle": 0,
@@ -413,8 +413,8 @@
         "type": "P_26",
         "value": "4.7k",
         "xy": [
-          36,
-          8
+          69,
+          33
         ],
         "angle": 0,
         "section": "03-sensors",
@@ -430,8 +430,8 @@
         "type": "P_26",
         "value": "4.7k",
         "xy": [
-          40,
-          8
+          69,
+          36
         ],
         "angle": 0,
         "section": "03-sensors",
@@ -445,23 +445,23 @@
       {
         "ref": "U2",
         "type": "P_34",
-        "value": "RM3100 XYZ",
+        "value": "RM3100 XYZ / 0",
         "xy": [
-          18,
+          20,
           20
         ],
         "angle": 0,
-        "section": "03-sensors",
+        "section": "03-magnetometer-0",
         "dnp": false,
-        "note": "",
+        "note": "Array slot 0; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11",
         "mpn": "PNI 14190",
         "footprint": "Groundlark:PNI_14190_Module",
         "local_fp": "Groundlark__PNI_14190_Module",
         "names": {
-          "1": "SCL",
-          "2": "SA1",
-          "3": "SDA",
-          "4": "SA0",
+          "1": "SCK",
+          "2": "SO",
+          "3": "SI",
+          "4": "SSN",
           "5": "DRDY",
           "6": "NC",
           "7": "AVSS",
@@ -479,13 +479,13 @@
         "type": "P_6",
         "value": "100n",
         "xy": [
-          33,
-          15
+          34.5,
+          14.92
         ],
         "angle": 0,
-        "section": "03-sensors",
+        "section": "03-magnetometer-0",
         "dnp": false,
-        "note": "",
+        "note": "U2 local 100 nF bypass",
         "mpn": "GRM188R71H104KA93D",
         "footprint": "Capacitor_SMD:C_0603_1608Metric",
         "local_fp": "Capacitor_SMD__C_0603_1608Metric",
@@ -514,7 +514,7 @@
         "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
         "names": {},
         "xy": [
-          67,
+          93,
           3
         ],
         "section": "01-remote-link",
@@ -532,7 +532,7 @@
         "names": {},
         "xy": [
           3,
-          42
+          67
         ],
         "section": "01-remote-link",
         "angle": 0,
@@ -548,8 +548,8 @@
         "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
         "names": {},
         "xy": [
-          67,
-          42
+          93,
+          67
         ],
         "section": "01-remote-link",
         "angle": 0,
@@ -564,8 +564,8 @@
         "type": "SHT45",
         "value": "SHT45",
         "xy": [
-          31,
-          36
+          35,
+          35
         ],
         "angle": 0,
         "section": "03-sensors",
@@ -586,8 +586,8 @@
         "type": "P_6",
         "value": "100n",
         "xy": [
-          33,
-          38
+          38,
+          35
         ],
         "angle": 0,
         "section": "03-sensors",
@@ -597,24 +597,204 @@
         "footprint": "Capacitor_SMD:C_0603_1608Metric",
         "local_fp": "Capacitor_SMD__C_0603_1608Metric",
         "names": {}
+      },
+      {
+        "ref": "U7",
+        "type": "P_34",
+        "value": "RM3100 XYZ / 1",
+        "xy": [
+          50,
+          20
+        ],
+        "angle": 0,
+        "section": "03-magnetometer-1",
+        "dnp": false,
+        "note": "Array slot 1; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11",
+        "mpn": "PNI 14190",
+        "footprint": "Groundlark:PNI_14190_Module",
+        "local_fp": "Groundlark__PNI_14190_Module",
+        "names": {
+          "1": "SCK",
+          "2": "SO",
+          "3": "SI",
+          "4": "SSN",
+          "5": "DRDY",
+          "6": "NC",
+          "7": "AVSS",
+          "8": "NC",
+          "9": "NC",
+          "10": "I2CEN",
+          "11": "NC",
+          "12": "DVDD",
+          "13": "AVDD",
+          "14": "DVSS"
+        }
+      },
+      {
+        "ref": "C11",
+        "type": "P_6",
+        "value": "100n",
+        "xy": [
+          64.5,
+          14.92
+        ],
+        "angle": 0,
+        "section": "03-magnetometer-1",
+        "dnp": false,
+        "note": "U7 local 100 nF bypass",
+        "mpn": "GRM188R71H104KA93D",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "names": {}
+      },
+      {
+        "ref": "U8",
+        "type": "P_34",
+        "value": "RM3100 XYZ / 2",
+        "xy": [
+          20,
+          50
+        ],
+        "angle": 0,
+        "section": "03-magnetometer-2",
+        "dnp": false,
+        "note": "Array slot 2; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11",
+        "mpn": "PNI 14190",
+        "footprint": "Groundlark:PNI_14190_Module",
+        "local_fp": "Groundlark__PNI_14190_Module",
+        "names": {
+          "1": "SCK",
+          "2": "SO",
+          "3": "SI",
+          "4": "SSN",
+          "5": "DRDY",
+          "6": "NC",
+          "7": "AVSS",
+          "8": "NC",
+          "9": "NC",
+          "10": "I2CEN",
+          "11": "NC",
+          "12": "DVDD",
+          "13": "AVDD",
+          "14": "DVSS"
+        }
+      },
+      {
+        "ref": "C12",
+        "type": "P_6",
+        "value": "100n",
+        "xy": [
+          34.5,
+          44.92
+        ],
+        "angle": 0,
+        "section": "03-magnetometer-2",
+        "dnp": false,
+        "note": "U8 local 100 nF bypass",
+        "mpn": "GRM188R71H104KA93D",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "names": {}
+      },
+      {
+        "ref": "U9",
+        "type": "P_34",
+        "value": "RM3100 XYZ / 3",
+        "xy": [
+          50,
+          50
+        ],
+        "angle": 0,
+        "section": "03-magnetometer-3",
+        "dnp": false,
+        "note": "Array slot 3; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11",
+        "mpn": "PNI 14190",
+        "footprint": "Groundlark:PNI_14190_Module",
+        "local_fp": "Groundlark__PNI_14190_Module",
+        "names": {
+          "1": "SCK",
+          "2": "SO",
+          "3": "SI",
+          "4": "SSN",
+          "5": "DRDY",
+          "6": "NC",
+          "7": "AVSS",
+          "8": "NC",
+          "9": "NC",
+          "10": "I2CEN",
+          "11": "NC",
+          "12": "DVDD",
+          "13": "AVDD",
+          "14": "DVSS"
+        }
+      },
+      {
+        "ref": "C13",
+        "type": "P_6",
+        "value": "100n",
+        "xy": [
+          64.5,
+          44.92
+        ],
+        "angle": 0,
+        "section": "03-magnetometer-3",
+        "dnp": false,
+        "note": "U9 local 100 nF bypass",
+        "mpn": "GRM188R71H104KA93D",
+        "footprint": "Capacitor_SMD:C_0603_1608Metric",
+        "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+        "names": {}
+      },
+      {
+        "ref": "R9",
+        "type": "IF_R66",
+        "value": "100k",
+        "xy": [
+          68,
+          20
+        ],
+        "angle": 0,
+        "section": "02-controller",
+        "dnp": false,
+        "note": "100 kohm shared SPI CS pull-up to switched sensor rail",
+        "mpn": "RC0603FR-07100KL",
+        "footprint": "Resistor_SMD:R_0603_1608Metric",
+        "local_fp": "Resistor_SMD__R_0603_1608Metric",
+        "names": {}
       }
     ],
     "silkscreen": {
       "name": "Burrowlark",
-      "model_revision": "DAQUSB-01 / REV A2",
-      "revision": "A2",
+      "model_revision": "DAQUSB-01 / REV B1",
+      "revision": "B1",
       "logo_xy": [
-        48,
-        33
+        80,
+        48
       ],
       "name_xy": [
-        48,
-        39
+        80,
+        55
       ],
       "details_xy": [
-        48,
-        42
+        80,
+        59
       ]
+    },
+    "magnetic_array": {
+      "references": [
+        "U2",
+        "U7",
+        "U8",
+        "U9"
+      ],
+      "pitch_mm": 30,
+      "orientation_deg": 0,
+      "origin_mm": [
+        20,
+        20
+      ],
+      "interface": "parallel SPI: shared SCK/SI/SSN; independent SO and DRDY",
+      "timing": "Common single-measurement POLL; individual DRDY observations; internal oscillators are independent"
     }
   }
 }

@@ -1,107 +1,107 @@
 {
   "trial_counts": {
     "0.4": {
-      "attempted": 98,
-      "retained": 63
+      "attempted": 35,
+      "retained": 0
     },
     "0.3": {
       "attempted": 35,
-      "retained": 3
+      "retained": 6
     },
     "0.25": {
-      "attempted": 32,
-      "retained": 7
+      "attempted": 29,
+      "retained": 5
     },
     "0.2": {
-      "attempted": 25,
-      "retained": 12
+      "attempted": 24,
+      "retained": 11
     }
   },
   "track_length_mm": [
     {
       "net": "USB_5V",
       "width_mm": 0.15,
-      "length_mm": 6.333
+      "length_mm": 4.673
     },
     {
       "net": "USB_5V",
       "width_mm": 0.2,
-      "length_mm": 1.813
+      "length_mm": 0.612
     },
     {
       "net": "USB_5V",
       "width_mm": 0.25,
-      "length_mm": 0.291
+      "length_mm": 0.873
     },
     {
       "net": "USB_5V",
       "width_mm": 0.4,
-      "length_mm": 8.448
+      "length_mm": 11.007
     },
     {
       "net": "USB_VBUS",
       "width_mm": 0.15,
-      "length_mm": 6.572
+      "length_mm": 2.671
     },
     {
       "net": "USB_VBUS",
       "width_mm": 0.2,
-      "length_mm": 12.312
+      "length_mm": 0.703
     },
     {
       "net": "USB_VBUS",
+      "width_mm": 0.4,
+      "length_mm": 24.086
+    },
+    {
+      "net": "V3",
+      "width_mm": 0.15,
+      "length_mm": 5.414
+    },
+    {
+      "net": "V3",
+      "width_mm": 0.2,
+      "length_mm": 18.529
+    },
+    {
+      "net": "V3",
+      "width_mm": 0.25,
+      "length_mm": 0.436
+    },
+    {
+      "net": "V3",
       "width_mm": 0.3,
-      "length_mm": 0.69
-    },
-    {
-      "net": "USB_VBUS",
-      "width_mm": 0.4,
-      "length_mm": 19.791
-    },
-    {
-      "net": "V3",
-      "width_mm": 0.15,
-      "length_mm": 20.698
-    },
-    {
-      "net": "V3",
-      "width_mm": 0.2,
-      "length_mm": 1.781
-    },
-    {
-      "net": "V3",
-      "width_mm": 0.25,
-      "length_mm": 7.582
+      "length_mm": 5.78
     },
     {
       "net": "V3",
       "width_mm": 0.4,
-      "length_mm": 47.426
+      "length_mm": 57.19
     },
     {
       "net": "V3_SENSOR",
       "width_mm": 0.15,
-      "length_mm": 16.343
+      "length_mm": 29.976
     },
     {
       "net": "V3_SENSOR",
       "width_mm": 0.2,
-      "length_mm": 10.98
+      "length_mm": 24.718
     },
     {
       "net": "V3_SENSOR",
       "width_mm": 0.25,
-      "length_mm": 3.703
+      "length_mm": 26.733
     },
     {
       "net": "V3_SENSOR",
       "width_mm": 0.3,
-      "length_mm": 8.703
+      "length_mm": 1.25
     },
     {
       "net": "V3_SENSOR",
       "width_mm": 0.4,
-      "length_mm": 25.267
+      "length_mm": 66.934
     }
   ],
   "scope": "Width cleanup checked by DRC; not current/thermal signoff"

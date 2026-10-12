@@ -38,7 +38,9 @@ def run_bench(board="hat"):
         check("Barometer", values[16]["primary"][0] == 101325 and values[16]["secondary"][0] == 25,
               "Factory compensation of synthetic trim: 101325 Pa, 25 C")
     else:
-        check("Magnetometer", snap["latest"][7]["primary"] == [-750, 0, 1500], "Nominal 75 counts/uT, signed axes")
+        check("Four magnetometers", set(snap["latest"]) == {7, 18, 19, 20, 17} and
+              all(snap["latest"][sensor]["primary"] == [-750, 0, 1500] for sensor in (7, 18, 19, 20)),
+              "Four distinct streams; independent nominal 75 counts/uT expectation, signed axes")
         climate = snap["latest"][17]
         check("SHT45 cold/dry", abs(climate["primary"][0]+10)<.003 and
               abs(climate["secondary"][0])<.003, "Negative temperature and zero RH remain valid; both CRC words retained")
@@ -53,6 +55,9 @@ def run_bench(board="hat"):
     check("Fault isolation", snap["latest"][sid]["quality"] == "Missing" and
           snap["latest"][14 if board == "skylark" else 17]["quality"] == "Valid",
           "Missing stays distinct from zero; independent environmental stream continues")
+    if board == "burrowlark":
+        check("Modeled lane isolation", all(snap["latest"][sensor]["quality"] == "Valid" for sensor in (18, 19, 20)),
+              "Ideal independent drivers continue; target firmware instead latches the whole array on a magnetic fault")
     e.controls({"sensor_faults": {str(sid): "none"}})
     advance(5000 if board == "skylark" else 1000)
     if board == "burrowlark":
@@ -60,7 +65,8 @@ def run_bench(board="hat"):
         advance(1000)
         values = e.snapshot(17)["latest"]
         check("SHT45 fault isolation", values[17]["quality"] == "Missing" and
-              values[7]["quality"] == "Valid", "Climate failure leaves magnetic acquisition running")
+              all(values[sensor]["quality"] == "Valid" for sensor in (7, 18, 19, 20)),
+              "Climate failure leaves all four magnetic streams running")
         e.controls({"sensor_faults": {"17": "none"}})
         advance(3000)
         check("SHT45 recovery", e.snapshot(17)["latest"][17]["quality"] == "Valid",
@@ -74,4 +80,4 @@ def run_bench(board="hat"):
                      samples=e.samples, recording_sha256=sha256(data).hexdigest(),
                      scope="Ideal sensor stimulus through shared acquisition and replay; " +
                      ("Skylark C firmware fault tests run separately in the portable suite" if board=='skylark'
-                      else "Burrowlark firmware remains pending"))
+                      else "Burrowlark B1 C timing/fault tests run separately; physical coherence and noise remain unqualified"))

@@ -41,6 +41,9 @@ enum SensorId {
   SENSOR_ID_AMBIENT_CLIMATE = 15;
   SENSOR_ID_BAROMETER = 16;
   SENSOR_ID_ENCLOSURE_CLIMATE = 17;
+  SENSOR_ID_MAGNETOMETER_2 = 18;
+  SENSOR_ID_MAGNETOMETER_3 = 19;
+  SENSOR_ID_MAGNETOMETER_4 = 20;
 }
 
 enum ClockDomain {
@@ -137,6 +140,14 @@ message MagneticRaw {
   Vector3i counts = 1;
 }
 
+// Burrowlark B1 common POLL command and individual DRDY interrupt observations.
+// Same MCU clock as Timestamp; these do not establish physical sample times.
+message MagneticTiming {
+  optional uint64 cohort = 1;
+  optional uint64 trigger_ns = 2;
+  optional uint64 ready_observed_ns = 3;
+}
+
 message PressureRaw {
   // Exactly four sensor response bytes, including status and temperature bits.
   bytes response = 1;
@@ -203,6 +214,7 @@ message Sample {
     BarometerRaw barometer = 19;
   }
   Calibrated calibrated = 20;
+  MagneticTiming magnetic_timing = 21;
 }
 
 message SampleBatch {

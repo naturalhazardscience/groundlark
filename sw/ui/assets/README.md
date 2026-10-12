@@ -92,7 +92,7 @@ mating solids. The jack faces away from the geophone exit.
 
 ## Burrowlark
 
-`burrowlark.glb` contains the native 70 x 45 mm routed PCB and stock models plus
+`burrowlark.glb` contains the native 96 x 70 mm B1 routed PCB with four aligned RM3100 modules and stock models plus
 simplified PNI14190, PTC1812 and SHT45 envelopes. The SHT45 body is an authored
 nominal 1.5 x 1.5 x 0.5 mm model based on the Sensirion SHT4x package drawing,
 not a supplier-certified solid. It is included in both the native README render
@@ -106,7 +106,7 @@ python sw/ui/build_burrowlark_model.py .local/burrowlark-native.glb
 ```
 
 Use a separate build environment with `trimesh==4.8.3` and `numpy==2.5.3`.
-The three local VRML parts are the expected missing native GLB models and are
+The six local VRML parts (four PNI modules, fuse and SHT45) are the expected missing native GLB models and are
 added by the converter. Inspect alignment before accepting the hashes in
 `burrowlark-provenance.json`. Runtime/UI dependencies remain unchanged.
 

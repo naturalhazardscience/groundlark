@@ -116,6 +116,7 @@ def schematic(name,spec,folder):
         all_libs.extend(libs)
         revision='DAQHAT-01' if name=='groundlark-daqhat-01' else 'A2 PROTOTYPE'
         date='2026-09-30' if name=='groundlark-daqhat-01' else '2026-09-23'
+        if name=='groundlark-field-head': revision,date='B1 PROTOTYPE','2026-10-12'
         if name=='skylark-usb': revision,date='A PROTOTYPE','2026-09-26'
         header=f'(kicad_sch (version 20230121) (generator eeschema) (uuid {sid}) (paper "A3") (title_block (title {q(("Groundlark DAQHAT-01" if name=="groundlark-daqhat-01" else name)+" / "+section)}) (date {q(date)}) (rev {q(revision)}))'
         (folder/file).write_text(header+'\n(lib_symbols\n'+'\n'.join(libs)+')\n'+'\n'.join(body)+'\n)',encoding='utf-8')

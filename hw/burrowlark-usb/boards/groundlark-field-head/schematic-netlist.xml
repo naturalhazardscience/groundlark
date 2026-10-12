@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="E">
   <design>
-    <source>/work/hw/burrowlark-usb/boards/groundlark-field-head/groundlark-field-head.kicad_sch</source>
-    <date>2026-10-01T21:37:49+0000</date>
+    <source>/workspace/hw/burrowlark-usb/boards/groundlark-field-head/groundlark-field-head.kicad_sch</source>
+    <date>2026-10-12T21:49:37+0000</date>
     <tool>Eeschema 9.0.9</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -26,8 +26,8 @@
       <title_block>
         <title>groundlark-field-head / 01-usb-power-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>B1 PROTOTYPE</rev>
+        <date>2026-10-12</date>
         <source>01-usb-power-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -44,8 +44,8 @@
       <title_block>
         <title>groundlark-field-head / 02-controller-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>B1 PROTOTYPE</rev>
+        <date>2026-10-12</date>
         <source>02-controller-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -58,12 +58,84 @@
         <comment number="9" value=""/>
       </title_block>
     </sheet>
-    <sheet number="4" name="/03-sensors-page-01/" tstamps="/ab979e54-c171-5922-9bbc-4aaabc504545/">
+    <sheet number="4" name="/03-magnetometer-0-page-01/" tstamps="/04158baf-cecb-5065-a9bc-851bfffed368/">
+      <title_block>
+        <title>groundlark-field-head / 03-magnetometer-0-page-01</title>
+        <company/>
+        <rev>B1 PROTOTYPE</rev>
+        <date>2026-10-12</date>
+        <source>03-magnetometer-0-page-01.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="5" name="/03-magnetometer-1-page-01/" tstamps="/9fad44fa-7af3-56fc-b7e7-e4c810889758/">
+      <title_block>
+        <title>groundlark-field-head / 03-magnetometer-1-page-01</title>
+        <company/>
+        <rev>B1 PROTOTYPE</rev>
+        <date>2026-10-12</date>
+        <source>03-magnetometer-1-page-01.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="6" name="/03-magnetometer-2-page-01/" tstamps="/e8b93225-614c-5ada-b7fb-3affdad481e0/">
+      <title_block>
+        <title>groundlark-field-head / 03-magnetometer-2-page-01</title>
+        <company/>
+        <rev>B1 PROTOTYPE</rev>
+        <date>2026-10-12</date>
+        <source>03-magnetometer-2-page-01.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="7" name="/03-magnetometer-3-page-01/" tstamps="/a7182554-5f76-51c0-b062-5e65eae498b8/">
+      <title_block>
+        <title>groundlark-field-head / 03-magnetometer-3-page-01</title>
+        <company/>
+        <rev>B1 PROTOTYPE</rev>
+        <date>2026-10-12</date>
+        <source>03-magnetometer-3-page-01.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="8" name="/03-sensors-page-01/" tstamps="/ab979e54-c171-5922-9bbc-4aaabc504545/">
       <title_block>
         <title>groundlark-field-head / 03-sensors-page-01</title>
         <company/>
-        <rev>A2 PROTOTYPE</rev>
-        <date>2026-09-23</date>
+        <rev>B1 PROTOTYPE</rev>
+        <date>2026-10-12</date>
         <source>03-sensors-page-01.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
@@ -350,6 +422,22 @@
       <sheetpath names="/02-controller-page-01/" tstamps="/fc7d5532-6c14-5c58-945d-ed7a9463f825/"/>
       <tstamps>6e356c18-4980-539a-94bd-6426e0013a4d</tstamps>
     </comp>
+    <comp ref="R9">
+      <value>100k</value>
+      <footprint>Groundlark:Resistor_SMD__R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+        <field name="Footprint">Groundlark:Resistor_SMD__R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Groundlark" part="Part_R9" description=""/>
+      <property name="MPN" value="RC0603FR-07100KL"/>
+      <property name="Sheetname" value="02-controller-page-01"/>
+      <property name="Sheetfile" value="02-controller-page-01.kicad_sch"/>
+      <sheetpath names="/02-controller-page-01/" tstamps="/fc7d5532-6c14-5c58-945d-ed7a9463f825/"/>
+      <tstamps>b79f1f5d-f1a1-5875-8edf-6295879e8d40</tstamps>
+    </comp>
     <comp ref="U1">
       <value>STM32F042K6T6</value>
       <footprint>Groundlark:Package_QFP__LQFP-32_7x7mm_P0.8mm</footprint>
@@ -377,10 +465,122 @@
       </fields>
       <libsource lib="Groundlark" part="Part_C4" description=""/>
       <property name="MPN" value="GRM188R71H104KA93D"/>
-      <property name="Sheetname" value="03-sensors-page-01"/>
-      <property name="Sheetfile" value="03-sensors-page-01.kicad_sch"/>
-      <sheetpath names="/03-sensors-page-01/" tstamps="/ab979e54-c171-5922-9bbc-4aaabc504545/"/>
+      <property name="Sheetname" value="03-magnetometer-0-page-01"/>
+      <property name="Sheetfile" value="03-magnetometer-0-page-01.kicad_sch"/>
+      <sheetpath names="/03-magnetometer-0-page-01/" tstamps="/04158baf-cecb-5065-a9bc-851bfffed368/"/>
       <tstamps>363ebc15-a84e-5c88-994c-72d30999ff2d</tstamps>
+    </comp>
+    <comp ref="U2">
+      <value>RM3100 XYZ / 0</value>
+      <footprint>Groundlark:Groundlark__PNI_14190_Module</footprint>
+      <fields>
+        <field name="MPN">PNI 14190</field>
+        <field name="Footprint">Groundlark:Groundlark__PNI_14190_Module</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Groundlark" part="Part_U2" description=""/>
+      <property name="MPN" value="PNI 14190"/>
+      <property name="Sheetname" value="03-magnetometer-0-page-01"/>
+      <property name="Sheetfile" value="03-magnetometer-0-page-01.kicad_sch"/>
+      <sheetpath names="/03-magnetometer-0-page-01/" tstamps="/04158baf-cecb-5065-a9bc-851bfffed368/"/>
+      <tstamps>22eaabde-65c0-5cea-8227-63f631a39695</tstamps>
+    </comp>
+    <comp ref="C11">
+      <value>100n</value>
+      <footprint>Groundlark:Capacitor_SMD__C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">Groundlark:Capacitor_SMD__C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Groundlark" part="Part_C11" description=""/>
+      <property name="MPN" value="GRM188R71H104KA93D"/>
+      <property name="Sheetname" value="03-magnetometer-1-page-01"/>
+      <property name="Sheetfile" value="03-magnetometer-1-page-01.kicad_sch"/>
+      <sheetpath names="/03-magnetometer-1-page-01/" tstamps="/9fad44fa-7af3-56fc-b7e7-e4c810889758/"/>
+      <tstamps>95a4cf01-5624-5acb-8996-bac01c4d1fae</tstamps>
+    </comp>
+    <comp ref="U7">
+      <value>RM3100 XYZ / 1</value>
+      <footprint>Groundlark:Groundlark__PNI_14190_Module</footprint>
+      <fields>
+        <field name="MPN">PNI 14190</field>
+        <field name="Footprint">Groundlark:Groundlark__PNI_14190_Module</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Groundlark" part="Part_U7" description=""/>
+      <property name="MPN" value="PNI 14190"/>
+      <property name="Sheetname" value="03-magnetometer-1-page-01"/>
+      <property name="Sheetfile" value="03-magnetometer-1-page-01.kicad_sch"/>
+      <sheetpath names="/03-magnetometer-1-page-01/" tstamps="/9fad44fa-7af3-56fc-b7e7-e4c810889758/"/>
+      <tstamps>9cbb49bf-898d-5d20-b045-ca9ad9937869</tstamps>
+    </comp>
+    <comp ref="C12">
+      <value>100n</value>
+      <footprint>Groundlark:Capacitor_SMD__C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">Groundlark:Capacitor_SMD__C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Groundlark" part="Part_C12" description=""/>
+      <property name="MPN" value="GRM188R71H104KA93D"/>
+      <property name="Sheetname" value="03-magnetometer-2-page-01"/>
+      <property name="Sheetfile" value="03-magnetometer-2-page-01.kicad_sch"/>
+      <sheetpath names="/03-magnetometer-2-page-01/" tstamps="/e8b93225-614c-5ada-b7fb-3affdad481e0/"/>
+      <tstamps>6b8e3395-fbfd-549f-91f3-28f9b796abcb</tstamps>
+    </comp>
+    <comp ref="U8">
+      <value>RM3100 XYZ / 2</value>
+      <footprint>Groundlark:Groundlark__PNI_14190_Module</footprint>
+      <fields>
+        <field name="MPN">PNI 14190</field>
+        <field name="Footprint">Groundlark:Groundlark__PNI_14190_Module</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Groundlark" part="Part_U8" description=""/>
+      <property name="MPN" value="PNI 14190"/>
+      <property name="Sheetname" value="03-magnetometer-2-page-01"/>
+      <property name="Sheetfile" value="03-magnetometer-2-page-01.kicad_sch"/>
+      <sheetpath names="/03-magnetometer-2-page-01/" tstamps="/e8b93225-614c-5ada-b7fb-3affdad481e0/"/>
+      <tstamps>2748c76a-43f8-5116-a53e-e4eb5d94c88f</tstamps>
+    </comp>
+    <comp ref="C13">
+      <value>100n</value>
+      <footprint>Groundlark:Capacitor_SMD__C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H104KA93D</field>
+        <field name="Footprint">Groundlark:Capacitor_SMD__C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Groundlark" part="Part_C13" description=""/>
+      <property name="MPN" value="GRM188R71H104KA93D"/>
+      <property name="Sheetname" value="03-magnetometer-3-page-01"/>
+      <property name="Sheetfile" value="03-magnetometer-3-page-01.kicad_sch"/>
+      <sheetpath names="/03-magnetometer-3-page-01/" tstamps="/a7182554-5f76-51c0-b062-5e65eae498b8/"/>
+      <tstamps>43ac0bd9-b191-5198-bac8-a3cd4a6758b3</tstamps>
+    </comp>
+    <comp ref="U9">
+      <value>RM3100 XYZ / 3</value>
+      <footprint>Groundlark:Groundlark__PNI_14190_Module</footprint>
+      <fields>
+        <field name="MPN">PNI 14190</field>
+        <field name="Footprint">Groundlark:Groundlark__PNI_14190_Module</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Groundlark" part="Part_U9" description=""/>
+      <property name="MPN" value="PNI 14190"/>
+      <property name="Sheetname" value="03-magnetometer-3-page-01"/>
+      <property name="Sheetfile" value="03-magnetometer-3-page-01.kicad_sch"/>
+      <sheetpath names="/03-magnetometer-3-page-01/" tstamps="/a7182554-5f76-51c0-b062-5e65eae498b8/"/>
+      <tstamps>3ebad94c-6858-5c96-a964-32b77cb4c2c5</tstamps>
     </comp>
     <comp ref="C9">
       <value>100n</value>
@@ -462,22 +662,6 @@
       <sheetpath names="/03-sensors-page-01/" tstamps="/ab979e54-c171-5922-9bbc-4aaabc504545/"/>
       <tstamps>fc27de2f-9279-53c3-b692-df9c65d77131</tstamps>
     </comp>
-    <comp ref="U2">
-      <value>RM3100 XYZ</value>
-      <footprint>Groundlark:Groundlark__PNI_14190_Module</footprint>
-      <fields>
-        <field name="MPN">PNI 14190</field>
-        <field name="Footprint">Groundlark:Groundlark__PNI_14190_Module</field>
-        <field name="Datasheet"/>
-        <field name="Description"/>
-      </fields>
-      <libsource lib="Groundlark" part="Part_U2" description=""/>
-      <property name="MPN" value="PNI 14190"/>
-      <property name="Sheetname" value="03-sensors-page-01"/>
-      <property name="Sheetfile" value="03-sensors-page-01.kicad_sch"/>
-      <sheetpath names="/03-sensors-page-01/" tstamps="/ab979e54-c171-5922-9bbc-4aaabc504545/"/>
-      <tstamps>22eaabde-65c0-5cea-8227-63f631a39695</tstamps>
-    </comp>
     <comp ref="U5">
       <value>TPS22919</value>
       <footprint>Groundlark:Package_TO_SOT_SMD__SOT-363_SC-70-6</footprint>
@@ -526,6 +710,45 @@
       </pins>
     </libpart>
     <libpart lib="Groundlark" part="Part_C10">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">100n</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Groundlark" part="Part_C11">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">100n</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Groundlark" part="Part_C12">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">100n</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Groundlark" part="Part_C13">
       <fields>
         <field name="Reference">C</field>
         <field name="Value">100n</field>
@@ -824,6 +1047,19 @@
         <pin num="2" name="2" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="Groundlark" part="Part_R9">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">100k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="Groundlark" part="Part_U1">
       <fields>
         <field name="Reference">U</field>
@@ -870,16 +1106,16 @@
     <libpart lib="Groundlark" part="Part_U2">
       <fields>
         <field name="Reference">U</field>
-        <field name="Value">RM3100 XYZ</field>
+        <field name="Value">RM3100 XYZ / 0</field>
         <field name="Footprint"/>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <pins>
-        <pin num="1" name="SCL" type="passive"/>
-        <pin num="2" name="SA1" type="passive"/>
-        <pin num="3" name="SDA" type="passive"/>
-        <pin num="4" name="SA0" type="passive"/>
+        <pin num="1" name="SCK" type="input"/>
+        <pin num="2" name="SO" type="passive"/>
+        <pin num="3" name="SI" type="passive"/>
+        <pin num="4" name="SSN" type="passive"/>
         <pin num="5" name="DRDY" type="output"/>
         <pin num="6" name="NC" type="passive"/>
         <pin num="7" name="AVSS" type="power_in"/>
@@ -940,10 +1176,85 @@
         <pin num="4" name="VSS" type="power_in"/>
       </pins>
     </libpart>
+    <libpart lib="Groundlark" part="Part_U7">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">RM3100 XYZ / 1</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="SCK" type="input"/>
+        <pin num="2" name="SO" type="passive"/>
+        <pin num="3" name="SI" type="passive"/>
+        <pin num="4" name="SSN" type="passive"/>
+        <pin num="5" name="DRDY" type="output"/>
+        <pin num="6" name="NC" type="passive"/>
+        <pin num="7" name="AVSS" type="power_in"/>
+        <pin num="8" name="NC" type="passive"/>
+        <pin num="9" name="NC" type="passive"/>
+        <pin num="10" name="I2CEN" type="passive"/>
+        <pin num="11" name="NC" type="passive"/>
+        <pin num="12" name="DVDD" type="power_in"/>
+        <pin num="13" name="AVDD" type="power_in"/>
+        <pin num="14" name="DVSS" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Groundlark" part="Part_U8">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">RM3100 XYZ / 2</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="SCK" type="input"/>
+        <pin num="2" name="SO" type="passive"/>
+        <pin num="3" name="SI" type="passive"/>
+        <pin num="4" name="SSN" type="passive"/>
+        <pin num="5" name="DRDY" type="output"/>
+        <pin num="6" name="NC" type="passive"/>
+        <pin num="7" name="AVSS" type="power_in"/>
+        <pin num="8" name="NC" type="passive"/>
+        <pin num="9" name="NC" type="passive"/>
+        <pin num="10" name="I2CEN" type="passive"/>
+        <pin num="11" name="NC" type="passive"/>
+        <pin num="12" name="DVDD" type="power_in"/>
+        <pin num="13" name="AVDD" type="power_in"/>
+        <pin num="14" name="DVSS" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Groundlark" part="Part_U9">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">RM3100 XYZ / 3</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="SCK" type="input"/>
+        <pin num="2" name="SO" type="passive"/>
+        <pin num="3" name="SI" type="passive"/>
+        <pin num="4" name="SSN" type="passive"/>
+        <pin num="5" name="DRDY" type="output"/>
+        <pin num="6" name="NC" type="passive"/>
+        <pin num="7" name="AVSS" type="power_in"/>
+        <pin num="8" name="NC" type="passive"/>
+        <pin num="9" name="NC" type="passive"/>
+        <pin num="10" name="I2CEN" type="passive"/>
+        <pin num="11" name="NC" type="passive"/>
+        <pin num="12" name="DVDD" type="power_in"/>
+        <pin num="13" name="AVDD" type="power_in"/>
+        <pin num="14" name="DVSS" type="power_in"/>
+      </pins>
+    </libpart>
   </libparts>
   <libraries>
     <library logical="Groundlark">
-      <uri>/work/hw/burrowlark-usb/boards/groundlark-field-head/Groundlark.kicad_sym</uri>
+      <uri>/workspace/hw/burrowlark-usb/boards/groundlark-field-head/Groundlark.kicad_sym</uri>
     </library>
   </libraries>
   <nets>
@@ -955,6 +1266,9 @@
     <net code="2" name="GND" class="Default">
       <node ref="C1" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C10" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="C11" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="C12" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="C13" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C2" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C3" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="C4" pin="2" pinfunction="2" pintype="passive"/>
@@ -976,82 +1290,138 @@
       <node ref="R5" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="U1" pin="16" pinfunction="VSS" pintype="power_in"/>
       <node ref="U1" pin="32" pinfunction="VSS" pintype="power_in"/>
+      <node ref="U2" pin="10" pinfunction="I2CEN" pintype="passive"/>
       <node ref="U2" pin="14" pinfunction="DVSS" pintype="power_in"/>
-      <node ref="U2" pin="2" pinfunction="SA1" pintype="passive"/>
-      <node ref="U2" pin="4" pinfunction="SA0" pintype="passive"/>
       <node ref="U2" pin="7" pinfunction="AVSS" pintype="power_in"/>
       <node ref="U4" pin="2" pinfunction="GND" pintype="power_in"/>
       <node ref="U5" pin="2" pinfunction="GND" pintype="power_in"/>
       <node ref="U6" pin="4" pinfunction="VSS" pintype="power_in"/>
+      <node ref="U7" pin="10" pinfunction="I2CEN" pintype="passive"/>
+      <node ref="U7" pin="14" pinfunction="DVSS" pintype="power_in"/>
+      <node ref="U7" pin="7" pinfunction="AVSS" pintype="power_in"/>
+      <node ref="U8" pin="10" pinfunction="I2CEN" pintype="passive"/>
+      <node ref="U8" pin="14" pinfunction="DVSS" pintype="power_in"/>
+      <node ref="U8" pin="7" pinfunction="AVSS" pintype="power_in"/>
+      <node ref="U9" pin="10" pinfunction="I2CEN" pintype="passive"/>
+      <node ref="U9" pin="14" pinfunction="DVSS" pintype="power_in"/>
+      <node ref="U9" pin="7" pinfunction="AVSS" pintype="power_in"/>
     </net>
-    <net code="3" name="MAG_DRDY" class="Default">
+    <net code="3" name="MAG_CSN" class="Default">
+      <node ref="R9" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="9" pinfunction="PA3" pintype="passive"/>
+      <node ref="U2" pin="4" pinfunction="SSN" pintype="passive"/>
+      <node ref="U7" pin="4" pinfunction="SSN" pintype="passive"/>
+      <node ref="U8" pin="4" pinfunction="SSN" pintype="passive"/>
+      <node ref="U9" pin="4" pinfunction="SSN" pintype="passive"/>
+    </net>
+    <net code="4" name="MAG_DRDY0" class="Default">
       <node ref="U1" pin="14" pinfunction="PB0" pintype="passive"/>
       <node ref="U2" pin="5" pinfunction="DRDY" pintype="output"/>
     </net>
-    <net code="4" name="NRST" class="Default">
+    <net code="5" name="MAG_DRDY1" class="Default">
+      <node ref="U1" pin="15" pinfunction="PB1" pintype="passive"/>
+      <node ref="U7" pin="5" pinfunction="DRDY" pintype="output"/>
+    </net>
+    <net code="6" name="MAG_DRDY2" class="Default">
+      <node ref="U1" pin="26" pinfunction="PB3" pintype="passive"/>
+      <node ref="U8" pin="5" pinfunction="DRDY" pintype="output"/>
+    </net>
+    <net code="7" name="MAG_DRDY3" class="Default">
+      <node ref="U1" pin="27" pinfunction="PB4" pintype="passive"/>
+      <node ref="U9" pin="5" pinfunction="DRDY" pintype="output"/>
+    </net>
+    <net code="8" name="MAG_MISO0" class="Default">
+      <node ref="U1" pin="10" pinfunction="PA4" pintype="passive"/>
+      <node ref="U2" pin="2" pinfunction="SO" pintype="passive"/>
+    </net>
+    <net code="9" name="MAG_MISO1" class="Default">
+      <node ref="U1" pin="11" pinfunction="PA5" pintype="passive"/>
+      <node ref="U7" pin="2" pinfunction="SO" pintype="passive"/>
+    </net>
+    <net code="10" name="MAG_MISO2" class="Default">
+      <node ref="U1" pin="12" pinfunction="PA6" pintype="passive"/>
+      <node ref="U8" pin="2" pinfunction="SO" pintype="passive"/>
+    </net>
+    <net code="11" name="MAG_MISO3" class="Default">
+      <node ref="U1" pin="13" pinfunction="PA7" pintype="passive"/>
+      <node ref="U9" pin="2" pinfunction="SO" pintype="passive"/>
+    </net>
+    <net code="12" name="MAG_MOSI" class="Default">
+      <node ref="U1" pin="8" pinfunction="PA2" pintype="passive"/>
+      <node ref="U2" pin="3" pinfunction="SI" pintype="passive"/>
+      <node ref="U7" pin="3" pinfunction="SI" pintype="passive"/>
+      <node ref="U8" pin="3" pinfunction="SI" pintype="passive"/>
+      <node ref="U9" pin="3" pinfunction="SI" pintype="passive"/>
+    </net>
+    <net code="13" name="MAG_SCK" class="Default">
+      <node ref="U1" pin="7" pinfunction="PA1" pintype="passive"/>
+      <node ref="U2" pin="1" pinfunction="SCK" pintype="input"/>
+      <node ref="U7" pin="1" pinfunction="SCK" pintype="input"/>
+      <node ref="U8" pin="1" pinfunction="SCK" pintype="input"/>
+      <node ref="U9" pin="1" pinfunction="SCK" pintype="input"/>
+    </net>
+    <net code="14" name="NRST" class="Default">
       <node ref="C8" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="J2" pin="5" pinfunction="5" pintype="passive"/>
       <node ref="R3" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="U1" pin="4" pinfunction="NRST" pintype="passive"/>
     </net>
-    <net code="5" name="SCL" class="Default">
+    <net code="15" name="SCL" class="Default">
       <node ref="R8" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U1" pin="29" pinfunction="I2C_SCL" pintype="passive"/>
-      <node ref="U2" pin="1" pinfunction="SCL" pintype="passive"/>
       <node ref="U6" pin="2" pinfunction="SCL" pintype="passive"/>
     </net>
-    <net code="6" name="SDA" class="Default">
+    <net code="16" name="SDA" class="Default">
       <node ref="R7" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U1" pin="30" pinfunction="I2C_SDA" pintype="passive"/>
-      <node ref="U2" pin="3" pinfunction="SDA" pintype="passive"/>
       <node ref="U6" pin="1" pinfunction="SDA" pintype="passive"/>
     </net>
-    <net code="7" name="SENSOR_EN" class="Default">
+    <net code="17" name="SENSOR_EN" class="Default">
       <node ref="R5" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="U1" pin="6" pinfunction="PA0" pintype="passive"/>
       <node ref="U5" pin="3" pinfunction="ON" pintype="passive"/>
     </net>
-    <net code="8" name="SWCLK" class="Default">
+    <net code="18" name="SWCLK" class="Default">
       <node ref="J2" pin="4" pinfunction="4" pintype="passive"/>
       <node ref="U1" pin="24" pinfunction="SWCLK" pintype="passive"/>
     </net>
-    <net code="9" name="SWDIO" class="Default">
+    <net code="19" name="SWDIO" class="Default">
       <node ref="J2" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="U1" pin="23" pinfunction="SWDIO" pintype="passive"/>
     </net>
-    <net code="10" name="USB_5V" class="Default">
+    <net code="20" name="USB_5V" class="Default">
       <node ref="C1" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="F1" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="U4" pin="1" pinfunction="VIN" pintype="passive"/>
       <node ref="U4" pin="3" pinfunction="EN" pintype="input"/>
     </net>
-    <net code="11" name="USB_CC1" class="Default">
+    <net code="21" name="USB_CC1" class="Default">
       <node ref="D2" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="D2" pin="6" pinfunction="6" pintype="passive"/>
       <node ref="J1" pin="A5" pinfunction="A5" pintype="passive"/>
       <node ref="R1" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="12" name="USB_CC2" class="Default">
+    <net code="22" name="USB_CC2" class="Default">
       <node ref="D2" pin="3" pinfunction="3" pintype="passive"/>
       <node ref="D2" pin="4" pinfunction="4" pintype="passive"/>
       <node ref="J1" pin="B5" pinfunction="B5" pintype="passive"/>
       <node ref="R2" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="13" name="USB_DM" class="Default">
+    <net code="23" name="USB_DM" class="Default">
       <node ref="D1" pin="3" pinfunction="3" pintype="passive"/>
       <node ref="D1" pin="4" pinfunction="4" pintype="passive"/>
       <node ref="J1" pin="A7" pinfunction="A7" pintype="passive"/>
       <node ref="J1" pin="B7" pinfunction="B7" pintype="passive"/>
       <node ref="U1" pin="21" pinfunction="USB_DM" pintype="passive"/>
     </net>
-    <net code="14" name="USB_DP" class="Default">
+    <net code="24" name="USB_DP" class="Default">
       <node ref="D1" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="D1" pin="6" pinfunction="6" pintype="passive"/>
       <node ref="J1" pin="A6" pinfunction="A6" pintype="passive"/>
       <node ref="J1" pin="B6" pinfunction="B6" pintype="passive"/>
       <node ref="U1" pin="22" pinfunction="USB_DP" pintype="passive"/>
     </net>
-    <net code="15" name="USB_VBUS" class="Default">
+    <net code="25" name="USB_VBUS" class="Default">
       <node ref="D1" pin="5" pinfunction="5" pintype="passive"/>
       <node ref="D2" pin="5" pinfunction="5" pintype="passive"/>
       <node ref="F1" pin="1" pinfunction="1" pintype="passive"/>
@@ -1060,7 +1430,7 @@
       <node ref="J1" pin="B4" pinfunction="B4" pintype="passive"/>
       <node ref="J1" pin="B9" pinfunction="B9" pintype="passive"/>
     </net>
-    <net code="16" name="V3" class="Default">
+    <net code="26" name="V3" class="Default">
       <node ref="C2" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C3" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C6" pin="1" pinfunction="1" pintype="passive"/>
@@ -1075,65 +1445,44 @@
       <node ref="U4" pin="5" pinfunction="VOUT" pintype="passive"/>
       <node ref="U5" pin="1" pinfunction="IN" pintype="passive"/>
     </net>
-    <net code="17" name="V3_SENSOR" class="Default">
+    <net code="27" name="V3_SENSOR" class="Default">
       <node ref="C10" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="C11" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="C12" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="C13" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="C4" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="R7" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="R8" pin="2" pinfunction="2" pintype="passive"/>
-      <node ref="U2" pin="10" pinfunction="I2CEN" pintype="passive"/>
+      <node ref="R9" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="U2" pin="12" pinfunction="DVDD" pintype="power_in"/>
       <node ref="U2" pin="13" pinfunction="AVDD" pintype="power_in"/>
       <node ref="U5" pin="5" pinfunction="QOD" pintype="passive"/>
       <node ref="U5" pin="6" pinfunction="OUT" pintype="passive"/>
       <node ref="U6" pin="3" pinfunction="VDD" pintype="power_in"/>
+      <node ref="U7" pin="12" pinfunction="DVDD" pintype="power_in"/>
+      <node ref="U7" pin="13" pinfunction="AVDD" pintype="power_in"/>
+      <node ref="U8" pin="12" pinfunction="DVDD" pintype="power_in"/>
+      <node ref="U8" pin="13" pinfunction="AVDD" pintype="power_in"/>
+      <node ref="U9" pin="12" pinfunction="DVDD" pintype="power_in"/>
+      <node ref="U9" pin="13" pinfunction="AVDD" pintype="power_in"/>
     </net>
-    <net code="18" name="unconnected-(J1-PadA8)" class="Default">
+    <net code="28" name="unconnected-(J1-PadA8)" class="Default">
       <node ref="J1" pin="A8" pinfunction="A8" pintype="passive+no_connect"/>
     </net>
-    <net code="19" name="unconnected-(J1-PadB8)" class="Default">
+    <net code="29" name="unconnected-(J1-PadB8)" class="Default">
       <node ref="J1" pin="B8" pinfunction="B8" pintype="passive+no_connect"/>
     </net>
-    <net code="20" name="unconnected-(U1-PA1-Pad7)" class="Default">
-      <node ref="U1" pin="7" pinfunction="PA1" pintype="passive+no_connect"/>
-    </net>
-    <net code="21" name="unconnected-(U1-PA2-Pad8)" class="Default">
-      <node ref="U1" pin="8" pinfunction="PA2" pintype="passive+no_connect"/>
-    </net>
-    <net code="22" name="unconnected-(U1-PA3-Pad9)" class="Default">
-      <node ref="U1" pin="9" pinfunction="PA3" pintype="passive+no_connect"/>
-    </net>
-    <net code="23" name="unconnected-(U1-PA4-Pad10)" class="Default">
-      <node ref="U1" pin="10" pinfunction="PA4" pintype="passive+no_connect"/>
-    </net>
-    <net code="24" name="unconnected-(U1-PA5-Pad11)" class="Default">
-      <node ref="U1" pin="11" pinfunction="PA5" pintype="passive+no_connect"/>
-    </net>
-    <net code="25" name="unconnected-(U1-PA6-Pad12)" class="Default">
-      <node ref="U1" pin="12" pinfunction="PA6" pintype="passive+no_connect"/>
-    </net>
-    <net code="26" name="unconnected-(U1-PA7-Pad13)" class="Default">
-      <node ref="U1" pin="13" pinfunction="PA7" pintype="passive+no_connect"/>
-    </net>
-    <net code="27" name="unconnected-(U1-PA8-Pad18)" class="Default">
+    <net code="30" name="unconnected-(U1-PA8-Pad18)" class="Default">
       <node ref="U1" pin="18" pinfunction="PA8" pintype="passive+no_connect"/>
     </net>
-    <net code="28" name="unconnected-(U1-PA9-Pad19)" class="Default">
+    <net code="31" name="unconnected-(U1-PA9-Pad19)" class="Default">
       <node ref="U1" pin="19" pinfunction="PA9" pintype="passive+no_connect"/>
     </net>
-    <net code="29" name="unconnected-(U1-PA10-Pad20)" class="Default">
+    <net code="32" name="unconnected-(U1-PA10-Pad20)" class="Default">
       <node ref="U1" pin="20" pinfunction="PA10" pintype="passive+no_connect"/>
     </net>
-    <net code="30" name="unconnected-(U1-PA15-Pad25)" class="Default">
+    <net code="33" name="unconnected-(U1-PA15-Pad25)" class="Default">
       <node ref="U1" pin="25" pinfunction="PA15" pintype="passive+no_connect"/>
-    </net>
-    <net code="31" name="unconnected-(U1-PB1-Pad15)" class="Default">
-      <node ref="U1" pin="15" pinfunction="PB1" pintype="passive+no_connect"/>
-    </net>
-    <net code="32" name="unconnected-(U1-PB3-Pad26)" class="Default">
-      <node ref="U1" pin="26" pinfunction="PB3" pintype="passive+no_connect"/>
-    </net>
-    <net code="33" name="unconnected-(U1-PB4-Pad27)" class="Default">
-      <node ref="U1" pin="27" pinfunction="PB4" pintype="passive+no_connect"/>
     </net>
     <net code="34" name="unconnected-(U1-PB5-Pad28)" class="Default">
       <node ref="U1" pin="28" pinfunction="PB5" pintype="passive+no_connect"/>
@@ -1161,6 +1510,42 @@
     </net>
     <net code="42" name="unconnected-(U5-NC-Pad4)" class="Default">
       <node ref="U5" pin="4" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="43" name="unconnected-(U7-NC-Pad6)" class="Default">
+      <node ref="U7" pin="6" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="44" name="unconnected-(U7-NC-Pad8)" class="Default">
+      <node ref="U7" pin="8" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="45" name="unconnected-(U7-NC-Pad9)" class="Default">
+      <node ref="U7" pin="9" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="46" name="unconnected-(U7-NC-Pad11)" class="Default">
+      <node ref="U7" pin="11" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="47" name="unconnected-(U8-NC-Pad6)" class="Default">
+      <node ref="U8" pin="6" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="48" name="unconnected-(U8-NC-Pad8)" class="Default">
+      <node ref="U8" pin="8" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="49" name="unconnected-(U8-NC-Pad9)" class="Default">
+      <node ref="U8" pin="9" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="50" name="unconnected-(U8-NC-Pad11)" class="Default">
+      <node ref="U8" pin="11" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="51" name="unconnected-(U9-NC-Pad6)" class="Default">
+      <node ref="U9" pin="6" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="52" name="unconnected-(U9-NC-Pad8)" class="Default">
+      <node ref="U9" pin="8" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="53" name="unconnected-(U9-NC-Pad9)" class="Default">
+      <node ref="U9" pin="9" pinfunction="NC" pintype="passive+no_connect"/>
+    </net>
+    <net code="54" name="unconnected-(U9-NC-Pad11)" class="Default">
+      <node ref="U9" pin="11" pinfunction="NC" pintype="passive+no_connect"/>
     </net>
   </nets>
 </export>

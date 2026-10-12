@@ -36,7 +36,7 @@ def validate(message):
     if kind == "identity":
         require(body.board in (1, 2, 3), "unknown board")
         identifier(body.firmware_version)
-        allowed = (set(range(1, 7)) | {8, 9}) if body.board == 1 else {7, 8, 17} if body.board == 2 else set(range(10, 17))
+        allowed = (set(range(1, 7)) | {8, 9}) if body.board == 1 else {7, 8, 17, 18, 19, 20} if body.board == 2 else set(range(10, 17))
         require(1 <= len(body.sensors) <= 8 and len(set(body.sensors)) == len(body.sensors), "sensor list size/duplicates")
         require(set(body.sensors) <= allowed, "sensor does not belong on board")
     elif kind == "configuration":
@@ -44,16 +44,16 @@ def validate(message):
         require(1 <= len(body.sensors) <= 8, "configuration sensor bound")
         require(len({s.sensor_id for s in body.sensors}) == len(body.sensors), "duplicate configuration")
         for sensor in body.sensors:
-            require(1 <= sensor.sensor_id <= 17, "unknown sensor")
+            require(1 <= sensor.sensor_id <= 20, "unknown sensor")
             require((0 < sensor.period_ns <= 60_000_000_000) if sensor.enabled else sensor.period_ns == 0, "invalid sample period")
             data = sensor.register_config
             require(len(data) <= 64 and len(data) % 2 == 0, "invalid register configuration")
             addresses = list(data[::2])
             require(addresses == sorted(set(addresses)), "registers must be unique and sorted")
-            require(not data or sensor.sensor_id in (1, 2, 3, 4, 7), "8-bit register snapshot not applicable")
+            require(not data or sensor.sensor_id in (1, 2, 3, 4, 7, 18, 19, 20), "8-bit register snapshot not applicable")
             allowed = ({"acceleration_range_g", "angular_rate_range_dps"} if sensor.sensor_id <= 4 else
                        {5: {"tilt_mode"}, 6: set(), 7: {"cycle_count_x", "cycle_count_y", "cycle_count_z"},
-                        8: {"pressure_min_pa", "pressure_max_pa", "pressure_part_number"}, 9: {"geophone_gain", "geophone_reference_v"}, **{i: set() for i in range(10, 18)}}[sensor.sensor_id])
+                        8: {"pressure_min_pa", "pressure_max_pa", "pressure_part_number"}, 9: {"geophone_gain", "geophone_reference_v"}, **{i: set() for i in range(10, 18)}, **{i: {"cycle_count_x", "cycle_count_y", "cycle_count_z"} for i in (18,19,20)}}[sensor.sensor_id])
             supplied = {field.name for field, _ in sensor.ListFields() if field.number >= 5}
             require(supplied <= allowed, "settings incompatible with sensor")
             if sensor.enabled:
@@ -62,7 +62,7 @@ def validate(message):
                     require(sensor.acceleration_range_g in (2, 4, 8, 16) and sensor.angular_rate_range_dps in (125, 250, 500, 1000, 2000), "unsupported IMU range")
                 elif sensor.sensor_id == 5:
                     require(1 <= sensor.tilt_mode <= 4, "invalid tilt mode")
-                elif sensor.sensor_id == 7:
+                elif sensor.sensor_id in (7, 18, 19, 20):
                     require(all(1 <= getattr(sensor, field) <= 65535 for field in allowed), "invalid cycle count")
                 elif sensor.sensor_id == 9:
                     require(sensor.geophone_gain == 64 and sensor.geophone_reference_v == 2.048 and sensor.period_ns == 3_030_303, "unsupported geophone profile")
@@ -77,7 +77,7 @@ def validate(message):
                     require(math.isfinite(sensor.pressure_min_pa) and math.isfinite(sensor.pressure_max_pa)
                             and sensor.pressure_min_pa < sensor.pressure_max_pa, "invalid pressure range")
     elif kind == "status":
-        require(0 <= body.sensor_id <= 17 and 1 <= body.code <= 6, "unknown status")
+        require(0 <= body.sensor_id <= 20 and 1 <= body.code <= 6, "unknown status")
         require(len(body.detail.encode("utf-8")) <= 96 and all(ord(c) >= 32 for c in body.detail), "invalid status detail")
     elif kind == "batch":
         validate_batch(body)
@@ -86,11 +86,11 @@ def validate(message):
 
 def validate_batch(batch):
     sensor = batch.sensor_id
-    require(1 <= sensor <= 17, "unknown sensor")
+    require(1 <= sensor <= 20, "unknown sensor")
     require(batch.configuration_revision > 0, "batch configuration required")
     require(1 <= len(batch.samples) <= 4, "batch must contain 1..4 samples")
     identifier(batch.calibration_id, optional=True)
-    expected = "imu" if sensor <= 4 else {5: "tilt", 6: "gnss", 7: "magnetic", 8: "pressure", 9: "geophone", **{i: "gas" for i in range(10, 14)}, 14: "particulate", 15: "climate", 16: "barometer", 17: "climate"}[sensor]
+    expected = "imu" if sensor <= 4 else {5: "tilt", 6: "gnss", 7: "magnetic", 8: "pressure", 9: "geophone", **{i: "gas" for i in range(10, 14)}, 14: "particulate", 15: "climate", 16: "barometer", 17: "climate", 18: "magnetic", 19: "magnetic", 20: "magnetic"}[sensor]
     domain = 2 if sensor in (7, 8) or sensor >= 10 else 1
     previous = None
     for sample in batch.samples:
@@ -105,6 +105,16 @@ def validate_batch(batch):
             require(batch.dropped_before <= sample.sequence, "drop count exceeds sequence")
         previous = sample
         require(sample.quality in (1, 2, 3, 4), "quality required")
+        if sample.HasField("magnetic_timing"):
+            require(sensor in (7, 18, 19, 20), "magnetic timing on wrong sensor")
+            timing = sample.magnetic_timing
+            require(timing.HasField("cohort") and timing.cohort == sample.sequence, "magnetic cohort/sequence mismatch")
+            if timing.HasField("trigger_ns"):
+                require(timing.trigger_ns <= time.acquisition_ns, "trigger after read completion")
+            if timing.HasField("ready_observed_ns"):
+                require(timing.HasField("trigger_ns") and timing.trigger_ns <= timing.ready_observed_ns <= time.acquisition_ns, "invalid DRDY observation")
+            if sample.quality != 2:
+                require(timing.HasField("ready_observed_ns"), "usable magnetic sample requires DRDY evidence")
         raw = sample.WhichOneof("raw")
         if sample.quality == 2:
             require(raw is None and not sample.HasField("calibrated"), "missing sample cannot contain measurements")

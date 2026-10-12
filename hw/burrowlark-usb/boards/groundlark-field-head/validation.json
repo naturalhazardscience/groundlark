@@ -1,16 +1,45 @@
 {
-  "pin_checks": 131,
-  "atopile_pin_checks": 131,
+  "pin_checks": 181,
+  "atopile_pin_checks": 181,
   "connectivity_errors": [],
   "drc_findings_by_type": {},
   "drc_errors": 0,
   "erc_findings": 0,
   "unconnected_items": 0,
-  "tracks_and_vias": 579,
-  "status": "A2 PROTOTYPE - NOT FABRICATION RELEASED",
+  "tracks_and_vias": 501,
+  "status": "B1 PROTOTYPE - NOT FABRICATION RELEASED",
   "limits": [
     "Prototype USB sensor firmware is implemented; physical enumeration, suspend and USB signal integrity are unvalidated",
     "No bench, magnetic-noise, RF impedance, EMC or mechanical stack validation",
     "SPICE models are supporting-circuit behavioral/passive models, not full sensor silicon models"
-  ]
+  ],
+  "array_layout": {
+    "bypasses": [
+      {
+        "module": "U2",
+        "capacitor": "C4",
+        "supply_path_mm": 2.275,
+        "ground_stitch_path_mm": 0.9
+      },
+      {
+        "module": "U7",
+        "capacitor": "C11",
+        "supply_path_mm": 2.275,
+        "ground_stitch_path_mm": 0.9
+      },
+      {
+        "module": "U8",
+        "capacitor": "C12",
+        "supply_path_mm": 2.275,
+        "ground_stitch_path_mm": 0.9
+      },
+      {
+        "module": "U9",
+        "capacitor": "C13",
+        "supply_path_mm": 2.275,
+        "ground_stitch_path_mm": 0.9
+      }
+    ],
+    "scope": "Native copper geometry; not supply-noise or magnetic cross-talk qualification"
+  }
 }

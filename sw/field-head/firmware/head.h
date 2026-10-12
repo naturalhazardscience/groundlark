@@ -4,15 +4,20 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-#define BH_QUEUE 4
+#define BH_QUEUE 8
 #define BH_FRAME_MAX 224
 typedef struct {
-    char device[33]; uint64_t boot, next[2], sequence[2], ready;
+    char device[33]; uint64_t boot, next[2], sequence[5], ready, trigger_us;
     uint32_t revision, power_generation; unsigned head,count,announce;
-    bool powered,connected,initialized,overflow; uint8_t enabled,failures[2];
+    bool powered,connected,initialized,overflow,measuring,mag_fault; uint8_t enabled,failures[5];
     uint8_t frames[BH_QUEUE][BH_FRAME_MAX];uint16_t lengths[BH_QUEUE];
 } bh_state;
 uint64_t bh_clock(void);
+uint64_t bh_micros(void);
+/* One command to four SSN/SCK/SI inputs; four separate SO lanes. */
+bool bh_spi(uint8_t reg,const uint8_t *write,size_t n,uint8_t read[4][9]);
+bool bh_ready_arm(void);
+uint8_t bh_ready(uint64_t observed_us[4]);
 void bh_delay(uint32_t ms);
 bool bh_i2c(uint8_t address,const uint8_t *write,size_t wn,uint8_t *read,size_t rn);
 void bh_power(bool enabled);

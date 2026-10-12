@@ -63,6 +63,9 @@ MODELS.update({10:"SGX-7SO2-AQ-20",11:"SO₂ auxiliary",12:"SGX-7H2S-AQ-25",13:"
                14:"PMS5003",15:"SHT40",16:"BMP388"})
 LABELS[17] = ("Enclosure temperature · °C", "Enclosure humidity · %RH")
 MODELS[17] = "SHT45"
+for sid in (18,19,20):
+    LABELS[sid] = LABELS[7]
+    MODELS[sid] = "RM3100"
 
 def chart_options(title):
     return dict(backgroundColor="transparent", animation=False, color=COLORS,
@@ -117,14 +120,14 @@ def board_scene(scene, select):
             connector = next(part for part in layout['parts'] if part['ref'] == 'J90')['xy']
             add_geophone(scene, ((connector[0]-center_x)/10, (28-connector[1])/10), targets, rings, TEAL)
         with scene.group() as head:
-            scene.gltf(f"/board-assets/burrowlark.glb?v={HEAD_ASSET_VERSION}").scale(100).rotate(math.pi / 2, 0, 0).move(-8.5, 7.25, 0)
+            scene.gltf(f"/board-assets/burrowlark.glb?v={HEAD_ASSET_VERSION}").scale(100).rotate(math.pi / 2, 0, 0).move(-(50 + remote["size"][0]/2)/10, (50 + remote["size"][1]/2)/10, 0)
             for part in remote["parts"]:
                 ref = part["ref"]
-                if ref not in ("U2", "U6"):
+                if ref not in ("U2", "U7", "U8", "U9", "U6"):
                     continue
-                x, y = (part["xy"][0] - 35) / 10, (22.5 - part["xy"][1]) / 10
-                sid = {"U2": 7, "U6": 17}[ref]
-                radius = 1.4 if sid == 7 else .3
+                x, y = (part["xy"][0] - remote["size"][0]/2) / 10, (remote["size"][1]/2 - part["xy"][1]) / 10
+                sid = {"U2": 7, "U7": 18, "U8": 19, "U9": 20, "U6": 17}[ref]
+                radius = 1.4 if sid in (7,18,19,20) else .3
                 box = scene.cylinder(radius, radius, .05).rotate(math.pi/2, 0, 0).move(x, y, .25).material(TEAL, .15)
                 if sid:
                     targets[box.id] = sid
@@ -132,7 +135,7 @@ def board_scene(scene, select):
                     rings.setdefault(sid, []).append(ring)
                     targets[ring.id] = sid
                     scene.text(NAMES[sid], "color:white;font-size:12px;pointer-events:none").move(x, y, 1)
-            scene.text("REMOTE USB HEAD  /  70 × 45 mm", "color:#a6bfcc;font-size:11px;pointer-events:none").move(0, -2.8, .1)
+            scene.text("BURROWLARK B1  /  96 × 70 mm", "color:#a6bfcc;font-size:11px;pointer-events:none").move(0, -3.9, .1)
         head.visible(False)
         skylark = add_skylark(scene, targets, rings, TEAL)
     def clicked(event):
@@ -168,10 +171,10 @@ def page():
         nonlocal selected
         selected = sid
         heading.set_text(f"{NAMES[sid]}  /  {MODELS[sid]}")
-        board_label.set_text("Burrowlark USB sensor head" if sid in (7,17) else "Skylark USB" if 10 <= sid <= 16 else "DAQHAT-01 sensor HAT")
+        board_label.set_text("Burrowlark USB sensor head" if sid in (7,18,19,20,17) else "Skylark USB" if 10 <= sid <= 16 else "DAQHAT-01 sensor HAT")
         hat.visible(sid < 10 and sid != 7)
         skylark.visible(10 <= sid <= 16)
-        head.visible(sid in (7,17))
+        head.visible(sid in (7,18,19,20,17))
         for sensor, highlights in rings.items():
             for ring in highlights:
                 ring.material(TEAL if sensor == sid or (sensor in (10,12) and sensor+1 == sid) or (sensor in (11,13) and sensor-1 == sid) else "#60788a", 1 if sensor == sid or (sensor in (10,12) and sensor+1 == sid) or (sensor in (11,13) and sensor-1 == sid) else .25)
@@ -183,10 +186,10 @@ def page():
 
     def camera(top=False):
         sky = 10 <= selected <= 16
-        remote = selected in (7, 17)
+        remote = selected in (7, 18, 19, 20, 17)
         scene.move_camera(x=1.5 if sky else 0 if top else 2 if remote else 4,
-                          y=-.01 if top else -8 if sky else -6 if remote else -13,
-                          z=(23 if top else 21) if sky else (11 if top else 8) if remote else 23 if top else 16,
+                          y=-.01 if top else -8 if sky else -8 if remote else -13,
+                          z=(23 if top else 21) if sky else (15 if top else 12) if remote else 23 if top else 16,
                           look_at_x=1.5 if sky else 0, look_at_y=0, look_at_z=.2, up_x=0, up_y=0, up_z=1)
 
     def sync_board():
@@ -341,7 +344,7 @@ def page():
             ui.label("DEVICES").classes("eyebrow")
             ui.label("Select a sensor").classes("section-title")
             sensor_buttons, statuses = {}, {}
-            for sid in (1, 2, 3, 9, 6, 7, 17, 8, 10, 11, 12, 13, 14, 15, 16):
+            for sid in (1, 2, 3, 9, 6, 7, 18, 19, 20, 17, 8, 10, 11, 12, 13, 14, 15, 16):
                 name = NAMES[sid]
                 with ui.button(on_click=lambda sid=sid: choose(sid)).props("flat no-caps align=left").classes("sensor-button") as b:
                     with ui.column().classes("gap-0 items-start"):

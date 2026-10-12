@@ -22,11 +22,18 @@ R5,100k,RC0603FR-07100KL,Resistor_SMD__R_0603_1608Metric,False,
 C9,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
 R7,4.7k,RC0603FR-074K7L,Resistor_SMD__R_0603_1608Metric,False,
 R8,4.7k,RC0603FR-074K7L,Resistor_SMD__R_0603_1608Metric,False,
-U2,RM3100 XYZ,PNI 14190,Groundlark__PNI_14190_Module,False,
-C4,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
+U2,RM3100 XYZ / 0,PNI 14190,Groundlark__PNI_14190_Module,False,Array slot 0; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11
+C4,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,U2 local 100 nF bypass
 H1,M2.5 NPTH,M2.5 NPTH,MountingHole__MountingHole_2.7mm_M2.5,False,
 H2,M2.5 NPTH,M2.5 NPTH,MountingHole__MountingHole_2.7mm_M2.5,False,
 H3,M2.5 NPTH,M2.5 NPTH,MountingHole__MountingHole_2.7mm_M2.5,False,
 H4,M2.5 NPTH,M2.5 NPTH,MountingHole__MountingHole_2.7mm_M2.5,False,
 U6,SHT45,SHT45-AD1B-R2,SHT45,False,Enclosure temperature/humidity; 0x44; heater disabled; keep sensing opening exposed
 C10,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,SHT45 local bypass
+U7,RM3100 XYZ / 1,PNI 14190,Groundlark__PNI_14190_Module,False,Array slot 1; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11
+C11,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,U7 local 100 nF bypass
+U8,RM3100 XYZ / 2,PNI 14190,Groundlark__PNI_14190_Module,False,Array slot 2; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11
+C12,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,U8 local 100 nF bypass
+U9,RM3100 XYZ / 3,PNI 14190,Groundlark__PNI_14190_Module,False,Array slot 3; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11
+C13,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,U9 local 100 nF bypass
+R9,100k,RC0603FR-07100KL,Resistor_SMD__R_0603_1608Metric,False,100 kohm shared SPI CS pull-up to switched sensor rail

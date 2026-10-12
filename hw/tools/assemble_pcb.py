@@ -142,8 +142,8 @@ def main():
                 add_text(b,'PI BAT 8-18V',183,54,.8)
                 add_text(b,'+    GND',167.9,64,.8)
         else:
-            add_text(b,'RM3100 / XYZ',68,54,.8)
-        title=p.TITLE_BLOCK();title.SetTitle(name+' / atopile prototype');title.SetRevision('DAQHAT-01 6L' if target=='trenz_hat' else 'A2');title.SetDate('2026-09-25' if target=='trenz_hat' else '2026-09-23');b.SetTitleBlock(title)
+            add_text(b,'4x RM3100 / XYZ',83,53,.8)
+        title=p.TITLE_BLOCK();title.SetTitle(name+' / atopile prototype');title.SetRevision('DAQHAT-01 6L' if target=='trenz_hat' else spec['silkscreen']['revision']);title.SetDate('2026-09-25' if target=='trenz_hat' else '2026-10-12');b.SetTitleBlock(title)
         if target == 'field_head':
             from burrowlark_silkscreen import apply
             apply(b, spec)
@@ -158,7 +158,7 @@ def main():
         for fpfile in (ROOT/'hw/shared/elec').glob('*.kicad_mod'):shutil.copyfile(fpfile,lib/fpfile.name)
         derived={'size':spec['size'],'parts':parts};schematic(name,derived,folder)
         for sch in folder.glob('*.kicad_sch'):
-            s=sch.read_text().replace('A0 DRAFT','A2 PROTOTYPE').replace('Engineering draft - module interface and fabrication release on hold.','Atopile-derived circuit review schematic - prototype, not released.')
+            s=sch.read_text().replace('A0 DRAFT',('A2' if ishat else spec['silkscreen']['revision'])+' PROTOTYPE').replace('Engineering draft - module interface and fabrication release on hold.','Atopile-derived circuit review schematic - prototype, not released.')
             sch.write_text(s)
         (folder/'electrical.json').write_text(json.dumps({'source':'atopile compiled PCB; do not edit','size_mm':spec['size'],'copper_layers':layers,'ground_layers':ground_layers,'stackup':spec.get('stackup'),'fabrication':fab,'parts':[vars(x) for x in parts]},indent=2))
         with open(folder/'bom.csv','w',newline='') as f:

@@ -1,7 +1,7 @@
 """Independent circuit invariants against the actual atopile-compiled PCB."""
 from pathlib import Path
 from project_paths import compiled_dir, load_layout
-from burrowlark_checks import population
+from burrowlark_checks import population, array_pins, array_geometry
 import argparse,json,re
 import pcbnew as p
 ROOT=Path(__file__).resolve().parents[2]
@@ -20,10 +20,11 @@ def main(boards=('groundlark-field-head',)):
             block=blocks[part['type']]
             assert f'partnumber="{part["mpn"]}"' in block,(part['ref'],'BOM/source MPN mismatch')
             assert f'footprint="{part["local_fp"]}.kicad_mod"' in block,(part['ref'],'BOM/source footprint mismatch')
-        require(pins,'U2',{1:'SCL',2:'GND',3:'SDA',4:'GND',5:'MAG_DRDY',7:'GND',10:'V3_SENSOR',12:'V3_SENSOR',13:'V3_SENSOR',14:'GND'})
+        array_pins(pins)
+        array_geometry({part['ref']:part for part in meta['parts']}, meta['size'])
         population(f.GetReference() for f in b.GetFootprints())
         population(part['ref'] for part in meta['parts'])
-        require(pins,'U1',{1:'V3',5:'V3',16:'GND',17:'V3',32:'GND',4:'NRST',6:'SENSOR_EN',14:'MAG_DRDY',21:'USB_DM',22:'USB_DP',23:'SWDIO',24:'SWCLK',29:'SCL',30:'SDA',31:'BOOT0'})
+        require(pins,'U1',{1:'V3',5:'V3',16:'GND',17:'V3',32:'GND',4:'NRST',6:'SENSOR_EN',21:'USB_DM',22:'USB_DP',23:'SWDIO',24:'SWCLK',29:'SCL',30:'SDA',31:'BOOT0'})
         require(pins,'J1',{'A5':'USB_CC1','B5':'USB_CC2','A6':'USB_DP','B6':'USB_DP','A7':'USB_DM','B7':'USB_DM','A4':'USB_VBUS','A9':'USB_VBUS','B4':'USB_VBUS','B9':'USB_VBUS','A1':'GND','A12':'GND','B1':'GND','B12':'GND','S1':'GND'})
         require(pins,'R1',{1:'USB_CC1',2:'GND'});require(pins,'R2',{1:'USB_CC2',2:'GND'})
         require(pins,'F1',{1:'USB_VBUS',2:'USB_5V'})

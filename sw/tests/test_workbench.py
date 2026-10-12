@@ -23,7 +23,7 @@ class WorkbenchTests(unittest.TestCase):
     def test_pressure_moves_to_hat_with_pi_clock_and_remote_magnetometer_stays(self):
         hat, head = Workbench(board='hat'), Workbench(board='burrowlark')
         self.assertEqual(set(hat.sensor_ids), {1,2,3,6,8,9})
-        self.assertEqual(set(head.sensor_ids), {7,17})
+        self.assertEqual(set(head.sensor_ids), {7,18,19,20,17})
         advance(hat, 20)
         self.assertEqual(hat.snapshot(8)['latest'][8]['clock_domain'], 1)
         data=hat.finish();hat.load_recording(data)
@@ -58,7 +58,7 @@ class WorkbenchTests(unittest.TestCase):
         engine = Workbench()
         advance(engine, 300)
         snap = engine.snapshot(1)
-        self.assertEqual(set(snap["latest"]), {1, 2, 3, 6, 9, 7, 8, 17})
+        self.assertEqual(set(snap["latest"]), {1, 2, 3, 6, 9, 7, 8, 17, 18, 19, 20})
         self.assertTrue(all(snap["latest"].values()))
         self.assertEqual(snap["latest"][1]["primary"], [0, 0, 16393])
         engine.controls({"orientation_deg": [90, 0, 0]})

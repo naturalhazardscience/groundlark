@@ -1,4 +1,4 @@
-(kicad_sch (version 20230121) (generator eeschema) (uuid d6693e67-c66d-5c5a-8823-e5de021d6177) (paper "A3") (title_block (title "groundlark-field-head / 01-usb-power-page-01") (date "2026-09-23") (rev "A2 PROTOTYPE"))
+(kicad_sch (version 20230121) (generator eeschema) (uuid d6693e67-c66d-5c5a-8823-e5de021d6177) (paper "A3") (title_block (title "groundlark-field-head / 01-usb-power-page-01") (date "2026-10-12") (rev "B1 PROTOTYPE"))
 (lib_symbols
 (symbol "Groundlark:Part_J1" (pin_names (offset 0.6)) (in_bom yes) (on_board yes)
       (property "Reference" "J" (id 0) (at 0 15.239999999999998 0) (effects (font (size 1.27 1.27))))

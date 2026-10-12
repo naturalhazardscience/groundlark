@@ -52,6 +52,15 @@ def main():
         reserved_boot_journal_bytes=4096,minimum_stack_reserve_bytes=4096,
         sha256={name:hashlib.sha256((arm/name).read_bytes()).hexdigest() for name in ('skylark.elf','skylark.bin')},
         scope='ARM link and native C fault fixtures; physical USB/sensor/power qualification pending'),indent=2)+'\n')
+    head = BUILD/'burrowlark-arm'
+    size = run('arm-none-eabi-size',str(head/'burrowlark.elf'),capture_output=True,text=True).stdout.splitlines()[1].split()
+    text_bytes,data_bytes,bss_bytes=map(int,size[:3])
+    assert text_bytes+data_bytes <= 30*1024 and data_bytes+bss_bytes <= 4*1024
+    (head/'firmware.json').write_text(json.dumps(dict(
+        target='STM32F042K6',flash_bytes=text_bytes+data_bytes,static_ram_bytes=data_bytes+bss_bytes,
+        reserved_boot_journal_bytes=2048,minimum_stack_reserve_bytes=2048,
+        sha256={name:hashlib.sha256((head/name).read_bytes()).hexdigest() for name in ('burrowlark.elf','burrowlark.bin')},
+        scope='ARM link and native C array fault fixtures; physical USB, timing and magnetic noise unqualified'),indent=2)+'\n')
     # Run the public application entry point and retain one bounded review artifact.
     demo = BUILD / "demo.ssrec"
     if demo.exists(): demo.unlink()
@@ -75,6 +84,7 @@ def main():
         "application_demo": json.loads(replayed.stdout),
         "hat_signals": json.loads(signal_report.read_text()),
         "skylark_firmware": "ARM image linked; production C drivers/encoder and flash journal tested with native fault fixtures",
+        "burrowlark_firmware": "ARM image linked; four-lane timing, readback/status faults, saturation, encoder bounds and complete-quartet loss tested natively",
         "scope": "Schemas, software acquisition/replay, modeled sensor buses and injected faults; not physical buses, USB enumeration or MCU emulation"
     }, indent=2) + "\n")
 

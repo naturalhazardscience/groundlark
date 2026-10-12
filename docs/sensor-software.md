@@ -65,7 +65,7 @@ and a nonblocking USB CDC TTY. The initial profile is:
 | Three LSM6DSO | 26 Hz, ±2 g, ±250 dps; identity/reset/readback; BDU/address increment; signed temperature, gyro and acceleration. |
 | MAX-M10S-00B | I²C 0x42, 1 Hz NAV-PVT; optional timing configuration/readback, TIM-TP, NAV-TIMEUTC and BCM24 PPS capture. |
 | ADS122C04 geophone input | I²C 0x40; 330 SPS, PGA64, internal 2.048 V reference; signed 24-bit counts, conversion counter and inverted-data integrity checks. |
-| Burrowlark DAQUSB-01 USB head | Receive v1 identity/configuration/batches/status over framed CDC; real firmware is still required. |
+| Burrowlark DAQUSB-01 USB head | Receive v1 identity/configuration/batches/status over framed CDC; B1 prototype firmware publishes four raw magnetic lanes plus SHT45; physical USB qualification is pending. |
 
 IMU filter registers are explicitly written, checked and included in effective
 `register_config`. The default 26 Hz profile has 13 Hz accelerometer and 8.3 Hz
@@ -299,12 +299,22 @@ complete PMS/SHT responses and BMP raw/trim bytes. Gas concentration calibration
 is not supplied. Native firmware's 60-second gas/30-second PM warmup is explicit
 missing data; the ideal UI model intentionally has no physical warmup delay.
 
+### Burrowlark magnetic array
+
+B1 retains independent raw XYZ lanes and common-trigger/DRDY evidence in the
+v1 recording. `groundlark.magnetic_array.average_cohort` accepts exactly four
+valid members, the matching configuration envelope, an explicit device-bound
+matrix/offset calibration for each lane, and an experiment-selected DRDY skew
+limit. It returns a derived field estimate with lane fields and calibration ID;
+it never edits raw envelopes. Missing, saturated, mismatched, uncalibrated or
+late quartets are rejected. See [array operation and calibration](usb-sensor-head.md).
+
 ### Burrowlark SHT45
 
 `groundlark.burrowlark.SHT45` provides the injected-bus, heater-off 1 Hz reference
 acquisition profile. A separate write/STOP, conversion wait and six-byte read
 preserve both original CRC-protected words. The Burrowlark simulation publishes
-sensor 17 with RM3100 sensor 7 under one USB-head identity. Runtime validation,
+sensor 17 with RM3100 sensors 7/18/19/20 under one USB-head identity. Runtime validation,
 bounded recording and replay preserve raw values, MCU clock identity and missing
 readings. Target firmware implements this profile; physical qualification remains pending.
 

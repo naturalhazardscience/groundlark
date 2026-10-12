@@ -2,7 +2,7 @@
   "boards": [
     {
       "board": "groundlark-field-head",
-      "compiled_pins": 131,
+      "compiled_pins": 181,
       "source_bom_agreement": "PASS",
       "circuit_invariants": "PASS"
     }

@@ -23,7 +23,7 @@ for i in range(20):
 write('Pi_bottom_socket',socket)
 for name in ['groundlark-field-head']:
     path=board_dir(name)/(name+'.kicad_pcb');b=p.LoadBoard(str(path))
-    custom={'U2':'PNI14190','F1':'PTC1812'}
+    custom={'U2':'PNI14190','U7':'PNI14190','U8':'PNI14190','U9':'PNI14190','F1':'PTC1812'}
     missing=[]
     for fp in b.GetFootprints():
         if fp.GetReference() in custom:

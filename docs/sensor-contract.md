@@ -2,7 +2,7 @@
 
 `Calibrated.geophone_input_v` (optional field 7) carries measured J90 differential volts from a static electronics calibration. It is not velocity. Raw ADC counts remain unchanged. Version 2 calibration artifacts bind to device identity and effective sensor configuration; see [calibration](calibration.md).
 
-Status: implemented schema, Python reference checks and USB framing; Pi drivers and Skylark STM32 firmware implemented; Burrowlark firmware and physical qualification remain pending. This document owns semantic rules. The
+Status: implemented schema, Python reference checks and USB framing; Pi drivers and Skylark STM32 firmware implemented; Burrowlark prototype firmware implemented; physical qualification remains pending. This document owns semantic rules. The
 [Protobuf schema](../sw/interfaces/proto/groundlark/sensor/v1/sensor.proto) owns
 field numbers/types. Both apply. A configured FPGA is unnecessary.
 
@@ -29,10 +29,11 @@ Breaking meaning/units requires a new package and envelope version.
 | 1–3 | DAQHAT-01 LSM6DSO U11–U13 | Signed 16-bit XYZ acceleration/gyro counts; optional signed temperature |
 | 5 | Legacy SCL3300 U20 (removed from current DAQHAT-01) | Signed 16-bit XYZ acceleration and/or angle counts, optional temperature, required 16-bit device status |
 | 6 | Legacy DAQHAT-01 MAX-M10S U21 (absent on DAQHAT-01) | Complete 92-byte UBX NAV-PVT payload, excluding UBX header/checksum |
-| 7 | USB head RM3100 | Signed 24-bit XYZ counts, sign-extended into sint32 |
+| 7 | USB head RM3100 U2 (B1 slot 0; legacy single sensor) | Signed 24-bit XYZ counts, sign-extended into sint32 |
 | 8 | DAQHAT-01 DLVR U23; legacy USB head supported | Four original response bytes, preserving pressure, temperature and status bits |
 | 9 | DAQHAT-01 ADS122C04 / Racotech vertical | Signed 24-bit ADC count in sint32; required uint8 conversion counter |
 | 17 | Burrowlark SHT45 U6 | Six original temperature/humidity bytes, including both CRC bytes |
+| 18 / 19 / 20 | Burrowlark B1 RM3100 U7 / U8 / U9, slots 1 / 2 / 3 | Signed 24-bit XYZ counts, separately retained |
 
 Skylark uses board ID 3 and MCU clock domain 2:
 
@@ -107,12 +108,30 @@ sensor are invalid. Optional register_config contains at most 32 sorted, unique
 Driver-specific bus setup and filter controls must be captured by the eventual
 adapter configuration/recording metadata before hardware acquisition is qualified.
 
+## Burrowlark array timing
+
+`Sample.magnetic_timing` (field 21) is optional evidence for magnetic IDs
+7/18/19/20. `cohort` is required when the message is present and equals the
+per-lane sequence. All four members of a B1 quartet share the same cohort and
+`trigger_ns` (completion of the broadcast POLL command). `ready_observed_ns`
+records each DRDY interrupt observation, in the same MCU_MONOTONIC domain.
+Trigger must precede or equal DRDY, which must precede or equal read completion
+in `time.acquisition_ns`. Missing slots can omit trigger/ready fields; absence
+does not mean zero. Usable samples with array timing require both observations.
+
+Group by device, boot, configuration revision, cohort and trigger, never by USB
+arrival or nearest timestamp. Legacy data and generic ideal simulation can omit
+this evidence and cannot establish a coherent quartet. The MCU records evidence;
+the experiment supplies a completion-skew limit and individual gain/offset/axis
+calibration before averaging. No sample-time or UTC accuracy follows from the
+1 microsecond timer resolution. Internal RM3100 conversion clocks are independent.
+
 ## Time, ordering and loss
 
 Timestamp.domain is PI_MONOTONIC_RAW for IDs 1–6 and 9, and MCU_MONOTONIC for
-ID 7. Pressure ID 8 uses PI_MONOTONIC_RAW on DAQHAT-01 and retains MCU_MONOTONIC
+IDs 7 and 10–20. Pressure ID 8 uses PI_MONOTONIC_RAW on DAQHAT-01 and retains MCU_MONOTONIC
 for legacy USB-head recordings. Session validation binds the pressure clock to
-the advertised board identity. Field layouts and the Buf baseline are unchanged.
+the advertised board identity. The Buf compatibility baseline is retained; the B1 array adds IDs and optional timing without changing legacy raw semantics.
 acquisition_ns is required with explicit presence: zero is a valid timestamp.
 MCU ticks are extended through timer wraps before conversion to nanoseconds;
 a reset begins a new boot/session. No timestamp wraps or decreases within a

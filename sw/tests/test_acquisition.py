@@ -246,7 +246,7 @@ class RuntimeTests(unittest.TestCase):
                 outputs.append(path.read_bytes())
                 self.assertEqual(replay(path), summaries[-1])
             self.assertEqual(outputs[0], outputs[1])
-            self.assertEqual(summaries[0]["samples"], 1040)  # Three IMUs, geophone, magnetic/legacy pressure and two 1 Hz SHT45 frames.
+            self.assertEqual(summaries[0]["samples"], 1100)  # Three IMUs, geophone, four magnetometers, legacy pressure and two SHT45 frames.
             self.assertEqual(summaries[0]["missing"], 30)
             self.assertEqual(summaries[0]["saturated"], 2)
 

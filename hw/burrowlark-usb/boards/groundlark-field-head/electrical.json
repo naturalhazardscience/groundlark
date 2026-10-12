@@ -1,8 +1,8 @@
 {
   "source": "atopile compiled PCB; do not edit",
   "size_mm": [
-    70,
-    45
+    96,
+    70
   ],
   "copper_layers": 4,
   "ground_layers": [
@@ -16,7 +16,7 @@
       "ref": "J1",
       "value": "USB-C DEVICE",
       "xy": [
-        67,
+        93,
         14
       ],
       "angle": 90,
@@ -51,7 +51,7 @@
       "ref": "R1",
       "value": "5.1k",
       "xy": [
-        61,
+        87,
         6
       ],
       "angle": 0,
@@ -71,7 +71,7 @@
       "ref": "R2",
       "value": "5.1k",
       "xy": [
-        60,
+        86,
         20
       ],
       "angle": 0,
@@ -91,7 +91,7 @@
       "ref": "D1",
       "value": "USBLC6-2SC6",
       "xy": [
-        60,
+        86,
         14
       ],
       "angle": 0,
@@ -115,7 +115,7 @@
       "ref": "D2",
       "value": "USBLC6-2SC6",
       "xy": [
-        57,
+        83,
         5
       ],
       "angle": 0,
@@ -139,7 +139,7 @@
       "ref": "F1",
       "value": "500mA PTC",
       "xy": [
-        66,
+        92,
         26
       ],
       "angle": 0,
@@ -159,7 +159,7 @@
       "ref": "U4",
       "value": "AP2112K-3.3",
       "xy": [
-        58,
+        84,
         24
       ],
       "angle": 0,
@@ -188,7 +188,7 @@
       "ref": "C1",
       "value": "2.2u",
       "xy": [
-        61,
+        87,
         28
       ],
       "angle": 0,
@@ -208,7 +208,7 @@
       "ref": "C2",
       "value": "4.7u",
       "xy": [
-        53,
+        79,
         24
       ],
       "angle": 0,
@@ -228,7 +228,7 @@
       "ref": "U1",
       "value": "STM32F042K6T6",
       "xy": [
-        51,
+        77,
         14
       ],
       "angle": 0,
@@ -279,15 +279,15 @@
         "4": "NRST",
         "5": "V3",
         "6": "SENSOR_EN",
-        "7": null,
-        "8": null,
-        "9": null,
-        "10": null,
-        "11": null,
-        "12": null,
-        "13": null,
-        "14": "MAG_DRDY",
-        "15": null,
+        "7": "MAG_SCK",
+        "8": "MAG_MOSI",
+        "9": "MAG_CSN",
+        "10": "MAG_MISO0",
+        "11": "MAG_MISO1",
+        "12": "MAG_MISO2",
+        "13": "MAG_MISO3",
+        "14": "MAG_DRDY0",
+        "15": "MAG_DRDY1",
         "16": "GND",
         "17": "V3",
         "18": null,
@@ -298,8 +298,8 @@
         "23": "SWDIO",
         "24": "SWCLK",
         "25": null,
-        "26": null,
-        "27": null,
+        "26": "MAG_DRDY2",
+        "27": "MAG_DRDY3",
         "28": null,
         "29": "SCL",
         "30": "SDA",
@@ -311,7 +311,7 @@
       "ref": "C3",
       "value": "100n",
       "xy": [
-        46,
+        72,
         8
       ],
       "angle": 0,
@@ -331,7 +331,7 @@
       "ref": "C6",
       "value": "100n",
       "xy": [
-        56,
+        82,
         19
       ],
       "angle": 0,
@@ -351,7 +351,7 @@
       "ref": "C7",
       "value": "100n",
       "xy": [
-        44,
+        70,
         16
       ],
       "angle": 0,
@@ -371,7 +371,7 @@
       "ref": "C8",
       "value": "100n",
       "xy": [
-        44,
+        70,
         12
       ],
       "angle": 0,
@@ -391,7 +391,7 @@
       "ref": "R3",
       "value": "10k",
       "xy": [
-        44,
+        70,
         5
       ],
       "angle": 0,
@@ -411,7 +411,7 @@
       "ref": "R4",
       "value": "10k",
       "xy": [
-        51,
+        77,
         5
       ],
       "angle": 0,
@@ -431,7 +431,7 @@
       "ref": "J2",
       "value": "SWD / 3V3 SENSE",
       "xy": [
-        61,
+        87,
         32
       ],
       "angle": 0,
@@ -454,8 +454,8 @@
       "ref": "J3",
       "value": "BOOT0 jumper",
       "xy": [
-        36,
-        32
+        72,
+        43
       ],
       "angle": 0,
       "section": "02-controller-page-01",
@@ -474,7 +474,7 @@
       "ref": "U5",
       "value": "TPS22919",
       "xy": [
-        39,
+        65,
         25
       ],
       "angle": 0,
@@ -505,7 +505,7 @@
       "ref": "R5",
       "value": "100k",
       "xy": [
-        39,
+        65,
         21
       ],
       "angle": 0,
@@ -525,7 +525,7 @@
       "ref": "C9",
       "value": "100n",
       "xy": [
-        35,
+        69,
         25
       ],
       "angle": 0,
@@ -545,8 +545,8 @@
       "ref": "R7",
       "value": "4.7k",
       "xy": [
-        36,
-        8
+        69,
+        33
       ],
       "angle": 0,
       "section": "03-sensors-page-01",
@@ -565,8 +565,8 @@
       "ref": "R8",
       "value": "4.7k",
       "xy": [
-        40,
-        8
+        69,
+        36
       ],
       "angle": 0,
       "section": "03-sensors-page-01",
@@ -583,23 +583,23 @@
     },
     {
       "ref": "U2",
-      "value": "RM3100 XYZ",
+      "value": "RM3100 XYZ / 0",
       "xy": [
-        18,
+        20,
         20
       ],
       "angle": 0,
-      "section": "03-sensors-page-01",
+      "section": "03-magnetometer-0-page-01",
       "dnp": false,
-      "note": "",
+      "note": "Array slot 0; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11",
       "mpn": "PNI 14190",
       "footprint": "Groundlark:PNI_14190_Module",
       "local_fp": "Groundlark__PNI_14190_Module",
       "names": {
-        "1": "SCL",
-        "2": "SA1",
-        "3": "SDA",
-        "4": "SA0",
+        "1": "SCK",
+        "2": "SO",
+        "3": "SI",
+        "4": "SSN",
         "5": "DRDY",
         "6": "NC",
         "7": "AVSS",
@@ -612,16 +612,16 @@
         "14": "DVSS"
       },
       "pins": {
-        "1": "SCL",
-        "2": "GND",
-        "3": "SDA",
-        "4": "GND",
-        "5": "MAG_DRDY",
+        "1": "MAG_SCK",
+        "2": "MAG_MISO0",
+        "3": "MAG_MOSI",
+        "4": "MAG_CSN",
+        "5": "MAG_DRDY0",
         "6": null,
         "7": "GND",
         "8": null,
         "9": null,
-        "10": "V3_SENSOR",
+        "10": "GND",
         "11": null,
         "12": "V3_SENSOR",
         "13": "V3_SENSOR",
@@ -632,13 +632,13 @@
       "ref": "C4",
       "value": "100n",
       "xy": [
-        33,
-        15
+        34.5,
+        14.92
       ],
       "angle": 0,
-      "section": "03-sensors-page-01",
+      "section": "03-magnetometer-0-page-01",
       "dnp": false,
-      "note": "",
+      "note": "U2 local 100 nF bypass",
       "mpn": "GRM188R71H104KA93D",
       "footprint": "Capacitor_SMD:C_0603_1608Metric",
       "local_fp": "Capacitor_SMD__C_0603_1608Metric",
@@ -671,7 +671,7 @@
       "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
       "names": {},
       "xy": [
-        67,
+        93,
         3
       ],
       "section": "01-remote-link",
@@ -689,7 +689,7 @@
       "names": {},
       "xy": [
         3,
-        42
+        67
       ],
       "section": "01-remote-link",
       "angle": 0,
@@ -705,8 +705,8 @@
       "footprint": "MountingHole:MountingHole_2.7mm_M2.5",
       "names": {},
       "xy": [
-        67,
-        42
+        93,
+        67
       ],
       "section": "01-remote-link",
       "angle": 0,
@@ -720,8 +720,8 @@
       "ref": "U6",
       "value": "SHT45",
       "xy": [
-        31,
-        36
+        35,
+        35
       ],
       "angle": 0,
       "section": "03-sensors-page-01",
@@ -747,8 +747,8 @@
       "ref": "C10",
       "value": "100n",
       "xy": [
-        33,
-        38
+        38,
+        35
       ],
       "angle": 0,
       "section": "03-sensors-page-01",
@@ -761,6 +761,227 @@
       "pins": {
         "1": "V3_SENSOR",
         "2": "GND"
+      }
+    },
+    {
+      "ref": "U7",
+      "value": "RM3100 XYZ / 1",
+      "xy": [
+        50,
+        20
+      ],
+      "angle": 0,
+      "section": "03-magnetometer-1-page-01",
+      "dnp": false,
+      "note": "Array slot 1; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11",
+      "mpn": "PNI 14190",
+      "footprint": "Groundlark:PNI_14190_Module",
+      "local_fp": "Groundlark__PNI_14190_Module",
+      "names": {
+        "1": "SCK",
+        "2": "SO",
+        "3": "SI",
+        "4": "SSN",
+        "5": "DRDY",
+        "6": "NC",
+        "7": "AVSS",
+        "8": "NC",
+        "9": "NC",
+        "10": "I2CEN",
+        "11": "NC",
+        "12": "DVDD",
+        "13": "AVDD",
+        "14": "DVSS"
+      },
+      "pins": {
+        "1": "MAG_SCK",
+        "2": "MAG_MISO1",
+        "3": "MAG_MOSI",
+        "4": "MAG_CSN",
+        "5": "MAG_DRDY1",
+        "6": null,
+        "7": "GND",
+        "8": null,
+        "9": null,
+        "10": "GND",
+        "11": null,
+        "12": "V3_SENSOR",
+        "13": "V3_SENSOR",
+        "14": "GND"
+      }
+    },
+    {
+      "ref": "C11",
+      "value": "100n",
+      "xy": [
+        64.5,
+        14.92
+      ],
+      "angle": 0,
+      "section": "03-magnetometer-1-page-01",
+      "dnp": false,
+      "note": "U7 local 100 nF bypass",
+      "mpn": "GRM188R71H104KA93D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "V3_SENSOR",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "U8",
+      "value": "RM3100 XYZ / 2",
+      "xy": [
+        20,
+        50
+      ],
+      "angle": 0,
+      "section": "03-magnetometer-2-page-01",
+      "dnp": false,
+      "note": "Array slot 2; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11",
+      "mpn": "PNI 14190",
+      "footprint": "Groundlark:PNI_14190_Module",
+      "local_fp": "Groundlark__PNI_14190_Module",
+      "names": {
+        "1": "SCK",
+        "2": "SO",
+        "3": "SI",
+        "4": "SSN",
+        "5": "DRDY",
+        "6": "NC",
+        "7": "AVSS",
+        "8": "NC",
+        "9": "NC",
+        "10": "I2CEN",
+        "11": "NC",
+        "12": "DVDD",
+        "13": "AVDD",
+        "14": "DVSS"
+      },
+      "pins": {
+        "1": "MAG_SCK",
+        "2": "MAG_MISO2",
+        "3": "MAG_MOSI",
+        "4": "MAG_CSN",
+        "5": "MAG_DRDY2",
+        "6": null,
+        "7": "GND",
+        "8": null,
+        "9": null,
+        "10": "GND",
+        "11": null,
+        "12": "V3_SENSOR",
+        "13": "V3_SENSOR",
+        "14": "GND"
+      }
+    },
+    {
+      "ref": "C12",
+      "value": "100n",
+      "xy": [
+        34.5,
+        44.92
+      ],
+      "angle": 0,
+      "section": "03-magnetometer-2-page-01",
+      "dnp": false,
+      "note": "U8 local 100 nF bypass",
+      "mpn": "GRM188R71H104KA93D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "V3_SENSOR",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "U9",
+      "value": "RM3100 XYZ / 3",
+      "xy": [
+        50,
+        50
+      ],
+      "angle": 0,
+      "section": "03-magnetometer-3-page-01",
+      "dnp": false,
+      "note": "Array slot 3; parallel SPI; module top-view orientation identical for all four; NC 6/8/9/11",
+      "mpn": "PNI 14190",
+      "footprint": "Groundlark:PNI_14190_Module",
+      "local_fp": "Groundlark__PNI_14190_Module",
+      "names": {
+        "1": "SCK",
+        "2": "SO",
+        "3": "SI",
+        "4": "SSN",
+        "5": "DRDY",
+        "6": "NC",
+        "7": "AVSS",
+        "8": "NC",
+        "9": "NC",
+        "10": "I2CEN",
+        "11": "NC",
+        "12": "DVDD",
+        "13": "AVDD",
+        "14": "DVSS"
+      },
+      "pins": {
+        "1": "MAG_SCK",
+        "2": "MAG_MISO3",
+        "3": "MAG_MOSI",
+        "4": "MAG_CSN",
+        "5": "MAG_DRDY3",
+        "6": null,
+        "7": "GND",
+        "8": null,
+        "9": null,
+        "10": "GND",
+        "11": null,
+        "12": "V3_SENSOR",
+        "13": "V3_SENSOR",
+        "14": "GND"
+      }
+    },
+    {
+      "ref": "C13",
+      "value": "100n",
+      "xy": [
+        64.5,
+        44.92
+      ],
+      "angle": 0,
+      "section": "03-magnetometer-3-page-01",
+      "dnp": false,
+      "note": "U9 local 100 nF bypass",
+      "mpn": "GRM188R71H104KA93D",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "local_fp": "Capacitor_SMD__C_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "V3_SENSOR",
+        "2": "GND"
+      }
+    },
+    {
+      "ref": "R9",
+      "value": "100k",
+      "xy": [
+        68,
+        20
+      ],
+      "angle": 0,
+      "section": "02-controller-page-01",
+      "dnp": false,
+      "note": "100 kohm shared SPI CS pull-up to switched sensor rail",
+      "mpn": "RC0603FR-07100KL",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "names": {},
+      "pins": {
+        "1": "MAG_CSN",
+        "2": "V3_SENSOR"
       }
     }
   ]

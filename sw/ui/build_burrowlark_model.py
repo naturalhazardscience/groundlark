@@ -45,7 +45,7 @@ def main():
     board = ROOT/'hw/burrowlark-usb/boards/groundlark-field-head/groundlark-field-head.kicad_pcb'
     inputs = [placement, board, Path(__file__)]
     for part in json.loads(placement.read_text())['groundlark-field-head']['parts']:
-        name = {'U2': 'PNI14190', 'F1': 'PTC1812', 'U6': 'SHT45'}.get(part['ref'])
+        name = {'U2': 'PNI14190', 'U7': 'PNI14190', 'U8': 'PNI14190', 'U9': 'PNI14190', 'F1': 'PTC1812', 'U6': 'SHT45'}.get(part['ref'])
         if name is None:
             continue
         model = ROOT/f'hw/shared/models/{name}.wrl'

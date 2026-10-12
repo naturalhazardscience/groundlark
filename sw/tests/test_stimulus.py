@@ -149,7 +149,7 @@ class ScenarioTests(unittest.TestCase):
         scenario = Scenario({"version": 1, "initial": {"pressure_pa": {"amplitude": 10, "frequency_hz": 1, "noise_peak": .1}}})
         adapter = Simulated(8, scenario=scenario, clock=lambda: now)
         first = adapter.read()
-        adapter.configure(defaults(True)[1])
+        adapter.configure(next(c for c in defaults(True) if c["sensor_id"] == 8))
         self.assertEqual(adapter.read(), first)
         now = 750_000_000
         self.assertLess(int.from_bytes(adapter.read().raw["response"][:2], "big"), 8192)
@@ -165,7 +165,7 @@ class ScenarioTests(unittest.TestCase):
         self.assertEqual(adapter.read().quality, 3)
         now = 100
         self.assertEqual(adapter.read().quality, 1)
-        for controls in ({"18": "disconnect"}, {"1": "unknown"}, {"1": []}):
+        for controls in ({"21": "disconnect"}, {"1": "unknown"}, {"1": []}):
             with self.assertRaises(ValueError): Scenario({"version": 1, "initial": {"sensor_faults": controls}})
 
     def test_actual_application_records_events_and_reproduces_from_metadata(self):
@@ -185,7 +185,7 @@ class ScenarioTests(unittest.TestCase):
             self.assertEqual(json.loads(exported.stdout)["seed"], 7)
             run(scenario_file, second)
             self.assertEqual(first.read_bytes(), second.read_bytes())
-            self.assertEqual(replay(first)["samples"], 1040)  # Three IMUs, geophone, magnetic/legacy pressure and two 1 Hz SHT45 frames.
+            self.assertEqual(replay(first)["samples"], 1100)  # Three IMUs, geophone, four magnetometers, legacy pressure and two SHT45 frames.
             self.assertEqual(replay(first)["saturated"], 50)
 
     def test_export_includes_interactive_events_absent_from_initial_metadata(self):

@@ -41,7 +41,10 @@ selectable gas/climate/PM targets to the native PCB/package GLB.
 `build_skylark_model.py` is build-only tooling; its dependencies are separate
 from the locked UI environment. See [asset provenance](assets/README.md).
 
-Burrowlark includes RM3100 and SHT45 sensor 17. Select its enclosure-climate
+Burrowlark B1 includes four RM3100 modules (IDs 7/18/19/20) in a 2×2 grid
+and SHT45 sensor 17. Each magnetic module has its own selectable raw chart.
+The ideal model does not establish physical coherence or noise performance.
+Select its enclosure-climate
 channel to adjust temperature and humidity, inject faults and inspect both plots.
 **Test selected board** verifies independent faults, recovery and recording/replay.
 `build_burrowlark_model.py` merges the native KiCad export with the authored

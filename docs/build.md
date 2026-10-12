@@ -82,6 +82,12 @@ objects. KiCad performs independent DRC afterwards. Review schematics use local
 symbols with physical pin numbers, explicit no-connects and documented supply
 flags. They are derived artifacts, not a second electrical source.
 
+Burrowlark B1 stores its finished copper in a complete native SES snapshot,
+including local ground returns. Refresh it after authorized routing edits with
+`python3 hw/tools/export_session.py groundlark-field-head`. Validate reproducibility
+with `python3 hw/tools/replay_burrowlark.py`, which uses a temporary tree and never
+reroutes or rewrites authoring CAD. The full and quick lab profiles run this check.
+
 Autorouter completion is never assumed from a successful process exit; the
 independent unconnected-net check is required. Use each product's documented
 render command to refresh its actual native PCB view.

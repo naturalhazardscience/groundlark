@@ -35,7 +35,7 @@ Iload board 0 PULSE(0.02 0.20 100u 1u 1u 200u 500u)
 
 # USB 5 V cable/PTC budget, behavioral LDO and sensor switch on resistance.
 # The LDO is an ideal bounded source: this does not model its control loop.
-for vin,load in itertools.product([4.75,5.25],[.025,.05]):
+for vin,load in itertools.product([4.75,5.25],[.025,.08]):
     run(f'usb_supply_{vin}_{load}'.replace('.','p'),f'''Vhost host 0 {vin}
 Rcable host fused 2
 Rptc fused input 1
@@ -44,8 +44,8 @@ Iload input 0 {load}
 Bldo reg 0 V=min(3.234,v(input)-0.4)
 Cout reg 0 4.7u
 Rswitch reg sensor 0.5
-Isensor sensor 0 PULSE(0.001 0.025 100u 2u 2u 200u 500u)
-Csensor sensor 0 200n
+Isensor sensor 0 PULSE(0.001 0.055 100u 2u 2u 200u 500u)
+Csensor sensor 0 500n
 .tran 100n 800u
 .measure tran input_min MIN v(input) FROM=90u TO=800u
 .measure tran sensor_min MIN v(sensor) FROM=90u TO=800u

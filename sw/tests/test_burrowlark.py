@@ -63,7 +63,7 @@ class BurrowlarkTests(unittest.TestCase):
         self.assertTrue(all(len(frame)==6 for frame in frames))
         e = Workbench(); e.load_recording(data); e.seek(e.duration/1e9)
         self.assertEqual(e.board,'burrowlark')
-        self.assertEqual(set(e.sensor_ids), {7,17})
+        self.assertEqual(set(e.sensor_ids), {7,18,19,20,17})
         self.assertEqual(e.snapshot(17)['latest'][17]['quality'],'Valid')
 
     def test_legacy_magnetometer_only_recording_remains_readable(self):

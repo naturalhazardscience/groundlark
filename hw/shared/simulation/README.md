@@ -30,7 +30,7 @@ out-of-range measurement.
 | Cases | Model | Acceptance |
 |---|---|---|
 | 8 | Sensor rail 3.18/3.42 V; source resistance 0.05/0.2 ohm; 500 nH trace; 22 uF bulk at 40/100% effective capacitance; 1 uF aggregate local bypass; 20–200 mA steps | 3.0–3.6 V |
-| 4 | USB 4.75/5.25 V, 25/50 mA; 2 ohm cable plus 1 ohm PTC; ideal LDO with 0.4 V headroom; 0.5 ohm sensor switch, 1–25 mA sensor steps | LDO input ≥4.35 V; sensor rail ≥3.20 V |
+| 4 | USB 4.75/5.25 V, 25/80 mA; 2 ohm cable plus 1 ohm PTC; ideal LDO with 0.4 V headroom; 0.5 ohm sensor switch, 1–55 mA sensor steps and 500 nF external local bypass (excluding module-internal capacitance) | LDO input ≥4.35 V; sensor rail ≥3.20 V |
 | 3 | 4.7 kohm +1% I2C pull-up; 50/100/200 pF; 20 ohm open-drain switch | Rise <1 us, low <0.4 V; 100 kHz bus target |
 | 1 | 2 Mbaud UART; 47 ohm series, assumed 25 ohm driver and 100 pF | Rise <50 ns; mid-bit high >2.31 V |
 | 2 | USB CC 5.1 kohm ±1% pull-down with a 56 kohm source pull-up at 5 V | CC 0.40–0.43 V |

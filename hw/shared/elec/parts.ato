@@ -453,10 +453,10 @@ component P_34:
     assert io.voltage within 1.62V to 3.6V
     trait is_atomic_part<manufacturer="See datasheet", partnumber="PNI 14190", footprint="Groundlark__PNI_14190_Module.kicad_mod", symbol="symbols/P_34.kicad_sym">
     trait has_designator_prefix<prefix="U">
-    signal p1 ~ pin 1  # SCL
-    signal p2 ~ pin 2  # SA1
-    signal p3 ~ pin 3  # SDA
-    signal p4 ~ pin 4  # SA0
+    signal p1 ~ pin 1  # SCK / SCL
+    signal p2 ~ pin 2  # SO / SA1
+    signal p3 ~ pin 3  # SI / SDA
+    signal p4 ~ pin 4  # SSN / SA0
     signal p5 ~ pin 5  # DRDY
     signal p6 ~ pin 6  # NC
     signal p7 ~ pin 7  # AVSS

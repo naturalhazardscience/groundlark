@@ -1,28 +1,28 @@
 {
   "renderer": "9.0.9",
   "source_board": "groundlark-field-head.kicad_pcb",
-  "source_sha256": "407d031b6b2a42187b1871b7d026fe11e131fc9a9cfc89dbb83f3b51821948ba",
+  "source_sha256": "0ba51d48187e75f6208ca7f84aed766d9601a029872f508bd7cd9756edaec188",
   "generator": "hw/tools/render_burrowlark.py",
-  "generator_sha256": "ee6ba3808d4bcd9760b9d68256a2973f2f91647a0b9d3550331db927802d7804",
+  "generator_sha256": "a57f26a5aefa800b006cbb7e7021f7bcce5863a29b1e124e948029c0c177597d",
   "models_sha256": {
+    "${KICAD9_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step": "4857b3dc717675bf1fb22edda622ac3b3ae03cf44d81eefaf3fa3ba3a86d84c1",
     "${KICAD9_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-23-5.step": "720a6eab0024069bbee68e7cb4c3ff1149468a34611225cdc852662c5d0ec2b7",
     "${KICAD9_3DMODEL_DIR}/Package_QFP.3dshapes/LQFP-32_7x7mm_P0.8mm.step": "be0e412f1c66fee70039b0e109e0cc7c823161dda97593718afa97569bc61ce3",
-    "${KICAD9_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step": "4857b3dc717675bf1fb22edda622ac3b3ae03cf44d81eefaf3fa3ba3a86d84c1",
     "${KICAD9_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0603_1608Metric.step": "1875571c326d0d9e96f36b4efeb8094068ef7619f0a449c781caf0b49c2e5861",
     "${KICAD9_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-23-6.step": "c9fe686b4d1b56927a41fa84a9bc1efb61d8a45a123a3db43bcaa05c2891d635",
-    "${KIPRJMOD}/../../../shared/models/SHT45.wrl": "a9285f921528b102576e3109c79b1a0d298df52588b6b63715305b73dd4ba36c",
     "${KIPRJMOD}/../../../shared/models/PNI14190.wrl": "71b906e9b88bf53675e91c76582e58dff1ca1249736d70346dbee2ac9dc33815",
+    "${KICAD9_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal.step": "6338ce740fa231c2d3dcc6384e0576994a47240a312a21413cb85d76990a69a0",
     "${KICAD9_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-363_SC-70-6.step": "045cc95e18ee7a13d1623c3ce6604fc833049bdb4f952f68c26e3c5767d122e4",
     "${KIPRJMOD}/../../../shared/models/PTC1812.wrl": "08432feb6826846a43080c5604656fbcbd35b567e1c4411ab52e65de5d733e6e",
     "${KICAD9_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x05_P2.54mm_Vertical.step": "f03b716e453f6d4f2a111a227c671d96f92708e72a5a663cd4889296d021f4c3",
+    "${KIPRJMOD}/../../../shared/models/SHT45.wrl": "a9285f921528b102576e3109c79b1a0d298df52588b6b63715305b73dd4ba36c",
     "${KICAD9_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x02_P2.54mm_Vertical.step": "ea4d0799007ebdd3945072bf255d673d2fe87eb05fda85fd8d7993ad9397da41",
-    "${KICAD9_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.step": "9a669c1a2f1ea25b88b401acef6efeaa80a067bd7da9db6993de719a7fbe155c",
-    "${KICAD9_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal.step": "6338ce740fa231c2d3dcc6384e0576994a47240a312a21413cb85d76990a69a0"
+    "${KICAD9_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.step": "9a669c1a2f1ea25b88b401acef6efeaa80a067bd7da9db6993de719a7fbe155c"
   },
   "images": [
     {
       "file": "3d.png",
-      "sha256": "e6c68993cfaa9129a742efb0e08e9e287cf7170810ec039c4f462017fdf0d51a",
+      "sha256": "4051a069b0476ac024c56b423042a2b4640fd5a23c1ceb5e4ac1ff9672844ab9",
       "side": "top",
       "rotation": "325,0,25",
       "zoom": 0.9,
@@ -32,5 +32,5 @@
       ]
     }
   ],
-  "scope": "Native 70 x 45 mm routed DAQUSB-01 PCB with RM3100 and SHT45 U6/C10; U3/C5 absent. PNI14190, PTC and SHT45 bodies are simplified dimensional envelopes. No enclosure or cable shown; physical qualification remains pending."
+  "scope": "Native 96 x 70 mm routed DAQUSB-01 B1 PCB with four aligned RM3100 modules and SHT45 U6/C10; U3/C5 absent. PNI14190, PTC and SHT45 bodies are simplified dimensional envelopes. No enclosure or cable shown; physical qualification remains pending."
 }

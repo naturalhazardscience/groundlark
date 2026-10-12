@@ -7,7 +7,7 @@ from groundlark_contract.validation import require, validate, identifier
 VECTORS = {"acceleration_m_s2": "acceleration", "angular_rate_rad_s": "angular_rate",
            "angle_rad": "angle", "magnetic_t": "counts"}
 FIELDS = {**{i: {"acceleration_m_s2", "angular_rate_rad_s", "temperature_k"} for i in range(1, 5)},
-          5: {"angle_rad", "temperature_k"}, 7: {"magnetic_t"},
+          5: {"angle_rad", "temperature_k"}, **{i: {"magnetic_t"} for i in (7,18,19,20)},
           8: {"pressure_pa", "temperature_k"}, 9: {"geophone_input_v"}}
 
 

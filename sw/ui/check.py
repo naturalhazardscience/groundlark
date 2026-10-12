@@ -48,6 +48,7 @@ def main():
             assert 'Test selected board' in page and 'Skylark USB' in page
             assert 'Air quality stimulus' in page and 'The FPGA is not required for sensor experiments.' in page
             assert 'Enclosure climate' in page and 'SHT45' in page
+            assert all(f'Magnetometer {i}' in page for i in range(1,5)), 'B1 requires four separate magnetic views'
             with urlopen(f"http://127.0.0.1:{port}/station",timeout=3) as response:
                 station_page=html.unescape(response.read().decode())
             assert 'Station configuration' in station_page and 'Download SSREC' in station_page

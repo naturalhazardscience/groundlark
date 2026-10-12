@@ -1,0 +1,7 @@
+{
+  "copper_identical": true,
+  "tracks_and_vias": 501,
+  "violations": 0,
+  "unconnected_items": 0,
+  "scope": "Native copper replay and geometry only; physical coherence/noise unqualified"
+}

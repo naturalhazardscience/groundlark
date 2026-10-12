@@ -4,7 +4,7 @@ This does not perform analog simulation, SI/PI signoff or bench validation.
 """
 from pathlib import Path
 from project_paths import board_dir, compiled_dir
-from burrowlark_checks import population
+from burrowlark_checks import population, array_pins, array_geometry, array_layout
 from collections import Counter
 import argparse,json,subprocess,xml.etree.ElementTree as ET
 import pcbnew as pcb
@@ -22,6 +22,8 @@ def main(boards=('groundlark-field-head',)):
             for node in net.findall('node'): sch[(node.get('ref'),node.get('pin'))]=net.get('name')
         board=pcb.LoadBoard(str(folder/(name+'.kicad_pcb')))
         actual={(fp.GetReference(),pad.GetNumber()):pad.GetNetname() for fp in board.GetFootprints() for pad in fp.Pads() if pad.GetNumber()}
+        array_pins(actual)
+        array_geometry({f.GetReference():dict(xy=[pcb.ToMM(f.GetPosition().x)-50,pcb.ToMM(f.GetPosition().y)-50],angle=f.GetOrientationDegrees(),side='back' if f.IsFlipped() else 'front') for f in board.GetFootprints()}, [round(pcb.ToMM(board.GetBoardEdgesBoundingBox().GetWidth())),round(pcb.ToMM(board.GetBoardEdgesBoundingBox().GetHeight()))])
         degree=Counter(actual.values())
         target='field_head'
         compiled=pcb.LoadBoard(str(compiled_dir(target)/(target+'.kicad_pcb')))
@@ -50,7 +52,8 @@ def main(boards=('groundlark-field-head',)):
         findings=drc['violations']+drc['unconnected_items'];erc_findings=[x for sheet in erc['sheets'] for x in sheet['violations']]
         types=Counter(x['type'] for x in findings)
         errors=[x for x in findings if x['severity']=='error']
-        result={'pin_checks':checks,'atopile_pin_checks':len(compiler_pins),'connectivity_errors':failures,'drc_findings_by_type':dict(types),'drc_errors':len(errors),'erc_findings':len(erc_findings),'unconnected_items':len(drc['unconnected_items']),'tracks_and_vias':len(board.GetTracks()),'status':'A2 PROTOTYPE - NOT FABRICATION RELEASED','limits':['Prototype USB sensor firmware is implemented; physical enumeration, suspend and USB signal integrity are unvalidated','No bench, magnetic-noise, RF impedance, EMC or mechanical stack validation','SPICE models are supporting-circuit behavioral/passive models, not full sensor silicon models']}
+        result={'pin_checks':checks,'atopile_pin_checks':len(compiler_pins),'connectivity_errors':failures,'drc_findings_by_type':dict(types),'drc_errors':len(errors),'erc_findings':len(erc_findings),'unconnected_items':len(drc['unconnected_items']),'tracks_and_vias':len(board.GetTracks()),'status':'B1 PROTOTYPE - NOT FABRICATION RELEASED','limits':['Prototype USB sensor firmware is implemented; physical enumeration, suspend and USB signal integrity are unvalidated','No bench, magnetic-noise, RF impedance, EMC or mechanical stack validation','SPICE models are supporting-circuit behavioral/passive models, not full sensor silicon models']}
+        result['array_layout']=array_layout(board)
         (folder/'validation.json').write_text(json.dumps(result,indent=2))
         print(name,json.dumps(result,indent=2))
         if failures or errors or erc_findings:board_failures.append({'board':name,'connectivity':failures,'drc':dict(types),'erc':len(erc_findings)})

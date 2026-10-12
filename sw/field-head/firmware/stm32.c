@@ -3,6 +3,7 @@
 #include "boot.h"
 #include <libopencm3/cm3/cortex.h>
 #include <libopencm3/cm3/systick.h>
+#include <libopencm3/cm3/nvic.h>
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/crs.h>
 #include <libopencm3/stm32/gpio.h>
@@ -10,6 +11,8 @@
 #include <libopencm3/stm32/flash.h>
 #include <libopencm3/stm32/iwdg.h>
 #include <libopencm3/stm32/syscfg.h>
+#include <libopencm3/stm32/timer.h>
+#include <libopencm3/stm32/exti.h>
 #include <libopencm3/usb/usbd.h>
 #include <libopencm3/usb/cdc.h>
 #include <string.h>
@@ -22,12 +25,84 @@ static usbd_device *usb;
 static volatile uint64_t milliseconds;
 static bool configured,dtr,suspended,tx_busy,zlp_pending;
 static uint16_t tx_offset;
-void sys_tick_handler(void){milliseconds++;}
+static volatile uint8_t ready_mask;
+static volatile uint64_t ready_us[4];
+static volatile bool ready_armed;
+static bool spi_enabled;
+#define MAG_INPUTS (GPIO4|GPIO5|GPIO6|GPIO7)
+#define MAG_OUTPUTS (GPIO1|GPIO2|GPIO3)
+#define MAG_READY (GPIO0|GPIO1|GPIO3|GPIO4)
+uint64_t bh_micros(void){
+    static uint32_t previous;static uint64_t high;
+    uint32_t mask=cm_mask_interrupts(1),low=timer_get_counter(TIM2);
+    if(low<previous)high+=1ull<<32;previous=low;
+    uint64_t result=high+low;cm_mask_interrupts(mask);return result;
+}
+void sys_tick_handler(void){milliseconds++;(void)bh_micros();}
 uint64_t bh_clock(void){uint32_t mask=cm_mask_interrupts(1);uint64_t t=milliseconds;cm_mask_interrupts(mask);return t;}
 void bh_delay(uint32_t ms){uint64_t end=bh_clock()+ms;while(bh_clock()<end)if(usb)usbd_poll(usb);}
+static void ready_interrupt(void){
+    const uint32_t lines[]={EXTI0,EXTI1,EXTI3,EXTI4};uint64_t stamp=bh_micros();
+    for(unsigned i=0;i<4;i++)if(exti_get_flag_status(lines[i])){
+        exti_reset_request(lines[i]);
+        if(ready_armed&&!(ready_mask&(1u<<i))){ready_us[i]=stamp;ready_mask|=1u<<i;}
+    }
+}
+void exti0_1_isr(void){ready_interrupt();}
+void exti2_3_isr(void){ready_interrupt();}
+void exti4_15_isr(void){ready_interrupt();}
+bool bh_ready_arm(void){
+    uint32_t mask=cm_mask_interrupts(1);ready_armed=false;ready_mask=0;
+    exti_reset_request(MAG_READY);bool low=!(gpio_get(GPIOB,MAG_READY));
+    if(low){ready_armed=true;exti_enable_request(MAG_READY);}
+    cm_mask_interrupts(mask);return low;
+}
+uint8_t bh_ready(uint64_t observed_us[4]){
+    uint32_t mask=cm_mask_interrupts(1);uint8_t result=ready_mask;
+    for(unsigned i=0;i<4;i++)observed_us[i]=ready_us[i];
+    cm_mask_interrupts(mask);return result;
+}
+/* Conservative mode-0 software SPI. All four SO bits are captured in one
+ * GPIO read; interrupts may stretch clocks but cannot offset the shared edge.
+ * Actual edge shape, timing and DRDY latency still require bench qualification. */
+static void spi_wait(void){uint32_t start=timer_get_counter(TIM2);while((uint32_t)(timer_get_counter(TIM2)-start)<2){}}
+static void spi_byte(uint8_t value,uint8_t read[4]){
+    for(unsigned bit=0;bit<8;bit++){
+        if(value&0x80)gpio_set(GPIOA,GPIO2);else gpio_clear(GPIOA,GPIO2);value<<=1;
+        spi_wait();gpio_set(GPIOA,GPIO1);spi_wait();uint32_t lanes=GPIO_IDR(GPIOA);
+        if(read)for(unsigned i=0;i<4;i++)read[i]=(uint8_t)((read[i]<<1)|((lanes>>(4+i))&1));
+        gpio_clear(GPIOA,GPIO1);
+    }
+}
+bool bh_spi(uint8_t reg,const uint8_t *write,size_t n,uint8_t read[4][9]){
+    if(!state.powered||n>9||!n||(!write&&!read)||(write&&read))return false;
+    /* First transaction occurs only after head.c's 20 ms rail-settle interval.
+     * Leave all push-pull signals high impedance throughout the supply ramp. */
+    if(!spi_enabled){
+        gpio_set(GPIOA,GPIO3);gpio_clear(GPIOA,GPIO1|GPIO2);
+        gpio_mode_setup(GPIOA,GPIO_MODE_OUTPUT,GPIO_PUPD_NONE,MAG_OUTPUTS);
+        gpio_set_output_options(GPIOA,GPIO_OTYPE_PP,GPIO_OSPEED_2MHZ,MAG_OUTPUTS);
+        gpio_mode_setup(GPIOA,GPIO_MODE_INPUT,GPIO_PUPD_NONE,MAG_INPUTS);
+        gpio_mode_setup(GPIOB,GPIO_MODE_INPUT,GPIO_PUPD_NONE,MAG_READY);spi_enabled=true;
+    }
+    gpio_clear(GPIOA,GPIO3);spi_wait();spi_byte(reg|(read?0x80:0),0);
+    for(size_t j=0;j<n;j++){
+        uint8_t lanes[4]={0};spi_byte(write?write[j]:0,read?lanes:0);
+        if(read)for(unsigned i=0;i<4;i++)read[i][j]=lanes[i];
+    }
+    spi_wait();gpio_set(GPIOA,GPIO3);gpio_clear(GPIOA,GPIO2);return true;
+}
 void bh_power(bool enabled){
-    if(enabled){gpio_set(GPIOA,GPIO0);gpio_mode_setup(GPIOB,GPIO_MODE_AF,GPIO_PUPD_NONE,GPIO6|GPIO7);gpio_set_af(GPIOB,GPIO_AF1,GPIO6|GPIO7);gpio_set_output_options(GPIOB,GPIO_OTYPE_OD,GPIO_OSPEED_2MHZ,GPIO6|GPIO7);i2c_peripheral_enable(I2C1);}
-    else{i2c_peripheral_disable(I2C1);gpio_mode_setup(GPIOB,GPIO_MODE_ANALOG,GPIO_PUPD_NONE,GPIO0|GPIO6|GPIO7);gpio_clear(GPIOA,GPIO0);}
+    ready_armed=false;ready_mask=0;exti_disable_request(MAG_READY);exti_reset_request(MAG_READY);
+    spi_enabled=false;gpio_mode_setup(GPIOA,GPIO_MODE_ANALOG,GPIO_PUPD_NONE,MAG_INPUTS|MAG_OUTPUTS);
+    gpio_mode_setup(GPIOB,GPIO_MODE_ANALOG,GPIO_PUPD_NONE,MAG_READY);
+    if(enabled){
+        gpio_set(GPIOA,GPIO0);
+        gpio_mode_setup(GPIOB,GPIO_MODE_AF,GPIO_PUPD_NONE,GPIO6|GPIO7);gpio_set_af(GPIOB,GPIO_AF1,GPIO6|GPIO7);gpio_set_output_options(GPIOB,GPIO_OTYPE_OD,GPIO_OSPEED_2MHZ,GPIO6|GPIO7);i2c_peripheral_enable(I2C1);
+    }else{
+        i2c_peripheral_disable(I2C1);gpio_mode_setup(GPIOB,GPIO_MODE_ANALOG,GPIO_PUPD_NONE,MAG_READY|GPIO6|GPIO7);
+        gpio_mode_setup(GPIOA,GPIO_MODE_ANALOG,GPIO_PUPD_NONE,MAG_INPUTS|MAG_OUTPUTS);gpio_clear(GPIOA,GPIO0);
+    }
 }
 static bool wait_flag(uint32_t flag,uint64_t end){
     for(unsigned spin=0;spin<100000;spin++){
@@ -111,6 +186,11 @@ int main(void){
     gpio_mode_setup(GPIOA,GPIO_MODE_ANALOG,GPIO_PUPD_NONE,GPIO1|GPIO2|GPIO3|GPIO4|GPIO5|GPIO6|GPIO7|GPIO8|GPIO15);
     gpio_mode_setup(GPIOB,GPIO_MODE_ANALOG,GPIO_PUPD_NONE,GPIO0|GPIO1|GPIO3|GPIO4|GPIO5|GPIO6|GPIO7);
     gpio_clear(GPIOA,GPIO0);gpio_mode_setup(GPIOA,GPIO_MODE_OUTPUT,GPIO_PUPD_NONE,GPIO0);
+    rcc_periph_clock_enable(RCC_TIM2);timer_set_prescaler(TIM2,47);timer_set_period(TIM2,0xffffffff);timer_generate_event(TIM2,TIM_EGR_UG);timer_enable_counter(TIM2);
+    rcc_periph_clock_enable(RCC_SYSCFG_COMP);
+    exti_select_source(EXTI0,GPIOB);exti_select_source(EXTI1,GPIOB);exti_select_source(EXTI3,GPIOB);exti_select_source(EXTI4,GPIOB);
+    exti_set_trigger(MAG_READY,EXTI_TRIGGER_RISING);
+    nvic_enable_irq(NVIC_EXTI0_1_IRQ);nvic_enable_irq(NVIC_EXTI2_3_IRQ);nvic_enable_irq(NVIC_EXTI4_15_IRQ);
     systick_set_clocksource(STK_CSR_CLKSOURCE_AHB);systick_set_reload(47999);systick_interrupt_enable();systick_counter_enable();
     rcc_periph_clock_enable(RCC_I2C1);rcc_set_i2c_clock_hsi(RCC_I2C1);rcc_osc_on(RCC_HSI);rcc_wait_for_osc_ready(RCC_HSI);
     i2c_set_speed(I2C1,i2c_speed_sm_100k,8);

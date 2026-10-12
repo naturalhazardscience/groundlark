@@ -58,7 +58,12 @@ Sensor acquisition uses Pi drivers/runtime software. The separate TI MSPM0L1106
 power supervisor has prototype target firmware in `sw/supervisor/`; its battery policy remains disabled and physical qualification pending. The DLVR-F50D infrasound sensor U23/C24 is on DAQHAT-01 I2C1 at 0x28;
 BCM6 requests Pi shutdown and BCM13 acknowledges halt; BCM24 carries GNSS PPS. Burrowlark U3/C5 are removed.
 The remote USB magnetometer sensor board is
-named Burrowlark, model DAQUSB-01. Firmware belongs to that USB sensor head.
+named Burrowlark, model DAQUSB-01. B1 uses four aligned PNI 14190 modules
+U2/U7/U8/U9 on a 30 mm square grid and a 96 x 70 mm outline. Preserve common
+SPI SCK/SI/SSN, separate SO/DRDY lanes, switched-rail high impedance when off,
+per-lane raw data and cohort timing; shared commands do not phase-lock the
+internal conversion clocks. Keep complete-quartet loss and explicit calibrated
+averaging/skew policy. Firmware belongs to that USB sensor head.
 The Trenz variant needs an FPGA bitstream. Pi acquisition/simulation and bounded
 recovery are implemented; Burrowlark prototype firmware is in `sw/field-head/` with native and ARM checks; physical qualification remains pending. Skylark STM32 firmware is implemented in `sw/skylark/`, with native C driver/journal tests and an ARM build in the shared software profile. A DAQHAT-01
 SPI echo bitstream is implemented and simulated; accelerated models and native

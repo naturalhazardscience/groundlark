@@ -1,4 +1,4 @@
-# A2: standalone USB-C sensor head; see docs/usb-sensor-head.md.
+# B1: coherent four-module USB-C sensor head; see docs/usb-sensor-head.md.
 #pragma experiment("TRAITS")
 import has_designator
 import ElectricPower
@@ -25,7 +25,17 @@ from "../../shared/elec/burrowlark.ato" import SHT45
 module FieldHead:
     signal BOOT0
     signal GND
-    signal MAG_DRDY
+    signal MAG_SCK
+    signal MAG_MOSI
+    signal MAG_CSN
+    signal MAG_MISO0
+    signal MAG_MISO1
+    signal MAG_MISO2
+    signal MAG_MISO3
+    signal MAG_DRDY0
+    signal MAG_DRDY1
+    signal MAG_DRDY2
+    signal MAG_DRDY3
     signal NRST
     signal SCL
     signal SDA
@@ -130,7 +140,17 @@ module FieldHead:
     u1.p4 ~ NRST
     u1.p5 ~ V3
     u1.p6 ~ SENSOR_EN
-    u1.p14 ~ MAG_DRDY
+    u1.p7 ~ MAG_SCK
+    u1.p8 ~ MAG_MOSI
+    u1.p9 ~ MAG_CSN
+    u1.p10 ~ MAG_MISO0
+    u1.p11 ~ MAG_MISO1
+    u1.p12 ~ MAG_MISO2
+    u1.p13 ~ MAG_MISO3
+    u1.p14 ~ MAG_DRDY0
+    u1.p15 ~ MAG_DRDY1
+    u1.p26 ~ MAG_DRDY2
+    u1.p27 ~ MAG_DRDY3
     u1.p16 ~ GND
     u1.p17 ~ V3
     u1.p21 ~ USB_DM
@@ -215,13 +235,13 @@ module FieldHead:
 
     u2 = new P_34
     trait u2 has_designator<designator="U2">
-    u2.p1 ~ SCL
-    u2.p2 ~ GND
-    u2.p3 ~ SDA
-    u2.p4 ~ GND
-    u2.p5 ~ MAG_DRDY
+    u2.p1 ~ MAG_SCK
+    u2.p2 ~ MAG_MISO0
+    u2.p3 ~ MAG_MOSI
+    u2.p4 ~ MAG_CSN
+    u2.p5 ~ MAG_DRDY0
     u2.p7 ~ GND
-    u2.p10 ~ V3_SENSOR
+    u2.p10 ~ GND
     u2.p12 ~ V3_SENSOR
     u2.p13 ~ V3_SENSOR
     u2.p14 ~ GND
@@ -230,6 +250,72 @@ module FieldHead:
     trait c4 has_designator<designator="C4">
     c4.p1 ~ V3_SENSOR
     c4.p2 ~ GND
+
+    u7 = new P_34
+    trait u7 has_designator<designator="U7">
+    u7.p1 ~ MAG_SCK
+    u7.p2 ~ MAG_MISO1
+    u7.p3 ~ MAG_MOSI
+    u7.p4 ~ MAG_CSN
+    u7.p5 ~ MAG_DRDY1
+    u7.p7 ~ GND
+    u7.p10 ~ GND
+    u7.p12 ~ V3_SENSOR
+    u7.p13 ~ V3_SENSOR
+    u7.p14 ~ GND
+    u7.power ~ sensor_supply
+    u7.io ~ sensor_supply
+
+    c11 = new P_6
+    trait c11 has_designator<designator="C11">
+    c11.p1 ~ V3_SENSOR
+    c11.p2 ~ GND
+
+    u8 = new P_34
+    trait u8 has_designator<designator="U8">
+    u8.p1 ~ MAG_SCK
+    u8.p2 ~ MAG_MISO2
+    u8.p3 ~ MAG_MOSI
+    u8.p4 ~ MAG_CSN
+    u8.p5 ~ MAG_DRDY2
+    u8.p7 ~ GND
+    u8.p10 ~ GND
+    u8.p12 ~ V3_SENSOR
+    u8.p13 ~ V3_SENSOR
+    u8.p14 ~ GND
+    u8.power ~ sensor_supply
+    u8.io ~ sensor_supply
+
+    c12 = new P_6
+    trait c12 has_designator<designator="C12">
+    c12.p1 ~ V3_SENSOR
+    c12.p2 ~ GND
+
+    u9 = new P_34
+    trait u9 has_designator<designator="U9">
+    u9.p1 ~ MAG_SCK
+    u9.p2 ~ MAG_MISO3
+    u9.p3 ~ MAG_MOSI
+    u9.p4 ~ MAG_CSN
+    u9.p5 ~ MAG_DRDY3
+    u9.p7 ~ GND
+    u9.p10 ~ GND
+    u9.p12 ~ V3_SENSOR
+    u9.p13 ~ V3_SENSOR
+    u9.p14 ~ GND
+    u9.power ~ sensor_supply
+    u9.io ~ sensor_supply
+
+    c13 = new P_6
+    trait c13 has_designator<designator="C13">
+    c13.p1 ~ V3_SENSOR
+    c13.p2 ~ GND
+
+    # Shared CS defaults inactive; four SO wires are never connected together.
+    r9 = new IF_R66
+    trait r9 has_designator<designator="R9">
+    r9.p1 ~ MAG_CSN
+    r9.p2 ~ V3_SENSOR
 
     # Enclosure climate, address 0x44; heater disabled in the acquisition profile.
     u6 = new SHT45
@@ -249,11 +335,19 @@ module FieldHead:
     u4.input_power ~ usb_supply
     u4.output_power ~ supply
     u5.power ~ supply
-    u2.power ~ sensor_supply
-    u2.io ~ sensor_supply
     trait BOOT0 has_net_name_suggestion<name="BOOT0", level="EXPECTED">
     trait GND has_net_name_suggestion<name="GND", level="EXPECTED">
-    trait MAG_DRDY has_net_name_suggestion<name="MAG_DRDY", level="EXPECTED">
+    trait MAG_SCK has_net_name_suggestion<name="MAG_SCK", level="EXPECTED">
+    trait MAG_MOSI has_net_name_suggestion<name="MAG_MOSI", level="EXPECTED">
+    trait MAG_CSN has_net_name_suggestion<name="MAG_CSN", level="EXPECTED">
+    trait MAG_MISO0 has_net_name_suggestion<name="MAG_MISO0", level="EXPECTED">
+    trait MAG_MISO1 has_net_name_suggestion<name="MAG_MISO1", level="EXPECTED">
+    trait MAG_MISO2 has_net_name_suggestion<name="MAG_MISO2", level="EXPECTED">
+    trait MAG_MISO3 has_net_name_suggestion<name="MAG_MISO3", level="EXPECTED">
+    trait MAG_DRDY0 has_net_name_suggestion<name="MAG_DRDY0", level="EXPECTED">
+    trait MAG_DRDY1 has_net_name_suggestion<name="MAG_DRDY1", level="EXPECTED">
+    trait MAG_DRDY2 has_net_name_suggestion<name="MAG_DRDY2", level="EXPECTED">
+    trait MAG_DRDY3 has_net_name_suggestion<name="MAG_DRDY3", level="EXPECTED">
     trait NRST has_net_name_suggestion<name="NRST", level="EXPECTED">
     trait SCL has_net_name_suggestion<name="SCL", level="EXPECTED">
     trait SDA has_net_name_suggestion<name="SDA", level="EXPECTED">

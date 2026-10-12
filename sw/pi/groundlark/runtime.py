@@ -25,7 +25,7 @@ class Channel:
 class Acquisition:
     def __init__(self, writer, sessions, channels, capacity=64, calibration_ids=None,
                  retry_limit=2, failure_limit=3, cooldown_ns=1_000_000_000):
-        if not 1 <= len(channels) <= 8 or not 0 <= retry_limit <= 10 or not 1 <= failure_limit <= 10 or cooldown_ns < 1:
+        if not 1 <= len(channels) <= 16 or not 0 <= retry_limit <= 10 or not 1 <= failure_limit <= 10 or cooldown_ns < 1:
             raise ValueError("acquisition bounds")
         self.writer, self.sessions, self.channels = writer, sessions, channels
         keys = [(c.device, c.boot, c.settings["sensor_id"]) for c in channels]
@@ -59,7 +59,7 @@ class Acquisition:
             c.settings = c.adapter.configure(c.settings)
         for (device, boot), channels in groups.items():
             sensors = [c.settings["sensor_id"] for c in channels]
-            board = 3 if set(sensors) <= set(range(10, 17)) else 2 if set(sensors) <= {7, 8, 17} else 1
+            board = 3 if set(sensors) <= set(range(10, 17)) else 2 if set(sensors) <= {7, 8, 17, 18, 19, 20} else 1
             for c in channels:
                 if c.settings['sensor_id'] == 8: c.clock_domain = 1 if board == 1 else 2
             self.emit(messages.identity(device, boot, board, sensors), now)

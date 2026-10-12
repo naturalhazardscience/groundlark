@@ -1,5 +1,9 @@
 # DAQHAT-01 physical bench procedure and report
 
+Burrowlark B1 has a separate [array timing, calibration and noise procedure](usb-sensor-head.md#calibrated-averaging-and-noise).
+Its four-sensor timing, magnetic cross-talk, thermal behavior and noise floor remain
+physically unqualified; passing HAT or native software tests does not qualify them.
+
 Use the [calibration procedure](calibration.md) for PCB probe points, electrical injection, six-face IMU measurements and versioned calibration evidence. A static gain/offset fit does not satisfy the dynamic response or timing checks below.
 
 **DAQHAT-01 GNSS revision:** MAX-M10S-00B uses Pi I2C1 at 0x42 and

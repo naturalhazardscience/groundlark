@@ -7,7 +7,7 @@ from .burrowlark import SETTINGS as CLIMATE_SETTINGS
 
 class Simulated:
     def __init__(self, sensor, seed=1, faults=(), scenario=None, clock=None):
-        if type(sensor) is not int or not 1 <= sensor <= 17: raise ValueError("simulated sensor ID")
+        if type(sensor) is not int or not 1 <= sensor <= 20: raise ValueError("simulated sensor ID")
         if type(seed) is not int or not 0 <= seed < 1 << 64: raise ValueError("seed must be uint64")
         self.sensor, self.seed, self.index = sensor, seed, 0
         self.scenario, self.clock = scenario or Scenario(), clock
@@ -15,7 +15,7 @@ class Simulated:
         if len(faults) > 256: raise ValueError("fault fixture bound")
         self.faults = {}
         for f in faults:
-            if set(f) != {"sensor", "sample", "action"} or f["sensor"] not in range(1, 18) or type(f["sample"]) is not int or not 0 <= f["sample"] <= 1_000_000:
+            if set(f) != {"sensor", "sample", "action"} or f["sensor"] not in range(1, 21) or type(f["sample"]) is not int or not 0 <= f["sample"] <= 1_000_000:
                 raise ValueError("fault fixture fields")
             if f["action"] not in ("timeout", "nack", "disconnect", "not_ready", "saturation", "short_read"):
                 raise ValueError("unknown fault action")
@@ -43,7 +43,7 @@ class Simulated:
                 result.raw["acceleration"] = (32767, *result.raw["acceleration"][1:])
                 if self.sensor == 5: result.raw["device_status"] |= 64
             elif self.sensor == 9 or 10 <= self.sensor <= 13: result.raw["counts"] = 8388607
-            elif self.sensor == 7: result.raw["counts"] = (8388607, *result.raw["counts"][1:])
+            elif self.sensor in (7, 18, 19, 20): result.raw["counts"] = (8388607, *result.raw["counts"][1:])
             elif self.sensor == 8: result.raw["response"] = b"\x3f\xff" + result.raw["response"][2:]
         return result
 
@@ -55,8 +55,8 @@ def defaults(remote=False, legacy_gnss=False):
     entries += [dict(sensor_id=5, enabled=True, period_ns=40_000_000, tilt_mode=1),
                 dict(sensor_id=6, enabled=True, period_ns=1_000_000_000)]
     if remote:
-        return [dict(sensor_id=7, enabled=True, period_ns=100_000_000, cycle_count_x=200,
-                     cycle_count_y=200, cycle_count_z=200),
+        return [dict(sensor_id=i, enabled=True, period_ns=100_000_000, cycle_count_x=200,
+                     cycle_count_y=200, cycle_count_z=200) for i in (7,18,19,20)] + [
                 dict(sensor_id=8, enabled=True, period_ns=10_000_000, pressure_min_pa=-250,
                      pressure_max_pa=250, pressure_part_number="SIMULATED-DLVR"), dict(CLIMATE_SETTINGS)]
     if not legacy_gnss:

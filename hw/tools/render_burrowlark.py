@@ -54,7 +54,7 @@ def main():
         'models_sha256': models,
         'images': [{'file': output.name, 'sha256': digest(output), 'side': 'top',
                     'rotation': '325,0,25', 'zoom': 0.9, 'size_px': list(struct.unpack('>II', output.read_bytes()[16:24]))}],
-        'scope': 'Native 70 x 45 mm routed DAQUSB-01 PCB with RM3100 and SHT45 U6/C10; U3/C5 absent. '
+        'scope': 'Native 96 x 70 mm routed DAQUSB-01 B1 PCB with four aligned RM3100 modules and SHT45 U6/C10; U3/C5 absent. '
                  'PNI14190, PTC and SHT45 bodies are simplified dimensional envelopes. '
                  'No enclosure or cable shown; physical qualification remains pending.',
     }

@@ -5,8 +5,8 @@
     "hw/groundlark-fpga-hat/layout/placement.json": "5380ea9ba1a56a464da22035ed8682b672b0e1e958c5fc83be8e5b4f5e78b06f",
     "sw/ui/assets/daqhat-01.glb": "2dc7a979bcf662b88499a6a65d441a6622c94524fcbb5433fba8d47dc1c06dbb",
     "sw/ui/geophone_scene.py": "65ef0de9df78e2b7c1c4697367f5a5b81486dd95f2fe4f01d9fa6f35b8dd461a",
-    "hw/burrowlark-usb/layout/placement.json": "0a41c4d62e305121748801b6d8382ece764ea68c39fd33471924e88f3f4e30bc",
-    "sw/ui/main.py": "c5246c7ff4046b371004ac17abfeccf44b8fad07dae4474c91767578640cb67a",
+    "hw/burrowlark-usb/layout/placement.json": "f180ef6b13946e4425e12864c34a310c905ea993b59d379671d8acee6e5ea2e6",
+    "sw/ui/main.py": "4d4c69aa494fe03c62a7ca13fb96a07342eb97645d913166aabce4c32bfca264",
     "hw/shared/models/DLVR_E1BS.wrl": "cef03553881ccfc39cc5810789a92d578c0f9d8a636b5de29cd719bada7c4dad",
     "hw/shared/models/PJ_102AH_envelope.wrl": "4ee72a8ea9a1d0d7c4afc079819353c87c9e6111557c5727d821b4f53b711c94",
     "hw/shared/models/TPSM53603_envelope.wrl": "eec66b8373d0bce441527b2ec6ce28c3c2fcbe6ef56a7f0fad3883eb48f30604",
@@ -17,5 +17,5 @@
   "metadata_review": "140 x 56 mm supervised Pi supply and separate FPGA input. J130 accepts protected 8-18 V DC; U130 MSPM0L1106 controls U132/U133. Native KiCad 9.0.9 GLB; local VRML parts use explicit display envelopes. Physical fit, thermal behavior and battery policy remain unqualified.",
   "calibration_access": "Four underside passive probe pads TP90-TP93; outline and assembly height unchanged. Native PCB fit checks pass; physical calibration pending.",
   "gnss": "MAX-M10S underside package envelope and drawing-based HL-SMA-KWE-02 STEP; native -X antenna. Timing evidence is modeled; physical RF/timing/fit qualification pending.",
-  "label_review": "Interface component identifiers and service labels updated; normalized placement geometry, native PCB, model and GLB bytes unchanged. UI notice wording only."
+  "label_review": "Burrowlark B1 scene adds four independent selection targets and its new native GLB; HAT scene geometry, PCB, models and GLB remain unchanged."
 }

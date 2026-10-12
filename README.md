@@ -75,19 +75,22 @@ fasteners and cable dressing are illustrative. [Render provenance](docs/images/s
 
 ## Burrowlark
 
-![Burrowlark DAQUSB-01 Rev A2: USB-C PCB with PNI RM3100 XYZ magnetometer and SHT45 temperature/humidity](hw/burrowlark-usb/boards/groundlark-field-head/3d.png)
+![Burrowlark DAQUSB-01 Rev B1: USB-C PCB with four aligned PNI RM3100 XYZ magnetometers and SHT45 temperature/humidity](hw/burrowlark-usb/boards/groundlark-field-head/3d.png)
 
 **Remote magnetic and enclosure-climate sensing over USB.**
-[Burrowlark USB](hw/burrowlark-usb/README.md), model **DAQUSB-01**, carries an
-RM3100 magnetometer and SHT45 temperature/humidity sensor. It connects to the Pi through USB-C for power and data.
+[Burrowlark USB](hw/burrowlark-usb/README.md), model **DAQUSB-01**, carries four
+RM3100 magnetometers on a 30 mm square grid and an SHT45 temperature/humidity
+sensor. One STM32F042K6 coordinates their measurements and sends each sensor's
+raw data and timing evidence to the Pi over USB-C.
 The DLVR infrasound sensor is fitted on Groundlark DAQHAT-01.
 
-**Status:** hardware design and workbench simulation are present; MCU firmware
-and physical qualification remain pending. See the
+**Status:** routed prototype hardware, MCU firmware and workbench simulation are
+implemented. Physical USB, synchronization, magnetic cross-talk and noise
+qualification remain pending. See the
 [USB sensor-head guide](docs/usb-sensor-head.md) for interfaces and assembly details.
 
-*Render: native 70 × 45 mm PCB with favicon, Burrowlark name and DAQUSB-01 / REV A2
-silkscreen, RM3100 module and SHT45 U6/C10; the former infrasound
+*Render: native 96 × 70 mm PCB with favicon, Burrowlark name and DAQUSB-01 / REV B1
+silkscreen, four RM3100 modules and SHT45 U6/C10; the former infrasound
 footprint and bypass capacitor are removed. Module, fuse and SHT45 bodies are simplified
 dimensional envelopes. [Render provenance](hw/burrowlark-usb/boards/groundlark-field-head/render-provenance.json).*
 

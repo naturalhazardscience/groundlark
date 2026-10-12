@@ -134,8 +134,9 @@ IMUs and geophone input. Expand the results for measurements and tolerances;
 download the recording and JSON report from that panel.
 
 With **Skylark USB** selected, expect seven checks: inventory, gas channels,
-particulate, climate, pressure, isolated failure and replay. Burrowlark has five
-checks. These two USB-board UI tests use ideal sensor stimuli through the shared
+particulate, climate, pressure, isolated failure and replay. Burrowlark has nine
+checks, including four magnetic streams, modeled lane isolation and SHT45 recovery.
+These two USB-board UI tests use ideal sensor stimuli through the shared
 acquisition/controller; the portable software profile separately compiles and
 runs Skylark's actual C drivers/encoder with injected register/UART faults and
 builds the ARM firmware. The report states each test's scope.
@@ -207,13 +208,22 @@ remain readable with their original cadence. See [response limits](sensor-respon
 for filtering, noise and timing interpretation.
 
 The current HAT view includes the fitted DLVR infrasound sensor (sensor ID 8).
-Burrowlark contains only the magnetometer. Workbench pressure remains simulated;
+Burrowlark contains four magnetometers and an SHT45 enclosure-climate sensor. Workbench pressure remains simulated;
 adding the sensor to the PCB does not implement Pi live pressure acquisition.
 
 The DAQHAT-01 scene includes the 140 × 56 mm carrier, separate FPGA power
 section, barrel-jack and converter envelopes. Scene labels and sensor targets
 use the current placement coordinates. The rendered power switch is a physical
 board feature; simulation controls do not operate it.
+
+## Burrowlark magnetic array
+
+The B1 scene shows four identically oriented modules in a 2×2 grid. Select
+Magnetometer 1–4 (IDs 7/18/19/20) to inspect independent raw XYZ charts and
+faults. The ideal stimulus model uses the common field and independently seeded
+lane noise; it does not establish physical synchronization, cross-talk or noise.
+Captured firmware timing is preserved in recordings. Scientific averaging
+requires the explicit [calibration and skew policy](usb-sensor-head.md).
 
 ## Burrowlark temperature and humidity
 
