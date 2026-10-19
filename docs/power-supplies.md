@@ -8,7 +8,7 @@ calculation is not a USB compliance or physical power qualification result.
 
 | Input | Required allocation | Loads |
 | --- | --- | --- |
-| Switched Pi header 5 V, pins 2/4 | Reserve 75 mA within the combined 3 A budget | LDL1117, three IMUs, ADC, DLVR, interfaces and GNSS antenna LDO |
+| Switched Pi header 5 V, pins 2/4 | Reserve 75 mA within the combined 3 A budget | LDL1117, three IMUs, ADC, SDP32, interfaces and GNSS antenna LDO |
 | Pi header 3.3 V, pins 1/17 | Reserve 150 mA including receiver acquisition/startup allocation | GNSS receiver and Pi-side interfaces, EEPROM, GPIO expander, logic and pull-ups |
 | J83 external adapter | 12 V ±5%, center-positive, 5.5/2.1 mm plug, at least 3 A | Independent FPGA converter input |
 | U80 converter output | 3.326 V nominal, 3 A design allocation | Trenz module and FPGA-side circuitry |
@@ -30,8 +30,8 @@ resistance must remain within the 15 mΩ design target. See the
 [Trenz voltage, capacitance and protection limits](trenz-hat.md#power-and-interfaces).
 Actual FPGA current depends on the bitstream and remains unmeasured.
 
-The DLVR-F50D fast 3.3 V variant adds a 4.3 mA maximum load; the 5 V
-allocation retains 15.2 mA of reserve. Its 100 nF bypass adds nominally 0.33 µC
+The SDP32 at 3.3 V adds a 5.5 mA maximum load; the 5 V
+allocation retains 14 mA of reserve. Its 100 nF bypass adds nominally 0.33 µC
 of charge to the sensor rail. The current circuit does not switch sensor power:
 BCM26 controls signal-buffer enable, not the LDL1117 supply. BCM6/13 provide the power-supervisor handshake; BCM24 carries GNSS PPS.
 Switching off the Pi 5 V input also removes sensor power.

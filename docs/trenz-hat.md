@@ -32,21 +32,31 @@ have separate builds.
 From bottom to top: Raspberry Pi, Groundlark DAQHAT-01, **TE0712-03-81I36-A**.
 The FPGA stays on top for heatsink access. The HAT keeps the three LSM6DSO IMUs
 and ADS122C04 geophone input; the dedicated inclinometer is removed. The fitted
-DLVR-F50D-E1BS-I-NI3F pressure sensor U23 is on the HAT, with its pin-1 origin at
-(1.5,26) mm and orientation 270 degrees. Its conservative body/barb envelope is
-x=1.5–10.65, y=23.27–38.08 mm, clear of the Trenz outline. C24 is the local
-100 nF underside bypass. Keep the pressure tubing clear of IMUs and strain-relieve
-it to the enclosure. The RM3100 magnetometer remains on Burrowlark.
+Sensirion SDP32-125PA-TR-250PCS pressure sensor U23 is centered at (6,29) mm,
+top side, orientation 0 degrees. Its 8.5 x 5.5 mm body and 4.4 mm height clear
+the Trenz outline. C24 is its local 100 nF underside bypass at (7,31.85) mm.
+Keep the pressure tubing clear of the IMUs and strain-relieve it to the enclosure.
+The RM3100 magnetometer remains on Burrowlark.
 
-U23 shares the isolated sensor-side I2C1 bus at address 0x28. Pins 1–4 are GND,
-SENS_3V3, SDA and SCL (All Sensors DS-0300 Rev J, E1BS front pin view). Existing
-I2C pull-ups are retained. No FPGA signal or extra Pi GPIO is consumed.
-The fast 3.3 V variant draws at most 4.3 mA; 15.2 mA reserve remains inside the
-50 mA sensor-domain allocation. The ±0.5 inH2O range is approximately ±125 Pa.
-Pneumatic inlet/reference volumes and tubing set the system response; the sensor
-alone does not establish an infrasound passband. Physical response, noise,
-thermal drift and vibration coupling remain unqualified. The existing Pi live
-acquisition command does not yet include U23; the workbench shows its new location.
+U23 shares isolated sensor-side I2C1 at 0x21, with ADDR grounded. Sensirion's
+SDP3x digital datasheet v1.1 defines GND on pins 1/2/3/6/10/11, SCL on 5,
+VDD on 7, SDA on 8 and ADDR on 9. IRQn 4 and reserved 12-16 stay unconnected.
+The split center pad connects to ground; its center vent and three locating
+holes must remain clear. Existing pull-ups and Pi/FPGA signals are preserved.
+Maximum continuous current is 5.5 mA; 14 mA reserve remains in the 50 mA
+sensor-domain allocation. Differential pressure range is +/-125 Pa.
+
+Live acquisition uses differential-pressure compensation without averaging,
+checks product identity, scale and each word's CRC, and preserves signed raw
+pressure and temperature counts. Read completion timestamps do not qualify
+conversion timing. Legacy DLVR recordings remain readable. Pneumatic response,
+noise, thermal drift, vibration and actual tubing/stack fit require measurement.
+The thermal flow sensing principle requires a pneumatic system response check.
+
+Assembly must follow Sensirion's one-reflow rule: fit U23 in the last reflow
+run, protect its ports, use no-clean paste, and do not wash the board. Maximum
+peak is 260 C and time above 200 C is at most 150 seconds. See the
+[manufacturer datasheet](https://sensirion.com/media/documents/4D045D69/6375F34F/DP_DS_SDP3x_digital_D1.pdf).
 
 The Trenz outline occupies HAT coordinates x=30–80, y=8–48 mm, measured from
 the upper-left corner. Its mounting holes are (33,11), (77,11), (33,45), (77,45)

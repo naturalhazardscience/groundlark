@@ -1,15 +1,16 @@
 {
   "generator": "KiCad 9.0.9 native PCB render",
-  "board_sha256": "ea7fea2524d2612f5d8b17a0dfb1ef6ff84d383784a0dbc8371181f6afca0b76",
-  "models": "Vendor Trenz STEP; authored Pi, DLVR, power envelopes and manufacturer-dimensioned SMA/MAX-M10S STEP envelopes",
+  "board_sha256": "90cb62eb962f41b9770798add089a8737bcf25457320eaa73ed10d3b4c279aa1",
+  "models": "Vendor Trenz STEP; authored Pi, SDP32, power envelopes and manufacturer-dimensioned SMA/MAX-M10S STEP envelopes",
   "physical_fit_qualified": false,
   "sha256": {
-    "3d.png": "32062eede91517e8892970375ba3b1e21d42e33d64031f2268290fcc10687667",
-    "3d-bottom.png": "85720f077f718afc62526a22f1bc2806a246288db418fdd0447bd19d0ff133f6",
-    "trenz-mounted.png": "736d53cbcd35fa916331a8f80ca948408a45b5d343f7db623e0ec58d456f9b43",
-    "pi-trenz-stack-concept.png": "dad7cc3d3505a26063f09e6f557b858dd40add8c5f4eed4dde2292f63942bd28",
-    "stack-service-envelopes.png": "64e3e71ba6ca439b41c9ccd25fd20800e59f8c4f4ddb6885b2fe7c1c4c98d887",
-    "stack-exploded.png": "afe70678e1f50185b46e5a9ed4590d5c4249e707306a95d534152f1d3198a622"
+    "3d.png": "8a9b3eef831e4de84b4a8f25bb63f993e66611c10a429299dc4dcba22ac650b1",
+    "3d-bottom.png": "583a102688fb42f6944f9da70d5c5c2cb81be06a1b32e27a77a43fe62615225f",
+    "trenz-mounted.png": "61a75081e3145e702a0af843d9a9c5026f016d18a999265d5ea8068c8c265e14",
+    "pi-trenz-stack-concept.png": "5e776f4ee06730c6a9392424896afa158ccff94b91c2fb42d4037f0002d97d57",
+    "stack-service-envelopes.png": "79ab4c3e0f1afadef3b934936b2f7d0b14a5438a618750a295ca40afb6911a0f",
+    "stack-exploded.png": "9d30ce33c0d2b680a1586f264eb5793bca2502ecbaccdf151595bec908bd3cab"
   },
-  "calibration_access": "TP90-TP93 underside pads; no fitted components or additional enclosure cutouts."
+  "calibration_access": "TP90-TP93 underside pads; no fitted components or additional enclosure cutouts.",
+  "pressure_model_sha256": "8c2fac308af653c219f8b502c2ed1daa6d3490034d28bb0be4e044907b03a9a0"
 }

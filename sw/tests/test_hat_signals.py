@@ -8,6 +8,8 @@ from groundlark.hat_signals import PROFILE, run_bench, check_recording
 from groundlark.recording import Reader, Writer
 from groundlark.sensors import LSM6DSO, SCL3300
 from groundlark.geophone import ADS122C04
+from groundlark.pressure import SDP32
+from groundlark_contract.validation import sht_crc
 
 
 def altered(data, edit):
@@ -37,7 +39,7 @@ class HatSignalsTests(unittest.TestCase):
 
     def test_known_signal_runs_through_all_production_hat_drivers(self):
         # Spy on real methods rather than replacing them with model adapters.
-        counts = dict(imu=0, tilt=0, geophone=0)
+        counts = dict(imu=0, tilt=0, geophone=0, pressure=0)
         def spy(original, key):
             def read(driver):
                 counts[key] += 1
@@ -45,28 +47,31 @@ class HatSignalsTests(unittest.TestCase):
             return read
         with patch.object(LSM6DSO, "read", spy(LSM6DSO.read, "imu")), \
              patch.object(SCL3300, "read", spy(SCL3300.read, "tilt")), \
-             patch.object(ADS122C04, "read", spy(ADS122C04.read, "geophone")):
+             patch.object(ADS122C04, "read", spy(ADS122C04.read, "geophone")), \
+             patch.object(SDP32, "read", spy(SDP32.read, "pressure")):
             data, report = run_bench()
         self.assertTrue(report["passed"], report)
-        self.assertEqual(counts, dict(imu=624, tilt=0, geophone=2640))
+        self.assertEqual(counts, dict(imu=624, tilt=0, geophone=2640, pressure=801))
         self.assertEqual(data, self.data)
         self.assertEqual(len(report["checks"]), 12)
         self.assertEqual(report['samples'],4072)
-        self.assertIn('Pi DLVR driver pending',report['scope'])
+        self.assertIn('SDP32',report['scope'])
 
     def test_infrasound_gain_status_and_temperature_faults_fail(self):
-        for fault in ('gain','status','temperature'):
+        for fault in ('gain','crc','temperature','scale'):
             def edit(m):
                 if m.WhichOneof('body')=='batch' and m.batch.sensor_id==8:
                     for sample in m.batch.samples:
-                        frame=bytearray(sample.pressure.response)
-                        if fault=='gain':frame[:2]=(8192+2*(int.from_bytes(frame[:2],'big')-8192)).to_bytes(2,'big')
-                        elif fault=='status':frame[0]|=0x40
-                        else:frame[2]^=1
-                        sample.pressure.response=bytes(frame)
+                        frame=bytearray(sample.pressure.sdp3x_response)
+                        if fault=='gain':frame[:2]=(2*int.from_bytes(frame[:2],'big',signed=True)).to_bytes(2,'big',signed=True)
+                        elif fault=='temperature':frame[3]^=1
+                        elif fault=='scale':frame[7]^=1
+                        for i in (0,3,6):frame[i+2]=sht_crc(frame[i:i+2])
+                        if fault=='crc':frame[2]^=1
+                        sample.pressure.sdp3x_response=bytes(frame)
             with self.subTest(fault=fault):
-                if fault=='status':
-                    with self.assertRaisesRegex(ValueError,'non-normal pressure status'):
+                if fault in ('crc','scale'):
+                    with self.assertRaisesRegex(ValueError,'SDP32'):
                         check_recording(altered(self.data,edit))
                 else:self.assert_check_fails(altered(self.data,edit),'Infrasound raw response & waveform')
 

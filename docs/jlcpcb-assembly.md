@@ -1,20 +1,17 @@
 # JLCPCB assembled DAQHAT-01 HAT
 
 The package targets **one fabricated PCB and one assembled HAT**, the same
-physical board. The current HAT is 140 × 56 mm. The frozen procurement/placement
-registry still describes the earlier 117-placement, 38-line assembly.
+physical board. The current HAT is 140 × 56 mm with 188 fitted placements.
+The current exact-part registry covers all 188 placements with 71 unique JLCPCB
+catalog identities. Dated live inventory and MOQ observations are recorded in
+the registry. Procurement identities include the revised FPGA power input,
+Pi supervisor, GNSS and SDP32 pressure sensor; older packages are incompatible.
 
-**Export hold:** U23/C24, the 12 V FPGA input and the TI Pi supervisor require procurement
-and numbered supplier-pad review. J83/F80 changed part identity; U80, SW80,
-D80/D81, R120–R124, C86–C89 and C110–C112 are new. No current stock or supplier
-rotation is claimed for these selections. Dated live stock observations for the
-corrected fuse, supervisor, divider and antenna parts are recorded in
-[power-gnss-selection.json](../hw/assembly/groundlark-fpga-hat/power-gnss-selection.json).
-The exact DLVR-F50D-E1BS-I-NI3F still has no confirmed JLCPCB match. Full assembly regression remains
-blocked by this mismatch; native circuit, DRC/ERC and routing replay are checked
-separately. The 40 Pi supply/supervisor additions are listed in
-`hw/assembly/groundlark-fpga-hat/pi-supervisor-review.json` with catalog and
-supplier-pad evidence pending. Earlier packages do not describe the enlarged board.
+**Assembly hold:** 136 placements have frozen numbered supplier-pad fits;
+52 retain explicitly unverified supplier origins/rotations. The complete review
+export includes these exceptions and cannot be submitted as a released assembly.
+The placement release gate rejects unresolved entries. Obtain supplier geometry
+and verify the actual order preview before manufacture.
 The Pi, Trenz module, geophone, riser, supply and mounting hardware are separate
 purchases. The USB sensor heads are not included.
 
@@ -46,9 +43,8 @@ The package retains manufacturing holds and is not a fabrication approval.
 - Through-vias only, 0.30/0.40 mm drills, epoxy-filled and copper-capped (POFV),
   including vias in solder pads. Tenting alone is insufficient.
   Do not fill component plated holes or non-plated mounting holes.
-- Double-sided assembly. The earlier frozen registry has 107 SMT-only placements,
-  seven THT-only placements and three mixed SMT/THT connectors; these counts must
-  be regenerated after the export hold is resolved. J80/J81/J82 have SMT contacts and plated mounts.
+- Double-sided assembly. The export manifest records current SMT, THT and mixed
+  process counts. J80/J81/J82 have SMT contacts and plated mounts.
   J1 is the bottom Pi socket.
 - Confirm the supplier's one-piece assembly acceptance, handling frame,
   fiducials, part allocation and process requirements. Recorded Standard PCBA
@@ -65,18 +61,24 @@ reference to its source value/footprint and approved manufacturer, MPN and C-cod
 Catalog listing does not reserve stock or guarantee assembly eligibility.
 Recheck allocation at ordering; do not accept automatic substitutes.
 
-The earlier registry's 38 unique PCB selections (117 placements) have a dated **2026-09-27**
-JLCPCB available-order observation and **minimum quantity 1**. Pre-order-only
-parts and component minimums above one are prohibited. The exporter rejects
-missing, insufficient or nonconforming recorded stock observations; offline
-checks do not establish current stock. Recheck allocation before ordering.
+All 71 unique selections have dated **2026-10-19** JLCPCB available-order
+observations and component minimum quantity 1, sufficient for one HAT.
+Pre-order-only parts are rejected. Shared catalog identities are counted across
+all source groups when checking inventory. Offline checks validate the recorded
+snapshot; recheck allocation and assembly attrition at ordering.
 
-| Reference | Selected replacement | Available order quantity / minimum |
-| --- | --- | --- |
-| U40 | ST LDL1117S33R / C435835 | 23,204 / 1 |
-| D90 | TI TPD2E2U06QDCKRQ1 / C915089 | 6,229 / 1 |
+D90 uses TI **TPD2E2U06QDCKRQ1 / C915089** in the authored circuit, BOM and
+review schematic. It preserves the SC-70 pinout and existing bottom-side copper.
+U23 uses **SDP32-125PA-TR-250PCS / C6473035** with its redesigned 17-pin split-pad
+footprint, 3.3 V supply, I2C address 0x21 and matching driver. The sensor must be
+installed in the final reflow only, with no board wash; protect both ports.
+Maximum reflow temperature is 260 C, with at most 150 seconds above 200 C.
+Pneumatic filtering and infrasound noise/response still require measurement.
 
-The source circuit identifiers remain bound to explicit assembly overrides.
+U11/U12/U13 use **LSM6DSOXTR / C481766** as an explicit procurement override.
+The LGA-14 pinout, mode-1 SPI, identity and acquisition register/FIFO subset are
+compatible with the existing LSM6DSO driver. Unused auxiliary interfaces and
+machine-learning features remain disabled. Physical acquisition is unqualified.
 U40 retains GND/OUT/IN pins 1/2/3 and output tab. Its ceramic output capacitor
 must retain at least 4.7 µF effective capacitance; C42 is 22 µF X5R, 25 V.
 Allow ±3% regulator accuracy plus load/line regulation within the existing
@@ -99,8 +101,8 @@ The Pi, Trenz module, external geophone and risers remain outside this PCB BOM.
 | Footprint / package | `Footprint` |
 | JLCPCB / LCSC part number | `JLCPCB Part #` |
 
-Do not use `Description` as the ordering code. Confirm all 38 nonblank catalog
-identities and all 117 placements survive import.
+Do not use `Description` as the ordering code. Confirm all 71 nonblank catalog
+identities and all 188 placements survive import.
 
 | References | Assembly selection | Required specification |
 | --- | --- | --- |
@@ -109,12 +111,13 @@ identities and all 117 placements survive import.
 | C84, C85 | Murata GRM21BR71C475KE51L / C408144 | 4.7 µF, ±10%, X7R, 16 V, 0805. |
 | C90 | Murata GRM31C5C1H104JA01L / C97946 | 100 nF, ±5%, C0G, 50 V, 1206. |
 | C91, C92 | KEMET C0603C102J5GAC7867 / C140950 | 1 nF, ±5%, C0G, 50 V, 0603. |
-| F80 | Littelfuse 0466005.NRHF / C57525 | 5 A fast fuse, 32 V, 1206. |
+| F80 | Littelfuse 0466002.NRHF / C3105 | 2 A fuse, 1206, FPGA 12 V input. |
+| F130 | Littelfuse 0466004.NRHF / C187596 | 4 A fuse, 1206, Pi supply input. |
 
-F80 must use the 1206 assembly selection; the 0603 source-schematic MPN is not
-an approved assembly part. Its nominal cold resistance is 11 mΩ, which is
-included in the **30 mΩ total hot power-loop budget**, not an allowance in
-addition to it. Check hot voltage drop, startup and fuse behavior on hardware.
+Both fuses use 466-series 1206 bodies; 467-series parts do not fit. The FPGA
+output allocation is 3 A with a 15 milliohm hot output-loop target; the Pi supply
+has a separate 3 A total allocation. Check startup, hot voltage drop and fuse
+behavior on hardware. See [power supplies](power-supplies.md).
 Signal capacitors C90–C92 must retain C0G dielectric, tolerance and voltage rating.
 
 **J1 stack:** the model uses the selected 8.5 mm socket plus two external
@@ -139,9 +142,9 @@ Use its CPL rather than raw KiCad angles or manual per-reference offsets.
 | --- | --- |
 | J1 (Bottom) | 0° |
 | J4 | 270° |
-| JP1, JP80, JP81 | 0° |
+| JP1, JP80, JP81, JP130 | 0° |
 | J80, J81 | 180° |
-| J82, J83 | 270° |
+| J82 | 270° |
 | J90 | 0° |
 | U1, U22, U41, U42 | 270° |
 | U100–U103 (Bottom) | 270° |
@@ -208,5 +211,5 @@ that package's procurement CSV, keeping its instructions aligned with the BOM.
 - [BOM format](https://jlcpcb.com/help/article/bill-of-materials-for-pcb-assembly)
   and [CPL format](https://jlcpcb.com/help/article/pick-place-file-for-pcb-assembly).
 - [Parts sourcing](https://jlcpcb.com/help/article/pcba-parts-sourcing-instruction).
-- [LSM6DSOTR catalog](https://jlcpcb.com/partdetail/LSM6DSOTR/C2655100)
+- [LSM6DSOXTR catalog](https://jlcpcb.com/partdetail/LSM6DSOXTR/C481766)
   and [TCA9534PWR catalog](https://jlcpcb.com/partdetail/TexasInstruments-TCA9534PWR/C783615).

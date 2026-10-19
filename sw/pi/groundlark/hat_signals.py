@@ -13,7 +13,9 @@ import struct
 from .recording import Reader, Writer
 from .runtime import Acquisition, Channel
 from .session import Sessions
-from .simulation import Simulated, defaults
+from .simulation import defaults
+from .pressure import SETTINGS as PRESSURE_SETTINGS
+from groundlark_contract.validation import sht_crc
 from .stimulus import Scenario
 from .virtual_hat import VirtualDriver
 from .gnss_sim import GNSSSimulation, emit_pps, modeled_policy
@@ -24,11 +26,11 @@ PROFILE = {"version": 1, "initial": {
     "geophone_velocity_m_s": {"amplitude": .0001, "frequency_hz": 10}, "gnss_position": [0, 0, 10], "gnss_velocity_ned_m_s": [1, 2, -.5],
     "pressure_pa": {"amplitude": 20, "frequency_hz": 1}}}
 SECONDS = 8
-SCOPE = "Modeled IMU/ADC/GNSS buses through Pi drivers; DLVR raw-response model (Pi DLVR driver pending)"
+SCOPE = "Modeled IMU/ADC/GNSS/SDP32 buses through production Pi drivers; physical timing and noise unqualified"
 
 
 def configurations():
-    return defaults()+[c for c in defaults(True) if c['sensor_id']==8]
+    return defaults()+[dict(PRESSURE_SETTINGS)]
 # Independent nominal conversions from the effective bench configuration.
 ACCEL_M_S2_PER_COUNT = .00059820565
 GYRO_DEG_S_PER_COUNT = .00875
@@ -94,7 +96,7 @@ def check_recording(data):
     settings_ok = inventory and all(configs[i].period_ns == next(c["period_ns"] for c in configurations() if c["sensor_id"] == i) for i in samples)
     if settings_ok:
         settings_ok = all(configs[i].acceleration_range_g == 2 and configs[i].angular_rate_range_dps == 250 for i in range(1, 4))
-        settings_ok &= (configs[8].pressure_min_pa,configs[8].pressure_max_pa,configs[8].pressure_part_number)==(-250,250,'SIMULATED-DLVR')
+        settings_ok &= (configs[8].pressure_min_pa,configs[8].pressure_max_pa,configs[8].pressure_part_number)==(-125,125,'SDP32-125PA-TR-250PCS')
     check("Effective configuration", settings_ok, "26 Hz / Ã‚Â±2 g / Ã‚Â±250 Ã‚Â°/s IMUs; 330 SPS vertical geophone")
     if not inventory or not settings_ok or any(s.quality != 1 for rows in samples.values() for s in rows):
         return dict(passed=False, checks=checks, samples=sum(map(len, samples.values())), recording_sha256=hashlib.sha256(data).hexdigest(), scope=SCOPE)
@@ -151,18 +153,20 @@ def check_recording(data):
     counters_ok = all(s.geophone.conversion_counter == i % 256 for i,s in enumerate(rows))
     check("Geophone gain, phase & counter", max(errors) < 150 and counters_ok,
           f"10 Hz / 100 um/s reference; maximum count error {max(errors):.2f}; limit 150; counter wrap checked")
-    # Independent DLVR 10..90% transfer: zero=8192, 26.2144 counts/Pa.
-    frames=[s.pressure.response for s in samples[8]]
-    valid_frames=all(len(frame)==4 for frame in frames)
+    # Independent SDP32 nominal transfer: signed pressure *240, temperature *200.
+    frames=[s.pressure.sdp3x_response for s in samples[8]]
+    valid_frames=all(len(frame)==9 for frame in frames)
     pressure_errors=[]
     if valid_frames:
         for sample,frame in zip(samples[8],frames):
-            word,temp=struct.unpack('>HH',frame)
-            valid_frames &= word>>14==0 and temp==24576
-            expected=8192+524.288*math.sin(2*math.pi*sample.time.acquisition_ns/1e9)
-            pressure_errors.append(abs((word&16383)-expected))
+            word=int.from_bytes(frame[:2],'big',signed=True)
+            temp=int.from_bytes(frame[3:5],'big',signed=True)
+            valid_frames &= temp==5000 and int.from_bytes(frame[6:8],'big')==240
+            valid_frames &= all(sht_crc(frame[i:i+2])==frame[i+2] for i in (0,3,6))
+            expected=4800*math.sin(2*math.pi*sample.time.acquisition_ns/1e9)
+            pressure_errors.append(abs(word-expected))
     check("Infrasound raw response & waveform", valid_frames and bool(pressure_errors) and max(pressure_errors)<=.501,
-          "100 Hz, 1 Hz / 20 Pa sine; 14-bit pressure within 0.501 count, status and temperature bytes preserved")
+          "SDP32 driver: 100 Hz, 1 Hz / 20 Pa sine; signed pressure within 0.501 count, temperature and three CRCs preserved")
     return dict(passed=all(c["passed"] for c in checks), checks=checks, samples=sum(map(len, samples.values())),
                 recording_sha256=hashlib.sha256(data).hexdigest(), scope=SCOPE)
 
@@ -171,10 +175,9 @@ def run_bench():
     scenario, stream, now = Scenario(deepcopy(PROFILE)), BytesIO(), 0
     clock = lambda: now
     channels = [Channel("bench-pi", 1, cfg, GNSSSimulation(scenario, clock) if cfg["sensor_id"] == 6 else
-                        Simulated(8,scenario=scenario,clock=clock) if cfg['sensor_id']==8 else
                         VirtualDriver(cfg["sensor_id"], scenario, clock)) for cfg in configurations()]
     writer = Writer(stream, dict(format="groundlark-acquisition-v1", source="modeled-timing", utc_capture="m10-tim-tp-v1",
-        calibrations=[], bench="hat-signals-v2", scenario=deepcopy(PROFILE), timing="modeled 1 ms polling clock", model_scope=SCOPE), max_bytes=2 * 1024 * 1024)
+        calibrations=[], bench="hat-signals-v3", scenario=deepcopy(PROFILE), timing="modeled 1 ms polling clock", model_scope=SCOPE), max_bytes=2 * 1024 * 1024)
     acquisition = Acquisition(writer, Sessions(), channels)
     try:
         acquisition.start(0)

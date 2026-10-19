@@ -88,7 +88,8 @@ class WorkbenchTests(unittest.TestCase):
         engine = Workbench({"version": 1, "initial": {"magnetic_ut": [-10, 0, 20]}})
         advance(engine, 1)
         self.assertEqual(engine.snapshot(7)["latest"][7]["primary"], [-750, 0, 1500])
-        self.assertEqual(engine.snapshot(8)["latest"][8]["secondary"], [768, None, None])
+        self.assertEqual(engine.snapshot(8)["latest"][8]["secondary"], [5000, None, None])  # SDP32: 25 C * 200.
+        self.assertIn('SDP32', engine.snapshot(8)['latest'][8]['detail'])
 
     def test_recording_roundtrip_and_backward_seek(self):
         engine = Workbench()

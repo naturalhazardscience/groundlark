@@ -41,7 +41,7 @@ from "power_parts.ato" import PWR_100N
 #pragma experiment("TRAITS")
 import has_designator
 import ElectricPower
-from "../../shared/elec/parts.ato" import P_35
+from "infrasound_parts.ato" import PRESSURE_SDP32
 from "host_link_parts.ato" import LINK_SUP
 from "host_link_parts.ato" import LINK_NAND
 from "host_link_parts.ato" import LINK_AND
@@ -1238,14 +1238,38 @@ module TrenzHat:
     c106.p2 ~ GND
     trait LINK_ARMED_REQUEST has_net_name_suggestion<name="LINK_ARMED_REQUEST", level="EXPECTED">
 
-    # 10-infrasound: DLVR-F50D-E1BS-I-NI3F, I2C 0x28, fitted.
-    # All Sensors DS-0300 Rev J SIP pin view: GND, VS, SDA, SCL.
-    u23 = new P_35
+    # Sensirion SDP32 digital datasheet v1.1: top-view land pattern, I2C 0x21.
+    u23 = new PRESSURE_SDP32
     trait u23 has_designator<designator="U23">
     u23.p1 ~ GND
-    u23.p2 ~ SENS_3V3
-    u23.p3 ~ I2C_SDA
-    u23.p4 ~ I2C_SCL
+    u23.p2 ~ GND
+    u23.p3 ~ GND
+    signal PRESSURE_NC_4
+    trait PRESSURE_NC_4 has_net_name_suggestion<name="PRESSURE_NC_4", level="EXPECTED">
+    u23.p4 ~ PRESSURE_NC_4
+    u23.p5 ~ I2C_SCL
+    u23.p6 ~ GND
+    u23.p7 ~ SENS_3V3
+    u23.p8 ~ I2C_SDA
+    u23.p9 ~ GND
+    u23.p10 ~ GND
+    u23.p11 ~ GND
+    signal PRESSURE_NC_12
+    trait PRESSURE_NC_12 has_net_name_suggestion<name="PRESSURE_NC_12", level="EXPECTED">
+    u23.p12 ~ PRESSURE_NC_12
+    signal PRESSURE_NC_13
+    trait PRESSURE_NC_13 has_net_name_suggestion<name="PRESSURE_NC_13", level="EXPECTED">
+    u23.p13 ~ PRESSURE_NC_13
+    signal PRESSURE_NC_14
+    trait PRESSURE_NC_14 has_net_name_suggestion<name="PRESSURE_NC_14", level="EXPECTED">
+    u23.p14 ~ PRESSURE_NC_14
+    signal PRESSURE_NC_15
+    trait PRESSURE_NC_15 has_net_name_suggestion<name="PRESSURE_NC_15", level="EXPECTED">
+    u23.p15 ~ PRESSURE_NC_15
+    signal PRESSURE_NC_16
+    trait PRESSURE_NC_16 has_net_name_suggestion<name="PRESSURE_NC_16", level="EXPECTED">
+    u23.p16 ~ PRESSURE_NC_16
+    u23.p17 ~ GND
     u23.power ~ sensor_supply
     c24 = new P_6
     trait c24 has_designator<designator="C24">

@@ -86,8 +86,8 @@
   },
   "shared_sensor_pin_checks": 73,
   "infrasound": {
-    "physical_pin_checks": 6,
-    "i2c_address": "0x28",
+    "physical_pin_checks": 19,
+    "i2c_address": "0x21",
     "existing_bus_addresses": [
       "0x20",
       "0x40",
@@ -99,22 +99,28 @@
       13,
       24
     ],
-    "maximum_fast_current_mA": 4.3,
+    "maximum_continuous_current_mA": 5.5,
     "body_and_barbs_xy_mm": [
-      1.5,
-      23.27,
-      10.65,
-      38.08
+      1.75,
+      26.25,
+      10.25,
+      31.75
     ],
-    "minimum_module_xy_clearance_mm": 19.35,
-    "physical_qualification": false
+    "minimum_module_xy_clearance_mm": 19.75,
+    "physical_qualification": false,
+    "assembly_geometry": {
+      "locating_pegs": 3,
+      "split_ground_lands": 2,
+      "reduced_paste_apertures": 2,
+      "open_center_gap_mm": 0.8
+    }
   },
-  "compiled_pin_checks": 949,
+  "compiled_pin_checks": 962,
   "critical_module_pin_checks": 29,
   "drc_violations": 0,
   "unconnected_items": 0,
   "erc_violations": 0,
-  "tracks_and_vias": 13010,
+  "tracks_and_vias": 13058,
   "copper_layers": 6,
   "microvias": 0,
   "fabrication_process": "standard-six-layer-through-via",

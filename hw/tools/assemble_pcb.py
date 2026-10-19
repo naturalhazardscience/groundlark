@@ -93,7 +93,7 @@ def main():
                 assert not typ,('Missing compiled component',ref)
                 fp=p.FootprintLoad(str(ROOT/'hw/shared/elec'),meta['local_fp']);fp.SetReference(ref);b.Add(fp)
             else:fp=fps[ref]
-            if (target=='field_head' and ref=='J1') or meta['local_fp'].startswith(('PWR_', 'SUP_')):
+            if (target=='field_head' and ref=='J1') or meta['local_fp'].startswith(('PWR_', 'SUP_')) or meta['local_fp']=='Groundlark__SDP32':
                 # Restore the complete manufacturer footprint geometry after
                 # compiler conversion, retaining each compiled physical pin net.
                 old=fp;pin_nets={pad.GetNumber():pad.GetNet() for pad in old.Pads() if pad.GetNumber()}
@@ -150,7 +150,8 @@ def main():
         restore(b)
         if target=='trenz_hat':
             for fp in b.GetFootprints():
-                for zone in fp.Zones():zone.SetLayerSet(p.LSET.AllCuMask())
+                for zone in fp.Zones():
+                    if fp.GetReference() != 'U23':zone.SetLayerSet(p.LSET.AllCuMask())
         # Stock models are resolved by KiCad 9. Portable custom models are added
         # by hw/tools/models.py after routing, without changing connectivity.
         path=folder/(name+'.kicad_pcb');unique_ids(b);save_board(str(path),b)

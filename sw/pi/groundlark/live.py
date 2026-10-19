@@ -33,8 +33,8 @@ class Factory:
                     raise
             return device
         if self.sensor == 8:
-            from .pressure import DLVR
-            return DLVR(I2C(self.path))
+            from .pressure import SDP32
+            return SDP32(I2C(self.path))
         if self.sensor == 6:
             if self.utc:
                 from .gnss_timing import TimedGNSS

@@ -29,7 +29,7 @@ class SingleHATTests(unittest.TestCase):
             bom, procurement, selections = build_bom(list(csv.DictReader(stream)), 1)
         manifest = dict(requested_assembled_HATs=1, requested_fabricated_HATs=1,
                         boards_per_gerber_design=1, panelized=False,
-                        counts={'physical_placements':117})
+                        counts={'physical_placements':188})
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp); (out/'review').mkdir()
             write_csv(out/'BOM-review.csv', list(bom[0]), bom)
@@ -37,7 +37,7 @@ class SingleHATTests(unittest.TestCase):
             write_csv(out/'procurement.csv', list(procurement[0]), procurement)
             write_json(out/'manifest.json', manifest)
             write_json(out/'review/independent-check.json', {'single_board_outline':check_single_outline(RECT)})
-            self.assertEqual(audit_quantity(out)['installed_components'], 117)
+            self.assertEqual(audit_quantity(out)['installed_components'], 188)
             for key, value in [('requested_assembled_HATs',5), ('requested_fabricated_HATs',5),
                                ('boards_per_gerber_design',2), ('panelized',True)]:
                 write_json(out/'manifest.json', dict(manifest, **{key:value}))

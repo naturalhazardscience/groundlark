@@ -62,8 +62,8 @@ class NativeConnectorTests(unittest.TestCase):
         with cls.path.with_name('bom.csv').open(newline='') as stream:
             _,_,cls.selections=build_bom(list(csv.DictReader(stream)),1)
         cls.mappings=load_mappings()
-        cls.placements=[dict(Designator=g['reference'],MidX='0mm',MidY='0mm',
-                             Rotation='0.000000',Layer=g['side'])
+        cls.placements=[dict(Designator=g['reference'],MidX=f"{g['footprint_origin_mm'][0]:.6f}mm",MidY=f"{-g['footprint_origin_mm'][1]:.6f}mm",
+                             Rotation=f"{g['rotation_deg']:.6f}",Layer=g['side'])
                         for g in cls.geometry if g['reference'] in cls.selections]
 
     def solve(self, placements=None, geometry=None, selections=None):
@@ -73,7 +73,7 @@ class NativeConnectorTests(unittest.TestCase):
 
     def test_actual_connectors_and_supplier_pin_one(self):
         rows,audit=self.solve(); lookup={r['Designator']:r for r in rows}
-        expected={'J1':0,'J4':270,'JP1':0,'JP80':0,'JP81':0,'J80':180,'J81':180,'J82':270,'J83':270,'J90':0}
+        expected={'J1':0,'J4':270,'JP1':0,'JP80':0,'JP81':0,'JP130':0,'J80':180,'J81':180,'J82':270,'J90':0}
         self.assertEqual(sum('pads_checked' in a and a['reference'] in expected for a in audit),10)
         for ref,angle in expected.items():
             self.assertEqual(float(lookup[ref]['Rotation']),angle,ref)
@@ -174,9 +174,15 @@ class NativeConnectorTests(unittest.TestCase):
 
     def test_all_bom_placements_have_mapping_or_explicit_exception(self):
         result,audit=self.solve()
-        self.assertEqual(len(result),117)
-        self.assertEqual(sum('pads_checked' in a for a in audit),117)
-        self.assertEqual({a['reference'] for a in audit if 'pads_checked' not in a},set())
+        self.assertEqual(len(result),188)
+        self.assertEqual(sum('pads_checked' in a for a in audit),136)
+        missing={a['reference'] for a in audit if 'pads_checked' not in a}
+        self.assertEqual(len(missing),52)
+        self.assertTrue({'J83','F80','U23','U11','U12','U13'} <= missing)
+        # A complete review inventory is deliberately not a release approval.
+        from jlcpcb_placement import require_verified_placements
+        with self.assertRaisesRegex(ValueError,'52 unverified supplier placements'):
+            require_verified_placements(audit)
         extra=dict(self.placements[0],Designator='U999')
         with self.assertRaisesRegex(ValueError,'coverage'):self.solve(placements=self.placements+[extra])
 
@@ -250,7 +256,8 @@ class NativeConnectorTests(unittest.TestCase):
     def test_export_summary_does_not_keep_stale_missing_capacitor_warning(self):
         from jlcpcb_placement_overlay import exception_summary
         _,audit=self.solve()
-        self.assertIn('No supplier-footprint exceptions',exception_summary(audit))
+        self.assertIn('Unverified supplier-footprint exceptions',exception_summary(audit))
+        self.assertIn('U23',exception_summary(audit))
         self.assertNotIn('C91',exception_summary(audit))
         self.assertIn('C91',exception_summary([dict(reference='C91')]))
 
@@ -276,10 +283,11 @@ class NativeConnectorTests(unittest.TestCase):
         mappings=copy.deepcopy(self.mappings)
         entry=next(e for e in mappings['footprints'] if 'C91' in e['designators'])
         mappings['footprints'].remove(entry)
-        mappings['unverified']=[dict(designators=['C91','C92'],mpn=entry['mpn'],lcsc=entry['lcsc'],
+        mappings['unverified']+=[dict(designators=['C91','C92'],mpn=entry['mpn'],lcsc=entry['lcsc'],
             source_footprint=self.selections['C91']['source_footprint'],reason='Explicit review fixture')]
         rows,audit=correct_placements(self.placements,self.geometry,self.selections,mappings)
-        self.assertEqual({a['reference'] for a in audit if 'pads_checked' not in a},{'C91','C92'})
+        self.assertEqual({a['reference'] for a in audit if 'pads_checked' not in a},
+                         {'C91','C92'} | {r for e in self.mappings['unverified'] for r in e['designators']})
         selections=copy.deepcopy(self.selections);selections['C92']['lcsc']='C123'
         with self.assertRaisesRegex(ValueError,'Stale placement exception'):
             correct_placements(rows,self.geometry,selections,mappings)

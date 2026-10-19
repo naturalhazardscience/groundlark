@@ -193,7 +193,7 @@ def main():
     # Independent purchasing/package fixtures for the newly introduced ICs and header.
     rows={r['Reference']:r for r in csv.DictReader((BOARD/'bom.csv').open())}
     packages={'U22':('ADS122C04IPWR','Package_SO__TSSOP-16_4.4x5mm_P0.65mm'),
-              'D90':('TPD2E2U06DCKR','Package_TO_SOT_SMD__SOT-323_SC-70'),
+              'D90':('TPD2E2U06QDCKRQ1','Package_TO_SOT_SMD__SOT-323_SC-70'),
               'J90':('1803280','Connector_Phoenix_MC__PhoenixContact_MC_1,5_3-G-3.81_1x03_P3.81mm_Horizontal'),
               'C90':('C3216C0G1H104J160AA','Capacitor_SMD__C_1206_3216Metric'),
               'C91':('C0603C102J5GACTU','Capacitor_SMD__C_0603_1608Metric'),

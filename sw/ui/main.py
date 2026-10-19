@@ -54,7 +54,7 @@ LABELS = {**{i: ("Acceleration · raw counts", "Angular rate · raw counts") for
           9: ("Geophone ADC · raw counts", "Single vertical velocity-sensitive channel"),
           7: ("Magnetic field · raw counts", "XYZ samples • no calibration applied"),
           8: ("Differential pressure · raw counts", "Temperature · raw counts")}
-MODELS = {**{i: "LSM6DSO" for i in range(1, 5)}, 5: "SCL3300", 6: "MAX-M10S", 9: "Racotech / ADS122C04", 7: "RM3100", 8: "DLVR · HAT"}
+MODELS = {**{i: "LSM6DSO / LSM6DSOX" for i in range(1, 5)}, 5: "SCL3300", 6: "MAX-M10S", 9: "Racotech / ADS122C04", 7: "RM3100", 8: "SDP32 · HAT"}
 
 LABELS.update({**{i: ("Gas ADC · raw counts", "Uncalibrated") for i in range(10,14)},
                14: ("Atmospheric particulate · µg/m³", ""), 15: ("Temperature · °C", "Humidity · %RH"),
@@ -99,8 +99,10 @@ def board_scene(scene, select):
                     w, h, z = custom[ref]
                     scene.box(w, h, z).move(x, y, .16 + z / 2).material("#252b34")
                 if ref == 'U23':
-                    # Upright E1BS conservative envelope; GLB omits its VRML.
-                    scene.box(.915, 1.481, 1.725).move(x+.4575, y-.362, 1.0225).material('#29292c')
+                    # SDP3x v1.1 drawing envelope; GLB omits its local VRML.
+                    scene.box(.85, .55, .22).move(x, y, .27).material('#29292c')
+                    for dx in (-.215, .215):
+                        scene.cylinder(.1, .1, .22).rotate(math.pi/2, 0, 0).move(x+dx, y+.065, .49).material('#29292c')
                 if ref == 'J83':
                     scene.box(.9, 1.44, 1.1).move(x, y+.65, .71).material('#25252b')
                     scene.cylinder(.28, .28, .015).move(x, y+1.38, .81).material('#08090b')

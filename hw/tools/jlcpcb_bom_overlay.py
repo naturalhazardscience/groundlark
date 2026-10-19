@@ -75,15 +75,16 @@ Reviewed replacements:
 - C42/C80/C81/C82: Samsung CL31A226KAHNNNE, C12891, 22uF 25V X5R +/-10%, 1206.
 - C84/C85: Murata GRM21BR71C475KE51L, C408144, 4.7uF 16V X7R +/-10%, 0805.
 - C90: Murata GRM31C5C1H104JA01L, C97946, 100nF 50V C0G +/-5%, 1206.
-- F80: Littelfuse 0466005.NRHF, C57525, 1206 5A fast-acting 32V fuse.
-  This corrects the old 0603 MPN on the existing 1206 PCB lands. Use the assembly
-  selection above, not the legacy 0467005.NR annotation in the unchanged source CAD.
+- F80: Littelfuse 0466002.NRHF, C3105, 1206 2A fuse on the 12V input.
+- F130: Littelfuse 0466004.NRHF, C187596, 1206 4A fuse on the Pi supply input.
+- U23: Sensirion SDP32-125PA-TR-250PCS, C6473035; matching redesigned PCB required.
+- U11/U12/U13: ST LSM6DSOXTR, C481766; use the existing mode-1 acquisition subset.
 - J1: {selections['J1']['manufacturer']} {selections['J1']['mpn']} / {selections['J1']['lcsc']}.
   {selections['J1']['sourcing_note']}
 
 Stock observations are snapshots, not reservations. No order or account was changed.
 See procurement.csv and assembly-selections.json for exact evidence and limitations.
-The 3A initial operating budget and measured <=30mOhm hot supply-loop requirement remain.
+The separate 3A power allocations and <=15mOhm FPGA output-loop target remain.
 Physical power/transient, fuse inrush/fault and noise qualification remain open.
 ''',encoding='utf-8')
     return report

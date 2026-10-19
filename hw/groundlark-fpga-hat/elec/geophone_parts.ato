@@ -40,7 +40,7 @@ component GEO_CONN:
     signal p3 ~ pin 3
 
 component GEO_ESD:
-    trait is_atomic_part<manufacturer="See BOM", partnumber="TPD2E2U06DCKR", footprint="../../shared/elec/Package_TO_SOT_SMD__SOT-323_SC-70.kicad_mod", symbol="../../shared/elec/symbols/GEO_ESD.kicad_sym">
+    trait is_atomic_part<manufacturer="Texas Instruments", partnumber="TPD2E2U06QDCKRQ1", footprint="../../shared/elec/Package_TO_SOT_SMD__SOT-323_SC-70.kicad_mod", symbol="../../shared/elec/symbols/GEO_ESD.kicad_sym">
     trait has_designator_prefix<prefix="D">
     signal p1 ~ pin 1
     signal p2 ~ pin 2

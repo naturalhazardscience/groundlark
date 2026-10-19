@@ -15,6 +15,22 @@ from groundlark_contract.framing import encode
 
 
 class BusABITests(unittest.TestCase):
+    def test_i2c_read_only_has_no_dummy_write(self):
+        bus = I2C.__new__(I2C)
+        bus.fd = 20
+        def fake(fd, command, arg, mutate=False):
+            request = I2CTransfer.from_buffer_copy(arg)
+            self.assertEqual(request.count, 1)
+            message = request.messages[0]
+            self.assertEqual((message.addr, message.flags, message.length), (0x21, 1, 3))
+            c.memmove(message.buffer, b'\xbe\xef\x92', 3)
+            return 1
+        with patch('groundlark.linux_io.ioctl', fake):
+            self.assertEqual(bus.exchange(0x21, b'', 3), b'\xbe\xef\x92')
+        with self.assertRaises(ValueError): bus.exchange(0x21, b'', 0)
+        with patch('groundlark.linux_io.ioctl', return_value=0):
+            with self.assertRaises(OSError): bus.exchange(0x21, b'', 3)
+
     def test_spi_buffer_layout_and_short_transfer(self):
         bus = SPI.__new__(SPI)
         bus.fd = 19

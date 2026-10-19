@@ -1,0 +1,63 @@
+{
+  "origins": [
+    {
+      "origin": "4000,3000",
+      "parameters": "package`R0603`pre`R?`Contributor`lcsc`3DModel`R0603`link`https://www.mouser.in/datasheet/2/447/PYu_RT_1_to_0_01_RoHS_L_11-1669912.pdf`"
+    }
+  ],
+  "pads": [
+    {
+      "attributes": {
+        "c_etype": "pinpart",
+        "c_height": "3.4016",
+        "c_origin": "4002.97,3000",
+        "c_partid": "part_pad",
+        "c_rotation": "0",
+        "c_shape": "RECT",
+        "c_shapetype": "group",
+        "c_width": "3.1751",
+        "id": "gge1002",
+        "layerid": "1",
+        "locked": "0",
+        "net": "",
+        "number": "2",
+        "pasteexpansion": "-393.7008",
+        "plated": "Y",
+        "solderexpansion": "0.2000",
+        "title": ""
+      },
+      "polygons": [
+        "4001.378 3001.701 4001.378 2998.299 4004.553 2998.299 4004.553 3001.701",
+        "4001.378 3001.701 4001.378 2998.299 4004.553 2998.299 4004.553 3001.701",
+        "4001.378 3001.701 4001.378 2998.299 4004.553 2998.299 4004.553 3001.701"
+      ]
+    },
+    {
+      "attributes": {
+        "c_etype": "pinpart",
+        "c_height": "3.4016",
+        "c_origin": "3997.03,3000",
+        "c_partid": "part_pad",
+        "c_rotation": "0",
+        "c_shape": "RECT",
+        "c_shapetype": "group",
+        "c_width": "3.1751",
+        "id": "gge1004",
+        "layerid": "1",
+        "locked": "0",
+        "net": "",
+        "number": "1",
+        "pasteexpansion": "-393.7008",
+        "plated": "Y",
+        "solderexpansion": "0.2000",
+        "title": ""
+      },
+      "polygons": [
+        "3998.622 3001.701 3998.622 2998.299 3995.447 2998.299 3995.447 3001.701",
+        "3998.622 3001.701 3998.622 2998.299 3995.447 2998.299 3995.447 3001.701",
+        "3998.622 3001.701 3998.622 2998.299 3995.447 2998.299 3995.447 3001.701"
+      ]
+    }
+  ],
+  "svg": "<svg id=\"root2\" width=\"366\" height=\"366\" style=\"left:0;top:0\" viewBox=\" 3993.1375 2993.1875 13.624999999999998 13.624999999999998\" preserveAspectRatio=\"xMinYMin\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:c=\"https://easyeda.com/\" class=\"bw-firefox\">\n                    <rect id=\"gridBg\" pointer-events=\"none\" x=\"3993.1375\" y=\"2993.1875\" width=\"13.624999999999998\" height=\"13.624999999999998\" fill=\"#000000\" stroke=\"none\"></rect>\n                    <defs id=\"patterns2\">\n                        <pattern id=\"gridPattern22\" x=\"0\" y=\"0\" width=\"10\" height=\"10\" patternUnits=\"userSpaceOnUse\">\n                            <path id=\"gridCell22\" d=\"M10 0V10H0\" fill=\"none\" stroke=\"#CCCCCC\" stroke-width=\"0.03722677595628415\" stroke-opacity=\".8\"></path>\n                        </pattern>\n                    </defs>\n\n                    <rect id=\"grid12\" pointer-events=\"none\" x=\"3993.1375\" y=\"2993.1875\" width=\"13.624999999999998\" height=\"13.624999999999998\" fill=\"url(#gridPattern22)\" fill-opacity=\"0.8\" stroke=\"none\" shape-rendering=\"crispEdges\"></rect>\n\n                    <line id=\"gridOH2\" pointer-events=\"none\" x1=\"3993.1375\" y1=\"180\" x2=\"4006.7625\" y2=\"180\" stroke=\"#ffffff\" stroke-width=\"0.03722677595628415\" stroke-opacity=\"0\"></line>\n                    <line id=\"gridOV2\" pointer-events=\"none\" x1=\"180\" y1=\"2993.1875\" x2=\"180\" y2=\"3006.8125\" stroke=\"#ffffff\" stroke-width=\"0.03722677595628415\" stroke-opacity=\"0\"></line>\n\n                    <g id=\"g12\" c_spicecmd=\"TRAN`1u`1m`0`{AC`dec`10`1Hz`1Meg`{DC`0``0`0`{TF```\" c_para=\"Prefix Start`1`\"><g>\n<rect x=\"3984.5\" y=\"2987.4\" width=\"30.9\" height=\"25.2\" fill=\"none\" stroke=\"none\"></rect><g c_origin=\"4000,3000\" c_para=\"package`R0603`pre`R?`Contributor`lcsc`3DModel`R0603`link`https://www.mouser.in/datasheet/2/447/PYu_RT_1_to_0_01_RoHS_L_11-1669912.pdf`\" c_transformlist=\"\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 4004.7048 2998.2284 L 4001.5552 2998.2284 L 4001.3583 2998.4253 L 4001.3583 2999.3228 L 4002.815 2999.3228 L 4002.815 3000.622 L 4001.3583 3000.622 L 4001.3583 3001.5749 L 4001.5552 3001.7717 L 4004.7048 3001.7717 L 4004.9016 3001.5749 L 4004.9016 2998.4253 Z \" stroke-width=\"0\" c_shapetype=\"line\" net=\"\" type=\"solid\" layerid=\"5\" id=\"gge1030\" locked=\"0\" c_teardrop=\"\" c_targetpad=\"\" c_targetwire=\"\"></path><path d=\"M 3995.2952 3001.7716 L 3998.4448 3001.7716 L 3998.6417 3001.5747 L 3998.6417 3000.6772 L 3997.185 3000.6772 L 3997.185 2999.378 L 3998.6417 2999.378 L 3998.6417 2998.4251 L 3998.4448 2998.2283 L 3995.2952 2998.2283 L 3995.0984 2998.4251 L 3995.0984 3001.5747 Z\" stroke-width=\"0\" c_shapetype=\"line\" net=\"\" type=\"solid\" layerid=\"5\" id=\"gge1050\" locked=\"0\" c_teardrop=\"\" c_targetpad=\"\" c_targetwire=\"\"></path><g c_partid=\"part_pad\" c_etype=\"pinpart\" c_origin=\"4002.97,3000\" layerid=\"1\" number=\"2\" net=\"\" plated=\"Y\" c_shapetype=\"group\" id=\"gge1002\" locked=\"0\" c_rotation=\"0\" c_width=\"3.1751\" c_height=\"3.4016\" title=\"\" c_shape=\"RECT\" pasteexpansion=\"-393.7008\" solderexpansion=\"0.2000\"><polygon points=\"4001.378 3001.701 4001.378 2998.299 4004.553 2998.299 4004.553 3001.701\" layerid=\"7\" stroke-width=\"0.4\" c_padid=\"gge1002\"></polygon><polygon points=\"4001.378 3001.701 4001.378 2998.299 4004.553 2998.299 4004.553 3001.701\" layerid=\"5\" stroke-width=\"-787.4016\" c_padid=\"gge1002\"></polygon><polygon points=\"4001.378 3001.701 4001.378 2998.299 4004.553 2998.299 4004.553 3001.701\" stroke-width=\"0\"></polygon><circle c_padhole=\"1\" cx=\"4002.9655\" cy=\"3000\" r=\"0\" stroke-width=\"0\"></circle></g><g c_partid=\"part_pad\" c_etype=\"pinpart\" c_origin=\"3997.03,3000\" layerid=\"1\" number=\"1\" net=\"\" plated=\"Y\" c_shapetype=\"group\" id=\"gge1004\" locked=\"0\" c_rotation=\"0\" c_width=\"3.1751\" c_height=\"3.4016\" title=\"\" c_shape=\"RECT\" pasteexpansion=\"-393.7008\" solderexpansion=\"0.2000\"><polygon points=\"3998.622 3001.701 3998.622 2998.299 3995.447 2998.299 3995.447 3001.701\" layerid=\"7\" stroke-width=\"0.4\" c_padid=\"gge1004\"></polygon><polygon points=\"3998.622 3001.701 3998.622 2998.299 3995.447 2998.299 3995.447 3001.701\" layerid=\"5\" stroke-width=\"-787.4016\" c_padid=\"gge1004\"></polygon><polygon points=\"3998.622 3001.701 3998.622 2998.299 3995.447 2998.299 3995.447 3001.701\" stroke-width=\"0\"></polygon><circle c_padhole=\"1\" cx=\"3997.0345\" cy=\"3000\" r=\"0\" stroke-width=\"0\"></circle></g><polyline points=\"4001.678 3002.601 4005.453 3002.601 4005.453 2997.399 4001.678 2997.399\" stroke-width=\"0.6\" c_shapetype=\"line\" stroke-linecap=\"round\" fill=\"none\" layerid=\"3\" net=\"\" id=\"gge1006\"></polyline><polyline points=\"3998.322 3002.601 3994.547 3002.601 3994.547 2997.399 3998.322 2997.399\" stroke-width=\"0.6\" c_shapetype=\"line\" stroke-linecap=\"round\" fill=\"none\" layerid=\"3\" net=\"\" id=\"gge1007\"></polyline></g></g></g>\n\n                    <!--文本-->\n                    <g id=\"gNets\" pointer-events=\"none\" font-size=\"1\" stroke-width=\"0.02\">\n                        <text id=\"textTemp\" dy=\"0.35em\" x=\"0\" y=\"0\"></text>\n                    <text id=\"textTemp\" dy=\"0.35em\" x=\"4002.97\" y=\"3000\">2</text><text id=\"textTemp\" dy=\"0.35em\" x=\"3997.03\" y=\"3000\">1</text></g>\n                </svg>"
+}

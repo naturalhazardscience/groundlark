@@ -152,7 +152,8 @@ pin=cyl('Center positive pin',(95,-.2),hat_top+6.5,1,2,'metal')
 pin.rotation_euler.x=math.pi/2;pin.location=(95,-1.4,hat_top+6.5)
 cube('TPSM53603 FPGA envelope',(92.5,-34.75,hat_top),(97.5,-29.25,hat_top+4),'black')
 cube('TPSM53603 Pi envelope',(121.5,-30.75,hat_top),(126.5,-25.25,hat_top+4),'black')
-cube('DLVR E1BS envelope',(1.5,-37.025,hat_top),(10.65,-22.215,hat_top+17.25),'black')
+cube('SDP32 envelope',(1.75,-31.75,hat_top),(10.25,-26.25,hat_top+2.2),'black')
+for x in (3.85,8.15):cyl('SDP32 port',(x,-28.35),hat_top+2.2,1,2.2,'black')
 # Manufacturer TE0712 geometry, individually tessellated and approximately colored.
 for item in json.loads((CACHE/'fpga-bodies.json').read_text()):stl(CACHE/(item['name']+'.stl'),item['color'])
 # Illustrative molded details stay inside the conservative plug fit envelope.

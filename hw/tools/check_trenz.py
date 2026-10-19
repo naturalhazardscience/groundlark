@@ -61,11 +61,17 @@ verify_sensor_pins(cp)
 fps={f.GetReference():f for f in board.GetFootprints()}
 from infrasound_checks import verify as verify_infrasound
 pressure=next(part for part in spec['parts'] if part['ref']=='U23')
+pressure_pads={}
+for q in fps['U23'].Pads():
+    if q.GetNumber():
+        pressure_pads.setdefault(q.GetNumber(), []).append((p.ToMM(q.GetPosition().x)-50,p.ToMM(q.GetPosition().y)-50))
 gpio_report['infrasound']=verify_infrasound(bp,
-    {q.GetNumber():(p.ToMM(q.GetPosition().x)-50,p.ToMM(q.GetPosition().y)-50) for q in fps['U23'].Pads()},
+    pressure_pads,
     (fps['U23'].GetOrientationDegrees()%360,fps['U23'].IsFlipped()),pressure['mpn'],fps['U23'].IsDNP())
 assert not fps['C24'].IsDNP() and fps['C24'].GetValue()=='100n'
-assert fps['C24'].IsFlipped(), 'DLVR bypass must clear the tall front body'
+assert fps['C24'].IsFlipped(), 'SDP32 bypass belongs beneath the supply escape'
+from infrasound_checks import verify_mechanics
+gpio_report['infrasound']['assembly_geometry']=verify_mechanics(board)
 assert {ref for ref,fp in fps.items() if fp.GetValue()=='LSM6DSOTR'}=={'U11','U12','U13'}, 'Expected exactly three XYZ IMUs'
 assert not {'U14','C18','C19','R14'} & fps.keys(), 'Fourth IMU circuitry remains'
 assert bp[('U41','8')]==bp[('U41','9')]==bp[('U42','17')]=='GND', 'Unused buffer inputs must not float'

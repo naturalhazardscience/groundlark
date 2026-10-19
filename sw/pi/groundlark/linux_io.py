@@ -47,11 +47,11 @@ class I2C:
             raise
 
     def exchange(self, address, write, count):
-        if not 0 <= address < 128 or not 0 <= count <= 256 or not 0 < len(write) <= 256: raise ValueError("I2C transfer bounds")
+        if not 0 <= address < 128 or not 0 <= count <= 256 or not 0 <= len(write) <= 256 or not (write or count): raise ValueError("I2C transfer bounds")
         tx, rx = c.create_string_buffer(write), c.create_string_buffer(max(1, count))
-        messages = (I2CMessage * (2 if count else 1))()
-        messages[0] = I2CMessage(address, 0, len(write), c.addressof(tx))
-        if count: messages[1] = I2CMessage(address, 1, count, c.addressof(rx))
+        messages = (I2CMessage * (bool(write) + bool(count)))()
+        if write: messages[0] = I2CMessage(address, 0, len(write), c.addressof(tx))
+        if count: messages[int(bool(write))] = I2CMessage(address, 1, count, c.addressof(rx))
         request = I2CTransfer(messages, len(messages))
         result = ioctl(self.fd, 0x0707, bytearray(bytes(request)), True)
         if result != len(messages): raise OSError("short I2C transaction")

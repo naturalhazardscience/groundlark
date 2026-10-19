@@ -44,13 +44,13 @@ class ExactAssemblyBOMTests(unittest.TestCase):
             self.assertEqual(by_ref[ref], by_ref['R96'])
         self.assertEqual(by_ref['C92'], by_ref['C91'])
 
-    def test_all_117_placements_once_and_no_removed_sensors(self):
+    def test_all_188_placements_once_and_no_removed_sensors(self):
         bom, procurement, _ = self.rows()
         refs = [r for row in bom for r in row['Designator'].split(',')]
-        self.assertEqual(len(refs),117)
-        self.assertEqual(len(set(refs)),117)
+        self.assertEqual(len(refs),188)
+        self.assertEqual(len(set(refs)),188)
         self.assertFalse(set(refs) & {'U14','U20','C18','C19','C20','C21','C22','C23','R14','R20'})
-        self.assertEqual(sum(r['Installed_total'] for r in procurement),117)
+        self.assertEqual(sum(r['Installed_total'] for r in procurement),188)
         check_reference_sets(bom,[{'Designator':ref} for ref in refs])
 
     def test_preorder_bulk_minimum_unknown_or_insufficient_stock_rejected(self):
@@ -62,25 +62,39 @@ class ExactAssemblyBOMTests(unittest.TestCase):
             with self.subTest(fault=fault), self.assertRaisesRegex(ValueError, 'procurement policy'):
                 build_bom(self.source, 1, registry)
 
+    def test_stock_is_aggregated_across_source_footprints(self):
+        registry = copy.deepcopy(self.registry)
+        parts = [p for p in registry['parts'] if p['lcsc'] == 'C77055']
+        required = sum(len(p['designators']) for p in parts)
+        self.assertGreater(len(parts), 1)
+        for p in parts:
+            p['stock_observation']['available_order_quantity'] = required - 1
+            self.assertGreaterEqual(required - 1, len(p['designators']))
+        with self.assertRaisesRegex(ValueError, 'procurement policy'):
+            build_bom(self.source, 1, registry)
+
     def test_reviewed_shortage_replacements_and_unchanged_counts(self):
         bom, procurement, selections = self.rows()
         by_ref = {ref: r for r in bom for ref in r['Designator'].split(',')}
         expected = [(['C42','C80','C81','C82'], 'CL31A226KAHNNNE', 'C12891', '1206'),
                     (['C84','C85'], 'GRM21BR71C475KE51L', 'C408144', '0805'),
                     (['C90'], 'GRM31C5C1H104JA01L', 'C97946', '1206'),
-                    (['F80'], '0466005.NRHF', 'C57525', '1206')]
+                    (['F80'], '0466002.NRHF', 'C3105', '1206'),
+                    (['U23'], 'SDP32-125PA-TR-250PCS', 'C6473035', 'SMD-16P'),
+                    (['U11','U12','U13'], 'LSM6DSOXTR', 'C481766', 'LGA-14')]
         for refs, mpn, code, package in expected:
             for ref in refs:
                 self.assertEqual((by_ref[ref]['MPN'], by_ref[ref]['JLCPCB Part #'], by_ref[ref]['Footprint']), (mpn,code,package))
                 self.assertTrue(selections[ref]['resolution'])
                 self.assertTrue(selections[ref]['manufacturer_evidence'])
-        self.assertEqual(len(bom), 38)
-        self.assertEqual(sum(r['Installed_total'] for r in procurement), 117)
-        self.assertEqual(by_ref['F80']['Description'], '5A fast-acting fuse, 32V, 1206')
+        self.assertEqual(len(bom), 71)
+        self.assertEqual(sum(r['Installed_total'] for r in procurement), 188)
+        self.assertEqual(by_ref['F80']['Description'], '2A fast-acting fuse, 32V, 1206')
 
     def test_wrong_chip_package_and_undocumented_substitution_rejected(self):
         for ref in ['F80','C42','C84','C90']:
             for mode in ['package','resolution']:
+                if ref == 'F80' and mode == 'resolution':continue  # Exact source MPN now.
                 reg=copy.deepcopy(self.registry)
                 part=next(p for p in reg['parts'] if ref in p['designators'])
                 part[mode]='0603' if mode=='package' else ''
@@ -142,7 +156,7 @@ class ExactAssemblyBOMTests(unittest.TestCase):
         bom,_,_ = self.rows()
         rows=[r for r in bom if r['MPN']=='TSW-102-07-G-S']
         self.assertEqual(len(rows),1)
-        self.assertEqual(set(rows[0]['Designator'].split(',')),{'JP1','JP80','JP81'})
+        self.assertEqual(set(rows[0]['Designator'].split(',')),{'JP1','JP80','JP81','JP130'})
 
     def test_filter_caps_use_available_equivalent_with_documented_specification(self):
         bom,procurement,selections=self.rows()
@@ -177,7 +191,7 @@ class ExactAssemblyBOMTests(unittest.TestCase):
         self.assertEqual(row['JLCPCB Part #'], 'C7499354')
         self.assertEqual(row['Footprint'], 'THT socket 2x20 P2.54mm')
         part = selections['J1']
-        self.assertEqual(part['evidence_url'], 'https://jlcpcb.com/partdetail/ZX-PM2.54-2-20PY/C7499354')
+        self.assertEqual(part['evidence_url'], 'https://jlcpcb.com/partdetail/Megastar-ZX_PM2_54_220PY/C7499354')
         self.assertEqual(part['jlc_match_status'], 'catalog_listed')
         self.assertEqual(part['source_mpn'], 'ESQ-120-23-G-D')
         self.assertTrue(part['resolution'])
@@ -235,7 +249,7 @@ class ExactAssemblyBOMTests(unittest.TestCase):
             with self.assertRaises(ValueError):check_upload_roundtrip(path,bom)
 
     def test_substitution_requires_manufacturer_evidence(self):
-        for ref in ('F80', 'C42', 'C84', 'C90', 'C91', 'J1'):
+        for ref in ('U11', 'C86', 'C89', 'L140', 'C42', 'C84', 'C90', 'C91', 'J1'):
             registry=copy.deepcopy(self.registry)
             next(p for p in registry['parts'] if ref in p['designators']).pop('manufacturer_evidence')
             with self.subTest(ref=ref), self.assertRaisesRegex(ValueError,'manufacturer evidence'):

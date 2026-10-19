@@ -29,6 +29,15 @@ def validate_mappings(data):
         raise ValueError('Duplicate placement mapping')
 
 
+def require_verified_placements(audit):
+    """Release gate: review exports may retain exceptions, production may not."""
+    missing = [a['reference'] for a in audit if 'pads_checked' not in a]
+    if missing:
+        raise ValueError(f'{len(missing)} unverified supplier placements: {", ".join(missing)}')
+    if not audit:
+        raise ValueError('Empty supplier placement audit')
+
+
 def supplier_pads(entry):
     """EasyEDA Std PAD fields: x=2, y=3, number=8; units are 10 mil."""
     ox, oy = entry['origin_easyeda']

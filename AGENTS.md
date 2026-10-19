@@ -55,7 +55,7 @@ Do not invoke `pack_trenz.py` as validation: they overwrite
 authoring inputs. Do not silently reroute or rewrite checked CAD during tests.
 
 Sensor acquisition uses Pi drivers/runtime software. The separate TI MSPM0L1106
-power supervisor has prototype target firmware in `sw/supervisor/`; its battery policy remains disabled and physical qualification pending. The DLVR-F50D infrasound sensor U23/C24 is on DAQHAT-01 I2C1 at 0x28;
+power supervisor has prototype target firmware in `sw/supervisor/`; its battery policy remains disabled and physical qualification pending. The SDP32-125PA infrasound sensor U23/C24 is on DAQHAT-01 I2C1 at 0x21;
 BCM6 requests Pi shutdown and BCM13 acknowledges halt; BCM24 carries GNSS PPS. Burrowlark U3/C5 are removed.
 The remote USB magnetometer sensor board is
 named Burrowlark, model DAQUSB-01. B1 uses four aligned PNI 14190 modules

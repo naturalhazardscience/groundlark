@@ -51,7 +51,7 @@ def make(out):
         c.setFillColor(WARN); c.setFont('Helvetica-Bold', 9)
         c.drawString(48, H-108, 'ENGINEERING REVIEW ONLY - NOT RELEASED FOR MANUFACTURE')
         c.setFillColor(INK); c.setFont('Helvetica', 8)
-        source_label = manifest.get('source_label', f"Source {manifest['source_commit'][:12]}")
+        source_label = manifest.get('source_label', f"Source {(manifest.get('source_commit') or 'content-hashed')[:12]}")
         c.drawString(48, 27, f"{source_label} | Requested assembly: {manifest['requested_assembled_HATs']} HAT")
         c.drawRightString(W-48, 27, f'{index} / 4')
 
@@ -62,8 +62,8 @@ def make(out):
         '<b>Quantity: ONE SINGLE HAT.</b> Fabricate one PCB and assemble that one PCB. No increase to two or five boards is authorized. Set both website quantities to 1; supplier must confirm acceptance. Gerbers contain one board, without panel repeats. Component purchase minima and attrition are separate quote items.',
         '<b>Handling hold:</b> the 56 mm board dimension is below the 70 mm Standard minimum. Manufacturer to propose an assembly frame, edge rails and fiducials; return panel data for review without altering the HAT outline or hole positions.',
         f"<b>Sourcing hold:</b> {manifest['counts']['physical_placements']} placements, {manifest['counts']['BOM_lines']} grouped BOM lines. {manifest['counts'].get('catalog_mapped_BOM_lines', 0)} lines have exact catalog identities. J1 is {j1}. Confirm current allocation of every selected part. No substitutions are approved.",
-        '<b>Placement hold:</b> CPL is a review candidate, not feeder-approved data. Validate every centroid, rotation and pin 1 against the selected JLC component. J1 is explicitly bottom-mounted despite the front-side CAD land pattern.',
-        '<b>Assembly instructions:</b> populate required SMT and THT parts. Keep JP1, JP80 and JP81 shunts OPEN. Do not fit a Trenz module or Raspberry Pi during PCB assembly. Confirm sensor reflow limits, cleaning and handling with current manufacturer instructions.',
+        f"<b>Placement hold:</b> {len(manifest.get('unverified_placements', []))} placements lack verified supplier geometry. CPL is not feeder-approved. Validate centroid, rotation and pin 1. J1 is bottom-mounted despite the front-side CAD lands.",
+        '<b>Assembly:</b> keep JP1, JP80, JP81 and JP130 shunts OPEN. Fit U23 SDP32 in the final reflow only: max 260 C, max 150 s above 200 C, protected ports, no board wash. Do not fit the Trenz module or Pi during assembly.',
         f'<b>Validation:</b> fresh native DRC has zero findings and zero unconnected items. Independent Gerbonara parsing reads all {layer_count} plot layers and matches all {drill_count} drill hits to CAD within 1 micrometre. This does not replace manufacturer DFM or first-article power, fit, timing and noise measurements.',
     ]: y = paragraph(text, y)
     c.showPage()
@@ -103,7 +103,7 @@ def make(out):
         rows = ([
             '<b>J80 / J81 / J82:</b> three Samtec fine-pitch Trenz connectors on TOP, with SMT signal contacts and plated mounting features. Match exact height, locating posts and pin 1. Confirm stock or consigned parts before accepting the assembly quote.',
             '<b>U11-U13 / U22:</b> three IMUs and geophone ADC. Preserve existing sensor orientations; do not rotate an accelerometer to create another axis. The IMUs already measure all three axes.',
-            f'<b>J83 / J90:</b> module power terminal and horizontal geophone header. J90 is {j90}, opening outward over the board edge. Its 1803581 cable plug is a separate purchase. JP1/JP80/JP81 remain open.',
+            f'<b>J83 / J90:</b> 12 V center-positive barrel input and horizontal geophone header. J90 is {j90}, opening outward over the board edge. Its 1803581 cable plug is a separate purchase. JP1/JP80/JP81/JP130 remain open.',
             '<b>J1 exception:</b> the long Pi connector land pattern appears on this side in CAD Fab output, but its socket body is installed BELOW the board. Follow the bottom assembly instruction, not the library layer.',
         ] if side == 'top' else [
             f'<b>J1:</b> {j1} socket body underneath the HAT; mating face toward two external SSQ-120-02-G-D risers. Nominal Pi-top to HAT-underside clearance is 28.06 mm. Verify pin 1, contact engagement and measured support height before soldering.',

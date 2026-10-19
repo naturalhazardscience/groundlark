@@ -262,6 +262,11 @@ def reading(sensor, cfg, scenario, now, seed):
         pressure = scalar("pressure_pa")
         low, high = cfg["pressure_min_pa"], cfg["pressure_max_pa"]
         clipped |= not low <= pressure <= high
-        count = quantize(1638.4 + (pressure - low) * 13107.2 / (high - low), 0, 16383)
-        raw = dict(response=struct.pack(">HH", count, state["pressure_temperature_count"] << 5))
+        if cfg['pressure_part_number'] == 'SDP32-125PA-TR-250PCS':
+            from groundlark_contract.validation import sht_crc
+            data = struct.pack('>hhH', quantize(pressure * 240), quantize(temp * 200), 240)
+            raw = dict(sdp3x_response=b''.join(data[i:i+2] + bytes([sht_crc(data[i:i+2])]) for i in (0, 2, 4)))
+        else:
+            count = quantize(1638.4 + (pressure - low) * 13107.2 / (high - low), 0, 16383)
+            raw = dict(response=struct.pack(">HH", count, state["pressure_temperature_count"] << 5))
     return Reading(raw, 3 if clipped else 1)

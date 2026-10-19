@@ -1,6 +1,7 @@
 """Independent physical-pin and orientation fixture for DAQHAT-01.
 
-Pin maps: TI ADS122C04 SBAS751B PW package, TPD2E2U06 SLLSEG9C DCK.
+Pin maps: TI ADS122C04 SBAS751B PW package, TPD2E2U06-Q1 SLLSEJ9E DCK
+(same numbered pins as the replaced TPD2E2U06 SLLSEG9C DCK).
 ADC analog inputs/reference pins 6..9 intentionally float per TI section 9.1.3.
 """
 PINS = {

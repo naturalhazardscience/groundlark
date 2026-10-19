@@ -99,9 +99,39 @@ class GeophoneBus:
     def close(self): pass
 
 
+class PressureBus:
+    """SDP32 command-state model; waveform and wire CRCs come from the stimulus."""
+    def __init__(self, model):
+        self.model, self.started, self.product_stage = model, False, 0
+
+    def exchange(self, address, write, count):
+        if address != 0x21: raise OSError('wrong modeled SDP32 address')
+        if write == bytes.fromhex('3ff9') and not count:
+            self.started, self.product_stage = False, 0
+        elif write == bytes.fromhex('367c') and not count and not self.started:
+            self.product_stage = 1
+        elif write == bytes.fromhex('e102') and not count and self.product_stage == 1:
+            self.product_stage = 2
+        elif not write and count == 18 and self.product_stage == 2:
+            self.product_stage = 0
+            return bytes.fromhex('03019d0201690123a045675389ab77cdef84')
+        elif write == bytes.fromhex('361e') and not count and not self.started:
+            self.started = True
+        elif not write and count == 9 and self.started:
+            return self.model.read().raw['sdp3x_response']
+        else: raise OSError('unexpected SDP32 command/state')
+        return b''
+
+    def close(self): pass
+
+
 class VirtualDriver:
     def __init__(self, sensor, scenario, clock):
         self.model = Simulated(sensor, seed=1, scenario=scenario, clock=clock)
+        if sensor == 8:
+            from .pressure import SDP32
+            self.driver = SDP32(PressureBus(self.model), sleep=lambda _: None)
+            return
         if sensor == 9:
             from .geophone import ADS122C04
             self.driver = ADS122C04(GeophoneBus(self.model), sleep=lambda _: None, clock=lambda: clock()/1e9)

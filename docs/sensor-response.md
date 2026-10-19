@@ -1,5 +1,13 @@
 # Sensor bandwidth and timing
 
+DAQHAT-01 U23 is an SDP32-125PA at I2C 0x21, read at 100 Hz using differential
+pressure compensation with continuous averaging disabled. It returns signed
+pressure at 240 counts/Pa and temperature at 200 counts/C, with separate CRCs
+and a verified scale word. Records preserve all nine response bytes. Polling
+timestamps are read-completion times, not qualified conversion timestamps.
+The port/tubing response, anti-alias filtering and usable infrasound noise floor
+remain unmeasured; the ideal waveform model does not qualify them.
+
 These specifications cover the current Groundlark FPGA HAT and Skylark USB.
 Raw recordings preserve sensor counts. They do not apply inverse response,
 gas compensation, or a shared phase correction. Modeled response is not

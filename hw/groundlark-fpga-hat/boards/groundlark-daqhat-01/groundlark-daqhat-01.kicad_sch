@@ -30,7 +30,7 @@
           (property "Sheetfile" "04-gnss-page-02.kicad_sch" (at 140 177 0) (effects (font (size 1.27 1.27)) (justify left)))
           (instances (project "groundlark-daqhat-01" (path "/de5c43d7-546f-5b4d-b587-d8dfceb38170" (page "7")))))
 (sheet (at 30 195) (size 95 30)
-          (stroke (width 0.1524) (type solid)) (fill (color 0 0 0 0)) (uuid e698ceff-fa25-5efc-82bf-1acfc4d4bd14)
+          (stroke (width 0.1524) (type solid)) (fill (color 0 0 0 0)) (uuid af59b6a4-4884-5424-8233-13e916fbdbda)
           (property "Sheetname" "05-fpga-interface-page-01" (at 30 193 0) (effects (font (size 1.27 1.27)) (justify left)))
           (property "Sheetfile" "05-fpga-interface-page-01.kicad_sch" (at 30 227 0) (effects (font (size 1.27 1.27)) (justify left)))
           (instances (project "groundlark-daqhat-01" (path "/de5c43d7-546f-5b4d-b587-d8dfceb38170" (page "8")))))

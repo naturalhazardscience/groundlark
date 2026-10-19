@@ -1,4 +1,4 @@
-(kicad_sch (version 20230121) (generator eeschema) (uuid e698ceff-fa25-5efc-82bf-1acfc4d4bd14) (paper "A3") (title_block (title "Groundlark DAQHAT-01 / 05-fpga-interface-page-01") (date "2026-09-30") (rev "DAQHAT-01"))
+(kicad_sch (version 20230121) (generator eeschema) (uuid af59b6a4-4884-5424-8233-13e916fbdbda) (paper "A3") (title_block (title "Groundlark DAQHAT-01 / 05-fpga-interface-page-01") (date "2026-09-30") (rev "DAQHAT-01"))
 (lib_symbols
 (symbol "Groundlark:Part_J4" (pin_names (offset 0.6)) (in_bom yes) (on_board yes)
       (property "Reference" "J" (id 0) (at 0 6.35 0) (effects (font (size 1.27 1.27))))
@@ -10,7 +10,7 @@
               (property "Value" "FPGA test UART/reset" (at 50.8 34.06 0) (effects (font (size 1.0 1.0))))
               (property "Footprint" "Groundlark:Connector_PinHeader_2.54mm__PinHeader_1x04_P2.54mm_Vertical" (at 50.8 39.370000000000005 0) (effects (font (size 1 1)) hide))
               (property "MPN" "FPGA UART service ONLY" (at 50.8 39.370000000000005 0) (effects (font (size 1 1)) hide))
-              (instances (project "groundlark-daqhat-01" (path "/de5c43d7-546f-5b4d-b587-d8dfceb38170/e698ceff-fa25-5efc-82bf-1acfc4d4bd14" (reference "J4") (unit 1)))))
+              (instances (project "groundlark-daqhat-01" (path "/de5c43d7-546f-5b4d-b587-d8dfceb38170/af59b6a4-4884-5424-8233-13e916fbdbda" (reference "J4") (unit 1)))))
 (wire (pts (xy 35.56 38.1) (xy 30.48 38.1)) (stroke (width 0) (type default)) (uuid 0e10ef24-fe61-5052-8ad8-39c1864988e4))
 (global_label "GND" (shape bidirectional) (at 30.48 38.1 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid 736615e7-0b9b-5d0e-b42b-2ff8f5cb2abb))
 (wire (pts (xy 35.56 40.64) (xy 30.48 40.64)) (stroke (width 0) (type default)) (uuid ccf4c25e-aec3-56d1-9402-08135b1b8055))

@@ -147,7 +147,7 @@ def export(out, quantity):
         source = list(csv.DictReader(stream))
     if len(source) != len(refs) or {r['Reference'] for r in source} != set(refs):
         raise ValueError('Source BOM does not match PCB footprints')
-    if any(r['DNP'] != 'False' for r in source):
+    if any(r['DNP'] != 'False' and not re.fullmatch(r'(H|TP)\d+', r['Reference']) for r in source):
         raise ValueError('New DNP variant requires explicit assembly review')
     registry = load_registry()
     bom, procurement, selections = build_bom(source, quantity, registry)
@@ -256,6 +256,8 @@ def export(out, quantity):
         'requested_fabricated_HATs': quantity,
         'boards_per_gerber_design': 1,
         'panelized': False,
+        'supplier_placement_complete': all('pads_checked' in a for a in placement_audit),
+        'unverified_placements': [a['reference'] for a in placement_audit if 'pads_checked' not in a],
         'published_standard_PCBA_minimum': 2,
         'source_commit': source_commit(),
         'kicad': run('kicad-cli', 'version'), 'source_sha256': before,
@@ -274,6 +276,8 @@ def export(out, quantity):
             'JLC Standard assembly frame/rails and fiducials; 140x56 board is below 70mm minimum dimension.',
             f'J1 {selections["J1"]["mpn"]} / {selections["J1"]["lcsc"]}: {selections["J1"]["sourcing_note"]}',
             'Verify every rotation and centroid against JLC component definitions; J1 is bottom-mounted THT.',
+            f'{len(placements)-len(fitted)} placements lack frozen numbered supplier pads; retain as manufacturing holds until verified.',
+            'U23 SDP32: install in the final reflow only, maximum 260 C and at most 150 seconds above 200 C; protect ports and never wash the assembled sensor.',
             'Approve mixed SMT/THT assembly, reflow constraints and sensor handling; do not substitute parts.',
             'Review panelized Gerbers, drill spans, polarity/pin 1 and assembly preview before payment.',
         ],

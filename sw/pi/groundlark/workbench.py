@@ -31,7 +31,8 @@ BOARDS = {"all": "HAT + Burrowlark", "hat": "Groundlark FPGA HAT",
 def board_configs(board):
     if board not in BOARDS: raise ValueError("Unknown or deferred board")
     if board == 'skylark': return skylark.defaults()
-    hat = defaults() + [cfg for cfg in defaults(True) if cfg['sensor_id'] == 8]
+    from .pressure import SETTINGS as PRESSURE_SETTINGS
+    hat = defaults() + [dict(PRESSURE_SETTINGS)]
     head = [cfg for cfg in defaults(True) if cfg['sensor_id'] in (7, 18, 19, 20, 17)]
     return (hat if board in ('all','hat') else []) + (head if board in ('all','burrowlark') else [])
 
@@ -60,9 +61,15 @@ def project_sample(sensor, sample):
     elif sensor in (7, 18, 19, 20):
         result.update(primary=vectors(raw, "counts"), detail="RM3100 • raw signed XYZ counts")
     elif sensor == 8:
-        p, t = struct.unpack(">HH", raw.response)
-        result.update(primary=[p & 0x3fff, None, None], secondary=[t >> 5, None, None],
-                      detail=f"Sensor status bits: {p >> 14} • raw DLVR response")
+        if raw.sdp3x_response:
+            data = raw.sdp3x_response
+            result.update(primary=[int.from_bytes(data[:2], 'big', signed=True), None, None],
+                          secondary=[int.from_bytes(data[3:5], 'big', signed=True), None, None],
+                          detail="SDP32 raw signed counts • pressure 240 counts/Pa • temperature 200 counts/°C")
+        else:
+            p, t = struct.unpack(">HH", raw.response)
+            result.update(primary=[p & 0x3fff, None, None], secondary=[t >> 5, None, None],
+                          detail=f"Sensor status bits: {p >> 14} • raw DLVR response")
     elif 10 <= sensor <= 13:
         result.update(primary=[raw.counts, None, None], detail=f"ADS122C04 counts • conversion {raw.conversion_counter} • gas concentration uncalibrated")
     elif sensor == 14:

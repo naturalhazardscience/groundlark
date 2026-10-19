@@ -3,8 +3,8 @@
 Underside TP90–TP93 provide passive calibration probe access; see the [bench calibration guide](../../docs/calibration.md). No additional GPIO or enclosure opening is required.
 
 The active 140 × 56 mm, six-layer Trenz carrier combines three XYZ IMUs and
-an ADS122C04 input for an external Racotech geophone, plus a fitted DLVR-F50D
-infrasound pressure sensor on I2C1 (0x28). The stack is Raspberry Pi,
+an ADS122C04 input for an external Racotech geophone, plus a fitted SDP32-125PA
+infrasound pressure sensor on I2C1 (0x21). The stack is Raspberry Pi,
 DAQHAT-01, then Trenz TE0712-03-81I36-A. Physical qualification remains pending.
 J90 uses a horizontal Phoenix 1803280 header with the existing 1803581 cable
 plug. Pin order remains positive, negative, shield.
@@ -38,6 +38,13 @@ Assembly uses an 8.5 mm JLCPCB socket, two external GPIO risers and measured
 supports (28.06 mm nominal Pi gap). Sensor supply and bias returns have local
 ground stitches. Procurement accepts in-stock PCB selections with component
 MOQ 1; see [JLCPCB assembly](../../docs/jlcpcb-assembly.md).
+
+D90 uses TI **TPD2E2U06QDCKRQ1 / JLCPCB C915089** as the pin-compatible
+replacement for TPD2E2U06DCKR. Its SC-70 footprint and routing are unchanged.
+All 188 fitted placements have exact catalog selections with dated stock evidence.
+U23 uses the redesigned SDP32-125PA circuit and driver. Supplier geometry remains
+unverified for 52 placements, so the matching Gerber/BOM/CPL package remains a
+review package; see the assembly guide before ordering.
 
 Use the [R3 enclosure](../mechanical/daqhat-01-case/README.md) for the 140 × 56 mm
 board. It adds power-wing supports, a rear DC opening opposite the geophone and

@@ -1,13 +1,13 @@
 # Hardware validation and release gates
 
-## Current DAQHAT-01 GNSS, calibration and power revision
+## Current DAQHAT-01 pressure, GNSS, calibration and power revision
 
 The 140 × 56 mm board includes MAX-M10S-00B GNSS on I2C1, BCM24 PPS and a
 side-facing SMA with a 3.3 V active-antenna supply. BCM4 remains geophone DRDY;
 BCM6/13 retain the TI power-supervisor handshake. FPGA interfaces and the
 independent adapter supply remain unchanged. Native checks report zero ERC
 findings, zero DRC findings and zero unconnected items. The complete
-13,010-track/via SES reproduces identical copper. Independent pin/no-connect,
+13,058-track/via SES reproduces identical copper. Independent pin/no-connect,
 power, RF geometry, fabrication and analog-layout checks pass.
 The antenna limiter and local bypasses are routed; ISO1640 side 2 faces GNSS.
 Pi rail calculations include resistor temperature drift and an unmeasured
@@ -20,11 +20,15 @@ with instrument/configuration binding and retains raw counts. Local miniSEED
 export preserves timing gaps and requires valid UTC intervals. See the
 [calibration guide](calibration.md) and [timing limits](utc-timing.md).
 
-The portable software checks run 253 tests successfully, including device-tree
-checks, contract compatibility and FPGA loopback.
-The workbench HTTP check and browser interaction check pass. Its Groundlark
+The portable software checks include device-tree checks, contract compatibility,
+driver fault injection, firmware builds and FPGA loopback.
+The workbench HTTP and scene checks pass; browser interaction for the pressure
+revision remains unverified. Its Groundlark
 signal bench passes 12/12 checks on 4,072 modeled samples from all six HAT sensors.
-Infrasound uses the raw-response model; its Pi hardware driver remains pending.
+Pressure uses the production SDP32 driver on a modeled I2C bus, including
+product identity, signed raw counts, CRC and scale validation. Native checks
+cover the pin map, NCs, three pegs, split ground/paste lands and open center.
+Actual pneumatic response, noise, mounting and thermal drift require measurement.
 Antenna open/short, lock-loss and missing-PPS controls preserve independent
 sensor acquisition. Fault/recovery, replay and rejection of invalid UTC references
 are covered. Supply checks include Pi temperature corners, invalid envelope
@@ -33,18 +37,18 @@ Modeled UTC correlation and miniSEED round trips do not qualify physical 1 ms
 sample alignment; receiver RF, acquisition latency and filter delay need measurement.
 
 The 159 × 118 × 75 mm R3 enclosure adds a side SMA slot. Geometric/component
-checks, 560 native PCB underside checks and 25 enclosure fault tests pass.
+checks, 556 native PCB underside checks and 25 enclosure fault tests pass.
 The README renders use current CAD. Physical first-print fit remains pending.
-The supervisor battery policy stays disabled with unset thresholds; target MCU
-firmware and Pi shutdown integration remain pending.
+The supervisor battery policy stays disabled with unset thresholds; prototype
+target firmware is built and tested with native fixtures. Hardware shutdown
+integration remains unqualified.
 
-The full portable run executes all 25 stages; 24 pass. Hardware regressions
-report 186 tests, 13 failures and 16 errors from the existing
-procurement-registry/source and supplier-pad mismatches, retaining
-the existing assembly export hold. Exact GNSS and replacement-part stock
-observations are recorded; full procurement and supplier-pad/rotation approval
-remain pending. Ten focused GNSS pin/layout tests pass, including missing
-bypass and ground-stitch faults. No physical
+The full portable profile executes 26 stages. Its supplier placement acceptance
+gate remains blocked: 52 of 188 placements lack verified numbered supplier pads.
+All 71 catalog identities have dated stock observations; 136 placements fit frozen
+supplier geometry. Review export tests preserve exceptions rather than clearing
+the release gate. GNSS pin/layout checks include missing bypass and ground-stitch
+faults. No physical
 power, noise, thermal, battery or RF qualification is implied. See
 [power operation](power-supplies.md#pi-supervisor-and-battery-input) and
 [assembly status](jlcpcb-assembly.md).

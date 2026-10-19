@@ -23,7 +23,7 @@ models; procurement and physical qualification remain separate checks.
 
 KiCad's exporter cannot convert the local VRML bodies. The Python scene adds
 simplified envelopes for the selected 8.5 mm Megastar Pi socket and Trenz connectors. Selection rings use `hw/groundlark-fpga-hat/layout/placement.json` XY values.
-The fitted DLVR U23 is represented by a conservative upright E1BS envelope on
+The fitted SDP32 U23 is represented by a conservative SDP32 envelope on
 the HAT; its custom VRML cannot be converted by KiCad. The remote head is a
 native PCB GLB containing RM3100 and SHT45, with placement-based selection rings.
 

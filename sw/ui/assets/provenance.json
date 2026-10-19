@@ -1,21 +1,21 @@
 {
   "kicad": "9.0.9",
   "sha256": {
-    "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "4d630fe92d5d42bad19889ceed4c918c6e6d0d58bcbf6d13e238a32765aa503c",
-    "hw/groundlark-fpga-hat/layout/placement.json": "5380ea9ba1a56a464da22035ed8682b672b0e1e958c5fc83be8e5b4f5e78b06f",
-    "sw/ui/assets/daqhat-01.glb": "2dc7a979bcf662b88499a6a65d441a6622c94524fcbb5433fba8d47dc1c06dbb",
+    "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "90cb62eb962f41b9770798add089a8737bcf25457320eaa73ed10d3b4c279aa1",
+    "hw/groundlark-fpga-hat/layout/placement.json": "1dc12081ffadfe31cbad348c2d7c51ad696c31b1f1e6f053e3022815c36795bd",
+    "sw/ui/assets/daqhat-01.glb": "77ba97530a5a80c17b85d8c1bfa855ea5017f305ebab2028373d90ec11956c79",
     "sw/ui/geophone_scene.py": "65ef0de9df78e2b7c1c4697367f5a5b81486dd95f2fe4f01d9fa6f35b8dd461a",
     "hw/burrowlark-usb/layout/placement.json": "f180ef6b13946e4425e12864c34a310c905ea993b59d379671d8acee6e5ea2e6",
-    "sw/ui/main.py": "4d4c69aa494fe03c62a7ca13fb96a07342eb97645d913166aabce4c32bfca264",
-    "hw/shared/models/DLVR_E1BS.wrl": "cef03553881ccfc39cc5810789a92d578c0f9d8a636b5de29cd719bada7c4dad",
+    "sw/ui/main.py": "af2d3138ef9f4510486a717394f27e25d8e28a799bbd37edcdd984af9c48bbb1",
     "hw/shared/models/PJ_102AH_envelope.wrl": "4ee72a8ea9a1d0d7c4afc079819353c87c9e6111557c5727d821b4f53b711c94",
     "hw/shared/models/TPSM53603_envelope.wrl": "eec66b8373d0bce441527b2ec6ce28c3c2fcbe6ef56a7f0fad3883eb48f30604",
     "hw/shared/models/HL_SMA_KWE_02.step": "b18f2a60e4e25e77c107b980174833ed797862ffed13c80aa63308e2b27086b1",
     "hw/shared/models/MAX_M10S_envelope.step": "fb429633d752229d4ccc5102222635e8f39344ec0800070b13eefb6b7e76faf1",
-    "hw/tools/gnss_model.py": "ea896b8d2cc842f850764704ec253bbfcdccf26920b368a6103345208ba15d61"
+    "hw/tools/gnss_model.py": "ea896b8d2cc842f850764704ec253bbfcdccf26920b368a6103345208ba15d61",
+    "hw/shared/models/SDP32_envelope.wrl": "8c2fac308af653c219f8b502c2ed1daa6d3490034d28bb0be4e044907b03a9a0"
   },
   "metadata_review": "140 x 56 mm supervised Pi supply and separate FPGA input. J130 accepts protected 8-18 V DC; U130 MSPM0L1106 controls U132/U133. Native KiCad 9.0.9 GLB; local VRML parts use explicit display envelopes. Physical fit, thermal behavior and battery policy remain unqualified.",
   "calibration_access": "Four underside passive probe pads TP90-TP93; outline and assembly height unchanged. Native PCB fit checks pass; physical calibration pending.",
   "gnss": "MAX-M10S underside package envelope and drawing-based HL-SMA-KWE-02 STEP; native -X antenna. Timing evidence is modeled; physical RF/timing/fit qualification pending.",
-  "label_review": "Burrowlark B1 scene adds four independent selection targets and its new native GLB; HAT scene geometry, PCB, models and GLB remain unchanged."
+  "label_review": "SDP32-125PA at U23 replaces DLVR. Regenerated native GLB plus explicit 8.5 x 5.5 x 4.4 mm two-port scene envelope; placement and model hashes refreshed. Physical fit and pneumatic behavior remain unqualified."
 }

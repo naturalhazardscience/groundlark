@@ -5,7 +5,7 @@ For `calibration-observe`, `calibration-fit`, measured reference templates and i
 **New to the simulator?** Start with the [browser workbench walkthrough](sensor-workbench.md).
 This page covers command-line development and real Linux acquisition.
 The current HAT has three IMUs, a Racotech geophone input, infrasound and MAX-M10S GNSS. The fourth IMU and inclinometer remain legacy-only.
-DLVR infrasound is covered by simulation and the six-sensor browser bench;
+SDP32 infrasound is covered by simulation and the six-sensor browser bench;
 its Pi I2C hardware driver remains pending. The live factory currently supports
 the IMUs, geophone ADC and GNSS receiver.
 
@@ -252,7 +252,7 @@ Record the method, reference and date in `provenance`. Physical calibration
 is supplied by the user, never invented by the application.
 
 Inputs are acceleration, gyro, tilt angle, magnetic counts, IMU/tilt temperature
-and DLVR 14-bit pressure counts. Finite results and sensor/field compatibility
+and pressure raw counts (legacy DLVR 14-bit; SDP32 signed 16-bit). Finite results and sensor/field compatibility
 are checked. GNSS and pressure-response temperature conversion are not
 implemented. Raw values remain unchanged. The content hash becomes the
 calibration ID; full artifacts are stored with recordings. Only VALID/SATURATED
@@ -326,10 +326,14 @@ NiceGUI `/station` view. The persistent service uses capacity-based rolling
 SSREC retention with validated session checkpoints. Interrupted recordings remain
 incomplete; loss and raw precision survive segment boundaries.
 
-Live HAT acquisition includes fitted DLVR-F50D pressure at I2C 0x28, using its
-actual ±125 Pa nominal range and preserving all four response bytes. Busy data
-is missing, and diagnostic/command states are faults. The sensor has no identity
-or writable range register; its installed part must be checked during bring-up.
+Live HAT acquisition includes the SDP32-125PA at I2C 0x21, with its +/-125 Pa
+range. Startup validates the product ID and 240 counts/Pa scale, then starts
+continuous differential-pressure compensated measurements without averaging.
+All nine bytes (signed pressure and temperature, scale, and three CRCs) are
+retained in `PressureRaw.sdp3x_response`. CRC, identity, scale and bus failures
+enter bounded recovery; recovery stops only this device, without resetting
+other sensors on the bus. Legacy four-byte DLVR responses remain readable.
+Modeled protocol and fault checks do not establish physical pneumatic response.
 
 The [supervisor target](../sw/supervisor/README.md) defaults to RUN off. Its
 state-machine tests and ARM link do not qualify battery operation. SensorThings,

@@ -80,7 +80,7 @@ def build_report():
     attach_charge=1.2*(sc('USB_5V')*5.25+sc('V3')*3.366+sc('NRST')*3.366+sc('VBUS_SENSE')*2.625)
     assert attach_charge<50e-6,'USB attach charge needs inrush limiting review'
     ground_5v_mA={'three_IMUs':3,'ADS122C04':2,'ISO1640_side1':10,
-                  'translators_switching':10,'bias_and_pullups':5,'LDO_Iq':.5,'DLVR_fast_max':4.3,'reserve':15.2,'GNSS_antenna':20,'antenna_LDO_and_reserve':5}
+                  'translators_switching':10,'bias_and_pullups':5,'LDO_Iq':.5,'SDP32_continuous_max':5.5,'reserve':14,'GNSS_antenna':20,'antenna_LDO_and_reserve':5}
     ground_3v3_mA={'ISO1640_side2':10,'translators_and_muxes':10,'EEPROM_expander_logic':5,
                    'bias_and_pullups':10,'reserve':15,'MAX_M10S_acquisition':100}
     ground_5v=sum(ground_5v_mA.values())/1000

@@ -77,7 +77,7 @@ H82,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
 H83,M3 / 8 mm spacer,M3 / 8 mm spacer,TZ_TZ_HOLE,False,
 U22,ADS122C04,ADS122C04IPWR,Package_SO__TSSOP-16_4.4x5mm_P0.65mm,False,"I2C 0x40; internal 2.048V reference, gain 64, normal 330 SPS; unused analog/reference inputs open per TI."
 J90,GEO + / - / SHIELD,1803280,"Connector_Phoenix_MC__PhoenixContact_MC_1,5_3-G-3.81_1x03_P3.81mm_Horizontal",False,"Horizontal outward entry (+Y). 1 positive, 2 negative, 3 cable shield. Mate Phoenix 1803581. Never connect power."
-D90,TPD2E2U06,TPD2E2U06DCKR,Package_TO_SOT_SMD__SOT-323_SC-70,False,Connector ESD suppression only; not lightning protection.
+D90,TPD2E2U06,TPD2E2U06QDCKRQ1,Package_TO_SOT_SMD__SOT-323_SC-70,False,Connector ESD suppression only; not lightning protection.
 R90,1k,RC0603FR-071KL,Resistor_SMD__R_0603_1608Metric,False,Matched series input filter / current limiting.
 R91,1k,RC0603FR-071KL,Resistor_SMD__R_0603_1608Metric,False,
 C90,100n C0G,C3216C0G1H104J160AA,Capacitor_SMD__C_1206_3216Metric,False,C0G differential filter; no piezoelectric X7R on signal path.
@@ -125,8 +125,8 @@ R116,100k,RC0603FR-07100KL,Resistor_SMD__R_0603_1608Metric,False,
 R117,100k,RC0603FR-07100KL,Resistor_SMD__R_0603_1608Metric,False,
 U106,SN74LVC1G08DCKR,SN74LVC1G08DCKR,Package_TO_SOT_SMD__SOT-353_SC-70-5,False,Existing BCM25 FPGA_IO_ENABLE is also a hardware disarm independent of I2C. Default-low R62 retained.
 C106,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
-U23,DLVR-F50D,DLVR-F50D-E1BS-I-NI3F,Groundlark__DLVR_E1BS,False,Fitted 3.3 V I2C 0x28; pneumatic response and thermal/vibration isolation require qualification.
-C24,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,Local DLVR supply bypass
+U23,SDP32-125PA,SDP32-125PA-TR-250PCS,Groundlark__SDP32,False,SDP32 +/-125 Pa; 3.3 V I2C 0x21; one final reflow only; no board wash; pneumatic qualification pending.
+C24,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,Local SDP32 supply bypass beneath supply escape
 J83,12V DC / CENTER +,PJ-102AH,PWR_BarrelJack_CUI_PJ-102AH_Horizontal,False,"5.5/2.1 mm mating plug; mouth faces -Y, opposite J90 +Y; sleeve switch pin 3 NC"
 F80,0466002.NRHF,0466002.NRHF,PWR_Fuse_1206_3216Metric,False,Input fuse; output current controlled by buck converter
 D80,B340A,B340A-13-F,PWR_D_SMA,False,3 A / 40 V Schottky; reverse-polarity series protection

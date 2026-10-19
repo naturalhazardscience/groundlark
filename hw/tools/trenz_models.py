@@ -4,6 +4,7 @@ The Pi model is conceptual; the HAT geometry is the actual KiCad PCB. Run after
 routing. Does not change the circuit or create a fictitious routed board.
 """
 from pathlib import Path
+import math
 from kicad_support import save_board
 import pcbnew as p
 from assembly_fit import PI_TOP, PI_GAP, J1_BODY, RISER_BODY, RISER_COUNT
@@ -13,6 +14,17 @@ def box(x,y,z,w,d,h,color):
     return f'Transform {{ translation {x/2.54} {y/2.54} {z/2.54} children [ Shape {{ appearance Appearance {{ material Material {{ diffuseColor {color} }} }} geometry Box {{ size {w/2.54} {d/2.54} {h/2.54} }} }} ] }}\n'
 def cylinder(x,y,z,r,h,color):
     return f'Transform {{ translation {x/2.54} {y/2.54} {z/2.54} rotation 1 0 0 1.570796 children [ Shape {{ appearance Appearance {{ material Material {{ diffuseColor {color} }} }} geometry Cylinder {{ radius {r/2.54} height {h/2.54} }} }} ] }}\n'
+
+def z_cylinder_mesh(x,y,z,r,h,color):
+    # KiCad's VRML renderer omits Cylinder primitives; explicit faces retain ports.
+    n=32
+    pts=[((x+r*math.cos(i*2*math.pi/n))/2.54,(y+r*math.sin(i*2*math.pi/n))/2.54,(z+dz)/2.54)
+         for dz in (-h/2,h/2) for i in range(n)]
+    faces=[list(reversed(range(n))),list(range(n,2*n))]
+    faces += [[i,(i+1)%n,(i+1)%n+n,i+n] for i in range(n)]
+    vertices=', '.join(' '.join(f'{v:.7f}' for v in q) for q in pts)
+    indices=', '.join(' '.join(map(str,face+[-1])) for face in faces)
+    return f'Shape {{ appearance Appearance {{ material Material {{ diffuseColor {color} }} }} geometry IndexedFaceSet {{ coord Coordinate {{ point [ {vertices} ] }} coordIndex [ {indices} ] }} }}\n'
 def write(name,s):
     (M/(name+'.wrl')).write_text('#VRML V2.0 utf8\n# Conceptual geometry, millimetres converted to KiCad VRML units.\n'+s)
 def model(fp,path,offset=(0,0,0)):
@@ -31,6 +43,11 @@ for y,z in [(2.12,7.95),(7.03,11.3)]:
     dlvr+=box(11.025,y,z,2.11,2.24,2.24,'0.15 0.15 0.17')
 for i in range(4):dlvr+=box(i*2.54,0,0,.51,.25,3,'0.72 0.72 0.72')
 write('DLVR_E1BS',dlvr)
+# Sensirion SDP3x digital v1.1 drawing envelope; not a vendor solid.
+sdp32=box(0,0,1.1,8.5,5.5,2.2,'0.15 0.15 0.17')
+for x in [-2.15,2.15]:sdp32+=z_cylinder_mesh(x,.65,3.3,1,2.2,'0.15 0.15 0.17')
+for x,y in [(3.65,2.15),(-3.65,-2.15),(3.65,-2.15)]:sdp32+=z_cylinder_mesh(x,y,-.375,.295,.75,'0.15 0.15 0.17')
+write('SDP32_envelope',sdp32)
 # Datasheet-derived display envelopes for parts absent from the stock 3D set.
 # PJ-102AH body 9 x 14.4 x 11 mm; mouth at local PCB +Y (VRML -Y).
 jack=box(0,-6.5,5.5,9,14.4,11,'0.055 0.055 0.065')
@@ -45,8 +62,8 @@ for n in [50,30]:
         for y in [-1.85,1.85]:s+=box((i-(n-1)/2)*.5,y,.3,.2,1.1,.6,'0.72 0.58 0.25')
     write(f'LSHM_{n}_4mm',s)
 b=p.LoadBoard(str(F/(NAME+'.kicad_pcb')))
-title=b.GetTitleBlock();title.SetRevision('DAQHAT-01 6L');title.SetDate('2026-09-30');b.SetTitleBlock(title)
-custom={'J1':'Pi_Megastar_2x20','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm','U23':'DLVR_E1BS','J83':'PJ_102AH_envelope','U80':'TPSM53603_envelope','U132':'TPSM53603_envelope'}
+title=b.GetTitleBlock();title.SetRevision('DAQHAT-01 6L');title.SetDate('2026-10-19');b.SetTitleBlock(title)
+custom={'J1':'Pi_Megastar_2x20','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm','U23':'SDP32_envelope','J83':'PJ_102AH_envelope','U80':'TPSM53603_envelope','U132':'TPSM53603_envelope'}
 for fp in b.GetFootprints():
     if fp.GetReference()=='J140':model(fp,'${KIPRJMOD}/../../../shared/models/HL_SMA_KWE_02.step')
     elif fp.GetReference()=='U21':model(fp,'${KIPRJMOD}/../../../shared/models/MAX_M10S_envelope.step')

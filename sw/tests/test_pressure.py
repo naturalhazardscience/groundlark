@@ -1,6 +1,6 @@
 """Independent byte fixtures for the fitted pressure sensor."""
 import unittest
-from groundlark.pressure import DLVR, SETTINGS
+from groundlark.pressure import DLVR, DLVR_SETTINGS as SETTINGS
 from groundlark.sensors import NotReady
 
 

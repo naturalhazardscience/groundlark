@@ -33,7 +33,10 @@ The render shows the PCB header, not the cable plug or external geophone.
 - U22: ADS122C04IPWR, 24-bit delta-sigma ADC with internal PGA and 2.048 V
   reference, AIN0−AIN1, I²C address 0x40. Initial software: gain 64, normal
   330 SPS. The 24-bit word is not a claim of 24 noise-free bits.
-- D90: assembly part TPD2E2U06QDCKRQ1 / C915089 (source TPD2E2U06DCKR) at the connector; R90/R91 are 1 kΩ series input resistors.
+- D90: TI TPD2E2U06QDCKRQ1 / JLCPCB C915089 in the authored circuit and
+  assembly BOM, replacing TPD2E2U06DCKR at the connector. The SC-70 pinout
+  remains 1 = GEO_P, 2 = GEO_N, 3 = GND; no routing change is needed.
+  R90/R91 are 1 kΩ series input resistors.
   Protection is intended for handling ESD, not outdoor lightning or arbitrary
   sustained applied voltage. Qualification of the protection remains physical.
 - C90: 100 nF C0G across the differential input. Baseline CAD names TDK

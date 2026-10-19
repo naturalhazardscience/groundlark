@@ -110,7 +110,7 @@
               (property "Reference" "D90" (at 243.83999999999997 31.560000000000002 0) (effects (font (size 1.27 1.27))))
               (property "Value" "TPD2E2U06" (at 243.83999999999997 34.06 0) (effects (font (size 1.0 1.0))))
               (property "Footprint" "Groundlark:Package_TO_SOT_SMD__SOT-323_SC-70" (at 243.83999999999997 39.370000000000005 0) (effects (font (size 1 1)) hide))
-              (property "MPN" "TPD2E2U06DCKR" (at 243.83999999999997 39.370000000000005 0) (effects (font (size 1 1)) hide))
+              (property "MPN" "TPD2E2U06QDCKRQ1" (at 243.83999999999997 39.370000000000005 0) (effects (font (size 1 1)) hide))
               (instances (project "groundlark-daqhat-01" (path "/de5c43d7-546f-5b4d-b587-d8dfceb38170/fc4af920-ec4d-5175-b830-5c947dce5acb" (reference "D90") (unit 1)))))
 (wire (pts (xy 228.6 38.1) (xy 223.52 38.1)) (stroke (width 0) (type default)) (uuid 6d55aeb3-13e4-5c98-896e-e80d715a13c5))
 (global_label "GEO_P" (shape bidirectional) (at 223.52 38.1 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid 52fab9fa-9584-5b5f-b800-5edc34c97502))

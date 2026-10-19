@@ -150,9 +150,17 @@ def validate_batch(batch):
         elif raw == "barometer":
             require(len(sample.barometer.response) == 6 and len(sample.barometer.calibration) == 21, "BMP raw/trim length")
         elif raw == "pressure":
-            require(len(sample.pressure.response) == 4, "pressure response must be four bytes")
-            if sample.quality in (1, 3):
-                require(sample.pressure.response[0] >> 6 == 0, "non-normal pressure status")
+            pressure = sample.pressure
+            require(bool(pressure.response) != bool(pressure.sdp3x_response), "exactly one pressure response format")
+            if pressure.sdp3x_response:
+                data = pressure.sdp3x_response
+                require(len(data) == 9, "SDP32 response must be nine bytes")
+                require(all(sht_crc(data[i:i+2]) == data[i+2] for i in (0, 3, 6)), "SDP32 CRC")
+                require(int.from_bytes(data[6:8], "big") == 240, "SDP32 scale")
+            else:
+                require(len(pressure.response) == 4, "pressure response must be four bytes")
+                if sample.quality in (1, 3):
+                    require(pressure.response[0] >> 6 == 0, "non-normal pressure status")
         else:
             require(len(sample.gnss.nav_pvt) == 92, "NAV-PVT payload must be 92 bytes")
         if sample.HasField("calibrated"):

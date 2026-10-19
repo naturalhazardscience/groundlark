@@ -1,7 +1,7 @@
 {
   "scope": "pre-fab engineering review; no physical qualification",
   "disposition": "analog and internal-link stack reviewed; physical power/noise/fit and link throughput remain unqualified",
-  "board_sha256": "4d630fe92d5d42bad19889ceed4c918c6e6d0d58bcbf6d13e238a32765aa503c",
+  "board_sha256": "90cb62eb962f41b9770798add089a8737bcf25457320eaa73ed10d3b4c279aa1",
   "physical_pin_checks": 51,
   "purchasing_package_checks": 18,
   "analog": {
@@ -348,10 +348,6 @@
         "J130_tail_2_116.19,10.0": 26.89,
         "JP130_tail_1_117.0,52.0": 28.650000000000006,
         "JP130_tail_2_119.54,52.0": 31.189999999999998,
-        "U23_tail_1_1.5,26.0": 18.6,
-        "U23_tail_2_1.5,28.54": 18.6,
-        "U23_tail_3_1.5,31.08": 18.6,
-        "U23_tail_4_1.5,33.62": 18.6,
         "J82_tail_61_35.15,37.975": 11.559999999999999,
         "J82_tail_61_35.15,18.025": 11.559999999999999,
         "J81_tail_101_40.025,13.15": 11.559999999999999,
@@ -363,7 +359,7 @@
         "U106": 12.559999999999999,
         "R105": 12.86,
         "C104": 12.86,
-        "C24": 15.020000000000003,
+        "C24": 13.270000000000003,
         "R107": 12.86,
         "U102": 12.559999999999999,
         "TP90": 13.149999999999999,

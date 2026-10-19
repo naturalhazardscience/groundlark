@@ -7,7 +7,7 @@ not a replacement for the source BOM. Catalog evidence does not reserve stock.
 import csv
 import json
 import re
-from collections import defaultdict
+from collections import defaultdict, Counter
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
 
@@ -68,7 +68,7 @@ def resolve(source, registry=None):
         # Library names can hide a package mismatch (F80 previously selected
         # a 0603 fuse on a 1206 land pattern). Check recognized chip packages.
         chip = re.search(r'(?:C|R)_(0201|0402|0603|0805|1206|1210)_', row['Footprint'])
-        expected_package = '1206' if row['Footprint'] == 'TZ_TZ_FUSE' else (chip[1] if chip else None)
+        expected_package = '1206' if row['Footprint'] == 'TZ_TZ_FUSE' or re.search(r'Fuse_?1206', row['Footprint']) else (chip[1] if chip else None)
         if expected_package and part['package'] != expected_package:
             raise ValueError(f'Assembly package mismatch: {row["Reference"]}: expected {expected_package}')
         if part['mpn'] != part['source_mpn'] and not part['resolution']:
@@ -99,13 +99,14 @@ def build_bom(source, quantity, registry=None):
     registry = load_registry() if registry is None else registry
     selections = resolve(source, registry)
     if registry.get('procurement_policy', {}).get('require_available_stock'):
+        required = Counter(part['lcsc'] for part in selections.values())
         for part in registry['parts']:
             stock = part.get('stock_observation', {})
             available = stock.get('available_order_quantity')
             if (stock.get('status') != 'available_to_order'
                     or type(stock.get('minimum_quantity')) is not int
                     or stock['minimum_quantity'] != 1
-                    or type(available) is not int or available < len(part['designators'])
+                    or type(available) is not int or available < required[part['lcsc']]
                     or stock.get('source_url') != part['evidence_url']
                     or not stock.get('checked_at')):
                 raise ValueError(f'In-stock / MOQ 1 procurement policy failed: {part["mpn"]}')

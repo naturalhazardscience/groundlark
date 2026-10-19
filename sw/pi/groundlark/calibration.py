@@ -14,6 +14,10 @@ FIELDS = {**{i: {"acceleration_m_s2", "angular_rate_rad_s", "temperature_k"} for
 def raw_values(sample, name):
     """Return original counts, never previously calibrated values."""
     raw = getattr(sample, sample.WhichOneof("raw"))
+    if sample.WhichOneof("raw") == "pressure" and raw.sdp3x_response:
+        require(name in ("pressure_pa", "temperature_k"), "SDP32 calibration field")
+        offset = 0 if name == "pressure_pa" else 3
+        return [int.from_bytes(raw.sdp3x_response[offset:offset+2], "big", signed=True)]
     if name in VECTORS:
         source = VECTORS[name]
         require(source in raw.DESCRIPTOR.fields_by_name and raw.HasField(source), "raw calibration input missing")

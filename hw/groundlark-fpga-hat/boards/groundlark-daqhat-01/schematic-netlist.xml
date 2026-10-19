@@ -844,13 +844,13 @@
       <value>TPD2E2U06</value>
       <footprint>Groundlark:Package_TO_SOT_SMD__SOT-323_SC-70</footprint>
       <fields>
-        <field name="MPN">TPD2E2U06DCKR</field>
+        <field name="MPN">TPD2E2U06QDCKRQ1</field>
         <field name="Footprint">Groundlark:Package_TO_SOT_SMD__SOT-323_SC-70</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Groundlark" part="Part_D90" description=""/>
-      <property name="MPN" value="TPD2E2U06DCKR"/>
+      <property name="MPN" value="TPD2E2U06QDCKRQ1"/>
       <property name="Sheetname" value="03-geophone-page-01"/>
       <property name="Sheetfile" value="03-geophone-page-01.kicad_sch"/>
       <sheetpath names="/03-geophone-page-01/" tstamps="/fc4af920-ec4d-5175-b830-5c947dce5acb/"/>

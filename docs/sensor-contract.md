@@ -252,3 +252,11 @@ domain. Its only supported enabled profile is high precision, heater off,
 Temperature/humidity display conversion is the same as SHT40 ID 15. Keep raw
 precision and explicit missing/unknown values. Existing magnetometer-only
 recordings remain valid; absence of sensor 17 is not a zero climate reading.
+
+SDP32 pressure samples use the additive `PressureRaw.sdp3x_response` field:
+exactly nine bytes containing three big-endian words and each word's CRC-8
+(polynomial 0x31, initial 0xff). Pressure and temperature are signed 16-bit;
+scale must be 240 counts/Pa, and temperature uses 200 counts/C. Exactly one
+pressure response field may be populated. The four-byte `response` field
+retains its original DLVR meaning, so old recordings remain interpretable.
+Neither field supplies physical conversion timestamps or qualifies a passband.

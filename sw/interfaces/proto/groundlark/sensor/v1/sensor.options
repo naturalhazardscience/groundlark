@@ -7,6 +7,7 @@ groundlark.sensor.v1.Configuration.sensors max_count:8
 groundlark.sensor.v1.SensorConfiguration.register_config max_size:64
 groundlark.sensor.v1.SensorConfiguration.pressure_part_number max_length:32
 groundlark.sensor.v1.PressureRaw.response max_size:4
+groundlark.sensor.v1.PressureRaw.sdp3x_response max_size:9
 groundlark.sensor.v1.GnssRaw.nav_pvt max_size:92
 groundlark.sensor.v1.SampleBatch.samples max_count:4
 groundlark.sensor.v1.SampleBatch.calibration_id max_length:32

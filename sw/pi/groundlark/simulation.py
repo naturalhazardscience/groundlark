@@ -44,7 +44,13 @@ class Simulated:
                 if self.sensor == 5: result.raw["device_status"] |= 64
             elif self.sensor == 9 or 10 <= self.sensor <= 13: result.raw["counts"] = 8388607
             elif self.sensor in (7, 18, 19, 20): result.raw["counts"] = (8388607, *result.raw["counts"][1:])
-            elif self.sensor == 8: result.raw["response"] = b"\x3f\xff" + result.raw["response"][2:]
+            elif self.sensor == 8:
+                if 'sdp3x_response' in result.raw:
+                    from groundlark_contract.validation import sht_crc
+                    data = b'\x7f\xff'
+                    result.raw['sdp3x_response'] = data + bytes([sht_crc(data)]) + result.raw['sdp3x_response'][3:]
+                else:
+                    result.raw["response"] = b"\x3f\xff" + result.raw["response"][2:]
         return result
 
     def close(self): pass

@@ -15,7 +15,7 @@ import pcbnew as p
 from gpio_audit import check as check_module
 from geophone_checks import verify as check_geophone, verify_connector
 from jlcpcb_bom import resolve
-from jlcpcb_placement import board_geometry, correct_placements
+from jlcpcb_placement import board_geometry, correct_placements, require_verified_placements
 
 ROOT=Path(__file__).resolve().parents[2]
 
@@ -65,7 +65,7 @@ def audit():
             geometry=[g for g in board_geometry(board) if g['reference'] in selections]
             placements=[{'Designator':g['reference'],'Layer':g['side'],'MidX':str(g['footprint_origin_mm'][0]),'MidY':str(-g['footprint_origin_mm'][1]),'Rotation':str(g['rotation_deg'])} for g in geometry]
             rows,checks=correct_placements(placements,geometry,selections)
-            assert all('pads_checked' in row for row in checks)
+            require_verified_placements(checks)
             sides={row['Designator']:row['Layer'] for row in rows}
             assert sides['J1']=='Bottom' and all(sides[r]=='Top' for r in ('J80','J81','J82','J90'))
             result['supplier_numbered_placements']=len(checks)

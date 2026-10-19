@@ -149,8 +149,11 @@ message MagneticTiming {
 }
 
 message PressureRaw {
-  // Exactly four sensor response bytes, including status and temperature bits.
+  // Legacy DLVR: exactly four bytes including status and temperature bits.
   bytes response = 1;
+  // SDP32: exactly nine bytes, pressure/temperature/scale words and their CRCs.
+  // Exactly one response format must be populated. Signed counts are retained.
+  bytes sdp3x_response = 2;
 }
 
 message GnssRaw {

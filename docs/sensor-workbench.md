@@ -207,7 +207,7 @@ electrode and labels the fitted barometer BMP388. Legacy 240 ms gas recordings
 remain readable with their original cadence. See [response limits](sensor-response.md)
 for filtering, noise and timing interpretation.
 
-The current HAT view includes the fitted DLVR infrasound sensor (sensor ID 8).
+The current HAT view includes the fitted SDP32-125PA pressure sensor (sensor ID 8). Its two-port envelope follows the native PCB placement; physical pneumatic response remains unqualified.
 Burrowlark contains four magnetometers and an SHT45 enclosure-climate sensor. Workbench pressure remains simulated;
 adding the sensor to the PCB does not implement Pi live pressure acquisition.
 
@@ -257,9 +257,9 @@ preserve the fault for replay, and unlocked timing cannot supply a UTC reference
 
 **Test selected board** now exercises the production M10 I2C configuration and
 readback driver, TIM-TP/NAV-TIMEUTC parsing, modeled BCM24 PPS and navigation
-alongside the IMUs/geophone and the DLVR raw-response model. Its 12 checks cover
-4,072 samples from all six HAT sensors, including infrasound waveform, status
-and temperature bytes. The Pi DLVR hardware driver remains pending. Download
+alongside the IMU, geophone and SDP32 production drivers on modeled buses. Its checks cover
+4,072 samples from all six HAT sensors, including pressure waveform, temperature,
+CRC and scale. The SDP32 driver also validates product identity. Legacy DLVR recordings remain readable. Download
 its report and recording. Finish & save
 also retains timing events, controls and faults, and replay restores their state.
 The test uses an explicitly synthetic UTC epoch and ideal edges. It does not

@@ -1,0 +1,167 @@
+{
+  "origins": [
+    {
+      "origin": "4002.851,3003.351",
+      "parameters": "package`SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BR`pre`U?`Contributor`lcsc`link`https://item.szlcsc.com/169042.html`3DModel`SOT-23-6_L2.9-W1.6-H1.5-LS2.8-P0.95`"
+    }
+  ],
+  "pads": [
+    {
+      "attributes": {
+        "c_etype": "pinpart",
+        "c_height": "2.3622",
+        "c_origin": "4008.17,2999.61",
+        "c_partid": "part_pad",
+        "c_rotation": "0",
+        "c_shape": "RECT",
+        "c_shapetype": "group",
+        "c_width": "4.3307",
+        "id": "gge19",
+        "layerid": "1",
+        "locked": "0",
+        "net": "",
+        "number": "3",
+        "pasteexpansion": "0",
+        "plated": "Y",
+        "solderexpansion": "0.2008",
+        "title": ""
+      },
+      "polygons": [
+        "4006.001 2998.43 4010.332 2998.43 4010.332 3000.792 4006.001 3000.792",
+        "4006.001 2998.43 4010.332 2998.43 4010.332 3000.792 4006.001 3000.792",
+        "4006.001 2998.43 4010.332 2998.43 4010.332 3000.792 4006.001 3000.792"
+      ]
+    },
+    {
+      "attributes": {
+        "c_etype": "pinpart",
+        "c_height": "2.3622",
+        "c_origin": "4008.17,3003.35",
+        "c_partid": "part_pad",
+        "c_rotation": "0",
+        "c_shape": "RECT",
+        "c_shapetype": "group",
+        "c_width": "4.3307",
+        "id": "gge18",
+        "layerid": "1",
+        "locked": "0",
+        "net": "",
+        "number": "2",
+        "pasteexpansion": "0",
+        "plated": "Y",
+        "solderexpansion": "0.2008",
+        "title": ""
+      },
+      "polygons": [
+        "4006.001 3002.17 4010.332 3002.17 4010.332 3004.532 4006.001 3004.532",
+        "4006.001 3002.17 4010.332 3002.17 4010.332 3004.532 4006.001 3004.532",
+        "4006.001 3002.17 4010.332 3002.17 4010.332 3004.532 4006.001 3004.532"
+      ]
+    },
+    {
+      "attributes": {
+        "c_etype": "pinpart",
+        "c_height": "2.3622",
+        "c_origin": "4008.17,3007.09",
+        "c_partid": "part_pad",
+        "c_rotation": "0",
+        "c_shape": "RECT",
+        "c_shapetype": "group",
+        "c_width": "4.3307",
+        "id": "gge17",
+        "layerid": "1",
+        "locked": "0",
+        "net": "",
+        "number": "1",
+        "pasteexpansion": "0",
+        "plated": "Y",
+        "solderexpansion": "0.2008",
+        "title": ""
+      },
+      "polygons": [
+        "4006.001 3005.91 4010.332 3005.91 4010.332 3008.272 4006.001 3008.272",
+        "4006.001 3005.91 4010.332 3005.91 4010.332 3008.272 4006.001 3008.272",
+        "4006.001 3005.91 4010.332 3005.91 4010.332 3008.272 4006.001 3008.272"
+      ]
+    },
+    {
+      "attributes": {
+        "c_etype": "pinpart",
+        "c_height": "2.3622",
+        "c_origin": "3997.54,3007.09",
+        "c_partid": "part_pad",
+        "c_rotation": "0",
+        "c_shape": "RECT",
+        "c_shapetype": "group",
+        "c_width": "4.3307",
+        "id": "gge16",
+        "layerid": "1",
+        "locked": "0",
+        "net": "",
+        "number": "6",
+        "pasteexpansion": "0",
+        "plated": "Y",
+        "solderexpansion": "0.2008",
+        "title": ""
+      },
+      "polygons": [
+        "3995.371 3005.91 3999.701 3005.91 3999.701 3008.272 3995.371 3008.272",
+        "3995.371 3005.91 3999.701 3005.91 3999.701 3008.272 3995.371 3008.272",
+        "3995.371 3005.91 3999.701 3005.91 3999.701 3008.272 3995.371 3008.272"
+      ]
+    },
+    {
+      "attributes": {
+        "c_etype": "pinpart",
+        "c_height": "2.3622",
+        "c_origin": "3997.54,3003.35",
+        "c_partid": "part_pad",
+        "c_rotation": "0",
+        "c_shape": "RECT",
+        "c_shapetype": "group",
+        "c_width": "4.3307",
+        "id": "gge15",
+        "layerid": "1",
+        "locked": "0",
+        "net": "",
+        "number": "5",
+        "pasteexpansion": "0",
+        "plated": "Y",
+        "solderexpansion": "0.2008",
+        "title": ""
+      },
+      "polygons": [
+        "3995.371 3002.17 3999.701 3002.17 3999.701 3004.532 3995.371 3004.532",
+        "3995.371 3002.17 3999.701 3002.17 3999.701 3004.532 3995.371 3004.532",
+        "3995.371 3002.17 3999.701 3002.17 3999.701 3004.532 3995.371 3004.532"
+      ]
+    },
+    {
+      "attributes": {
+        "c_etype": "pinpart",
+        "c_height": "2.3622",
+        "c_origin": "3997.54,2999.61",
+        "c_partid": "part_pad",
+        "c_rotation": "0",
+        "c_shape": "RECT",
+        "c_shapetype": "group",
+        "c_width": "4.3307",
+        "id": "gge14",
+        "layerid": "1",
+        "locked": "0",
+        "net": "",
+        "number": "4",
+        "pasteexpansion": "0",
+        "plated": "Y",
+        "solderexpansion": "0.2008",
+        "title": ""
+      },
+      "polygons": [
+        "3995.371 2998.43 3999.701 2998.43 3999.701 3000.792 3995.371 3000.792",
+        "3995.371 2998.43 3999.701 2998.43 3999.701 3000.792 3995.371 3000.792",
+        "3995.371 2998.43 3999.701 2998.43 3999.701 3000.792 3995.371 3000.792"
+      ]
+    }
+  ],
+  "svg": "<svg id=\"root2\" width=\"366\" height=\"366\" style=\"left:0;top:0\" viewBox=\" 3993.525 2994.375 18.75 18.75\" preserveAspectRatio=\"xMinYMin\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:c=\"https://easyeda.com/\" class=\"bw-firefox\">\n                    <rect id=\"gridBg\" pointer-events=\"none\" x=\"3993.525\" y=\"2994.375\" width=\"18.75\" height=\"18.75\" fill=\"#000000\" stroke=\"none\"></rect>\n                    <defs id=\"patterns2\">\n                        <pattern id=\"gridPattern22\" x=\"0\" y=\"0\" width=\"10\" height=\"10\" patternUnits=\"userSpaceOnUse\">\n                            <path id=\"gridCell22\" d=\"M10 0V10H0\" fill=\"none\" stroke=\"#CCCCCC\" stroke-width=\"0.05122950819672131\" stroke-opacity=\".8\"></path>\n                        </pattern>\n                    </defs>\n\n                    <rect id=\"grid12\" pointer-events=\"none\" x=\"3993.525\" y=\"2994.375\" width=\"18.75\" height=\"18.75\" fill=\"url(#gridPattern22)\" fill-opacity=\"0.8\" stroke=\"none\" shape-rendering=\"crispEdges\"></rect>\n\n                    <line id=\"gridOH2\" pointer-events=\"none\" x1=\"3993.525\" y1=\"180\" x2=\"4012.275\" y2=\"180\" stroke=\"#ffffff\" stroke-width=\"0.05122950819672131\" stroke-opacity=\"0\"></line>\n                    <line id=\"gridOV2\" pointer-events=\"none\" x1=\"180\" y1=\"2994.375\" x2=\"180\" y2=\"3013.125\" stroke=\"#ffffff\" stroke-width=\"0.05122950819672131\" stroke-opacity=\"0\"></line>\n\n                    <g id=\"g12\" c_spicecmd=\"TRAN`1u`1m`0`{AC`dec`10`1Hz`1Meg`{DC`0``0`0`{TF```\" c_para=\"Prefix Start`1`\"><g>\n<rect x=\"3985.4\" y=\"2987.2\" width=\"35\" height=\"33.1\" fill=\"none\" stroke=\"none\"></rect><g c_origin=\"4002.851,3003.351\" c_para=\"package`SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BR`pre`U?`Contributor`lcsc`link`https://item.szlcsc.com/169042.html`3DModel`SOT-23-6_L2.9-W1.6-H1.5-LS2.8-P0.95`\" c_transformlist=\"\" xmlns=\"http://www.w3.org/2000/svg\"><g c_partid=\"part_pad\" c_etype=\"pinpart\" c_origin=\"4008.17,2999.61\" layerid=\"1\" number=\"3\" net=\"\" plated=\"Y\" c_shapetype=\"group\" id=\"gge19\" locked=\"0\" c_rotation=\"0\" c_width=\"4.3307\" c_height=\"2.3622\" title=\"\" c_shape=\"RECT\" pasteexpansion=\"0\" solderexpansion=\"0.2008\"><polygon points=\"4006.001 2998.43 4010.332 2998.43 4010.332 3000.792 4006.001 3000.792\" layerid=\"7\" stroke-width=\"0.4016\" c_padid=\"gge19\"></polygon><polygon points=\"4006.001 2998.43 4010.332 2998.43 4010.332 3000.792 4006.001 3000.792\" layerid=\"5\" stroke-width=\"0\" c_padid=\"gge19\"></polygon><polygon points=\"4006.001 2998.43 4010.332 2998.43 4010.332 3000.792 4006.001 3000.792\" stroke-width=\"0\"></polygon><circle c_padhole=\"1\" cx=\"4008.1663\" cy=\"2999.6109\" r=\"0\" stroke-width=\"0\"></circle></g><g c_partid=\"part_pad\" c_etype=\"pinpart\" c_origin=\"4008.17,3003.35\" layerid=\"1\" number=\"2\" net=\"\" plated=\"Y\" c_shapetype=\"group\" id=\"gge18\" locked=\"0\" c_rotation=\"0\" c_width=\"4.3307\" c_height=\"2.3622\" title=\"\" c_shape=\"RECT\" pasteexpansion=\"0\" solderexpansion=\"0.2008\"><polygon points=\"4006.001 3002.17 4010.332 3002.17 4010.332 3004.532 4006.001 3004.532\" layerid=\"7\" stroke-width=\"0.4016\" c_padid=\"gge18\"></polygon><polygon points=\"4006.001 3002.17 4010.332 3002.17 4010.332 3004.532 4006.001 3004.532\" layerid=\"5\" stroke-width=\"0\" c_padid=\"gge18\"></polygon><polygon points=\"4006.001 3002.17 4010.332 3002.17 4010.332 3004.532 4006.001 3004.532\" stroke-width=\"0\"></polygon><circle c_padhole=\"1\" cx=\"4008.1663\" cy=\"3003.3507\" r=\"0\" stroke-width=\"0\"></circle></g><g c_partid=\"part_pad\" c_etype=\"pinpart\" c_origin=\"4008.17,3007.09\" layerid=\"1\" number=\"1\" net=\"\" plated=\"Y\" c_shapetype=\"group\" id=\"gge17\" locked=\"0\" c_rotation=\"0\" c_width=\"4.3307\" c_height=\"2.3622\" title=\"\" c_shape=\"RECT\" pasteexpansion=\"0\" solderexpansion=\"0.2008\"><polygon points=\"4006.001 3005.91 4010.332 3005.91 4010.332 3008.272 4006.001 3008.272\" layerid=\"7\" stroke-width=\"0.4016\" c_padid=\"gge17\"></polygon><polygon points=\"4006.001 3005.91 4010.332 3005.91 4010.332 3008.272 4006.001 3008.272\" layerid=\"5\" stroke-width=\"0\" c_padid=\"gge17\"></polygon><polygon points=\"4006.001 3005.91 4010.332 3005.91 4010.332 3008.272 4006.001 3008.272\" stroke-width=\"0\"></polygon><circle c_padhole=\"1\" cx=\"4008.1663\" cy=\"3007.0905\" r=\"0\" stroke-width=\"0\"></circle></g><g c_partid=\"part_pad\" c_etype=\"pinpart\" c_origin=\"3997.54,3007.09\" layerid=\"1\" number=\"6\" net=\"\" plated=\"Y\" c_shapetype=\"group\" id=\"gge16\" locked=\"0\" c_rotation=\"0\" c_width=\"4.3307\" c_height=\"2.3622\" title=\"\" c_shape=\"RECT\" pasteexpansion=\"0\" solderexpansion=\"0.2008\"><polygon points=\"3995.371 3005.91 3999.701 3005.91 3999.701 3008.272 3995.371 3008.272\" layerid=\"7\" stroke-width=\"0.4016\" c_padid=\"gge16\"></polygon><polygon points=\"3995.371 3005.91 3999.701 3005.91 3999.701 3008.272 3995.371 3008.272\" layerid=\"5\" stroke-width=\"0\" c_padid=\"gge16\"></polygon><polygon points=\"3995.371 3005.91 3999.701 3005.91 3999.701 3008.272 3995.371 3008.272\" stroke-width=\"0\"></polygon><circle c_padhole=\"1\" cx=\"3997.5355\" cy=\"3007.0905\" r=\"0\" stroke-width=\"0\"></circle></g><g c_partid=\"part_pad\" c_etype=\"pinpart\" c_origin=\"3997.54,3003.35\" layerid=\"1\" number=\"5\" net=\"\" plated=\"Y\" c_shapetype=\"group\" id=\"gge15\" locked=\"0\" c_rotation=\"0\" c_width=\"4.3307\" c_height=\"2.3622\" title=\"\" c_shape=\"RECT\" pasteexpansion=\"0\" solderexpansion=\"0.2008\"><polygon points=\"3995.371 3002.17 3999.701 3002.17 3999.701 3004.532 3995.371 3004.532\" layerid=\"7\" stroke-width=\"0.4016\" c_padid=\"gge15\"></polygon><polygon points=\"3995.371 3002.17 3999.701 3002.17 3999.701 3004.532 3995.371 3004.532\" layerid=\"5\" stroke-width=\"0\" c_padid=\"gge15\"></polygon><polygon points=\"3995.371 3002.17 3999.701 3002.17 3999.701 3004.532 3995.371 3004.532\" stroke-width=\"0\"></polygon><circle c_padhole=\"1\" cx=\"3997.5355\" cy=\"3003.3507\" r=\"0\" stroke-width=\"0\"></circle></g><g c_partid=\"part_pad\" c_etype=\"pinpart\" c_origin=\"3997.54,2999.61\" layerid=\"1\" number=\"4\" net=\"\" plated=\"Y\" c_shapetype=\"group\" id=\"gge14\" locked=\"0\" c_rotation=\"0\" c_width=\"4.3307\" c_height=\"2.3622\" title=\"\" c_shape=\"RECT\" pasteexpansion=\"0\" solderexpansion=\"0.2008\"><polygon points=\"3995.371 2998.43 3999.701 2998.43 3999.701 3000.792 3995.371 3000.792\" layerid=\"7\" stroke-width=\"0.4016\" c_padid=\"gge14\"></polygon><polygon points=\"3995.371 2998.43 3999.701 2998.43 3999.701 3000.792 3995.371 3000.792\" layerid=\"5\" stroke-width=\"0\" c_padid=\"gge14\"></polygon><polygon points=\"3995.371 2998.43 3999.701 2998.43 3999.701 3000.792 3995.371 3000.792\" stroke-width=\"0\"></polygon><circle c_padhole=\"1\" cx=\"3997.5355\" cy=\"2999.6109\" r=\"0\" stroke-width=\"0\"></circle></g><polyline points=\"3999.308 2997.249 4006.394 2997.249\" stroke-width=\"1\" c_shapetype=\"line\" stroke-linecap=\"round\" fill=\"none\" layerid=\"3\" net=\"\" id=\"gge49\"></polyline><polyline points=\"3999.308 3009.454 4006.394 3009.454\" stroke-width=\"1\" c_shapetype=\"line\" stroke-linecap=\"round\" fill=\"none\" layerid=\"3\" net=\"\" id=\"gge50\"></polyline><circle cx=\"4008.35\" cy=\"3009.85\" r=\"0.5\" stroke-width=\"1\" fill=\"none\" layerid=\"3\" id=\"gge13\" c_shapetype=\"line\"></circle><circle cx=\"4008.36\" cy=\"3007.09\" r=\"0.39\" stroke-width=\"0.7874\" fill=\"none\" layerid=\"12\" id=\"gge117\" c_shapetype=\"line\"></circle></g></g></g>\n\n                    <!--文本-->\n                    <g id=\"gNets\" pointer-events=\"none\" font-size=\"1\" stroke-width=\"0.02\">\n                        <text id=\"textTemp\" dy=\"0.35em\" x=\"0\" y=\"0\"></text>\n                    <text id=\"textTemp\" dy=\"0.35em\" x=\"4008.17\" y=\"2999.61\">3</text><text id=\"textTemp\" dy=\"0.35em\" x=\"4008.17\" y=\"3003.35\">2</text><text id=\"textTemp\" dy=\"0.35em\" x=\"4008.17\" y=\"3007.09\">1</text><text id=\"textTemp\" dy=\"0.35em\" x=\"3997.54\" y=\"3007.09\">6</text><text id=\"textTemp\" dy=\"0.35em\" x=\"3997.54\" y=\"3003.35\">5</text><text id=\"textTemp\" dy=\"0.35em\" x=\"3997.54\" y=\"2999.61\">4</text></g>\n                </svg>"
+}
