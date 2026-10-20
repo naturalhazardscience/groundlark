@@ -9,6 +9,36 @@ class AntennaLayoutTests(unittest.TestCase):
   import pcbnew as p
   return p.LoadBoard(str(Path(__file__).resolve().parents[1]/'groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb'))
  def test_native_antenna(self):verify_board(self.load())
+ def test_atomic_and_compiler_seed_pad_geometry_stays_synchronized(self):
+  # The compiler identifies pads by number AND position. Replacing moved
+  # pads after graph binding can disconnect nets; migrate the seed as well.
+  import sexpdata
+  root=Path(__file__).resolve().parents[2]
+  for folder,count in [('hw/shared/elec',4),('hw/shared/libraries/Groundlark.pretty',4)]:
+   tree=sexpdata.loads((root/folder/'GNSS_SOD882.kicad_mod').read_text(encoding='utf8'))
+   pads=[x for x in tree if isinstance(x,list) and str(x[0])=='pad']
+   ids=[[q[1] for q in pad if isinstance(q,list) and str(q[0])=='uuid'] for pad in pads]
+   self.assertEqual(len(pads),count)
+   self.assertEqual(sorted(pad[1] for pad in pads if pad[1]),['1','2'])
+   self.assertTrue(all(len(row)==1 for row in ids))
+   self.assertEqual(len({row[0] for row in ids}),count)
+  import pcbnew as p
+  seed=p.LoadBoard(str(root/'hw/groundlark-fpga-hat/layout/trenz_hat/trenz_hat.kicad_pcb'))
+  f=next(f for f in seed.GetFootprints() if f.GetReference()=='D140')
+  lands={q.GetNumber():q for q in f.Pads() if q.GetNumber()}
+  self.assertEqual({n:q.GetNetname() for n,q in lands.items()},{'1':'GNSS_ANT','2':'GND'})
+  self.assertAlmostEqual(p.ToMM((lands['1'].GetPosition()-lands['2'].GetPosition()).EuclideanNorm()),.7,places=5)
+ def test_sod882_wrong_land_or_stencil_is_rejected(self):
+  import pcbnew as p
+  for fault in ('pitch','size','paste'):
+   b=self.load();f=next(f for f in b.GetFootprints() if f.GetReference()=='D140')
+   pad=next(q for q in f.Pads() if q.GetNumber()=='1')
+   if fault=='pitch':pad.SetPosition(pad.GetPosition()+p.VECTOR2I(0,p.FromMM(.25)))
+   elif fault=='size':pad.SetSize(p.VECTOR2I(p.FromMM(.6),p.FromMM(.6)))
+   else:
+    aperture=next(q for q in f.Pads() if q.IsOnLayer(p.B_Paste))
+    aperture.SetSize(p.VECTOR2I(p.FromMM(.6),p.FromMM(.6)))
+   with self.subTest(fault=fault),self.assertRaisesRegex(ValueError,'SOD882'):verify_board(b)
  def void(self,b,box):
   import pcbnew as p
   layer=b.GetLayerID('In4.Cu');cut=p.SHAPE_POLY_SET();cut.NewOutline()

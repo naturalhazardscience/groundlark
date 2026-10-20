@@ -45,7 +45,7 @@
           "net": "GND",
           "resistance_ohm": 0.001228701385271173,
           "grid_mm": 0.1,
-          "nodes": 1625935,
+          "nodes": 1625942,
           "conductor_temperature_C": 85,
           "barrel_plating_mm": 0.02
         }
@@ -64,7 +64,7 @@
     "spare_bcm": [],
     "budget": {
       "nominal_V": 5.11522633744856,
-      "minimum_V": 4.773514605630553,
+      "minimum_V": 4.773436928653904,
       "maximum_V": 5.234442772515668,
       "total_A": 3,
       "input_range_V": [
@@ -78,7 +78,7 @@
       ],
       "ripple_transient_allowance_V": 0.02,
       "adc_at_18V": 2.3519122829917762,
-      "copper_budget_ohm": 0.04941895869090932,
+      "copper_budget_ohm": 0.04944485101645922,
       "switch_budget_ohm": 0.025,
       "measured": false
     },
@@ -94,9 +94,9 @@
         },
         {
           "net": "PI_5V",
-          "resistance_ohm": 0.022354453487447794,
+          "resistance_ohm": 0.02237603042540604,
           "grid_mm": 0.1,
-          "nodes": 200028,
+          "nodes": 200018,
           "conductor_temperature_C": 85,
           "barrel_plating_mm": 0.02
         },
@@ -104,15 +104,15 @@
           "net": "GND",
           "resistance_ohm": 0.0016413792276209138,
           "grid_mm": 0.1,
-          "nodes": 1625935,
+          "nodes": 1625942,
           "conductor_temperature_C": 85,
           "barrel_plating_mm": 0.02
         }
       ],
-      "estimated_copper_loop_ohm": 0.028682465575757772,
+      "estimated_copper_loop_ohm": 0.028704042513716017,
       "model_reserve_fraction": 0.2,
-      "copper_with_reserve_ohm": 0.03441895869090932,
-      "remaining_of_50mohm_for_contacts": 0.01558104130909068,
+      "copper_with_reserve_ohm": 0.03444485101645922,
+      "remaining_of_50mohm_for_contacts": 0.015555148983540781,
       "contacts_measured": false,
       "thermal_qualified": false,
       "method": "DC finite-difference native filled copper at 85 C; idealized pad/via interiors; 20 um barrel plating"
@@ -173,11 +173,11 @@
           "net": "GNSS_ANT",
           "role": "ESD",
           "width_mm": 0.17,
-          "length_mm": 0.799999,
+          "length_mm": 1.049999,
           "estimated_ohm": 49.71591709061459,
           "reference_samples_checked": 0,
-          "antipad_samples": 99,
-          "unreferenced_launch_mm": 0.799999,
+          "antipad_samples": 129,
+          "unreferenced_launch_mm": 1.049999,
           "fully_inside_antipad": true
         },
         {
@@ -216,7 +216,7 @@
       ],
       "path_lengths_mm": {
         "GNSS_RF": 1.8629009635512028,
-        "ESD": 0.799999,
+        "ESD": 1.049999,
         "GNSS_ANT": 1.3602940858505561,
         "BIAS": 1.02,
         "GNSS_MATCH": 1.0570237272649086

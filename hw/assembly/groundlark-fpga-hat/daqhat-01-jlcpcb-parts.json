@@ -973,7 +973,7 @@
       "assembly_description": "1nF 50V C0G +/-5% 0603 nonpolar MLCC",
       "checked_on": "2026-10-19",
       "resolution": "Use C140950 / C0603C102J5GAC7867 instead of C2181873 / C0603C102J5GACTU so the exact assembly selection has a usable supplier footprint. KEMET's C0603C102J5GACTU specsheet explicitly lists C0603C102J5GAC7867 as an alias: same 1000pF, +/-5%, 50V, C0G, 0603/1608, 1.6 x 0.8mm body. Preserve geophone filter capacitance, dielectric and tolerance. No electrical, land-pattern or routing change.",
-      "sourcing_note": "JLCPCB live listing checked 2026-09-26: In Stock 999, Available Order Qty 616, minimum 1, USD 0.0212 each at quantity 1+, Extended SMT part. Two fitted per HAT; supplier attrition/fees are separate. Stock is a snapshot, not reserved. Exact public footprint is C0603, two pads; programmatic registration required.",
+      "sourcing_note": "JLCPCB live listing checked 2026-09-26: In Stock 999, Available Order Qty 616, minimum 1, USD 0.0212 each at quantity 1+, Extended SMT part. Two fitted per HAT; supplier attrition/fees are separate. Stock is a snapshot, not reserved. Exact public footprint is C0603, two pads; programmatic registration passed; order preview still required.",
       "stock_observation": {
         "checked_at": "2026-10-19T22:22:46.077454+00:00",
         "source_url": "https://jlcpcb.com/partdetail/KEMET-C0603C102J5GAC7867/C140950",
@@ -2363,7 +2363,7 @@
       "checked_on": "2026-10-20",
       "evidence_basis": "Exact manufacturer/MPN/0402 identity returned by JLCPCB public stock catalog API; dated observation.",
       "resolution": "Explicit same-value Murata assembly substitution for the Coilcraft source MPN. JELF243A_0100K-01 specifies +/-2% inductance and minimum SRF 2.9 GHz (56 nH) / 10 GHz (3.6 nH). Native 0.56 x 0.62 mm lands at 0.96 mm centers overlap both end terminations; 1.10 x 0.70 x 0.60 mm maximum body fits within the existing 1.17 x 0.71 x 0.82 mm conservative envelope. The RF simulator uses the selected Murata sensitivity model. Native source identity is retained for traceable substitution.",
-      "sourcing_note": "Exact catalog mapping established. Supplier numbered-pad/centroid evidence and assembly allocation remain open; stock is not reserved.",
+      "sourcing_note": "Exact catalog mapping and frozen numbered-pad registration established 2026-10-20. Supplier order preview, land-pattern process review and assembly allocation remain open; stock is not reserved.",
       "assembly_description": "56nH +/-2% RF bias choke, 340mA, 2.9GHz minimum SRF, 0402",
       "jlc_match_status": "catalog_listed",
       "stock_observation": {
@@ -2455,7 +2455,7 @@
       "checked_on": "2026-10-20",
       "evidence_basis": "Exact manufacturer/MPN/0402 identity returned by JLCPCB public stock catalog API; dated observation.",
       "resolution": "Explicit same-value Murata assembly substitution for the Coilcraft source MPN. JELF243A_0100K-01 specifies +/-2% inductance and minimum SRF 2.9 GHz (56 nH) / 10 GHz (3.6 nH). Native 0.56 x 0.62 mm lands at 0.96 mm centers overlap both end terminations; 1.10 x 0.70 x 0.60 mm maximum body fits within the existing 1.17 x 0.71 x 0.82 mm conservative envelope. The RF simulator uses the selected Murata sensitivity model. Native source identity is retained for traceable substitution.",
-      "sourcing_note": "Exact catalog mapping established. Supplier numbered-pad/centroid evidence and assembly allocation remain open; stock is not reserved.",
+      "sourcing_note": "Exact catalog mapping and frozen numbered-pad registration established 2026-10-20. Supplier order preview, land-pattern process review and assembly allocation remain open; stock is not reserved.",
       "assembly_description": "3.6nH +/-2% RF series tuning inductor, 1.95A, 10GHz minimum SRF, 0402",
       "jlc_match_status": "catalog_listed",
       "stock_observation": {

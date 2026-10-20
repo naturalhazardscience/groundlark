@@ -172,17 +172,16 @@ class NativeConnectorTests(unittest.TestCase):
         next(a for a in g['pads'] if a['number']=='101')['xy_mm'][0]+=.1
         with self.assertRaisesRegex(ValueError,'pad fit'): self.solve(geometry=geometry)
 
-    def test_all_bom_placements_have_mapping_or_explicit_exception(self):
+    def test_all_bom_placements_pass_supplier_release_gate(self):
         result,audit=self.solve()
         self.assertEqual(len(result),190)
-        self.assertEqual(sum('pads_checked' in a for a in audit),137)
+        self.assertEqual(sum('pads_checked' in a for a in audit),190)
         missing={a['reference'] for a in audit if 'pads_checked' not in a}
-        self.assertEqual(len(missing),53)
-        self.assertTrue({'J83','F80','U23','U11','U12','U13'} <= missing)
-        # A complete review inventory is deliberately not a release approval.
+        self.assertEqual(missing,set())
         from jlcpcb_placement import require_verified_placements
-        with self.assertRaisesRegex(ValueError,'53 unverified supplier placements'):
-            require_verified_placements(audit)
+        require_verified_placements(audit)
+        with self.assertRaisesRegex(ValueError,'1 unverified supplier placements'):
+            require_verified_placements(audit+[dict(reference='U999')])
         extra=dict(self.placements[0],Designator='U999')
         with self.assertRaisesRegex(ValueError,'coverage'):self.solve(placements=self.placements+[extra])
 
@@ -256,10 +255,51 @@ class NativeConnectorTests(unittest.TestCase):
     def test_export_summary_does_not_keep_stale_missing_capacitor_warning(self):
         from jlcpcb_placement_overlay import exception_summary
         _,audit=self.solve()
-        self.assertIn('Unverified supplier-footprint exceptions',exception_summary(audit))
-        self.assertIn('U23',exception_summary(audit))
+        self.assertNotIn('U23',exception_summary(audit))
         self.assertNotIn('C91',exception_summary(audit))
         self.assertIn('C91',exception_summary([dict(reference='C91')]))
+
+    def test_new_catalog_origins_rotations_and_all_contacts(self):
+        rows,audit=self.solve();rows={r['Designator']:r for r in rows};audit={a['reference']:a for a in audit}
+        # Independent numbered package drawings: regulator pin 1 at BR,
+        # WSON pin 1 at BL, bottom GNSS pin 1 at TL after projection.
+        for ref,angle,count in [('U131',180,5),('U140',180,5),('U133',270,11),
+                                ('U21',0,18),('U23',0,18),('SW80',180,7),('J140',0,5),('D140',90,2)]:
+            self.assertAlmostEqual(float(rows[ref]['Rotation']),angle,places=3,msg=ref)
+            self.assertEqual(audit[ref]['pads_checked'],count)
+        for ref,xy,angle in [('J83',(142.65004,-61.10005),0),('J130',(168.095,-60),180),('J131',(184,-97.54),270)]:
+            self.assertAlmostEqual(float(rows[ref]['MidX'][:-2]),xy[0],places=4)
+            self.assertAlmostEqual(float(rows[ref]['MidY'][:-2]),xy[1],places=4)
+            self.assertEqual(float(rows[ref]['Rotation']),angle)
+        self.assertEqual(audit['U21']['coordinate_projection'],'mirror_local_x_then_ccw')
+        self.assertEqual(audit['J140']['body_outline_checks'],1)
+
+    def test_switch_mounts_and_sma_shells_cannot_be_omitted_or_displaced(self):
+        for ref,key in [('SW80','mechanical_smd'),('J140','pads')]:
+            for fault in ('missing','moved'):
+                geometry=copy.deepcopy(self.geometry);pads=next(g for g in geometry if g['reference']==ref)[key]
+                if fault=='missing':pads.pop()
+                else:pads[-1]['xy_mm'][0]+=.5
+                with self.subTest(ref=ref,fault=fault),self.assertRaises(ValueError):self.solve(geometry=geometry)
+        mappings=copy.deepcopy(self.mappings)
+        next(e for e in mappings['footprints'] if 'J140' in e['designators']).pop('body_fit_basis')
+        with self.assertRaisesRegex(ValueError,'body outline/basis'):
+            correct_placements(self.placements,self.geometry,self.selections,mappings)
+
+    def test_old_d140_land_spacing_is_rejected(self):
+        geometry=copy.deepcopy(self.geometry);g=next(g for g in geometry if g['reference']=='D140')
+        for pad in g['pads']:
+            pad['xy_mm'][1]=66.6 if pad['number']=='1' else 67.8
+            pad['size_mm']=[.6,.6]
+        with self.assertRaisesRegex(ValueError,'No SMT orientation'):self.solve(geometry=geometry)
+
+    def test_bottom_gnss_wrong_chirality_is_rejected(self):
+        mappings=copy.deepcopy(self.mappings);geometry=copy.deepcopy(self.geometry);rows=copy.deepcopy(self.placements)
+        next(e for e in mappings['footprints'] if 'U21' in e['designators'])['side']='Top'
+        next(g for g in geometry if g['reference']=='U21')['side']='Top'
+        next(r for r in rows if r['Designator']=='U21')['Layer']='Top'
+        with self.assertRaisesRegex(ValueError,'No SMT orientation'):
+            correct_placements(rows,geometry,self.selections,mappings)
 
     def test_duplicate_mapping_cannot_silently_override_reviewed_identity(self):
         mappings=copy.deepcopy(self.mappings)

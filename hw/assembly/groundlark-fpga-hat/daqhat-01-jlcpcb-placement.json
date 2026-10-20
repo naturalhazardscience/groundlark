@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "coordinate_basis": "EasyEDA catalog zero, 10 mil units, Y down; exporter converts to mm Y up and fits numbered pads.",
-  "limitation": "190 fitted components; 137 frozen supplier-pad fits and 53 explicit placement holds. All 72 BOM lines mapped; only L140/L141 inventory refreshed.",
+  "limitation": "190 fitted placements have frozen supplier numbered-pad registrations; private order preview and process approval remain required. Inventory is outside this validation scope.",
   "shield_alias_basis": "LSHM S1/S2 are the two GND mounting pads: native J80/J81 pad 101 and J82 pad 61. Both physical centres must pass.",
   "footprints": [
     {
@@ -1635,592 +1635,1727 @@
       ],
       "bottom_projection": "mirror_local_x_then_ccw",
       "bottom_basis": "Reflect local supplier X, then rotate CCW into the top-view board frame. Absolute PCB coordinates are not mirrored. Numbered pads must fit individually."
-    }
-  ],
-  "unverified": [
+    },
     {
+      "lcsc": "C481766",
+      "mpn": "LSM6DSOXTR",
       "designators": [
         "U11"
       ],
-      "lcsc": "C481766",
-      "mpn": "LSM6DSOXTR",
-      "source_footprint": "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
-      "evidence_url": "https://jlcpcb.com/partdetail/STMicroelectronics-LSM6DSOXTR/C481766",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C481766/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "8886b646e0ff7741b65cd3ec1a4a6fbfdfeeba58aa5702b2e3e81d973b90b39a",
+      "footprint_uuid": "cea37cda94934032b29686e693beef37",
+      "footprint_title": "LGA-14L_L3.0-W2.5-P0.50-TL",
+      "footprint_updated": 1655881095,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~3995.3742~2997.047~1.9685~1.1024~1~~1~0~3994.39 2996.4958 3996.3585 2996.4958 3996.3585 2997.5982 3994.39 2997.5982~0~gge1001~0~~Y~0~0.0000~0.2000~3995.3742,2997.0472",
+        "PAD~RECT~3995.3742~2999.016~1.9685~1.1024~1~~2~0~3994.39 2998.4648 3996.3585 2998.4648 3996.3585 2999.5672 3994.39 2999.5672~0~gge1003~0~~Y~0~0.0000~0.2000~3995.3742,2999.0157",
+        "PAD~RECT~3995.3742~3000.984~1.9685~1.1024~1~~3~0~3994.39 3000.4328 3996.3585 3000.4328 3996.3585 3001.5352 3994.39 3001.5352~0~gge1005~0~~Y~0~0.0000~0.2000~3995.3742,3000.9843",
+        "PAD~RECT~3995.3742~3002.953~1.9685~1.1024~1~~4~0~3994.39 3002.4018 3996.3585 3002.4018 3996.3585 3003.5042 3994.39 3003.5042~0~gge1007~0~~Y~0~0.0000~0.2000~3995.3742,3002.9528",
+        "PAD~RECT~3998.032~3003.6418~1.1024~1.9685~1~~5~0~3997.4808 3002.6576 3998.5832 3002.6576 3998.5832 3004.6261 3997.4808 3004.6261~0~gge1009~0~~Y~0~0.0000~0.2000~3998.0315,3003.6415",
+        "PAD~RECT~4000~3003.6418~1.1024~1.9685~1~~6~0~3999.4488 3002.6576 4000.5512 3002.6576 4000.5512 3004.6261 3999.4488 3004.6261~0~gge1011~0~~Y~0~0.0000~0.2000~4000,3003.6415",
+        "PAD~RECT~4001.969~3003.6418~1.1024~1.9685~1~~7~0~4001.4178 3002.6576 4002.5202 3002.6576 4002.5202 3004.6261 4001.4178 3004.6261~0~gge1013~0~~Y~0~0.0000~0.2000~4001.9685,3003.6415",
+        "PAD~RECT~4004.6258~3002.953~1.9685~1.1024~1~~8~0~4003.6415 3002.4018 4005.61 3002.4018 4005.61 3003.5042 4003.6415 3003.5042~0~gge1015~0~~Y~0~0.0000~0.2000~4004.6258,3002.9528",
+        "PAD~RECT~4004.6258~3000.984~1.9685~1.1024~1~~9~0~4003.6415 3000.4328 4005.61 3000.4328 4005.61 3001.5352 4003.6415 3001.5352~0~gge1017~0~~Y~0~0.0000~0.2000~4004.6258,3000.9843",
+        "PAD~RECT~4004.6258~2999.016~1.9685~1.1024~1~~10~0~4003.6415 2998.4648 4005.61 2998.4648 4005.61 2999.5672 4003.6415 2999.5672~0~gge1019~0~~Y~0~0.0000~0.2000~4004.6258,2999.0157",
+        "PAD~RECT~4004.6258~2997.047~1.9685~1.1024~1~~11~0~4003.6415 2996.4958 4005.61 2996.4958 4005.61 2997.5982 4003.6415 2997.5982~0~gge1021~0~~Y~0~0.0000~0.2000~4004.6258,2997.0472",
+        "PAD~RECT~4001.969~2996.3582~1.1024~1.9685~1~~12~0~4001.4178 2995.374 4002.5202 2995.374 4002.5202 2997.3425 4001.4178 2997.3425~0~gge1023~0~~Y~0~0.0000~0.2000~4001.9685,2996.3585",
+        "PAD~RECT~4000~2996.3582~1.1024~1.9685~1~~13~0~3999.4488 2995.374 4000.5512 2995.374 4000.5512 2997.3425 3999.4488 2997.3425~0~gge1025~0~~Y~0~0.0000~0.2000~4000,2996.3585",
+        "PAD~RECT~3998.032~2996.3582~1.1024~1.9685~1~~14~0~3997.4808 2995.3739 3998.5832 2995.3739 3998.5832 2997.3424 3997.4808 2997.3424~0~gge1027~0~~Y~0~0.0000~0.2000~3998.0315,2996.3585"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C481766",
+      "mpn": "LSM6DSOXTR",
       "designators": [
         "U12"
       ],
-      "lcsc": "C481766",
-      "mpn": "LSM6DSOXTR",
-      "source_footprint": "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
-      "evidence_url": "https://jlcpcb.com/partdetail/STMicroelectronics-LSM6DSOXTR/C481766",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C481766/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "8886b646e0ff7741b65cd3ec1a4a6fbfdfeeba58aa5702b2e3e81d973b90b39a",
+      "footprint_uuid": "cea37cda94934032b29686e693beef37",
+      "footprint_title": "LGA-14L_L3.0-W2.5-P0.50-TL",
+      "footprint_updated": 1655881095,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~3995.3742~2997.047~1.9685~1.1024~1~~1~0~3994.39 2996.4958 3996.3585 2996.4958 3996.3585 2997.5982 3994.39 2997.5982~0~gge1001~0~~Y~0~0.0000~0.2000~3995.3742,2997.0472",
+        "PAD~RECT~3995.3742~2999.016~1.9685~1.1024~1~~2~0~3994.39 2998.4648 3996.3585 2998.4648 3996.3585 2999.5672 3994.39 2999.5672~0~gge1003~0~~Y~0~0.0000~0.2000~3995.3742,2999.0157",
+        "PAD~RECT~3995.3742~3000.984~1.9685~1.1024~1~~3~0~3994.39 3000.4328 3996.3585 3000.4328 3996.3585 3001.5352 3994.39 3001.5352~0~gge1005~0~~Y~0~0.0000~0.2000~3995.3742,3000.9843",
+        "PAD~RECT~3995.3742~3002.953~1.9685~1.1024~1~~4~0~3994.39 3002.4018 3996.3585 3002.4018 3996.3585 3003.5042 3994.39 3003.5042~0~gge1007~0~~Y~0~0.0000~0.2000~3995.3742,3002.9528",
+        "PAD~RECT~3998.032~3003.6418~1.1024~1.9685~1~~5~0~3997.4808 3002.6576 3998.5832 3002.6576 3998.5832 3004.6261 3997.4808 3004.6261~0~gge1009~0~~Y~0~0.0000~0.2000~3998.0315,3003.6415",
+        "PAD~RECT~4000~3003.6418~1.1024~1.9685~1~~6~0~3999.4488 3002.6576 4000.5512 3002.6576 4000.5512 3004.6261 3999.4488 3004.6261~0~gge1011~0~~Y~0~0.0000~0.2000~4000,3003.6415",
+        "PAD~RECT~4001.969~3003.6418~1.1024~1.9685~1~~7~0~4001.4178 3002.6576 4002.5202 3002.6576 4002.5202 3004.6261 4001.4178 3004.6261~0~gge1013~0~~Y~0~0.0000~0.2000~4001.9685,3003.6415",
+        "PAD~RECT~4004.6258~3002.953~1.9685~1.1024~1~~8~0~4003.6415 3002.4018 4005.61 3002.4018 4005.61 3003.5042 4003.6415 3003.5042~0~gge1015~0~~Y~0~0.0000~0.2000~4004.6258,3002.9528",
+        "PAD~RECT~4004.6258~3000.984~1.9685~1.1024~1~~9~0~4003.6415 3000.4328 4005.61 3000.4328 4005.61 3001.5352 4003.6415 3001.5352~0~gge1017~0~~Y~0~0.0000~0.2000~4004.6258,3000.9843",
+        "PAD~RECT~4004.6258~2999.016~1.9685~1.1024~1~~10~0~4003.6415 2998.4648 4005.61 2998.4648 4005.61 2999.5672 4003.6415 2999.5672~0~gge1019~0~~Y~0~0.0000~0.2000~4004.6258,2999.0157",
+        "PAD~RECT~4004.6258~2997.047~1.9685~1.1024~1~~11~0~4003.6415 2996.4958 4005.61 2996.4958 4005.61 2997.5982 4003.6415 2997.5982~0~gge1021~0~~Y~0~0.0000~0.2000~4004.6258,2997.0472",
+        "PAD~RECT~4001.969~2996.3582~1.1024~1.9685~1~~12~0~4001.4178 2995.374 4002.5202 2995.374 4002.5202 2997.3425 4001.4178 2997.3425~0~gge1023~0~~Y~0~0.0000~0.2000~4001.9685,2996.3585",
+        "PAD~RECT~4000~2996.3582~1.1024~1.9685~1~~13~0~3999.4488 2995.374 4000.5512 2995.374 4000.5512 2997.3425 3999.4488 2997.3425~0~gge1025~0~~Y~0~0.0000~0.2000~4000,2996.3585",
+        "PAD~RECT~3998.032~2996.3582~1.1024~1.9685~1~~14~0~3997.4808 2995.3739 3998.5832 2995.3739 3998.5832 2997.3424 3997.4808 2997.3424~0~gge1027~0~~Y~0~0.0000~0.2000~3998.0315,2996.3585"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C481766",
+      "mpn": "LSM6DSOXTR",
       "designators": [
         "U13"
       ],
-      "lcsc": "C481766",
-      "mpn": "LSM6DSOXTR",
-      "source_footprint": "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
-      "evidence_url": "https://jlcpcb.com/partdetail/STMicroelectronics-LSM6DSOXTR/C481766",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "Package_LGA__LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C481766/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "8886b646e0ff7741b65cd3ec1a4a6fbfdfeeba58aa5702b2e3e81d973b90b39a",
+      "footprint_uuid": "cea37cda94934032b29686e693beef37",
+      "footprint_title": "LGA-14L_L3.0-W2.5-P0.50-TL",
+      "footprint_updated": 1655881095,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~3995.3742~2997.047~1.9685~1.1024~1~~1~0~3994.39 2996.4958 3996.3585 2996.4958 3996.3585 2997.5982 3994.39 2997.5982~0~gge1001~0~~Y~0~0.0000~0.2000~3995.3742,2997.0472",
+        "PAD~RECT~3995.3742~2999.016~1.9685~1.1024~1~~2~0~3994.39 2998.4648 3996.3585 2998.4648 3996.3585 2999.5672 3994.39 2999.5672~0~gge1003~0~~Y~0~0.0000~0.2000~3995.3742,2999.0157",
+        "PAD~RECT~3995.3742~3000.984~1.9685~1.1024~1~~3~0~3994.39 3000.4328 3996.3585 3000.4328 3996.3585 3001.5352 3994.39 3001.5352~0~gge1005~0~~Y~0~0.0000~0.2000~3995.3742,3000.9843",
+        "PAD~RECT~3995.3742~3002.953~1.9685~1.1024~1~~4~0~3994.39 3002.4018 3996.3585 3002.4018 3996.3585 3003.5042 3994.39 3003.5042~0~gge1007~0~~Y~0~0.0000~0.2000~3995.3742,3002.9528",
+        "PAD~RECT~3998.032~3003.6418~1.1024~1.9685~1~~5~0~3997.4808 3002.6576 3998.5832 3002.6576 3998.5832 3004.6261 3997.4808 3004.6261~0~gge1009~0~~Y~0~0.0000~0.2000~3998.0315,3003.6415",
+        "PAD~RECT~4000~3003.6418~1.1024~1.9685~1~~6~0~3999.4488 3002.6576 4000.5512 3002.6576 4000.5512 3004.6261 3999.4488 3004.6261~0~gge1011~0~~Y~0~0.0000~0.2000~4000,3003.6415",
+        "PAD~RECT~4001.969~3003.6418~1.1024~1.9685~1~~7~0~4001.4178 3002.6576 4002.5202 3002.6576 4002.5202 3004.6261 4001.4178 3004.6261~0~gge1013~0~~Y~0~0.0000~0.2000~4001.9685,3003.6415",
+        "PAD~RECT~4004.6258~3002.953~1.9685~1.1024~1~~8~0~4003.6415 3002.4018 4005.61 3002.4018 4005.61 3003.5042 4003.6415 3003.5042~0~gge1015~0~~Y~0~0.0000~0.2000~4004.6258,3002.9528",
+        "PAD~RECT~4004.6258~3000.984~1.9685~1.1024~1~~9~0~4003.6415 3000.4328 4005.61 3000.4328 4005.61 3001.5352 4003.6415 3001.5352~0~gge1017~0~~Y~0~0.0000~0.2000~4004.6258,3000.9843",
+        "PAD~RECT~4004.6258~2999.016~1.9685~1.1024~1~~10~0~4003.6415 2998.4648 4005.61 2998.4648 4005.61 2999.5672 4003.6415 2999.5672~0~gge1019~0~~Y~0~0.0000~0.2000~4004.6258,2999.0157",
+        "PAD~RECT~4004.6258~2997.047~1.9685~1.1024~1~~11~0~4003.6415 2996.4958 4005.61 2996.4958 4005.61 2997.5982 4003.6415 2997.5982~0~gge1021~0~~Y~0~0.0000~0.2000~4004.6258,2997.0472",
+        "PAD~RECT~4001.969~2996.3582~1.1024~1.9685~1~~12~0~4001.4178 2995.374 4002.5202 2995.374 4002.5202 2997.3425 4001.4178 2997.3425~0~gge1023~0~~Y~0~0.0000~0.2000~4001.9685,2996.3585",
+        "PAD~RECT~4000~2996.3582~1.1024~1.9685~1~~13~0~3999.4488 2995.374 4000.5512 2995.374 4000.5512 2997.3425 3999.4488 2997.3425~0~gge1025~0~~Y~0~0.0000~0.2000~4000,2996.3585",
+        "PAD~RECT~3998.032~2996.3582~1.1024~1.9685~1~~14~0~3997.4808 2995.3739 3998.5832 2995.3739 3998.5832 2997.3424 3997.4808 2997.3424~0~gge1027~0~~Y~0~0.0000~0.2000~3998.0315,2996.3585"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C6473035",
+      "mpn": "SDP32-125PA-TR-250PCS",
       "designators": [
         "U23"
       ],
-      "lcsc": "C6473035",
-      "mpn": "SDP32-125PA-TR-250PCS",
-      "source_footprint": "Groundlark__SDP32",
-      "evidence_url": "https://jlcpcb.com/partdetail/Sensirion-SDP32_125PA_TR250PCS/C6473035",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "Groundlark__SDP32"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C6473035/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "ece447c09b634b07f841ea25dfa3df7d2de57fa08e941412ab991df1616dfded",
+      "footprint_uuid": "501a840e4f7a4706b883ae07d8fdc1df",
+      "footprint_title": "SENSOR-SMD_SDP32-125PA-TR-1.5KPCS",
+      "footprint_updated": 1760948556,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~3988.878~2996.063~1.5748~2.9528~1~~1~0~3987.4013 2996.8504 3987.4013 2995.2756 3990.3541 2995.2756 3990.3541 2996.8504~90~gge16~0~~Y~0~0~0.19685~3988.8777,2996.063",
+        "PAD~RECT~3988.878~3000~1.5748~2.9528~1~~2~0~3987.4013 3000.7874 3987.4013 2999.2126 3990.3541 2999.2126 3990.3541 3000.7874~90~gge52~0~~Y~0~0~0.19685~3988.8777,3000",
+        "PAD~RECT~3988.878~3003.937~1.5748~2.9528~1~~3~0~3987.4015 3004.7244 3987.4015 3003.1496 3990.3543 3003.1496 3990.3543 3004.7244~90~gge76~0~~Y~0~0~0.19685~3988.8779,3003.937",
+        "PAD~RECT~3992.126~3008.169~1.5748~2.9528~1~~4~0~3992.9134 3009.6456 3991.3386 3009.6456 3991.3386 3006.6928 3992.9134 3006.6928~180~gge118~0~~Y~0~0~0.19685~3992.126,3008.1692",
+        "PAD~RECT~3996.063~3008.169~1.5748~2.9528~1~~5~0~3996.8504 3009.6456 3995.2756 3009.6456 3995.2756 3006.6928 3996.8504 3006.6928~180~gge142~0~~Y~0~0~0.19685~3996.063,3008.1692",
+        "PAD~RECT~4000~3008.169~1.5748~2.9528~1~~6~0~4000.7874 3009.6456 3999.2126 3009.6456 3999.2126 3006.6928 4000.7874 3006.6928~180~gge166~0~~Y~0~0~0.19685~4000,3008.1692",
+        "PAD~RECT~4003.937~3008.169~1.5748~2.9528~1~~7~0~4004.7244 3009.6456 4003.1496 3009.6456 4003.1496 3006.6928 4004.7244 3006.6928~180~gge190~0~~Y~0~0~0.19685~4003.937,3008.1692",
+        "PAD~RECT~4007.874~3008.169~1.5748~2.9528~1~~8~0~4008.6614 3009.6457 4007.0866 3009.6457 4007.0866 3006.6929 4008.6614 3006.6929~180~gge214~0~~Y~0~0~0.19685~4007.874,3008.1693",
+        "PAD~RECT~4011.122~3003.937~1.5748~2.9528~1~~9~0~4012.5987 3003.1496 4012.5987 3004.7244 4009.6459 3004.7244 4009.6459 3003.1496~270~gge256~0~~Y~0~0~0.19685~4011.1223,3003.937",
+        "PAD~RECT~4011.122~3000~1.5748~2.9528~1~~10~0~4012.5987 2999.2126 4012.5987 3000.7874 4009.6459 3000.7874 4009.6459 2999.2126~270~gge280~0~~Y~0~0~0.19685~4011.1223,3000",
+        "PAD~RECT~4011.122~2996.063~1.5748~2.9528~1~~11~0~4012.5985 2995.2756 4012.5985 2996.8504 4009.6457 2996.8504 4009.6457 2995.2756~270~gge304~0~~Y~0~0~0.19685~4011.1221,2996.063",
+        "PAD~RECT~4007.874~2991.831~1.5748~2.9528~1~~12~0~4007.0866 2990.3543 4008.6614 2990.3543 4008.6614 2993.3071 4007.0866 2993.3071~0~gge328~0~~Y~0~0~0.19685~4007.874,2991.8307",
+        "PAD~RECT~4003.937~2991.831~1.5748~2.9528~1~~13~0~4003.1496 2990.3542 4004.7244 2990.3542 4004.7244 2993.307 4003.1496 2993.307~0~gge352~0~~Y~0~0~0.19685~4003.937,2991.8306",
+        "PAD~RECT~4000~2991.831~1.5748~2.9528~1~~14~0~3999.2126 2990.3542 4000.7874 2990.3542 4000.7874 2993.307 3999.2126 2993.307~0~gge376~0~~Y~0~0~0.19685~4000,2991.8306",
+        "PAD~RECT~3996.063~2991.831~1.5748~2.9528~1~~15~0~3995.2756 2990.3542 3996.8504 2990.3542 3996.8504 2993.307 3995.2756 2993.307~0~gge400~0~~Y~0~0~0.19685~3996.063,2991.8306",
+        "PAD~RECT~3992.126~2991.831~1.5748~2.9528~1~~16~0~3991.3386 2990.3542 3992.9134 2990.3542 3992.9134 2993.307 3991.3386 2993.307~0~gge424~0~~Y~0~0~0.19685~3992.126,2991.8306",
+        "PAD~RECT~4000~2996.6536~7.0866~3.5433~1~~17~0~3996.4567 2994.8819 4003.5433 2994.8819 4003.5433 2998.4252 3996.4567 2998.4252~0~gge466~0~~Y~0~0~0.19685~4000,2996.6536",
+        "PAD~RECT~4000~3003.3465~7.0866~3.5433~1~~17~0~3996.4567 3001.5748 4003.5433 3001.5748 4003.5433 3005.1181 3996.4567 3005.1181~0~gge820~0~~Y~0~0~0.19685~4000,3003.3464"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C3096093",
+      "mpn": "PJ-102AH",
       "designators": [
         "J83"
       ],
-      "lcsc": "C3096093",
-      "mpn": "PJ-102AH",
-      "source_footprint": "PWR_BarrelJack_CUI_PJ-102AH_Horizontal",
-      "evidence_url": "https://jlcpcb.com/partdetail/CUI-PJ102AH/C3096093",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_BarrelJack_CUI_PJ-102AH_Horizontal"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C3096093/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "3147881212b5b18088a4736e8e6b13f08366e20b58dedd913d559063ebabcf6f",
+      "footprint_uuid": "0968501d29fd4a1aaff1ca977473a57e",
+      "footprint_title": "DC-IN-TH_PJ-102AH",
+      "footprint_updated": 1650339307,
+      "origin_easyeda": [
+        3988.1895,
+        3009.2522
+      ],
+      "pad_shapes": [
+        "PAD~OVAL~3997.441~3021.063~9.8425~6~11~~1~1.9685~3995.5198 3021.063 3999.3623 3021.063~0~gge16~6.2992~3996.2603 3021.0632 3998.6225 3021.0632~Y~0~0~0.2~",
+        "PAD~OVAL~3997.441~2997.441~9.8425~6~11~~2~1.9685~3995.5198 2997.441 3999.3623 2997.441~0~gge52~6.2992~3996.2603 2997.4412 3998.6225 2997.4412~Y~0~0~0.2~",
+        "PAD~OVAL~3978.938~3009.252~9.8425~6~11~~3~1.9685~3978.938 3007.3308 3978.938 3011.1733~270~gge70~6.2992~3978.9375 3008.0711 3978.9375 3010.4333~Y~0~0~0.2~"
+      ],
+      "pad_aliases": {},
+      "fit_method": "rigid_centres",
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C3105",
+      "mpn": "0466002.NRHF",
       "designators": [
         "F80"
       ],
-      "lcsc": "C3105",
-      "mpn": "0466002.NRHF",
-      "source_footprint": "PWR_Fuse_1206_3216Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/Littelfuse-0466002NRHF/C3105",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_Fuse_1206_3216Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C3105/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "1b6665794668225c7ebbf0018754d349894c2ff70ed888313a62091ab0af1ff2",
+      "footprint_uuid": "c74a5ddd0add4500b745ecf0d59ab737",
+      "footprint_title": "F1206",
+      "footprint_updated": 1649404153,
+      "origin_easyeda": [
+        400,
+        300
+      ],
+      "pad_shapes": [
+        "PAD~RECT~394.311~300~4.6854~6.8031~1~~1~0~391.9683 296.5984 396.6537 296.5984 396.6537 303.4016 391.9683 303.4016~0~rep5~0~~Y~0~0~0.2~394.3108,300",
+        "PAD~RECT~405.689~300~4.6854~6.8031~1~~2~0~403.3463 296.5984 408.0317 296.5984 408.0317 303.4016 403.3463 303.4016~0~rep6~0~~Y~0~0~0.2~405.6892,300"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C85098",
+      "mpn": "B340A-13-F",
       "designators": [
         "D80"
       ],
-      "lcsc": "C85098",
-      "mpn": "B340A-13-F",
-      "source_footprint": "PWR_D_SMA",
-      "evidence_url": "https://jlcpcb.com/partdetail/DiodesIncorporated-B340A_13F/C85098",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_D_SMA"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C85098/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "3c30ee588b9e940fd7f92eb502fd0b8bfef6678c8ba2225e4f24afbc099d7e98",
+      "footprint_uuid": "6f2d54427ac94617a7b88c27da4b513c",
+      "footprint_title": "SMA_L4.4-W2.6-LS5.0-RD",
+      "footprint_updated": 1787382952,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4008.632~3000~7.0866~6.6929~1~~2~0~4005.0884 2996.6535 4012.1751 2996.6535 4012.1751 3003.3465 4005.0884 3003.3465~0~gge1002~0~~Y~0~0.0000~0.2000~4008.6316,3000",
+        "PAD~RECT~3991.368~3000~7.0866~6.6929~1~~1~0~3987.8249 2996.6535 3994.9116 2996.6535 3994.9116 3003.3465 3987.8249 3003.3465~0~gge1003~0~~Y~0~0.0000~0.2000~3991.3684,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C85098",
+      "mpn": "B340A-13-F",
       "designators": [
         "D130"
       ],
-      "lcsc": "C85098",
-      "mpn": "B340A-13-F",
-      "source_footprint": "PWR_D_SMA",
-      "evidence_url": "https://jlcpcb.com/partdetail/DiodesIncorporated-B340A_13F/C85098",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_D_SMA"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C85098/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "3c30ee588b9e940fd7f92eb502fd0b8bfef6678c8ba2225e4f24afbc099d7e98",
+      "footprint_uuid": "6f2d54427ac94617a7b88c27da4b513c",
+      "footprint_title": "SMA_L4.4-W2.6-LS5.0-RD",
+      "footprint_updated": 1787382952,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4008.632~3000~7.0866~6.6929~1~~2~0~4005.0884 2996.6535 4012.1751 2996.6535 4012.1751 3003.3465 4005.0884 3003.3465~0~gge1002~0~~Y~0~0.0000~0.2000~4008.6316,3000",
+        "PAD~RECT~3991.368~3000~7.0866~6.6929~1~~1~0~3987.8249 2996.6535 3994.9116 2996.6535 3994.9116 3003.3465 3987.8249 3003.3465~0~gge1003~0~~Y~0~0.0000~0.2000~3991.3684,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C110520",
+      "mpn": "SMAJ15A-13-F",
       "designators": [
         "D81"
       ],
-      "lcsc": "C110520",
-      "mpn": "SMAJ15A-13-F",
-      "source_footprint": "PWR_D_SMA",
-      "evidence_url": "https://jlcpcb.com/partdetail/DiodesIncorporated-SMAJ15A_13F/C110520",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_D_SMA"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C110520/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "d7ccc2fb27eacdc26a014b547791339d0612721cb5547378b03428e91f038db4",
+      "footprint_uuid": "6f2d54427ac94617a7b88c27da4b513c",
+      "footprint_title": "SMA_L4.4-W2.6-LS5.0-RD",
+      "footprint_updated": 1787382952,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4008.632~3000~7.0866~6.6929~1~~2~0~4005.0884 2996.6535 4012.1751 2996.6535 4012.1751 3003.3465 4005.0884 3003.3465~0~gge1002~0~~Y~0~0.0000~0.2000~4008.6316,3000",
+        "PAD~RECT~3991.368~3000~7.0866~6.6929~1~~1~0~3987.8249 2996.6535 3994.9116 2996.6535 3994.9116 3003.3465 3987.8249 3003.3465~0~gge1003~0~~Y~0~0.0000~0.2000~3991.3684,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C2860943",
+      "mpn": "TPSM53603RDAR",
       "designators": [
         "U80"
       ],
-      "lcsc": "C2860943",
-      "mpn": "TPSM53603RDAR",
-      "source_footprint": "PWR_Texas_B3QFN-14-1EP_5x5.5mm_P0.65mm",
-      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-TPSM53603RDAR/C2860943",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_Texas_B3QFN-14-1EP_5x5.5mm_P0.65mm"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C2860943/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "07ce66fd4f18f072aa43feff40d9e0054948ede84159a9fc7182b433aeef5270",
+      "footprint_uuid": "9cb6b0157fcc4aefa5bcacc902d85ca2",
+      "footprint_title": "B3QFN-15_TI_TPSM53603",
+      "footprint_updated": 1724397423,
+      "origin_easyeda": [
+        398.1445,
+        298.3365
+      ],
+      "pad_shapes": [
+        "PAD~RECT~388.892~293.711~3.1496~1.5748~1~~2~0~387.3174 292.9235 390.4671 292.9235 390.4671 294.4983 387.3174 294.4983~0~rep2~0~~Y~0~0~0.1969~398.1445,298.5745",
+        "PAD~RECT~388.892~296.27~3.1496~1.5748~1~~3~0~387.3174 295.4825 390.4671 295.4825 390.4671 297.0573 387.3174 297.0573~0~rep3~0~~Y~0~0~0.1969~388.8924,296.2708",
+        "PAD~RECT~388.892~298.829~3.1496~1.5748~1~~4~0~387.3174 298.0416 390.4671 298.0416 390.4671 299.6164 387.3174 299.6164~0~rep4~0~~Y~0~0~0.1969~388.8924,298.8299",
+        "PAD~RECT~388.892~301.388~3.1496~1.5748~1~~5~0~387.3174 300.6007 390.4671 300.6007 390.4671 302.1755 387.3174 302.1755~0~rep5~0~~Y~0~0~0.1969~388.8924,301.388",
+        "PAD~RECT~407.397~296.27~3.1496~1.5748~1~~12~0~405.8217 295.4825 408.9714 295.4825 408.9714 297.0573 405.8217 297.0573~0~rep6~0~~Y~0~0~0.1969~407.3967,296.2708",
+        "PAD~RECT~407.397~293.711~3.1496~1.5748~1~~13~0~405.8217 292.9235 408.9714 292.9235 408.9714 294.4983 405.8217 294.4983~0~rep7~0~~Y~0~0~0.1969~407.3967,293.7108",
+        "PAD~POLYGON~398.145~298.653~9.843~18.11~1~~15~0~395.1918 289.598 395.1918 289.598 401.0974 289.598 401.0974 293.7319 403.0659 293.7319 403.0659 303.5744 401.0974 303.5744 401.0974 307.7082 395.1918 307.7082 395.1918 303.5744 393.2233 303.5744 393.2233 293.7319 395.1918 293.7319~0~rep8~0~~Y~0~0~0.1969~398.1445,298.396",
+        "PAD~RECT~407.397~301.388~3.1496~1.5748~1~~10~0~405.8217 300.6007 408.9714 300.6007 408.9714 302.1755 405.8217 302.1755~0~gge21~0~~Y~0~0~0.1969~407.3967,301.388",
+        "PAD~RECT~407.397~298.829~3.1496~1.5748~1~~11~0~405.8217 298.0416 408.9714 298.0416 408.9714 299.6164 405.8217 299.6164~0~gge24~0~~Y~0~0~0.1969~407.3967,298.8299",
+        "PAD~RECT~388.892~303.947~3.1496~1.5748~1~~6~0~387.3175 303.1597 390.4672 303.1597 390.4672 304.7344 387.3175 304.7344~0~gge473~0~~Y~0~0~0.1969~388.8924,303.9469",
+        "PAD~RECT~407.397~303.947~3.1496~1.5748~1~~9~0~405.8218 303.1597 408.9715 303.1597 408.9715 304.7344 405.8218 304.7344~0~gge476~0~~Y~0~0~0.1969~407.3967,303.9469",
+        "PAD~RECT~390.271~306.801~5.5118~1.9685~1~~7~0~387.5147 305.8171 393.0265 305.8171 393.0265 307.7857 387.5147 307.7857~0~gge509~0~~Y~0~0~0.1969~390.2704,306.8011",
+        "PAD~RECT~406.019~306.801~5.5118~1.9685~1~~8~0~403.2627 305.8171 408.7745 305.8171 408.7745 307.7857 403.2627 307.7857~0~gge512~0~~Y~0~0~0.1969~406.0188,306.8011",
+        "PAD~RECT~406.019~289.872~5.5118~1.9685~1~~14~0~408.7745 290.8565 403.2627 290.8565 403.2627 288.888 408.7745 288.888~180~gge545~0~~Y~0~0~0.1969~406.0186,289.8726",
+        "PAD~RECT~390.271~289.872~5.5118~1.9685~1~~1~0~393.0265 290.8565 387.5147 290.8565 387.5147 288.888 393.0265 288.888~180~gge548~0~~Y~0~0~0.1969~390.2698,289.8726"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C2860943",
+      "mpn": "TPSM53603RDAR",
       "designators": [
         "U132"
       ],
-      "lcsc": "C2860943",
-      "mpn": "TPSM53603RDAR",
-      "source_footprint": "PWR_Texas_B3QFN-14-1EP_5x5.5mm_P0.65mm",
-      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-TPSM53603RDAR/C2860943",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_Texas_B3QFN-14-1EP_5x5.5mm_P0.65mm"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C2860943/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "07ce66fd4f18f072aa43feff40d9e0054948ede84159a9fc7182b433aeef5270",
+      "footprint_uuid": "9cb6b0157fcc4aefa5bcacc902d85ca2",
+      "footprint_title": "B3QFN-15_TI_TPSM53603",
+      "footprint_updated": 1724397423,
+      "origin_easyeda": [
+        398.1445,
+        298.3365
+      ],
+      "pad_shapes": [
+        "PAD~RECT~388.892~293.711~3.1496~1.5748~1~~2~0~387.3174 292.9235 390.4671 292.9235 390.4671 294.4983 387.3174 294.4983~0~rep2~0~~Y~0~0~0.1969~398.1445,298.5745",
+        "PAD~RECT~388.892~296.27~3.1496~1.5748~1~~3~0~387.3174 295.4825 390.4671 295.4825 390.4671 297.0573 387.3174 297.0573~0~rep3~0~~Y~0~0~0.1969~388.8924,296.2708",
+        "PAD~RECT~388.892~298.829~3.1496~1.5748~1~~4~0~387.3174 298.0416 390.4671 298.0416 390.4671 299.6164 387.3174 299.6164~0~rep4~0~~Y~0~0~0.1969~388.8924,298.8299",
+        "PAD~RECT~388.892~301.388~3.1496~1.5748~1~~5~0~387.3174 300.6007 390.4671 300.6007 390.4671 302.1755 387.3174 302.1755~0~rep5~0~~Y~0~0~0.1969~388.8924,301.388",
+        "PAD~RECT~407.397~296.27~3.1496~1.5748~1~~12~0~405.8217 295.4825 408.9714 295.4825 408.9714 297.0573 405.8217 297.0573~0~rep6~0~~Y~0~0~0.1969~407.3967,296.2708",
+        "PAD~RECT~407.397~293.711~3.1496~1.5748~1~~13~0~405.8217 292.9235 408.9714 292.9235 408.9714 294.4983 405.8217 294.4983~0~rep7~0~~Y~0~0~0.1969~407.3967,293.7108",
+        "PAD~POLYGON~398.145~298.653~9.843~18.11~1~~15~0~395.1918 289.598 395.1918 289.598 401.0974 289.598 401.0974 293.7319 403.0659 293.7319 403.0659 303.5744 401.0974 303.5744 401.0974 307.7082 395.1918 307.7082 395.1918 303.5744 393.2233 303.5744 393.2233 293.7319 395.1918 293.7319~0~rep8~0~~Y~0~0~0.1969~398.1445,298.396",
+        "PAD~RECT~407.397~301.388~3.1496~1.5748~1~~10~0~405.8217 300.6007 408.9714 300.6007 408.9714 302.1755 405.8217 302.1755~0~gge21~0~~Y~0~0~0.1969~407.3967,301.388",
+        "PAD~RECT~407.397~298.829~3.1496~1.5748~1~~11~0~405.8217 298.0416 408.9714 298.0416 408.9714 299.6164 405.8217 299.6164~0~gge24~0~~Y~0~0~0.1969~407.3967,298.8299",
+        "PAD~RECT~388.892~303.947~3.1496~1.5748~1~~6~0~387.3175 303.1597 390.4672 303.1597 390.4672 304.7344 387.3175 304.7344~0~gge473~0~~Y~0~0~0.1969~388.8924,303.9469",
+        "PAD~RECT~407.397~303.947~3.1496~1.5748~1~~9~0~405.8218 303.1597 408.9715 303.1597 408.9715 304.7344 405.8218 304.7344~0~gge476~0~~Y~0~0~0.1969~407.3967,303.9469",
+        "PAD~RECT~390.271~306.801~5.5118~1.9685~1~~7~0~387.5147 305.8171 393.0265 305.8171 393.0265 307.7857 387.5147 307.7857~0~gge509~0~~Y~0~0~0.1969~390.2704,306.8011",
+        "PAD~RECT~406.019~306.801~5.5118~1.9685~1~~8~0~403.2627 305.8171 408.7745 305.8171 408.7745 307.7857 403.2627 307.7857~0~gge512~0~~Y~0~0~0.1969~406.0188,306.8011",
+        "PAD~RECT~406.019~289.872~5.5118~1.9685~1~~14~0~408.7745 290.8565 403.2627 290.8565 403.2627 288.888 408.7745 288.888~180~gge545~0~~Y~0~0~0.1969~406.0186,289.8726",
+        "PAD~RECT~390.271~289.872~5.5118~1.9685~1~~1~0~393.0265 290.8565 387.5147 290.8565 387.5147 288.888 393.0265 288.888~180~gge548~0~~Y~0~0~0.1969~390.2698,289.8726"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C861441",
+      "mpn": "RT0603BRD074K3L",
       "designators": [
         "R121"
       ],
-      "lcsc": "C861441",
-      "mpn": "RT0603BRD074K3L",
-      "source_footprint": "PWR_R_0603_1608Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/YAGEO-RT0603BRD074K3L/C861441",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_R_0603_1608Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C861441/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "5d2794dbe6bcdcee6bbacf4f92553438dbc42074165c39d9affaf334723cef09",
+      "footprint_uuid": "398691f1f785460098bbe5ee6590333c",
+      "footprint_title": "R0603",
+      "footprint_updated": 1766479705,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4002.966~3000~3.1751~3.4016~1~~2~0~4001.378 3001.7008 4001.378 2998.2992 4004.5531 2998.2992 4004.5531 3001.7008~0~gge1002~0~~Y~0~-393.7008~0.2000~4002.9655,3000",
+        "PAD~RECT~3997.034~3000~3.1751~3.4016~1~~1~0~3998.622 3001.7008 3998.622 2998.2992 3995.4469 2998.2992 3995.4469 3001.7008~0~gge1004~0~~Y~0~-393.7008~0.2000~3997.0345,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C114661",
+      "mpn": "RC0603FR-0715KL",
       "designators": [
         "R123"
       ],
-      "lcsc": "C114661",
-      "mpn": "RC0603FR-0715KL",
-      "source_footprint": "PWR_R_0603_1608Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/YAGEO-RC0603FR0715KL/C114661",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_R_0603_1608Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C114661/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "359a4ce817c0c60db5bf8d435a68cdaf6d58d1aaa2c8a855ac551271eae732f2",
+      "footprint_uuid": "398691f1f785460098bbe5ee6590333c",
+      "footprint_title": "R0603",
+      "footprint_updated": 1766479705,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4002.966~3000~3.1751~3.4016~1~~2~0~4001.378 3001.7008 4001.378 2998.2992 4004.5531 2998.2992 4004.5531 3001.7008~0~gge1002~0~~Y~0~-393.7008~0.2000~4002.9655,3000",
+        "PAD~RECT~3997.034~3000~3.1751~3.4016~1~~1~0~3998.622 3001.7008 3998.622 2998.2992 3995.4469 2998.2992 3995.4469 3001.7008~0~gge1004~0~~Y~0~-393.7008~0.2000~3997.0345,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C221841",
+      "mpn": "PCM12SMTR",
       "designators": [
         "SW80"
       ],
-      "lcsc": "C221841",
-      "mpn": "PCM12SMTR",
-      "source_footprint": "PWR_SW_SPDT_PCM12",
-      "evidence_url": "https://jlcpcb.com/partdetail/CK-PCM12SMTR/C221841",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_SW_SPDT_PCM12"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C221841/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "95f4d7a41cdc598746bfa35f6c0a206462bc56d642b8b2f49705d51ea15c8446",
+      "footprint_uuid": "bcb1318c96014e92aae5f3a35948683f",
+      "footprint_title": "SW-SMD_PCM12SMTR",
+      "footprint_updated": 1779955253,
+      "origin_easyeda": [
+        4000,
+        2998.4255
+      ],
+      "pad_shapes": [
+        "PAD~RECT~3991.142~2992.914~2.7559~5.9055~1~~1~0~3989.7638 2989.9608 3992.5198 2989.9608 3992.5198 2995.8664 3989.7638 2995.8664~0~gge5~0~~Y~0~0~0.2~3991.1418,2992.9136",
+        "PAD~RECT~4002.953~2992.914~2.7559~5.9055~1~~2~0~4001.5748 2989.9608 4004.3308 2989.9608 4004.3308 2995.8664 4001.5748 2995.8664~0~gge11~0~~Y~0~0~0.2~4002.9528,2992.9136",
+        "PAD~RECT~4008.858~2992.914~2.7559~5.9055~1~~3~0~4007.4803 2989.9608 4010.2363 2989.9608 4010.2363 2995.8664 4007.4803 2995.8664~0~gge16~0~~Y~0~0~0.2~4008.8583,2992.9136",
+        "PAD~RECT~4014.37~2996.063~3.937~3.1496~1~~4~0~4012.4015 2994.4882 4016.3385 2994.4882 4016.3385 2997.6378 4012.4015 2997.6378~0~gge21~0~~Y~0~0~0.2~4014.37,2996.0631",
+        "PAD~RECT~4014.37~3003.937~3.937~3.1496~1~~4~0~4012.4015 3002.3622 4016.3385 3002.3622 4016.3385 3005.5118 4012.4015 3005.5118~0~gge32~0~~Y~0~0~0.2~4014.3701,3003.9371",
+        "PAD~RECT~3985.63~3003.937~3.937~3.1496~1~~4~0~3983.6615 3002.3622 3987.5985 3002.3622 3987.5985 3005.5118 3983.6615 3005.5118~0~gge43~0~~Y~0~0~0.2~3985.6304,3003.9371",
+        "PAD~RECT~3985.63~2996.063~3.937~3.1496~1~~4~0~3983.6615 2994.4882 3987.5985 2994.4882 3987.5985 2997.6378 3983.6615 2997.6378~0~gge44~0~~Y~0~0~0.2~3985.6303,2996.0631"
+      ],
+      "pad_aliases": {
+        "4": "@mount"
+      },
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "include_mechanical_smd": true,
+      "mechanical_pad_basis": "PCM12SMTR C&K mounting drawing has three electrical terminals and four isolated shell tabs. Supplier pad 4 names all four tabs; native copper tabs are unnumbered. Check all four individually; NPTH locating pegs are not electrical pads.",
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C531431",
+      "mpn": "CGA5L1X7R1H106KT0Y0N",
       "designators": [
         "C86"
       ],
-      "lcsc": "C531431",
-      "mpn": "CGA5L1X7R1H106KT0Y0N",
-      "source_footprint": "PWR_C_1206_3216Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/TDK-CGA5L1X7R1H106KT0Y0N/C531431",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_C_1206_3216Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C531431/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "b6ed840ed2290ada67ee5d957e9f6f69004707dd8b6aed7a7fee5054d9663e5e",
+      "footprint_uuid": "7bdec8012728462a85919a4d0d033579",
+      "footprint_title": "C1206",
+      "footprint_updated": 1675328481,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4006.27~3000~5.8465~6.8031~1~~2~0~4003.3465 3003.4016 4003.3465 2996.5984 4009.1929 2996.5984 4009.1929 3003.4016~0~gge1002~0~~Y~0~-393.7008~0.2000~4006.2697,3000",
+        "PAD~RECT~3993.73~3000~5.8465~6.8031~1~~1~0~3996.6535 3003.4016 3996.6535 2996.5984 3990.8071 2996.5984 3990.8071 3003.4016~0~gge1004~0~~Y~0~-393.7008~0.2000~3993.7303,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C531431",
+      "mpn": "CGA5L1X7R1H106KT0Y0N",
       "designators": [
         "C87"
       ],
-      "lcsc": "C531431",
-      "mpn": "CGA5L1X7R1H106KT0Y0N",
-      "source_footprint": "PWR_C_1206_3216Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/TDK-CGA5L1X7R1H106KT0Y0N/C531431",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_C_1206_3216Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C531431/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "b6ed840ed2290ada67ee5d957e9f6f69004707dd8b6aed7a7fee5054d9663e5e",
+      "footprint_uuid": "7bdec8012728462a85919a4d0d033579",
+      "footprint_title": "C1206",
+      "footprint_updated": 1675328481,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4006.27~3000~5.8465~6.8031~1~~2~0~4003.3465 3003.4016 4003.3465 2996.5984 4009.1929 2996.5984 4009.1929 3003.4016~0~gge1002~0~~Y~0~-393.7008~0.2000~4006.2697,3000",
+        "PAD~RECT~3993.73~3000~5.8465~6.8031~1~~1~0~3996.6535 3003.4016 3996.6535 2996.5984 3990.8071 2996.5984 3990.8071 3003.4016~0~gge1004~0~~Y~0~-393.7008~0.2000~3993.7303,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C531431",
+      "mpn": "CGA5L1X7R1H106KT0Y0N",
       "designators": [
         "C131"
       ],
-      "lcsc": "C531431",
-      "mpn": "CGA5L1X7R1H106KT0Y0N",
-      "source_footprint": "PWR_C_1206_3216Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/TDK-CGA5L1X7R1H106KT0Y0N/C531431",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_C_1206_3216Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C531431/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "b6ed840ed2290ada67ee5d957e9f6f69004707dd8b6aed7a7fee5054d9663e5e",
+      "footprint_uuid": "7bdec8012728462a85919a4d0d033579",
+      "footprint_title": "C1206",
+      "footprint_updated": 1675328481,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4006.27~3000~5.8465~6.8031~1~~2~0~4003.3465 3003.4016 4003.3465 2996.5984 4009.1929 2996.5984 4009.1929 3003.4016~0~gge1002~0~~Y~0~-393.7008~0.2000~4006.2697,3000",
+        "PAD~RECT~3993.73~3000~5.8465~6.8031~1~~1~0~3996.6535 3003.4016 3996.6535 2996.5984 3990.8071 2996.5984 3990.8071 3003.4016~0~gge1004~0~~Y~0~-393.7008~0.2000~3993.7303,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C531431",
+      "mpn": "CGA5L1X7R1H106KT0Y0N",
       "designators": [
         "C132"
       ],
-      "lcsc": "C531431",
-      "mpn": "CGA5L1X7R1H106KT0Y0N",
-      "source_footprint": "PWR_C_1206_3216Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/TDK-CGA5L1X7R1H106KT0Y0N/C531431",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_C_1206_3216Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C531431/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "b6ed840ed2290ada67ee5d957e9f6f69004707dd8b6aed7a7fee5054d9663e5e",
+      "footprint_uuid": "7bdec8012728462a85919a4d0d033579",
+      "footprint_title": "C1206",
+      "footprint_updated": 1675328481,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4006.27~3000~5.8465~6.8031~1~~2~0~4003.3465 3003.4016 4003.3465 2996.5984 4009.1929 2996.5984 4009.1929 3003.4016~0~gge1002~0~~Y~0~-393.7008~0.2000~4006.2697,3000",
+        "PAD~RECT~3993.73~3000~5.8465~6.8031~1~~1~0~3996.6535 3003.4016 3996.6535 2996.5984 3990.8071 2996.5984 3990.8071 3003.4016~0~gge1004~0~~Y~0~-393.7008~0.2000~3993.7303,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C531431",
+      "mpn": "CGA5L1X7R1H106KT0Y0N",
       "designators": [
         "C133"
       ],
-      "lcsc": "C531431",
-      "mpn": "CGA5L1X7R1H106KT0Y0N",
-      "source_footprint": "PWR_C_1206_3216Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/TDK-CGA5L1X7R1H106KT0Y0N/C531431",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_C_1206_3216Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C531431/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "b6ed840ed2290ada67ee5d957e9f6f69004707dd8b6aed7a7fee5054d9663e5e",
+      "footprint_uuid": "7bdec8012728462a85919a4d0d033579",
+      "footprint_title": "C1206",
+      "footprint_updated": 1675328481,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4006.27~3000~5.8465~6.8031~1~~2~0~4003.3465 3003.4016 4003.3465 2996.5984 4009.1929 2996.5984 4009.1929 3003.4016~0~gge1002~0~~Y~0~-393.7008~0.2000~4006.2697,3000",
+        "PAD~RECT~3993.73~3000~5.8465~6.8031~1~~1~0~3996.6535 3003.4016 3996.6535 2996.5984 3990.8071 2996.5984 3990.8071 3003.4016~0~gge1004~0~~Y~0~-393.7008~0.2000~3993.7303,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C178565",
+      "mpn": "EEEFK1V470P",
       "designators": [
         "C89"
       ],
-      "lcsc": "C178565",
-      "mpn": "EEEFK1V470P",
-      "source_footprint": "PWR_CP_Elec_6.3x7.7",
-      "evidence_url": "https://jlcpcb.com/partdetail/PANASONIC-EEEFK1V470P/C178565",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_CP_Elec_6.3x7.7"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C178565/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "8c6b89c59267d5466676a69f8f5c7dceaebf6a6d9ce4675d3acfe4b41bb44785",
+      "footprint_uuid": "c0a8d5074cd14a40a7baee3704c47035",
+      "footprint_title": "CAP-SMD_BD6.3-L6.6-W6.6-FD",
+      "footprint_updated": 1652416371,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~3989.488~3000~13.7795~4.7244~1~~1~0~3982.5985 2997.6378 3996.3781 2997.6378 3996.3781 3002.3622 3982.5985 3002.3622~0~gge1002~0~~Y~0~0.0000~0.2000~3989.4882,3000",
+        "PAD~RECT~4010.512~3000~13.7795~4.7244~1~~2~0~4003.6219 2997.6378 4017.4015 2997.6378 4017.4015 3002.3622 4003.6219 3002.3622~0~gge1003~0~~Y~0~0.0000~0.2000~4010.5118,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C178565",
+      "mpn": "EEEFK1V470P",
       "designators": [
         "C135"
       ],
-      "lcsc": "C178565",
-      "mpn": "EEEFK1V470P",
-      "source_footprint": "PWR_CP_Elec_6.3x7.7",
-      "evidence_url": "https://jlcpcb.com/partdetail/PANASONIC-EEEFK1V470P/C178565",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_CP_Elec_6.3x7.7"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C178565/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "8c6b89c59267d5466676a69f8f5c7dceaebf6a6d9ce4675d3acfe4b41bb44785",
+      "footprint_uuid": "c0a8d5074cd14a40a7baee3704c47035",
+      "footprint_title": "CAP-SMD_BD6.3-L6.6-W6.6-FD",
+      "footprint_updated": 1652416371,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~3989.488~3000~13.7795~4.7244~1~~1~0~3982.5985 2997.6378 3996.3781 2997.6378 3996.3781 3002.3622 3982.5985 3002.3622~0~gge1002~0~~Y~0~0.0000~0.2000~3989.4882,3000",
+        "PAD~RECT~4010.512~3000~13.7795~4.7244~1~~2~0~4003.6219 2997.6378 4017.4015 2997.6378 4017.4015 3002.3622 4003.6219 3002.3622~0~gge1003~0~~Y~0~0.0000~0.2000~4010.5118,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C21397",
+      "mpn": "GRM32ER71E226KE15L",
       "designators": [
         "C110"
       ],
-      "lcsc": "C21397",
-      "mpn": "GRM32ER71E226KE15L",
-      "source_footprint": "PWR_C_1210_3225Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM32ER71E226KE15L/C21397",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_C_1210_3225Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C21397/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "911fbd53882c4d9c988177bff01382874600a80606404eba045774c9e32add9d",
+      "footprint_uuid": "2ff699914e4849dc8fa1384e78f43943",
+      "footprint_title": "C1210",
+      "footprint_updated": 1758593686,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4005.974~3000~6.437~10.6299~1~~2~0~4002.7559 3005.315 4002.7559 2994.685 4009.1929 2994.685 4009.1929 3005.315~0~gge1002~0~~Y~0~-393.7008~0.2000~4005.9744,3000",
+        "PAD~RECT~3994.026~3000~6.437~10.6299~1~~1~0~3997.2441 3005.315 3997.2441 2994.685 3990.8071 2994.685 3990.8071 3005.315~0~gge1004~0~~Y~0~-393.7008~0.2000~3994.0256,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C21397",
+      "mpn": "GRM32ER71E226KE15L",
       "designators": [
         "C111"
       ],
-      "lcsc": "C21397",
-      "mpn": "GRM32ER71E226KE15L",
-      "source_footprint": "PWR_C_1210_3225Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM32ER71E226KE15L/C21397",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_C_1210_3225Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C21397/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "911fbd53882c4d9c988177bff01382874600a80606404eba045774c9e32add9d",
+      "footprint_uuid": "2ff699914e4849dc8fa1384e78f43943",
+      "footprint_title": "C1210",
+      "footprint_updated": 1758593686,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4005.974~3000~6.437~10.6299~1~~2~0~4002.7559 3005.315 4002.7559 2994.685 4009.1929 2994.685 4009.1929 3005.315~0~gge1002~0~~Y~0~-393.7008~0.2000~4005.9744,3000",
+        "PAD~RECT~3994.026~3000~6.437~10.6299~1~~1~0~3997.2441 3005.315 3997.2441 2994.685 3990.8071 2994.685 3990.8071 3005.315~0~gge1004~0~~Y~0~-393.7008~0.2000~3994.0256,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C21397",
+      "mpn": "GRM32ER71E226KE15L",
       "designators": [
         "C112"
       ],
-      "lcsc": "C21397",
-      "mpn": "GRM32ER71E226KE15L",
-      "source_footprint": "PWR_C_1210_3225Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM32ER71E226KE15L/C21397",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_C_1210_3225Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C21397/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "911fbd53882c4d9c988177bff01382874600a80606404eba045774c9e32add9d",
+      "footprint_uuid": "2ff699914e4849dc8fa1384e78f43943",
+      "footprint_title": "C1210",
+      "footprint_updated": 1758593686,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4005.974~3000~6.437~10.6299~1~~2~0~4002.7559 3005.315 4002.7559 2994.685 4009.1929 2994.685 4009.1929 3005.315~0~gge1002~0~~Y~0~-393.7008~0.2000~4005.9744,3000",
+        "PAD~RECT~3994.026~3000~6.437~10.6299~1~~1~0~3997.2441 3005.315 3997.2441 2994.685 3990.8071 2994.685 3990.8071 3005.315~0~gge1004~0~~Y~0~-393.7008~0.2000~3994.0256,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C21397",
+      "mpn": "GRM32ER71E226KE15L",
       "designators": [
         "C136"
       ],
-      "lcsc": "C21397",
-      "mpn": "GRM32ER71E226KE15L",
-      "source_footprint": "PWR_C_1210_3225Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM32ER71E226KE15L/C21397",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_C_1210_3225Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C21397/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "911fbd53882c4d9c988177bff01382874600a80606404eba045774c9e32add9d",
+      "footprint_uuid": "2ff699914e4849dc8fa1384e78f43943",
+      "footprint_title": "C1210",
+      "footprint_updated": 1758593686,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4005.974~3000~6.437~10.6299~1~~2~0~4002.7559 3005.315 4002.7559 2994.685 4009.1929 2994.685 4009.1929 3005.315~0~gge1002~0~~Y~0~-393.7008~0.2000~4005.9744,3000",
+        "PAD~RECT~3994.026~3000~6.437~10.6299~1~~1~0~3997.2441 3005.315 3997.2441 2994.685 3990.8071 2994.685 3990.8071 3005.315~0~gge1004~0~~Y~0~-393.7008~0.2000~3994.0256,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C21397",
+      "mpn": "GRM32ER71E226KE15L",
       "designators": [
         "C137"
       ],
-      "lcsc": "C21397",
-      "mpn": "GRM32ER71E226KE15L",
-      "source_footprint": "PWR_C_1210_3225Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM32ER71E226KE15L/C21397",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_C_1210_3225Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C21397/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "911fbd53882c4d9c988177bff01382874600a80606404eba045774c9e32add9d",
+      "footprint_uuid": "2ff699914e4849dc8fa1384e78f43943",
+      "footprint_title": "C1210",
+      "footprint_updated": 1758593686,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4005.974~3000~6.437~10.6299~1~~2~0~4002.7559 3005.315 4002.7559 2994.685 4009.1929 2994.685 4009.1929 3005.315~0~gge1002~0~~Y~0~-393.7008~0.2000~4005.9744,3000",
+        "PAD~RECT~3994.026~3000~6.437~10.6299~1~~1~0~3997.2441 3005.315 3997.2441 2994.685 3990.8071 2994.685 3990.8071 3005.315~0~gge1004~0~~Y~0~-393.7008~0.2000~3994.0256,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C21397",
+      "mpn": "GRM32ER71E226KE15L",
       "designators": [
         "C138"
       ],
-      "lcsc": "C21397",
-      "mpn": "GRM32ER71E226KE15L",
-      "source_footprint": "PWR_C_1210_3225Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM32ER71E226KE15L/C21397",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "PWR_C_1210_3225Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C21397/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "911fbd53882c4d9c988177bff01382874600a80606404eba045774c9e32add9d",
+      "footprint_uuid": "2ff699914e4849dc8fa1384e78f43943",
+      "footprint_title": "C1210",
+      "footprint_updated": 1758593686,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4005.974~3000~6.437~10.6299~1~~2~0~4002.7559 3005.315 4002.7559 2994.685 4009.1929 2994.685 4009.1929 3005.315~0~gge1002~0~~Y~0~-393.7008~0.2000~4005.9744,3000",
+        "PAD~RECT~3994.026~3000~6.437~10.6299~1~~1~0~3997.2441 3005.315 3997.2441 2994.685 3990.8071 2994.685 3990.8071 3005.315~0~gge1004~0~~Y~0~-393.7008~0.2000~3994.0256,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C480537",
+      "mpn": "1803277",
       "designators": [
         "J130"
       ],
-      "lcsc": "C480537",
-      "mpn": "1803277",
-      "source_footprint": "SUP_PhoenixContact_MC_1,5_2-G-3.81_1x02_P3.81mm_Horizontal",
-      "evidence_url": "https://jlcpcb.com/partdetail/PhoenixContact-1803277/C480537",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_PhoenixContact_MC_1,5_2-G-3.81_1x02_P3.81mm_Horizontal"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C480537/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "29fac160889a7d97fcb9afdb573f0e29f76483eefc1168e95bef4223b3d31c73",
+      "footprint_uuid": "c1e8b06dd02b4aba9596a50cfce12711",
+      "footprint_title": "CONN-TH_1803277",
+      "footprint_updated": 1613813441,
+      "origin_easyeda": [
+        4007.5,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~ELLIPSE~4015~3000~9.8425~9.8425~11~~2~2.9528~~0~gge27~0~~Y~0~0~0.2~4015,3000",
+        "PAD~RECT~4000~3000~9.8425~9.8425~11~~1~2.9528~3995.0787 2995.0787 4004.9213 2995.0787 4004.9213 3004.9213 3995.0787 3004.9213~0~gge28~0~~Y~0~0~0.2~4000,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "rigid_centres",
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C187596",
+      "mpn": "0466004.NRHF",
       "designators": [
         "F130"
       ],
-      "lcsc": "C187596",
-      "mpn": "0466004.NRHF",
-      "source_footprint": "SUP_Fuse_1206_3216Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/Littelfuse-0466004NRHF/C187596",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_Fuse_1206_3216Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C187596/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "93d2d7ec39b086fff9cdc1280f2cb684b2f582e30d82eb4b15e2aaf987547ebe",
+      "footprint_uuid": "c74a5ddd0add4500b745ecf0d59ab737",
+      "footprint_title": "F1206",
+      "footprint_updated": 1649404153,
+      "origin_easyeda": [
+        400,
+        300
+      ],
+      "pad_shapes": [
+        "PAD~RECT~394.311~300~4.6854~6.8031~1~~1~0~391.9683 296.5984 396.6537 296.5984 396.6537 303.4016 391.9683 303.4016~0~rep5~0~~Y~0~0~0.2~394.3108,300",
+        "PAD~RECT~405.689~300~4.6854~6.8031~1~~2~0~403.3463 296.5984 408.0317 296.5984 408.0317 303.4016 403.3463 303.4016~0~rep6~0~~Y~0~0~0.2~405.6892,300"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C134965",
+      "mpn": "SMAJ18A-13-F",
       "designators": [
         "D131"
       ],
-      "lcsc": "C134965",
-      "mpn": "SMAJ18A-13-F",
-      "source_footprint": "SUP_D_SMA",
-      "evidence_url": "https://jlcpcb.com/partdetail/DiodesIncorporated-SMAJ18A_13F/C134965",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_D_SMA"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C134965/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "2cbc3467229b4a76a770d72a78114186bc6ce1f53bd5ea075a096468f4936c7e",
+      "footprint_uuid": "6f2d54427ac94617a7b88c27da4b513c",
+      "footprint_title": "SMA_L4.4-W2.6-LS5.0-RD",
+      "footprint_updated": 1787382952,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4008.632~3000~7.0866~6.6929~1~~2~0~4005.0884 2996.6535 4012.1751 2996.6535 4012.1751 3003.3465 4005.0884 3003.3465~0~gge1002~0~~Y~0~0.0000~0.2000~4008.6316,3000",
+        "PAD~RECT~3991.368~3000~7.0866~6.6929~1~~1~0~3987.8249 2996.6535 3994.9116 2996.6535 3994.9116 3003.3465 3987.8249 3003.3465~0~gge1003~0~~Y~0~0.0000~0.2000~3991.3684,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C89347",
+      "mpn": "TPS70933DBVR",
       "designators": [
         "U131"
       ],
-      "lcsc": "C89347",
-      "mpn": "TPS70933DBVR",
-      "source_footprint": "SUP_SOT-23-5",
-      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-TPS70933DBVR/C89347",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_SOT-23-5"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C89347/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "244ada385dc8093cedbfd64dac31987d493efde946ab89a8dd1c7e3bdc6e317e",
+      "footprint_uuid": "e7f085e4f71344109c090040716070ab",
+      "footprint_title": "SOT-23-5_L3.0-W1.7-P0.95-LS2.8-BR",
+      "footprint_updated": 1734599759,
+      "origin_easyeda": [
+        3978.2515,
+        2993.751
+      ],
+      "pad_shapes": [
+        "PAD~RECT~3973.133~2997.491~4.3307~2.3622~1~~5~0~3970.9676 2996.3099 3975.2983 2996.3099 3975.2983 2998.6721 3970.9676 2998.6721~0~gge16~0~~Y~0~0~0.2~3973.1329,2997.4905",
+        "PAD~RECT~3973.133~2990.011~4.3307~2.3622~1~~4~0~3970.9676 2988.8299 3975.2983 2988.8299 3975.2983 2991.1921 3970.9676 2991.1921~0~gge15~0~~Y~0~0~0.2~3973.1333,2990.0105",
+        "PAD~RECT~3983.37~2990.011~4.3307~2.3622~1~~3~0~3981.2047 2988.8299 3985.5354 2988.8299 3985.5354 2991.1921 3981.2047 2991.1921~0~gge14~0~~Y~0~0~0.2~3983.3695,2990.0111",
+        "PAD~RECT~3983.37~2993.751~4.3307~2.3622~1~~2~0~3981.2047 2992.5699 3985.5354 2992.5699 3985.5354 2994.9321 3981.2047 2994.9321~0~gge13~0~~Y~0~0~0.2~3983.3693,2993.7511",
+        "PAD~RECT~3983.37~2997.491~4.3307~2.3622~1~~1~0~3981.2047 2996.3099 3985.5354 2996.3099 3985.5354 2998.6721 3981.2047 2998.6721~0~gge12~0~~Y~0~0~0.2~3983.3691,2997.4911"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C89347",
+      "mpn": "TPS70933DBVR",
       "designators": [
         "U140"
       ],
-      "lcsc": "C89347",
-      "mpn": "TPS70933DBVR",
-      "source_footprint": "SUP_SOT-23-5",
-      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-TPS70933DBVR/C89347",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_SOT-23-5"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C89347/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "244ada385dc8093cedbfd64dac31987d493efde946ab89a8dd1c7e3bdc6e317e",
+      "footprint_uuid": "e7f085e4f71344109c090040716070ab",
+      "footprint_title": "SOT-23-5_L3.0-W1.7-P0.95-LS2.8-BR",
+      "footprint_updated": 1734599759,
+      "origin_easyeda": [
+        3978.2515,
+        2993.751
+      ],
+      "pad_shapes": [
+        "PAD~RECT~3973.133~2997.491~4.3307~2.3622~1~~5~0~3970.9676 2996.3099 3975.2983 2996.3099 3975.2983 2998.6721 3970.9676 2998.6721~0~gge16~0~~Y~0~0~0.2~3973.1329,2997.4905",
+        "PAD~RECT~3973.133~2990.011~4.3307~2.3622~1~~4~0~3970.9676 2988.8299 3975.2983 2988.8299 3975.2983 2991.1921 3970.9676 2991.1921~0~gge15~0~~Y~0~0~0.2~3973.1333,2990.0105",
+        "PAD~RECT~3983.37~2990.011~4.3307~2.3622~1~~3~0~3981.2047 2988.8299 3985.5354 2988.8299 3985.5354 2991.1921 3981.2047 2991.1921~0~gge14~0~~Y~0~0~0.2~3983.3695,2990.0111",
+        "PAD~RECT~3983.37~2993.751~4.3307~2.3622~1~~2~0~3981.2047 2992.5699 3985.5354 2992.5699 3985.5354 2994.9321 3981.2047 2994.9321~0~gge13~0~~Y~0~0~0.2~3983.3693,2993.7511",
+        "PAD~RECT~3983.37~2997.491~4.3307~2.3622~1~~1~0~3981.2047 2996.3099 3985.5354 2996.3099 3985.5354 2998.6721 3981.2047 2998.6721~0~gge12~0~~Y~0~0~0.2~3983.3691,2997.4911"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C86040",
+      "mpn": "GRM21BR71C475KA73L",
       "designators": [
         "C130"
       ],
-      "lcsc": "C86040",
-      "mpn": "GRM21BR71C475KA73L",
-      "source_footprint": "SUP_C_0805_2012Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM21BR71C475KA73L/C86040",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_C_0805_2012Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C86040/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "e0fd5f2b0bc35949cc76f82353492cf43b8a3bfa82062d68c2df2e01aed4ce9a",
+      "footprint_uuid": "2ee8eb13a0124a108e622ce40c0c25a8",
+      "footprint_title": "C0805",
+      "footprint_updated": 1720420805,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4003.937~3000~5.5512~5.315~1~~2~0~4001.1615 3002.6575 4001.1615 2997.3425 4006.7127 2997.3425 4006.7127 3002.6575~0~gge1002~0~~Y~0~-393.7008~0.2000~4003.9371,3000",
+        "PAD~RECT~3996.063~3000~5.5512~5.315~1~~1~0~3998.8385 3002.6575 3998.8385 2997.3425 3993.2873 2997.3425 3993.2873 3002.6575~0~gge1004~0~~Y~0~-393.7008~0.2000~3996.0629,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C86040",
+      "mpn": "GRM21BR71C475KA73L",
       "designators": [
         "C149"
       ],
-      "lcsc": "C86040",
-      "mpn": "GRM21BR71C475KA73L",
-      "source_footprint": "Capacitor_SMD__C_0805_2012Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM21BR71C475KA73L/C86040",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "Capacitor_SMD__C_0805_2012Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C86040/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "e0fd5f2b0bc35949cc76f82353492cf43b8a3bfa82062d68c2df2e01aed4ce9a",
+      "footprint_uuid": "2ee8eb13a0124a108e622ce40c0c25a8",
+      "footprint_title": "C0805",
+      "footprint_updated": 1720420805,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4003.937~3000~5.5512~5.315~1~~2~0~4001.1615 3002.6575 4001.1615 2997.3425 4006.7127 2997.3425 4006.7127 3002.6575~0~gge1002~0~~Y~0~-393.7008~0.2000~4003.9371,3000",
+        "PAD~RECT~3996.063~3000~5.5512~5.315~1~~1~0~3998.8385 3002.6575 3998.8385 2997.3425 3993.2873 2997.3425 3993.2873 3002.6575~0~gge1004~0~~Y~0~-393.7008~0.2000~3996.0629,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C86040",
+      "mpn": "GRM21BR71C475KA73L",
       "designators": [
         "C150"
       ],
-      "lcsc": "C86040",
-      "mpn": "GRM21BR71C475KA73L",
-      "source_footprint": "Capacitor_SMD__C_0805_2012Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM21BR71C475KA73L/C86040",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "Capacitor_SMD__C_0805_2012Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C86040/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "e0fd5f2b0bc35949cc76f82353492cf43b8a3bfa82062d68c2df2e01aed4ce9a",
+      "footprint_uuid": "2ee8eb13a0124a108e622ce40c0c25a8",
+      "footprint_title": "C0805",
+      "footprint_updated": 1720420805,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4003.937~3000~5.5512~5.315~1~~2~0~4001.1615 3002.6575 4001.1615 2997.3425 4006.7127 2997.3425 4006.7127 3002.6575~0~gge1002~0~~Y~0~-393.7008~0.2000~4003.9371,3000",
+        "PAD~RECT~3996.063~3000~5.5512~5.315~1~~1~0~3998.8385 3002.6575 3998.8385 2997.3425 3993.2873 2997.3425 3993.2873 3002.6575~0~gge1004~0~~Y~0~-393.7008~0.2000~3996.0629,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C861298",
+      "mpn": "RT0603BRD072K43L",
       "designators": [
         "R131"
       ],
-      "lcsc": "C861298",
-      "mpn": "RT0603BRD072K43L",
-      "source_footprint": "SUP_R_0603_1608Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/YAGEO-RT0603BRD072K43L/C861298",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_R_0603_1608Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C861298/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "cf9a6a1d3a517b5a95a60db50383b78e5affa904244a27ac1ce33d26477f6993",
+      "footprint_uuid": "398691f1f785460098bbe5ee6590333c",
+      "footprint_title": "R0603",
+      "footprint_updated": 1766479705,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4002.966~3000~3.1751~3.4016~1~~2~0~4001.378 3001.7008 4001.378 2998.2992 4004.5531 2998.2992 4004.5531 3001.7008~0~gge1002~0~~Y~0~-393.7008~0.2000~4002.9655,3000",
+        "PAD~RECT~3997.034~3000~3.1751~3.4016~1~~1~0~3998.622 3001.7008 3998.622 2998.2992 3995.4469 2998.2992 3995.4469 3001.7008~0~gge1004~0~~Y~0~-393.7008~0.2000~3997.0345,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C471046",
+      "mpn": "TPS22953DQCR",
       "designators": [
         "U133"
       ],
-      "lcsc": "C471046",
-      "mpn": "TPS22953DQCR",
-      "source_footprint": "SUP_Texas_WSON10_DQC0010A",
-      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-TPS22953DQCR/C471046",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_Texas_WSON10_DQC0010A"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C471046/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "cf16620fb7a098b4a29e09702596102a005f98904e732cd701d6e4d3e4d30ced",
+      "footprint_uuid": "a6b2a5799e4643349db93d8f5c8eb2fa",
+      "footprint_title": "WSON-10_L3.0-W2.0-P0.50-BL-EP",
+      "footprint_updated": 1651322735,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~3996.063~3003.652~1.1024~1.9882~1~~1~0~3995.5118 3004.6457 3995.5118 3002.6575 3996.6142 3002.6575 3996.6142 3004.6457~0~gge1001~0.0000~~Y~0~0.0000~0.2000~3996.0630,3003.6516",
+        "PAD~RECT~3998.032~3003.652~1.1024~1.9882~1~~2~0~3997.4803 3004.6457 3997.4803 3002.6575 3998.5827 3002.6575 3998.5827 3004.6457~0~gge1003~0.0000~~Y~0~0.0000~0.2000~3998.0315,3003.6516",
+        "PAD~RECT~4000~3003.652~1.1024~1.9882~1~~3~0~3999.4488 3004.6457 3999.4488 3002.6575 4000.5512 3002.6575 4000.5512 3004.6457~0~gge1005~0.0000~~Y~0~0.0000~0.2000~4000.0000,3003.6516",
+        "PAD~RECT~4001.969~3003.652~1.1024~1.9882~1~~4~0~4001.4173 3004.6457 4001.4173 3002.6575 4002.5197 3002.6575 4002.5197 3004.6457~0~gge1007~0.0000~~Y~0~0.0000~0.2000~4001.9685,3003.6516",
+        "PAD~RECT~4003.937~3003.652~1.1024~1.9882~1~~5~0~4003.3858 3004.6457 4003.3858 3002.6575 4004.4882 3002.6575 4004.4882 3004.6457~0~gge1009~0.0000~~Y~0~0.0000~0.2000~4003.9370,3003.6516",
+        "PAD~RECT~3996.063~2996.348~1.1024~1.9882~1~~10~0~3995.5118 2995.3543 3995.5118 2997.3425 3996.6142 2997.3425 3996.6142 2995.3543~0~gge1011~0.0000~~Y~0~0.0000~0.2000~3996.0630,2996.3484",
+        "PAD~RECT~3998.032~2996.348~1.1024~1.9882~1~~9~0~3997.4803 2995.3543 3997.4803 2997.3425 3998.5827 2997.3425 3998.5827 2995.3543~0~gge1013~0.0000~~Y~0~0.0000~0.2000~3998.0315,2996.3484",
+        "PAD~RECT~4000~2996.348~1.1024~1.9882~1~~8~0~3999.4488 2995.3543 3999.4488 2997.3425 4000.5512 2997.3425 4000.5512 2995.3543~0~gge1015~0.0000~~Y~0~0.0000~0.2000~4000.0000,2996.3484",
+        "PAD~RECT~4001.969~2996.348~1.1024~1.9882~1~~7~0~4001.4173 2995.3543 4001.4173 2997.3425 4002.5197 2997.3425 4002.5197 2995.3543~0~gge1017~0.0000~~Y~0~0.0000~0.2000~4001.9685,2996.3484",
+        "PAD~RECT~4003.937~2996.348~1.1024~1.9882~1~~6~0~4003.3858 2995.3543 4003.3858 2997.3425 4004.4882 2997.3425 4004.4882 2995.3543~0~gge1019~0.0000~~Y~0~0.0000~0.2000~4003.9370,2996.3484",
+        "PAD~RECT~4000~3000~9.4488~3.3071~1~~11~0~3995.2756 3001.6535 3995.2756 2998.3465 4004.7244 2998.3465 4004.7244 3001.6535~0~gge1021~0.0000~~Y~0~0.0000~0.2000~4000.0000,3000.0000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C77075",
+      "mpn": "GRM21BR61C106KE15L",
       "designators": [
         "C140"
       ],
-      "lcsc": "C77075",
-      "mpn": "GRM21BR61C106KE15L",
-      "source_footprint": "SUP_C_0805_2012Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM21BR61C106KE15L/C77075",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_C_0805_2012Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C77075/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "f907308a1bb36d2162b9d25874085e44115ff6718eeb4194469fb44eb7790df7",
+      "footprint_uuid": "2ee8eb13a0124a108e622ce40c0c25a8",
+      "footprint_title": "C0805",
+      "footprint_updated": 1720420805,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4003.937~3000~5.5512~5.315~1~~2~0~4001.1615 3002.6575 4001.1615 2997.3425 4006.7127 2997.3425 4006.7127 3002.6575~0~gge1002~0~~Y~0~-393.7008~0.2000~4003.9371,3000",
+        "PAD~RECT~3996.063~3000~5.5512~5.315~1~~1~0~3998.8385 3002.6575 3998.8385 2997.3425 3993.2873 2997.3425 3993.2873 3002.6575~0~gge1004~0~~Y~0~-393.7008~0.2000~3996.0629,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C77075",
+      "mpn": "GRM21BR61C106KE15L",
       "designators": [
         "C142"
       ],
-      "lcsc": "C77075",
-      "mpn": "GRM21BR61C106KE15L",
-      "source_footprint": "SUP_C_0805_2012Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM21BR61C106KE15L/C77075",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_C_0805_2012Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C77075/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "f907308a1bb36d2162b9d25874085e44115ff6718eeb4194469fb44eb7790df7",
+      "footprint_uuid": "2ee8eb13a0124a108e622ce40c0c25a8",
+      "footprint_title": "C0805",
+      "footprint_updated": 1720420805,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4003.937~3000~5.5512~5.315~1~~2~0~4001.1615 3002.6575 4001.1615 2997.3425 4006.7127 2997.3425 4006.7127 3002.6575~0~gge1002~0~~Y~0~-393.7008~0.2000~4003.9371,3000",
+        "PAD~RECT~3996.063~3000~5.5512~5.315~1~~1~0~3998.8385 3002.6575 3998.8385 2997.3425 3993.2873 2997.3425 3993.2873 3002.6575~0~gge1004~0~~Y~0~-393.7008~0.2000~3996.0629,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C105576",
+      "mpn": "RC0603FR-072KL",
       "designators": [
         "R133"
       ],
-      "lcsc": "C105576",
-      "mpn": "RC0603FR-072KL",
-      "source_footprint": "SUP_R_0603_1608Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/YAGEO-RC0603FR072KL/C105576",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_R_0603_1608Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C105576/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "d0557ae0710bb1b985d1c20fb9b093deb61d3dfaf190531ab98a863911623f7f",
+      "footprint_uuid": "398691f1f785460098bbe5ee6590333c",
+      "footprint_title": "R0603",
+      "footprint_updated": 1766479705,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4002.966~3000~3.1751~3.4016~1~~2~0~4001.378 3001.7008 4001.378 2998.2992 4004.5531 2998.2992 4004.5531 3001.7008~0~gge1002~0~~Y~0~-393.7008~0.2000~4002.9655,3000",
+        "PAD~RECT~3997.034~3000~3.1751~3.4016~1~~1~0~3998.622 3001.7008 3998.622 2998.2992 3995.4469 2998.2992 3995.4469 3001.7008~0~gge1004~0~~Y~0~-393.7008~0.2000~3997.0345,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C19189332",
+      "mpn": "MSPM0L1106TRHBR",
       "designators": [
         "U130"
       ],
-      "lcsc": "C19189332",
-      "mpn": "MSPM0L1106TRHBR",
-      "source_footprint": "SUP_QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm",
-      "evidence_url": "https://jlcpcb.com/partdetail/TexasInstruments-MSPM0L1106TRHBR/C19189332",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C19189332/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "f4d88122fb39f81bf08adf893e3ccf42f8c05a5fa3301c91dead3bfcf8d3a8e3",
+      "footprint_uuid": "079f5c3a24e14786bee8e1227122b0f2",
+      "footprint_title": "VQFN-32_L5.0-W5.0-P0.50-TL-EP3.5",
+      "footprint_updated": 1677220533,
+      "origin_easyeda": [
+        3991.843,
+        2993.843
+      ],
+      "pad_shapes": [
+        "PAD~OVAL~3984.953~2984.394~1.1024~3.1496~1~~32~0~3984.953 2983.3704 3984.953 2985.4176~0~gge1339~0~~Y~0~-393.7~0.1969~3984.9526,2984.3949",
+        "PAD~OVAL~3986.921~2984.394~1.1024~3.1496~1~~31~0~3986.921 2983.3704 3986.921 2985.4176~0~gge1342~0~~Y~0~-393.7~0.1969~3986.9206,2984.3944",
+        "PAD~OVAL~3988.89~2984.394~1.1024~3.1496~1~~30~0~3988.89 2983.3704 3988.89 2985.4176~0~gge1345~0~~Y~0~-393.7~0.1969~3988.8896,2984.3949",
+        "PAD~OVAL~3990.858~2984.394~1.1024~3.1496~1~~29~0~3990.858 2983.3704 3990.858 2985.4176~0~gge1348~0~~Y~0~-393.7~0.1969~3990.8576,2984.3944",
+        "PAD~OVAL~3992.827~2984.394~1.1024~3.1496~1~~28~0~3992.827 2983.3704 3992.827 2985.4176~0~gge1351~0~~Y~0~-393.7~0.1969~3992.8266,2984.3948",
+        "PAD~OVAL~3994.795~2984.394~1.1024~3.1496~1~~27~0~3994.795 2983.3704 3994.795 2985.4176~0~gge1354~0~~Y~0~-393.7~0.1969~3994.7946,2984.3943",
+        "PAD~OVAL~3996.764~2984.394~1.1024~3.1496~1~~26~0~3996.764 2983.3704 3996.764 2985.4176~0~gge1357~0~~Y~0~-393.7~0.1969~3996.7636,2984.3948",
+        "PAD~OVAL~3998.732~2984.394~1.1024~3.1496~1~~25~0~3998.732 2983.3704 3998.732 2985.4176~0~gge1360~0~~Y~0~-393.7~0.1969~3998.7316,2984.3943",
+        "PAD~OVAL~4001.292~2986.954~3.1496~1.1024~1~~24~0~4000.2684 2986.954 4002.3156 2986.954~0~gge1363~0~~Y~0~-393.7~0.1969~4001.2926,2986.9543",
+        "PAD~OVAL~4001.292~2988.922~3.1496~1.1024~1~~23~0~4000.2684 2988.922 4002.3156 2988.922~0~gge1366~0~~Y~0~-393.7~0.1969~4001.2926,2988.9218",
+        "PAD~OVAL~4001.292~2990.891~3.1496~1.1024~1~~22~0~4000.2684 2990.891 4002.3156 2990.891~0~gge1369~0~~Y~0~-393.7~0.1969~4001.2926,2990.8913",
+        "PAD~OVAL~4001.292~2992.859~3.1496~1.1024~1~~21~0~4000.2684 2992.859 4002.3156 2992.859~0~gge1372~0~~Y~0~-393.7~0.1969~4001.2926,2992.8588",
+        "PAD~OVAL~4001.292~2994.828~3.1496~1.1024~1~~20~0~4000.2684 2994.828 4002.3156 2994.828~0~gge1375~0~~Y~0~-393.7~0.1969~4001.2926,2994.8282",
+        "PAD~OVAL~4001.292~2996.796~3.1496~1.1024~1~~19~0~4000.2684 2996.796 4002.3156 2996.796~0~gge1378~0~~Y~0~-393.7~0.1969~4001.2926,2996.7957",
+        "PAD~OVAL~4001.292~2998.765~3.1496~1.1024~1~~18~0~4000.2684 2998.765 4002.3156 2998.765~0~gge1381~0~~Y~0~-393.7~0.1969~4001.2926,2998.7652",
+        "PAD~OVAL~4001.292~3000.733~3.1496~1.1024~1~~17~0~4000.2684 3000.733 4002.3156 3000.733~0~gge1384~0~~Y~0~-393.7~0.1969~4001.2926,3000.7327",
+        "PAD~OVAL~3998.732~3003.292~1.1024~3.1496~1~~16~0~3998.732 3002.2684 3998.732 3004.3156~0~gge1387~0~~Y~0~-393.7~0.1969~3998.7332,3003.292",
+        "PAD~OVAL~3996.764~3003.292~1.1024~3.1496~1~~15~0~3996.764 3002.2684 3996.764 3004.3156~0~gge1390~0~~Y~0~-393.7~0.1969~3996.7652,3003.2915",
+        "PAD~OVAL~3994.795~3003.292~1.1024~3.1496~1~~14~0~3994.795 3002.2684 3994.795 3004.3156~0~gge1393~0~~Y~0~-393.7~0.1969~3994.7962,3003.292",
+        "PAD~OVAL~3992.827~3003.292~1.1024~3.1496~1~~13~0~3992.827 3002.2684 3992.827 3004.3156~0~gge1396~0~~Y~0~-393.7~0.1969~3992.8282,3003.2915",
+        "PAD~OVAL~3990.858~3003.292~1.1024~3.1496~1~~12~0~3990.858 3002.2684 3990.858 3004.3156~0~gge1399~0~~Y~0~-393.7~0.1969~3990.8592,3003.2919",
+        "PAD~OVAL~3988.89~3003.292~1.1024~3.1496~1~~11~0~3988.89 3002.2684 3988.89 3004.3156~0~gge1402~0~~Y~0~-393.7~0.1969~3988.8912,3003.2914",
+        "PAD~OVAL~3986.921~3003.292~1.1024~3.1496~1~~10~0~3986.921 3002.2684 3986.921 3004.3156~0~gge1405~0~~Y~0~-393.7~0.1969~3986.9222,3003.2919",
+        "PAD~OVAL~3984.953~3003.292~1.1024~3.1496~1~~9~0~3984.953 3002.2684 3984.953 3004.3156~0~gge1408~0~~Y~0~-393.7~0.1969~3984.9542,3003.2914",
+        "PAD~OVAL~3982.394~3000.733~3.1496~1.1024~1~~8~0~3981.3704 3000.733 3983.4176 3000.733~0~gge1411~0~~Y~0~-393.7~0.1969~3982.3933,3000.7327",
+        "PAD~OVAL~3982.394~2998.765~3.1496~1.1024~1~~7~0~3981.3704 2998.765 3983.4176 2998.765~0~gge1414~0~~Y~0~-393.7~0.1969~3982.3933,2998.7642",
+        "PAD~OVAL~3982.394~2996.796~3.1496~1.1024~1~~6~0~3981.3704 2996.796 3983.4176 2996.796~0~gge1417~0~~Y~0~-393.7~0.1969~3982.3933,2996.7957",
+        "PAD~OVAL~3982.394~2994.828~3.1496~1.1024~1~~5~0~3981.3704 2994.828 3983.4176 2994.828~0~gge1420~0~~Y~0~-393.7~0.1969~3982.3933,2994.8272",
+        "PAD~OVAL~3982.394~2992.859~3.1496~1.1024~1~~4~0~3981.3704 2992.859 3983.4176 2992.859~0~gge1423~0~~Y~0~-393.7~0.1969~3982.3933,2992.8586",
+        "PAD~OVAL~3982.394~2990.891~3.1496~1.1024~1~~3~0~3981.3704 2990.891 3983.4176 2990.891~0~gge1426~0~~Y~0~-393.7~0.1969~3982.3933,2990.8901",
+        "PAD~OVAL~3982.394~2988.922~3.1496~1.1024~1~~2~0~3981.3704 2988.922 3983.4176 2988.922~0~gge1429~0~~Y~0~-393.7~0.1969~3982.3933,2988.9216",
+        "PAD~OVAL~3982.394~2986.954~3.1496~1.1024~1~~1~0~3981.3704 2986.954 3983.4176 2986.954~0~gge1432~0~~Y~0~-393.7~0.1969~3982.3933,2986.9531",
+        "PAD~RECT~3991.842~2993.843~13.5827~13.5827~1~~33~0~3985.0511 2987.0514 3998.6337 2987.0514 3998.6337 3000.634 3985.0511 3000.634~0~gge1435~0~~Y~0~-393.7~0.1969~3991.8421,2993.8424"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C86019",
+      "mpn": "GRM188R71C474KA88D",
       "designators": [
         "C143"
       ],
-      "lcsc": "C86019",
-      "mpn": "GRM188R71C474KA88D",
-      "source_footprint": "SUP_C_0603_1608Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM188R71C474KA88D/C86019",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_C_0603_1608Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C86019/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "a7e1d4e2dd767304d871a015b679e05bc90e89faf234d94c845c04558148e285",
+      "footprint_uuid": "f8151fdc728a41ebbc304e11d39e5437",
+      "footprint_title": "C0603",
+      "footprint_updated": 1734501471,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4002.756~3000~3.1496~3.5433~1~~2~0~4001.1811 2998.2283 4004.3307 2998.2283 4004.3307 3001.7717 4001.1811 3001.7717~0~gge1002~0~~Y~0~0.0000~0.2000~4002.7555,3000",
+        "PAD~RECT~3997.244~3000~3.1496~3.5433~1~~1~0~3995.6693 2998.2283 3998.8189 2998.2283 3998.8189 3001.7717 3995.6693 3001.7717~0~gge1004~0~~Y~0~0.0000~0.2000~3997.2445,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C105579",
+      "mpn": "RC0603FR-0747KL",
       "designators": [
         "R134"
       ],
-      "lcsc": "C105579",
-      "mpn": "RC0603FR-0747KL",
-      "source_footprint": "SUP_R_0603_1608Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/YAGEO-RC0603FR0747KL/C105579",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_R_0603_1608Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C105579/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "4fc7cf2d3d2d42402a5ced9c04a38b95f285bc1d934612364fe52109b3459e17",
+      "footprint_uuid": "398691f1f785460098bbe5ee6590333c",
+      "footprint_title": "R0603",
+      "footprint_updated": 1766479705,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4002.966~3000~3.1751~3.4016~1~~2~0~4001.378 3001.7008 4001.378 2998.2992 4004.5531 2998.2992 4004.5531 3001.7008~0~gge1002~0~~Y~0~-393.7008~0.2000~4002.9655,3000",
+        "PAD~RECT~3997.034~3000~3.1751~3.4016~1~~1~0~3998.622 3001.7008 3998.622 2998.2992 3995.4469 2998.2992 3995.4469 3001.7008~0~gge1004~0~~Y~0~-393.7008~0.2000~3997.0345,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C326730",
+      "mpn": "RT0603BRD071ML",
       "designators": [
         "R135"
       ],
-      "lcsc": "C326730",
-      "mpn": "RT0603BRD071ML",
-      "source_footprint": "SUP_R_0603_1608Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/YAGEO-RT0603BRD071ML/C326730",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_R_0603_1608Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C326730/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "3e763efc1ab207083250e81f0d929f2bf3732c349bbbf1b68aecadbffa3fafd9",
+      "footprint_uuid": "398691f1f785460098bbe5ee6590333c",
+      "footprint_title": "R0603",
+      "footprint_updated": 1766479705,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4002.966~3000~3.1751~3.4016~1~~2~0~4001.378 3001.7008 4001.378 2998.2992 4004.5531 2998.2992 4004.5531 3001.7008~0~gge1002~0~~Y~0~-393.7008~0.2000~4002.9655,3000",
+        "PAD~RECT~3997.034~3000~3.1751~3.4016~1~~1~0~3998.622 3001.7008 3998.622 2998.2992 3995.4469 2998.2992 3995.4469 3001.7008~0~gge1004~0~~Y~0~-393.7008~0.2000~3997.0345,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C326734",
+      "mpn": "RT0603BRD07150KL",
       "designators": [
         "R136"
       ],
-      "lcsc": "C326734",
-      "mpn": "RT0603BRD07150KL",
-      "source_footprint": "SUP_R_0603_1608Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/YAGEO-RT0603BRD07150KL/C326734",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_R_0603_1608Metric"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C326734/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "c5c44f52bed3519a4e827e96f31dd8bbcaec5564b7d8a378f8557068c87a800a",
+      "footprint_uuid": "398691f1f785460098bbe5ee6590333c",
+      "footprint_title": "R0603",
+      "footprint_updated": 1766479705,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4002.966~3000~3.1751~3.4016~1~~2~0~4001.378 3001.7008 4001.378 2998.2992 4004.5531 2998.2992 4004.5531 3001.7008~0~gge1002~0~~Y~0~-393.7008~0.2000~4002.9655,3000",
+        "PAD~RECT~3997.034~3000~3.1751~3.4016~1~~1~0~3998.622 3001.7008 3998.622 2998.2992 3995.4469 2998.2992 3995.4469 3001.7008~0~gge1004~0~~Y~0~-393.7008~0.2000~3997.0345,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C6558713",
+      "mpn": "FTS-105-01-L-S",
       "designators": [
         "J131"
       ],
-      "lcsc": "C6558713",
-      "mpn": "FTS-105-01-L-S",
-      "source_footprint": "SUP_PinHeader_1x05_P1.27mm_Vertical",
-      "evidence_url": "https://jlcpcb.com/partdetail/Samtec-FTS_105_01_LS/C6558713",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "SUP_PinHeader_1x05_P1.27mm_Vertical"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C6558713/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "06e02998f631e84a8a8500198410ffe6240373d4ec2d0c2d991fd3ec8c423bbe",
+      "footprint_uuid": "13fe230224574e2f8726c079e94a5cae",
+      "footprint_title": "HDR-TH_5P-P1.27-V-M",
+      "footprint_updated": 1676950023,
+      "origin_easyeda": [
+        4010,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4000~3000~3.937~3.937~11~~1~1.378~3998.0315 2998.0315 4001.9685 2998.0315 4001.9685 3001.9685 3998.0315 3001.9685~0~gge8~0~~Y~0~0~0.2~4000,3000",
+        "PAD~ELLIPSE~4005~3000~3.937~3.937~11~~2~1.378~~0~gge20~0~~Y~0~0~0.2~4005,3000",
+        "PAD~ELLIPSE~4010~3000~3.937~3.937~11~~3~1.378~~0~gge28~0~~Y~0~0~0.2~4010,3000",
+        "PAD~ELLIPSE~4015~3000~3.937~3.937~11~~4~1.378~~0~gge36~0~~Y~0~0~0.2~4015,3000",
+        "PAD~ELLIPSE~4020~3000~3.937~3.937~11~~5~1.378~~0~gge44~0~~Y~0~0~0.2~4020,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "rigid_centres",
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C4153167",
+      "mpn": "MAX-M10S-00B",
       "designators": [
         "U21"
       ],
-      "lcsc": "C4153167",
-      "mpn": "MAX-M10S-00B",
-      "source_footprint": "RF_GPS__ublox_MAX",
-      "evidence_url": "https://jlcpcb.com/partdetail/UBLOX-MAX_M10S00B/C4153167",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "RF_GPS__ublox_MAX"
+      ],
+      "side": "Bottom",
+      "evidence_url": "https://easyeda.com/api/products/C4153167/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "73ff86290a2f625f3aa3031284d26767a3c20a8a8a54ca3ec7bbba583554bedc",
+      "footprint_uuid": "14e7fbdbfe4b40ea8daa7cd2f07416f1",
+      "footprint_title": "SMD-18_L10.1-W9.7-P1.10-TL_SKG09F",
+      "footprint_updated": 1661514118,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~3981.102~2982.677~7.0866~2.7559~1~~1~0~3977.5591 2981.2992 3984.6457 2981.2992 3984.6457 2984.0552 3977.5591 2984.0552~0~gge8~0~~Y~0~0~0.1969~3981.1024,2982.6772",
+        "PAD~RECT~3981.102~2987.008~7.0866~2.7559~1~~2~0~3977.559 2985.6299 3984.6456 2985.6299 3984.6456 2988.3859 3977.559 2988.3859~0~gge20~0~~Y~0~0~0.1969~3981.1023,2987.0079",
+        "PAD~RECT~3981.102~2991.339~7.0866~2.7559~1~~3~0~3977.559 2989.9606 3984.6456 2989.9606 3984.6456 2992.7166 3977.559 2992.7166~0~gge28~0~~Y~0~0~0.1969~3981.1023,2991.3386",
+        "PAD~RECT~3981.102~2995.669~7.0866~2.7559~1~~4~0~3977.559 2994.2913 3984.6456 2994.2913 3984.6456 2997.0473 3977.559 2997.0473~0~gge36~0~~Y~0~0~0.1969~3981.1023,2995.6693",
+        "PAD~RECT~3981.102~3000~7.0866~2.7559~1~~5~0~3977.559 2998.622 3984.6456 2998.622 3984.6456 3001.378 3977.559 3001.378~0~gge44~0~~Y~0~0~0.1969~3981.1023,3000",
+        "PAD~RECT~3981.102~3004.331~7.0866~2.7559~1~~6~0~3977.559 3002.9527 3984.6456 3002.9527 3984.6456 3005.7087 3977.559 3005.7087~0~gge52~0~~Y~0~0~0.1969~3981.1023,3004.3307",
+        "PAD~RECT~3981.102~3008.661~7.0866~2.7559~1~~7~0~3977.559 3007.2834 3984.6456 3007.2834 3984.6456 3010.0394 3977.559 3010.0394~0~gge60~0~~Y~0~0~0.1969~3981.1023,3008.6614",
+        "PAD~RECT~3981.102~3012.992~7.0866~2.7559~1~~8~0~3977.559 3011.6141 3984.6456 3011.6141 3984.6456 3014.3701 3977.559 3014.3701~0~gge74~0~~Y~0~0~0.1969~3981.1023,3012.9921",
+        "PAD~RECT~3981.102~3017.323~7.0866~2.7559~1~~9~0~3977.559 3015.9448 3984.6456 3015.9448 3984.6456 3018.7008 3977.559 3018.7008~0~gge82~0~~Y~0~0~0.1969~3981.1023,3017.3228",
+        "PAD~RECT~4018.898~3017.323~7.0866~2.7559~1~~10~0~4015.3544 3015.9448 4022.441 3015.9448 4022.441 3018.7008 4015.3544 3018.7008~0~gge90~0~~Y~0~0~0.1969~4018.8977,3017.3228",
+        "PAD~RECT~4018.898~3012.992~7.0866~2.7559~1~~11~0~4015.3544 3011.6141 4022.441 3011.6141 4022.441 3014.3701 4015.3544 3014.3701~0~gge98~0~~Y~0~0~0.1969~4018.8977,3012.9921",
+        "PAD~RECT~4018.898~3008.661~7.0866~2.7559~1~~12~0~4015.3544 3007.2834 4022.441 3007.2834 4022.441 3010.0394 4015.3544 3010.0394~0~gge106~0~~Y~0~0~0.1969~4018.8977,3008.6614",
+        "PAD~RECT~4018.898~3004.331~7.0866~2.7559~1~~13~0~4015.3544 3002.9527 4022.441 3002.9527 4022.441 3005.7087 4015.3544 3005.7087~0~gge114~0~~Y~0~0~0.1969~4018.8977,3004.3307",
+        "PAD~RECT~4018.898~3000~7.0866~2.7559~1~~14~0~4015.3544 2998.622 4022.441 2998.622 4022.441 3001.378 4015.3544 3001.378~0~gge122~0~~Y~0~0~0.1969~4018.8977,3000",
+        "PAD~RECT~4018.898~2995.669~7.0866~2.7559~1~~15~0~4015.3544 2994.2913 4022.441 2994.2913 4022.441 2997.0473 4015.3544 2997.0473~0~gge130~0~~Y~0~0~0.1969~4018.8977,2995.6693",
+        "PAD~RECT~4018.898~2991.339~7.0866~2.7559~1~~16~0~4015.3544 2989.9606 4022.441 2989.9606 4022.441 2992.7166 4015.3544 2992.7166~0~gge138~0~~Y~0~0~0.1969~4018.8977,2991.3386",
+        "PAD~RECT~4018.898~2987.008~7.0866~2.7559~1~~17~0~4015.3544 2985.6299 4022.441 2985.6299 4022.441 2988.3859 4015.3544 2988.3859~0~gge146~0~~Y~0~0~0.1969~4018.8977,2987.0079",
+        "PAD~RECT~4018.898~2982.677~7.0866~2.7559~1~~18~0~4015.3543 2981.2992 4022.4409 2981.2992 4022.4409 2984.0552 4015.3543 2984.0552~0~gge154~0~~Y~0~0~0.1969~4018.8976,2982.6772"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "bottom_projection": "mirror_local_x_then_ccw",
+      "bottom_basis": "C4153167 numbered catalog lands are projected by mirroring local X then CCW rotation, at the native bottom body centre. Absolute board XY is retained; private supplier model preview is still required.",
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C20617216",
+      "mpn": "HL-SMA-KWE-02",
       "designators": [
         "J140"
       ],
-      "lcsc": "C20617216",
-      "mpn": "HL-SMA-KWE-02",
-      "source_footprint": "GNSS_HL_SMA_KWE_02",
-      "evidence_url": "https://jlcpcb.com/partdetail/HenryTech-HL_SMA_KWE02/C20617216",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "GNSS_HL_SMA_KWE_02"
+      ],
+      "side": "Top",
+      "evidence_url": "https://easyeda.com/api/products/C20617216/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "fc91786275252a56aafab77863995b81b7bc05962920ed7343ed78d857fac779",
+      "footprint_uuid": "cb5e5f240a4e4c2ba437711b29dd1981",
+      "footprint_title": "SMA-TH_DL-SMA-KWE",
+      "footprint_updated": 1778318501,
+      "origin_easyeda": [
+        3992.1361,
+        2945.3639
+      ],
+      "pad_shapes": [
+        "PAD~ELLIPSE~3982.136~2955.364~9.8425~9.8425~11~~1~2.9528~~90~gge165~0~~Y~0~0~0.2~3982.1361,2955.3639",
+        "PAD~ELLIPSE~3982.136~2935.364~9.8425~9.8425~11~~2~2.9528~~90~gge168~0~~Y~0~0~0.2~3982.1361,2935.3639",
+        "PAD~ELLIPSE~4002.136~2935.364~9.8425~9.8425~11~~3~2.9528~~90~gge171~0~~Y~0~0~0.2~4002.1361,2935.3639",
+        "PAD~ELLIPSE~4002.136~2955.364~9.8425~9.8425~11~~4~2.9528~~90~gge174~0~~Y~0~0~0.2~4002.1361,2955.3639",
+        "PAD~ELLIPSE~3992.136~2945.364~9.8425~9.8425~11~~5~2.5591~~90~gge177~0~~Y~0~0~0.2~3992.1361,2945.3639"
+      ],
+      "pad_aliases": {
+        "1": "2",
+        "2": "2",
+        "3": "2",
+        "4": "2",
+        "5": "1"
+      },
+      "fit_method": "rigid_body_centres",
+      "nonpolar_two_terminal": false,
+      "body_shape": "SOLIDREGION~99~~M 4003.9471 2957.1749 L 3946.8606 2957.1749 L 3946.8606 2933.5529 L 4003.9471 2933.5529 Z~solid~gge180~~~~0",
+      "centre_tolerance_mm": 0.02,
+      "body_fit_basis": "HL-SMA-KWE-02: catalog pin 5 is centre contact; 1..4 are shell. Frozen body polygon extends to local -X, matching native F.Fab exit. Catalog shell pitch 5.08 mm versus manufacturer/native 5.10 mm gives 0.0142 mm radial mismatch, bounded by 0.020 mm; all five hole centres plus asymmetric body centre are fitted without scaling.",
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C86040",
+      "mpn": "GRM21BR71C475KA73L",
       "designators": [
         "C146"
       ],
-      "lcsc": "C86040",
-      "mpn": "GRM21BR71C475KA73L",
-      "source_footprint": "Capacitor_SMD__C_0805_2012Metric",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM21BR71C475KA73L/C86040",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "Capacitor_SMD__C_0805_2012Metric"
+      ],
+      "side": "Bottom",
+      "evidence_url": "https://easyeda.com/api/products/C86040/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "e0fd5f2b0bc35949cc76f82353492cf43b8a3bfa82062d68c2df2e01aed4ce9a",
+      "footprint_uuid": "2ee8eb13a0124a108e622ce40c0c25a8",
+      "footprint_title": "C0805",
+      "footprint_updated": 1720420805,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4003.937~3000~5.5512~5.315~1~~2~0~4001.1615 3002.6575 4001.1615 2997.3425 4006.7127 2997.3425 4006.7127 3002.6575~0~gge1002~0~~Y~0~-393.7008~0.2000~4003.9371,3000",
+        "PAD~RECT~3996.063~3000~5.5512~5.315~1~~1~0~3998.8385 3002.6575 3998.8385 2997.3425 3993.2873 2997.3425 3993.2873 3002.6575~0~gge1004~0~~Y~0~-393.7008~0.2000~3996.0629,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "bottom_projection": "mirror_local_x_then_ccw",
+      "bottom_basis": "C86040 numbered catalog lands are projected by mirroring local X then CCW rotation, at the native bottom body centre. Absolute board XY is retained; private supplier model preview is still required.",
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C76970",
+      "mpn": "GRM1555C1H470JA01D",
       "designators": [
         "C148"
       ],
-      "lcsc": "C76970",
-      "mpn": "GRM1555C1H470JA01D",
-      "source_footprint": "GNSS_C0402",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM1555C1H470JA01D/C76970",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "GNSS_C0402"
+      ],
+      "side": "Bottom",
+      "evidence_url": "https://easyeda.com/api/products/C76970/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "b8d3cf91a8e57191adaafbcd448457d97b7b933ad67a33ad274ccfa87761f915",
+      "footprint_uuid": "0821ed6ea50c44f4909e4be7610e4198",
+      "footprint_title": "C0402",
+      "footprint_updated": 1766729395,
+      "origin_easyeda": [
+        4000,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4001.654~3000~1.9685~2.126~1~~2~0~4000.6693 2998.937 4002.6378 2998.937 4002.6378 3001.063 4000.6693 3001.063~0~gge1111~0~~Y~0~0~0.2000~4001.6534,3000",
+        "PAD~RECT~3998.346~3000~1.9685~2.126~1~~1~0~3997.3622 2998.937 3999.3307 2998.937 3999.3307 3001.063 3997.3622 3001.063~0~gge1114~0~~Y~0~0~0.2000~3998.3466,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "bottom_projection": "mirror_local_x_then_ccw",
+      "bottom_basis": "C76970 numbered catalog lands are projected by mirroring local X then CCW rotation, at the native bottom body centre. Absolute board XY is retained; private supplier model preview is still required.",
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C45961",
+      "mpn": "PESD5V0F1BL,315",
       "designators": [
         "D140"
       ],
-      "lcsc": "C45961",
-      "mpn": "PESD5V0F1BL,315",
-      "source_footprint": "GNSS_SOD882",
-      "evidence_url": "https://jlcpcb.com/partdetail/Nexperia-PESD5V0F1BL315/C45961",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+      "source_footprints": [
+        "GNSS_SOD882"
+      ],
+      "side": "Bottom",
+      "evidence_url": "https://easyeda.com/api/products/C45961/components",
+      "checked_on": "2026-10-20",
+      "response_sha256": "cd9794f64a53dcfdc4e6653a3fb66eed1e0d715d6d24b0fa642395959c3d4350",
+      "footprint_uuid": "21b63a6f576642699c960d78d9339770",
+      "footprint_title": "SOD-882_L1.0-W0.6-BI",
+      "footprint_updated": 1784101093,
+      "origin_easyeda": [
+        411.0005,
+        -495
+      ],
+      "pad_shapes": [
+        "PAD~RECT~412.28~-495~1.1811~2.3622~1~~2~0~411.6889 -496.1811 412.8701 -496.1811 412.8701 -493.8189 411.6889 -493.8189~0~gge112~0~~Y~0~0~0.1969~412.2795,-495",
+        "PAD~RECT~409.721~-495~1.1811~2.3622~1~~1~0~409.1299 -496.1811 410.3111 -496.1811 410.3111 -493.8189 409.1299 -493.8189~0~gge124~0~~Y~0~0~0.1969~409.7204,-495"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": false,
+      "bottom_projection": "mirror_local_x_then_ccw",
+      "bottom_basis": "C45961 numbered catalog lands are projected by mirroring local X then CCW rotation, at the native bottom body centre. Absolute board XY is retained; private supplier model preview is still required.",
+      "land_basis": "Nexperia PESD5V0F1BL Fig.8: 0.70 mm copper-land pitch, 0.40 x 0.70 mm rounded copper and 0.30 x 0.60 mm paste. Catalog 0.65 mm pitch has full overlap with the manufacturer lands.",
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C1330587",
+      "mpn": "LQW15AN56NG80D",
       "designators": [
         "L140"
       ],
-      "lcsc": "C1330587",
-      "mpn": "LQW15AN56NG80D",
-      "source_footprint": "GNSS_HP0402",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN56NG80D/C1330587",
+      "source_footprints": [
+        "GNSS_HP0402"
+      ],
+      "side": "Bottom",
+      "evidence_url": "https://easyeda.com/api/products/C1330587/components",
       "checked_on": "2026-10-20",
-      "reason": "Exact Murata catalog identity established and manufacturer terminal envelope overlaps native lands. Public supplier numbered-pad service returned HTTP 403 on 2026-10-20. Native origin/rotation retained; supplier centroid/numbered-pad review remains a manufacturing hold."
+      "response_sha256": "40d9132d83bc5f15a3e33cc0ad97caa37e0065fe741ef6a88ddfe6ad78ed0f6e",
+      "footprint_uuid": "35976ddb20d744a28c10d56ad0685c6c",
+      "footprint_title": "L0402-SMD_L1.0-W0.6-LQW15AN2N5D80",
+      "footprint_updated": 1653051919,
+      "origin_easyeda": [
+        4000.0005,
+        3000
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4001.969~3000~1.5748~2.5591~1~~2~0~4001.1816 2998.7205 4002.7564 2998.7205 4002.7564 3001.2795 4001.1816 3001.2795~0~gge9~0~~Y~0~0~0.1969~4001.9685,3000",
+        "PAD~RECT~3998.032~3000~1.5748~2.5591~1~~1~0~3998.8194 3001.2795 3997.2446 3001.2795 3997.2446 2998.7205 3998.8194 2998.7205~180~gge21~0~~Y~0~0~0.1969~3998.0315,3000"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "bottom_projection": "mirror_local_x_then_ccw",
+      "bottom_basis": "C1330587 numbered catalog lands are projected by mirroring local X then CCW rotation, at the native bottom body centre. Absolute board XY is retained; private supplier model preview is still required.",
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     },
     {
+      "lcsc": "C412276",
+      "mpn": "LQW15AN3N6G80D",
       "designators": [
         "L141"
       ],
-      "lcsc": "C412276",
-      "mpn": "LQW15AN3N6G80D",
-      "source_footprint": "GNSS_HP0402",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN3N6G80D/C412276",
+      "source_footprints": [
+        "GNSS_HP0402"
+      ],
+      "side": "Bottom",
+      "evidence_url": "https://easyeda.com/api/products/C412276/components",
       "checked_on": "2026-10-20",
-      "reason": "Exact Murata catalog identity established and manufacturer terminal envelope overlaps native lands. Public supplier numbered-pad service returned HTTP 403 on 2026-10-20. Native origin/rotation retained; supplier centroid/numbered-pad review remains a manufacturing hold."
+      "response_sha256": "cabc4e5d6b922bd007918d8425dcb5b5c44c4f6d56a702e2331de8022055266a",
+      "footprint_uuid": "44ff893ac5a84521a792944467d5c569",
+      "footprint_title": "IND-SMD_L1.0-W0.6",
+      "footprint_updated": 1649904844,
+      "origin_easyeda": [
+        400,
+        300
+      ],
+      "pad_shapes": [
+        "PAD~RECT~398.292~300~1.9685~2.5512~1~~1~0~397.3081 298.7244 399.2767 298.7244 399.2767 301.2756 397.3081 301.2756~0~rep5~0~~Y~0~0~0.2~398.2921,300",
+        "PAD~RECT~401.708~300~1.9685~2.5512~1~~2~0~400.7233 298.7244 402.6919 298.7244 402.6919 301.2756 400.7233 301.2756~0~rep6~0~~Y~0~0~0.2~401.7079,300"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "bottom_projection": "mirror_local_x_then_ccw",
+      "bottom_basis": "C412276 numbered catalog lands are projected by mirroring local X then CCW rotation, at the native bottom body centre. Absolute board XY is retained; private supplier model preview is still required.",
+      "supplier_attribution": "JLCEDA/EasyEDA Official Library (https://lceda.cn/; https://easyeda.com/)"
     }
   ],
-  "require_complete_coverage": true
+  "unverified": [],
+  "require_complete_coverage": true,
+  "supplier_geometry_retrieval": {
+    "checked_on": "2026-10-20",
+    "method": "Windows curl HTTPS GET of exact public EasyEDA component endpoints",
+    "catalog_records": 34,
+    "placements_added": 53,
+    "authentication_required": false
+  }
 }

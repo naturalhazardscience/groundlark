@@ -130,6 +130,18 @@ def verify_board(board):
     _require_hardware((fps['U21'].IsFlipped()), lambda: ('GNSS underside clearance'))
     _require_hardware((fps['U21'].GetValue()=='MAX-M10S-00B'), lambda: ('gnss_checks.py:51: hardware validation condition'))
     _require_hardware((fps['D140'].GetValue()=='PESD5V0F1BL'), lambda: ('gnss_checks.py:52: hardware validation condition'))
+    # Nexperia PESD5V0F1BL Fig.8: copper 0.4 x 0.7, paste 0.3 x 0.6,
+    # pitch 0.7 mm. This fixture is independent of supplier registration.
+    esd=fps['D140'];lands=[q for q in esd.Pads() if q.GetNumber()]
+    if len(lands)!=2 or not esd.IsFlipped():raise ValueError('SOD882 lands/side')
+    if abs(p.ToMM((lands[0].GetPosition()-lands[1].GetPosition()).EuclideanNorm())-.7)>.001:
+        raise ValueError('SOD882 copper land pitch')
+    for q in lands:
+        if math.dist(xy(q.GetSize()),(.4,.7))>.001 or q.IsOnLayer(p.B_Paste):
+            raise ValueError('SOD882 copper/paste separation')
+    paste=[q for q in esd.Pads() if q.IsOnLayer(p.B_Paste)]
+    if len(paste)!=2 or any(math.dist(xy(q.GetSize()),(.3,.6))>.001 for q in paste):
+        raise ValueError('SOD882 stencil aperture')
     rf=[t for t in board.GetTracks() if t.GetNetname()=='GNSS_RF']
     _require_hardware((rf and all(not isinstance(t,p.PCB_VIA) and t.GetLayer()==p.B_Cu for t in rf)), lambda: ('RF path must stay on B.Cu'))
     _require_hardware((sum(p.ToMM(t.GetLength()) for t in rf)<3), lambda: ('RF input stub too long'))

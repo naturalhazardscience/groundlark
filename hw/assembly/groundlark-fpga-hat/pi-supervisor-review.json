@@ -1,5 +1,5 @@
 {
-  "status": "Partial dated catalog observations recorded; full procurement and numbered supplier-pad review pending; no fabrication release",
+  "status": "Frozen numbered supplier-pad registration complete; order preview, procurement and physical qualification pending; no fabrication release",
   "manufacturer_evidence": [
     "https://www.ti.com/lit/ds/symlink/mspm0l1106.pdf",
     "https://www.ti.com/lit/ds/symlink/tps709.pdf",
@@ -400,5 +400,7 @@
       "stock_observation": null,
       "supplier_pad_fixture": null
     }
-  ]
+  ],
+  "supplier_pad_registration_complete": true,
+  "supplier_pad_checked_on": "2026-10-20"
 }

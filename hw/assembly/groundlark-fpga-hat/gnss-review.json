@@ -1,5 +1,5 @@
 {
-  "status": "supplier-pad and procurement approval pending",
+  "status": "Frozen numbered supplier-pad registration complete; order preview, procurement and physical qualification pending; no fabrication release",
   "date_utc": "2026-09-30",
   "parts": [
     {
@@ -33,5 +33,7 @@
     }
   ],
   "supplier_rotation_approved": false,
-  "manufacturing_release": false
+  "manufacturing_release": false,
+  "supplier_pad_registration_complete": true,
+  "supplier_pad_checked_on": "2026-10-20"
 }

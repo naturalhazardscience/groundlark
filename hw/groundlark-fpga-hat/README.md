@@ -49,13 +49,14 @@ The 190 fitted placements have 72 exact-MPN BOM lines, all with catalog
 mappings. L140/L141 use Murata LQW15AN56NG80D / C1330587 and
 LQW15AN3N6G80D / C412276 as documented assembly substitutions. The RF model
 uses these selected parts; the sensor-acquisition/UI simulator is unchanged.
-U23 uses the redesigned SDP32-125PA circuit and driver. Supplier geometry remains
-unverified for 53 placements, so the matching Gerber/BOM/CPL package remains a
-review package; see the assembly guide before ordering.
+U23 uses the redesigned SDP32-125PA circuit and driver. All 190 placements now
+have frozen supplier-pad registrations, including bottom-side projections,
+switch mounting lands and the SMA body direction. D140 uses the manufacturer's
+SOD882 land and paste dimensions. See the assembly guide before ordering.
 
 The revised signal routing passes the expanded adjacent-layer coupling model: all
 217 evaluated pairs meet the 0.20 V allocation; worst excursion is 0.188 V.
-The full build retains the supplier-placement release gate.
+The full build enforces the supplier-placement release gate.
 L141 is a provisional 3.6 nH VNA tuning position; D130 junction-temperature
 qualification remains open. See [simulation scope](../../docs/simulation-validation.md).
 

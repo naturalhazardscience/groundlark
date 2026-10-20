@@ -1,9 +1,11 @@
 # DAQHAT-01 simulation scope
 
-Run `./lab.ps1 test -Profile simulation` (Linux: `sh lab.sh test --profile simulation`).
-This rebuilds all three circuits and runs the hardware, software, native CAD,
-routing replay, firmware and numerical/SPICE checks. Procurement is excluded by
-one explicit test ID. Source CAD is read-only; reports live in the five retained
+Run `./lab.ps1 test` (Linux: `sh lab.sh test`) for the complete profile, including
+all 190 supplier-pad registrations. The optional `simulation` profile
+rebuilds all three circuits and runs the hardware, software, native CAD,
+routing replay, firmware and numerical/SPICE checks but excludes the supplier
+placement gate by one explicit test ID. Neither profile verifies live inventory.
+Source CAD is read-only; reports live in the five retained
 `.lab/runs/` directories. No instrument or live inventory connection is required.
 
 A successful test run establishes that the implemented checks and model fixtures

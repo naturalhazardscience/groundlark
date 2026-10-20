@@ -94,7 +94,7 @@ def main():
                 _require_hardware((not typ), lambda: (('Missing compiled component',ref)))
                 fp=p.FootprintLoad(str(ROOT/'hw/shared/elec'),meta['local_fp']);fp.SetReference(ref);b.Add(fp)
             else:fp=fps[ref]
-            if (target=='field_head' and ref=='J1') or meta['local_fp'].startswith(('PWR_', 'SUP_')) or meta['local_fp']=='Groundlark__SDP32':
+            if (target=='field_head' and ref=='J1') or meta['local_fp'].startswith(('PWR_', 'SUP_')) or meta['local_fp'] in ('Groundlark__SDP32','GNSS_SOD882'):
                 # Restore the complete manufacturer footprint geometry after
                 # compiler conversion, retaining each compiled physical pin net.
                 old=fp;pin_nets={pad.GetNumber():pad.GetNet() for pad in old.Pads() if pad.GetNumber()}

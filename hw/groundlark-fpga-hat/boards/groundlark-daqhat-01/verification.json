@@ -1,18 +1,18 @@
 {
-  "date_utc": "2026-10-20T20:19:31.522644+00:00",
-  "revision": "Signal routing passes expanded coupling allocation; complete test profile retains only the supplier-placement release failure",
+  "date_utc": "2026-10-20T21:11:36.681117+00:00",
+  "revision": "All supplier-placement holds resolved; D140 manufacturer lands/stencil corrected; complete 28-stage profile passed with no exclusions",
   "physical_qualification": false,
   "manufacturing_package_released": false,
   "input_sha256": {
     "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/bom.csv": "2cdc00df3cdfe96d5bbfd9175dbfb1c9eba0fbec8befc857bac90a2091ed92d9",
     "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_dru": "7cd2b66915e69a37e4c34037fad1e952abdc40881ece2ad03b26efee4ba442a1",
-    "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "c077525514f035eb8227498309da46716a612a5720111e7324d39617246bec90",
+    "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "3422225b186c9ee486ed3be5c4d3691527ef5b36cd77a8116fea7afb52b7b69e",
     "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pro": "b64aba7eceafdb11721eac7efdeb6d011fefd60a1b7ae9c1e3dfb1823ec83b52",
-    "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.ses": "201d37f468bd39c036bd9ffc37941c2b9157b5e8ac99ce7e29e0970c892ce313",
+    "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.ses": "ad5854c7999591ef3d244fc71d8732eec9a1de5a08218603b13995529524d78f",
     "hw/groundlark-fpga-hat/elec/gnss_parts.ato": "7da25b200b7ab68bb6979c0aec84dec661aef0e625d30b94f1862a7ddceaf1f0",
     "hw/groundlark-fpga-hat/elec/hat_trenz.ato": "60ee38ac87f5f718260ec95f29021dd1d5a1f416e7aee9129531b9b0760c2c41",
     "hw/groundlark-fpga-hat/elec/infrasound_parts.ato": "bff8f8f72bdd35b8f96d03d5f0b02b5b2ef5940e95de417f103cc82f7606faf1",
-    "hw/groundlark-fpga-hat/layout/placement.json": "d96287995c053d7160639273796328c7f78c1f0f6ea23d97434f4566c3f7f34d",
+    "hw/groundlark-fpga-hat/layout/placement.json": "0dac7b42105fb7ae052046c6329549e4b7c146ca974b48fdfa6ee7602a109f05",
     "hw/shared/elec/GNSS_HP0402.kicad_mod": "571a86c213f2f0471aba55a4346d4465af6d8a4015e555c89b6c1957f5b5206c",
     "hw/shared/elec/Groundlark__SDP32.kicad_mod": "9bbc3e41c56ec0e8c2d88f6c32108574227e53acea69b216ca665a9df0e4c2fc",
     "hw/shared/elec/symbols/GNSS_3N6.kicad_sym": "db2ee6595b79178c3fae1af5bc910cdf35697e1849c374ffbcc7a2527779ed98",
@@ -24,7 +24,16 @@
     "hw/tools/rf_substitution.py": "0d7fbee1bb3a802407bc51a04604327f8cb6c540dc8d5473d23a24ff3dcd2fd8",
     "hw/tests/test_rf_network.py": "3c1b5027798313ee03610f67e3632d49d462b46be0dc5010fff77491b66379b0",
     "hw/tests/test_jlcpcb_bom.py": "e4c627ac6ff7f8c5d0cd201610641c8cc2bb78b6f1d335aa3a4390ae956539bd",
-    "hw/tests/test_jlcpcb_export_integration.py": "47e99caccc1a1833876cec4d9f98e7dab3e154541831464fa1c8911af97fcf34"
+    "hw/tests/test_jlcpcb_export_integration.py": "15468ef7d8d1bcc81beeced7dc00098c2a1194ab5ab5ad783574e60e2ab49deb",
+    "hw/assembly/groundlark-fpga-hat/daqhat-01-jlcpcb-parts.json": "cb7c0c2fedc3f8e6667ca02ee84af0ea1011fb9e54ff3bf6214cdd35d95444cf",
+    "hw/shared/elec/GNSS_SOD882.kicad_mod": "898e963dd65743e8dd678fadd06d9f803f3bd1ee1122f9ab1db8ba212bb6f5bc",
+    "hw/shared/libraries/Groundlark.pretty/GNSS_SOD882.kicad_mod": "898e963dd65743e8dd678fadd06d9f803f3bd1ee1122f9ab1db8ba212bb6f5bc",
+    "hw/tools/assemble_pcb.py": "619c7ad7412432f04a8c20e510abffff66c2e88fc1160f04b9fa293253f5d777",
+    "hw/tools/jlcpcb_placement.py": "fc0e82766a905b7680c7b673ad0e205d372d27fb22b9c49901d5e3e5ad0d490d",
+    "hw/tools/gnss_checks.py": "9a712f620147bf4ed69e501a6e55758fc7e0bd89c852a1560a7e487d3ad437fd",
+    "hw/assembly/groundlark-fpga-hat/daqhat-01-jlcpcb-placement.json": "976e7f3654e056c6dfa3e1f33ce109314cc504d725e5dc4a1b7938d524541400",
+    "hw/tests/test_jlcpcb_placement.py": "7f278bf27c0381453236fcb3825a77fa9b8ad363dc91d46ef2c1ccfe5b8982a7",
+    "hw/tests/test_gnss_layout.py": "9d28eae527f5c8747092b1ce7859f609a139635e4a326591a46af60abb1a1bf5"
   },
   "native_validation": {
     "status": "DAQHAT-01 engineering prototype; not fabrication released",
@@ -73,7 +82,7 @@
             "net": "GND",
             "resistance_ohm": 0.001228701385271173,
             "grid_mm": 0.1,
-            "nodes": 1625935,
+            "nodes": 1625942,
             "conductor_temperature_C": 85,
             "barrel_plating_mm": 0.02
           }
@@ -92,7 +101,7 @@
       "spare_bcm": [],
       "budget": {
         "nominal_V": 5.11522633744856,
-        "minimum_V": 4.773514605630553,
+        "minimum_V": 4.773436928653904,
         "maximum_V": 5.234442772515668,
         "total_A": 3,
         "input_range_V": [
@@ -106,7 +115,7 @@
         ],
         "ripple_transient_allowance_V": 0.02,
         "adc_at_18V": 2.3519122829917762,
-        "copper_budget_ohm": 0.04941895869090932,
+        "copper_budget_ohm": 0.04944485101645922,
         "switch_budget_ohm": 0.025,
         "measured": false
       },
@@ -122,9 +131,9 @@
           },
           {
             "net": "PI_5V",
-            "resistance_ohm": 0.022354453487447794,
+            "resistance_ohm": 0.02237603042540604,
             "grid_mm": 0.1,
-            "nodes": 200028,
+            "nodes": 200018,
             "conductor_temperature_C": 85,
             "barrel_plating_mm": 0.02
           },
@@ -132,15 +141,15 @@
             "net": "GND",
             "resistance_ohm": 0.0016413792276209138,
             "grid_mm": 0.1,
-            "nodes": 1625935,
+            "nodes": 1625942,
             "conductor_temperature_C": 85,
             "barrel_plating_mm": 0.02
           }
         ],
-        "estimated_copper_loop_ohm": 0.028682465575757772,
+        "estimated_copper_loop_ohm": 0.028704042513716017,
         "model_reserve_fraction": 0.2,
-        "copper_with_reserve_ohm": 0.03441895869090932,
-        "remaining_of_50mohm_for_contacts": 0.01558104130909068,
+        "copper_with_reserve_ohm": 0.03444485101645922,
+        "remaining_of_50mohm_for_contacts": 0.015555148983540781,
         "contacts_measured": false,
         "thermal_qualified": false,
         "method": "DC finite-difference native filled copper at 85 C; idealized pad/via interiors; 20 um barrel plating"
@@ -201,11 +210,11 @@
             "net": "GNSS_ANT",
             "role": "ESD",
             "width_mm": 0.17,
-            "length_mm": 0.799999,
+            "length_mm": 1.049999,
             "estimated_ohm": 49.71591709061459,
             "reference_samples_checked": 0,
-            "antipad_samples": 99,
-            "unreferenced_launch_mm": 0.799999,
+            "antipad_samples": 129,
+            "unreferenced_launch_mm": 1.049999,
             "fully_inside_antipad": true
           },
           {
@@ -244,7 +253,7 @@
         ],
         "path_lengths_mm": {
           "GNSS_RF": 1.8629009635512028,
-          "ESD": 0.799999,
+          "ESD": 1.049999,
           "GNSS_ANT": 1.3602940858505561,
           "BIAS": 1.02,
           "GNSS_MATCH": 1.0570237272649086
@@ -328,13 +337,11 @@
     "unconnected_items": 0
   },
   "portable_lab": {
-    "run_id": "20261020T201259Z-7f4b5269",
+    "run_id": "20261020T210445Z-31ed4036",
     "profile": "full",
-    "status": "failed",
-    "scope": "All 28 stages and all hardware tests, including supplier placement release gate",
-    "failed_steps": [
-      "hardware-regressions"
-    ],
+    "status": "passed",
+    "scope": "All 28 stages and all hardware tests including supplier placement release gate",
+    "failed_steps": [],
     "steps": [
       {
         "name": "build-field_head",
@@ -344,27 +351,27 @@
       {
         "name": "constraints-field_head",
         "exit_code": 0,
-        "seconds": 4.82
+        "seconds": 4.92
       },
       {
         "name": "build-trenz_hat",
         "exit_code": 0,
-        "seconds": 17.5
+        "seconds": 17.75
       },
       {
         "name": "constraints-trenz_hat",
         "exit_code": 0,
-        "seconds": 19.7
+        "seconds": 20.26
       },
       {
         "name": "build-skylark",
         "exit_code": 0,
-        "seconds": 8.28
+        "seconds": 8.53
       },
       {
         "name": "constraints-skylark",
         "exit_code": 0,
-        "seconds": 8.78
+        "seconds": 8.93
       },
       {
         "name": "reject-overvoltage",
@@ -373,8 +380,8 @@
       },
       {
         "name": "hardware-regressions",
-        "exit_code": 1,
-        "seconds": 112.11
+        "exit_code": 0,
+        "seconds": 114.71
       },
       {
         "name": "check_circuit",
@@ -384,22 +391,22 @@
       {
         "name": "check_design",
         "exit_code": 0,
-        "seconds": 1.02
+        "seconds": 1.07
       },
       {
         "name": "check_trenz",
         "exit_code": 0,
-        "seconds": 29.08
+        "seconds": 29.17
       },
       {
         "name": "daqhat_01_engineering",
         "exit_code": 0,
-        "seconds": 14.67
+        "seconds": 14.71
       },
       {
         "name": "prefab_review",
         "exit_code": 0,
-        "seconds": 2.77
+        "seconds": 2.72
       },
       {
         "name": "check_skylark",
@@ -409,7 +416,7 @@
       {
         "name": "routing-replay",
         "exit_code": 0,
-        "seconds": 8.38
+        "seconds": 8.68
       },
       {
         "name": "burrowlark-routing-replay",
@@ -424,7 +431,7 @@
       {
         "name": "simulate_trenz",
         "exit_code": 0,
-        "seconds": 0.36
+        "seconds": 0.41
       },
       {
         "name": "simulate_geophone",
@@ -434,7 +441,7 @@
       {
         "name": "simulate_geophone_review",
         "exit_code": 0,
-        "seconds": 0.47
+        "seconds": 0.46
       },
       {
         "name": "simulate_host_link",
@@ -454,17 +461,17 @@
       {
         "name": "simulate_signal_integrity",
         "exit_code": 0,
-        "seconds": 37.48
+        "seconds": 38.15
       },
       {
         "name": "pressure_pneumatics",
         "exit_code": 0,
-        "seconds": 31.7
+        "seconds": 32.95
       },
       {
         "name": "fpga-loopback-rtl",
         "exit_code": 0,
-        "seconds": 43.69
+        "seconds": 45.15
       },
       {
         "name": "fpga-implementation-evidence",
@@ -474,25 +481,25 @@
       {
         "name": "sensor-contracts",
         "exit_code": 0,
-        "seconds": 26.32
+        "seconds": 26.62
       }
     ],
-    "hardware_tests": 271,
-    "hardware_passed": 270,
-    "hardware_errors": 1,
+    "hardware_tests": 277,
+    "hardware_passed": 277,
+    "hardware_errors": 0,
     "software_tests": 315,
     "environment_unit_tests": 25,
     "environment_unit_skips": 2,
     "excluded_test": null,
-    "source_inputs_manifest_sha256": "54c3e2841055b58e3f0e3f1b1c41444241d60a4d1a79d9bc6cfe7a76f65e273a",
-    "evidence_binding": "Verification summaries and saved generated reports are bound after the run. Authored CAD and checker sources match the retained pre-run input manifest."
+    "source_inputs_manifest_sha256": "53b5e665036cdf780ccf06d613f4ab9dd6aa08d74ba2ca32da3096469b03fc99",
+    "evidence_binding": "Authored CAD, registry and checker inputs match the complete pre-run manifest. Generated reports and verification summaries are bound after the run."
   },
   "workbench": {
     "http_smoke": "passed",
     "browser_checked": true,
     "modeled_board_checks": 12,
     "modeled_samples": 4072,
-    "scope": "HTTP and current GLB delivery passed; all 212 displayed nodes and mesh metadata match the previous model. Interactive browser unavailable; UI/controller code unchanged.",
+    "scope": "Current native GLB parsed with 212 unchanged node identities/transforms; native underside render and HTTP asset delivery checked. No UI/controller code changes; prior browser interaction checks are historical.",
     "antenna_fault_browser_check": true
   },
   "enclosure": {
@@ -542,10 +549,10 @@
     }
   },
   "assembly": {
-    "status": "supplier placement release hold",
-    "reason": "53 supplier origins/rotations unverified; supplier download endpoints unavailable; whole-BOM inventory excluded",
+    "status": "all catalog placement gates passed; supplier order/process approval pending",
+    "reason": "190 placements and 971 individual supplier pads registered; whole-BOM inventory outside scope",
     "placements": 190,
-    "verified_supplier_placements": 137,
+    "verified_supplier_placements": 190,
     "catalog_mapped_BOM_lines": 72,
     "unmapped_catalog_placements": [],
     "inventory_checked": false,
@@ -553,7 +560,10 @@
     "stock_refreshed_designators": [
       "L140",
       "L141"
-    ]
+    ],
+    "supplier_placement_complete": true,
+    "supplier_pads_checked": 971,
+    "unverified_supplier_placements": 0
   },
   "limitations": [
     "No battery chosen; qualify thresholds and shutdown energy reserve before automatic use",
@@ -625,7 +635,8 @@
       "hw/assembly/groundlark-fpga-hat/daqhat-01-jlcpcb-placement.json": "464f6034261ca499a11e5ed16b371068e3e315033a9f0e432e9be8d66ecba717",
       "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "4d630fe92d5d42bad19889ceed4c918c6e6d0d58bcbf6d13e238a32765aa503c",
       "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.ses": "b6218942700e7f0c7f8c14181b26e12f1b5f0395cc8b639397dbe2770805be42"
-    }
+    },
+    "scope": "Historical D90 substitution evidence; its old lab statuses and hold counts are superseded by current portable_lab and assembly summaries."
   },
   "previous_validation_input_sha256": {
     "AGENTS.md": "ebfa13788e4315283b93c789e4c67ff8eda215c388982145205d3b044365dbb3",
@@ -897,12 +908,12 @@
     ],
     "native_tracks_and_vias": 13111,
     "placements": 190,
-    "supplier_pad_fits": 137,
-    "unverified_supplier_placements": 53,
+    "supplier_pad_fits": 190,
+    "unverified_supplier_placements": 0,
     "physical_qualification": false,
     "manufacturing_released": false,
-    "native_lab": ".lab/runs/20261020T201259Z-7f4b5269",
-    "compiled_board_sha256": "e080edb46b390ed08e3b1618bb9ecd7a080afb605038fc34c4d3b617109d4616"
+    "native_lab": ".lab/runs/20261020T210445Z-31ed4036",
+    "compiled_board_sha256": "4f804e7680ae8bfb169703e85d66d2bca9b30d31c6e6a9cf60502fac777b5429"
   },
   "simulation_acceptance": {
     "rf_sampled_envelope_pass": true,
@@ -960,7 +971,7 @@
         "far_peak_V": 0.18550155125394746
       }
     },
-    "coupling_report_sha256": "0d7d1fbe129bf8faf0d2dfe5c2dd94350660ccef353990756d45f84192073d36",
+    "coupling_report_sha256": "9d65439e2b4c6c491b3ce3d8ce3d2080f8e82e261c9a9d5f4d02e85294286220",
     "rf_assembly_mpns": {
       "L140": "LQW15AN56NG80D",
       "L141": "LQW15AN3N6G80D"
@@ -1010,7 +1021,7 @@
         "checked_on": "2026-10-20",
         "evidence_basis": "Exact manufacturer/MPN/0402 identity returned by JLCPCB public stock catalog API; dated observation.",
         "resolution": "Explicit same-value Murata assembly substitution for the Coilcraft source MPN. JELF243A_0100K-01 specifies +/-2% inductance and minimum SRF 2.9 GHz (56 nH) / 10 GHz (3.6 nH). Native 0.56 x 0.62 mm lands at 0.96 mm centers overlap both end terminations; 1.10 x 0.70 x 0.60 mm maximum body fits within the existing 1.17 x 0.71 x 0.82 mm conservative envelope. The RF simulator uses the selected Murata sensitivity model. Native source identity is retained for traceable substitution.",
-        "sourcing_note": "Exact catalog mapping established. Supplier numbered-pad/centroid evidence and assembly allocation remain open; stock is not reserved.",
+        "sourcing_note": "Exact catalog mapping and frozen numbered-pad registration established 2026-10-20. Supplier order preview, land-pattern process review and assembly allocation remain open; stock is not reserved.",
         "assembly_description": "56nH +/-2% RF bias choke, 340mA, 2.9GHz minimum SRF, 0402",
         "jlc_match_status": "catalog_listed",
         "stock_observation": {
@@ -1042,7 +1053,7 @@
         "checked_on": "2026-10-20",
         "evidence_basis": "Exact manufacturer/MPN/0402 identity returned by JLCPCB public stock catalog API; dated observation.",
         "resolution": "Explicit same-value Murata assembly substitution for the Coilcraft source MPN. JELF243A_0100K-01 specifies +/-2% inductance and minimum SRF 2.9 GHz (56 nH) / 10 GHz (3.6 nH). Native 0.56 x 0.62 mm lands at 0.96 mm centers overlap both end terminations; 1.10 x 0.70 x 0.60 mm maximum body fits within the existing 1.17 x 0.71 x 0.82 mm conservative envelope. The RF simulator uses the selected Murata sensitivity model. Native source identity is retained for traceable substitution.",
-        "sourcing_note": "Exact catalog mapping established. Supplier numbered-pad/centroid evidence and assembly allocation remain open; stock is not reserved.",
+        "sourcing_note": "Exact catalog mapping and frozen numbered-pad registration established 2026-10-20. Supplier order preview, land-pattern process review and assembly allocation remain open; stock is not reserved.",
         "assembly_description": "3.6nH +/-2% RF series tuning inductor, 1.95A, 10GHz minimum SRF, 0402",
         "jlc_match_status": "catalog_listed",
         "stock_observation": {
@@ -1082,7 +1093,8 @@
       "SPI_SCLK"
     ],
     "inner_layer_transfer": "LINK_DQ2 In2.Cu to In3.Cu; redundant through-via removed",
-    "physical_qualification": false
+    "physical_qualification": false,
+    "scope": "Historical coupling-routing revision; current board hash is in supplier_placement_revision and native validation inputs."
   },
   "previous_rf_copper_preservation": {
     "baseline_commit": "a6b57844f46fa9ddad1dfa1c4911835f1bc523b7",
@@ -1173,6 +1185,89 @@
     "new_tracks_and_vias": 13111,
     "changed_pins": {},
     "added_pins": {},
-    "scope": "Current routing geometry relative to mapped-RF revision; all non-routing authoring and all 18 zone definitions are byte-identical. Filled copper and return paths checked by native DRC and power extraction."
+    "scope": "Historical coupling-routing revision; subsequent D140 land/stub changes are recorded in supplier_placement_revision."
+  },
+  "supplier_placement_revision": {
+    "baseline_commit": "cb6cba7a05726f66c5a6c34994172ca11b096834",
+    "baseline_board_sha256": "c077525514f035eb8227498309da46716a612a5720111e7324d39617246bec90",
+    "board_sha256": "3422225b186c9ee486ed3be5c4d3691527ef5b36cd77a8116fea7afb52b7b69e",
+    "changed_pad_geometry": [
+      "D140"
+    ],
+    "component_poses_unchanged": true,
+    "numbered_pad_nets_unchanged": true,
+    "removed_tracks": [
+      [
+        "track",
+        "GND",
+        2,
+        250000,
+        [
+          54000000,
+          67800000
+        ],
+        [
+          54000000,
+          68200000
+        ],
+        true
+      ],
+      [
+        "track",
+        "GNSS_ANT",
+        2,
+        170000,
+        [
+          54000000,
+          65800000
+        ],
+        [
+          54000000,
+          66599999
+        ],
+        true
+      ]
+    ],
+    "added_tracks": [
+      [
+        "track",
+        "GND",
+        2,
+        250000,
+        [
+          54000000,
+          67550000
+        ],
+        [
+          54000000,
+          68200000
+        ],
+        true
+      ],
+      [
+        "track",
+        "GNSS_ANT",
+        2,
+        170000,
+        [
+          54000000,
+          65800000
+        ],
+        [
+          54000000,
+          66849999
+        ],
+        true
+      ]
+    ],
+    "tracks_and_vias": 13111,
+    "through_vias": 745,
+    "physical_qualification": false,
+    "synchronized_assembly_views": 4,
+    "catalog_records_retrieved": 34,
+    "holds_resolved": 53,
+    "pads_checked": 971,
+    "inventory_checked": false,
+    "compiler_seed_migration": "D140 pad positions migrated in the tracked compiler starting layout while retaining its numbered pin nets. Compiler pad identity includes position; full compilation, pin-map comparison and native SES replay validate the migration. Complete manufacturing stencil geometry is restored by assemble_pcb."
   }
 }

@@ -3808,7 +3808,7 @@
         "names": {},
         "side": "back",
         "dnp": false,
-        "note": "Bidirectional low-capacitance ESD diode; short RF branch and local ground stitch."
+        "note": "Nexperia SOD882 Fig.8 lands: 0.70 mm pitch, 0.40 x 0.70 mm copper, 0.30 x 0.60 mm paste, R0.05; bidirectional ESD with short RF branch and local ground stitch."
       },
       {
         "ref": "U141",

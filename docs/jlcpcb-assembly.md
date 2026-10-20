@@ -9,11 +9,13 @@ inventory recheck remains excluded. Historical observations remain in the
 registry and do not establish present availability. Procurement identities include the revised FPGA power input,
 Pi supervisor, GNSS and SDP32 pressure sensor; older packages are incompatible.
 
-**Assembly hold:** 137 placements have frozen numbered supplier-pad fits;
-53 retain explicitly unverified supplier origins/rotations. The complete review
-export includes these exceptions and cannot be submitted as a released assembly.
-The placement release gate rejects unresolved entries. Obtain supplier geometry
-and verify the actual order preview before manufacture.
+All **190 placements** have frozen numbered supplier-pad registrations, including
+explicit bottom-side projections. The 34 additional catalog records resolve the
+last 53 placement holds. The placement gate still rejects any missing mapping.
+Verify the actual order preview and manufacturing process before manufacture.
+Supplier geometry is attributed to the [JLCEDA](https://lceda.cn/)/
+[EasyEDA Official Library](https://easyeda.com/); exact C-codes, response hashes,
+footprint UUIDs and numbered pads are retained in the placement registry.
 The Pi, Trenz module, geophone, riser, supply and mounting hardware are separate
 purchases. The USB sensor heads are not included.
 
@@ -61,6 +63,14 @@ The package retains manufacturing holds and is not a fabrication approval.
 The [exact-part registry](../hw/assembly/groundlark-fpga-hat/daqhat-01-jlcpcb-parts.json) binds each
 reference to its source value/footprint and approved manufacturer, MPN and C-code.
 Catalog listing does not reserve stock or guarantee assembly eligibility.
+
+U23 must match **Sensirion SDP32-125PA-TR-250PCS**, **C6473035**, package
+**SMD-16P**. These exact fields are in `BOM-review.csv`; U23 also appears in
+the matching CPL. If the upload page shows it as unselected, use the row's
+magnifier to select C6473035 and check the row. A CSV cannot acknowledge a
+website selection or special-handling warning. Read any warning before
+continuing: an unchecked U23 will be omitted from assembly. See
+[JLCPCB's matching guidance](https://jlcpcb.com/help/article/component-matching-guidelines-for-pcba-orders).
 Recheck allocation at ordering; do not accept automatic substitutes.
 
 L140 uses **LQW15AN56NG80D / C1330587** (56 nH); L141 uses
@@ -143,6 +153,19 @@ model and one-riser assembly are superseded. Contact engagement, retention and
 GPIO signal integrity still require first-article checks; see [stack assembly](stack-assembly.md).
 
 ## Placement conventions
+
+The switch registration includes all four unnumbered native mounting lands as
+the supplier's four shell pads. The SMA uses five hole centres plus its asymmetric
+body outline to establish the -X antenna exit; electrically common shell pins
+alone cannot establish orientation. Its catalog 5.08 mm shell pitch differs from
+the manufacturer/native 5.10 mm by 0.0142 mm radially, within the explicit
+0.020 mm registration bound. This does not qualify solder joints or hole fit.
+
+D140 uses the Nexperia SOD882 recommended 0.70 mm copper-land pitch,
+0.40 × 0.70 mm copper and separate 0.30 × 0.60 mm paste apertures, with
+0.05 mm corner radii. See [Nexperia Fig. 8](https://assets.nexperia.com/documents/data-sheet/PESD5V0F1BL.pdf).
+Its body position and circuit are unchanged. The exporter corrects catalog
+origins/rotations from pads; do not add manual per-reference offsets.
 
 J90 uses Phoenix Contact **1803280 / C480530**, the horizontal 3.81 mm header.
 Its exact numbered supplier pads are frozen in the placement registry. The

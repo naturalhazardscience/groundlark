@@ -14,7 +14,7 @@ import zipfile
 from collections import Counter
 from pathlib import Path
 from jlcpcb_bom import REGISTRY, build_bom, check_upload_roundtrip, load_registry, require_single_hat, sourcing_status
-from jlcpcb_placement import MAPPINGS, correct_placements
+from jlcpcb_placement import MAPPINGS, correct_placements, board_geometry
 
 ROOT = Path(__file__).resolve().parents[2]
 BOARD_DIR = ROOT / 'hw/groundlark-fpga-hat/boards/groundlark-daqhat-01'
@@ -175,6 +175,7 @@ def export(out, quantity):
             '--sketch-pads-on-fab-layers', '--black-and-white', *extra)
     placements, review = [], []
     geometry = []
+    native_geometry = {g['reference']:g for g in board_geometry(b)}
     for row in sorted(source, key=lambda r: natural(r['Reference'])):
         ref = row['Reference']; f = refs[ref]
         pads = [pad for pad in f.Pads() if pad.GetNumber()]
@@ -214,6 +215,9 @@ def export(out, quantity):
                              pin1_mm=list(p.ToMM(pin1.GetPosition())) if pin1 else None,
                              pads=[dict(number=a.GetNumber(), xy_mm=list(p.ToMM(a.GetPosition())),
                                         size_mm=list(p.ToMM(a.GetSize())),rotation_deg=a.GetOrientationDegrees()) for a in pads]))
+    for item in geometry:
+        native=native_geometry[item['reference']]
+        item.update(mechanical_smd=native['mechanical_smd'],body_center_mm=native['body_center_mm'])
     placements, placement_audit = correct_placements(placements, geometry, selections)
     fitted = {a['reference']:a for a in placement_audit if 'pads_checked' in a}
     for row in review:
@@ -278,8 +282,8 @@ def export(out, quantity):
             'JLC Standard assembly frame/rails and fiducials; 140x56 board is below 70mm minimum dimension.',
             f'J1 {selections["J1"]["mpn"]} / {selections["J1"]["lcsc"]}: {selections["J1"]["sourcing_note"]}',
             'Verify every rotation and centroid against JLC component definitions; J1 is bottom-mounted THT.',
-            f'{len(placements)-len(fitted)} placements lack frozen numbered supplier pads; retain as manufacturing holds until verified.',
-            'Current inventory is outside this simulation revision. Unmapped catalog placements in the manifest require exact-MPN sourcing before assembly.',
+            *([f'{len(placements)-len(fitted)} placements lack frozen numbered supplier pads; retain as manufacturing holds until verified.'] if len(placements)!=len(fitted) else []),
+            'Current inventory is outside this simulation revision; recheck exact-MPN allocation at ordering.',
             'U23 SDP32: install in the final reflow only, maximum 260 C and at most 150 seconds above 200 C; protect ports and never wash the assembled sensor.',
             'Approve mixed SMT/THT assembly, reflow constraints and sensor handling; do not substitute parts.',
             'Review panelized Gerbers, drill spans, polarity/pin 1 and assembly preview before payment.',

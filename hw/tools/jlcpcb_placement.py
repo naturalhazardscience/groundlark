@@ -8,6 +8,7 @@ never infer a generic bottom-side mirror/rotation from a top-side mapping.
 from collections import Counter, defaultdict
 import json
 import math
+import copy
 from pathlib import Path
 from jlcpcb_smd_placement import register_smd
 
@@ -135,6 +136,11 @@ def correct_placements(placements, geometry, selections, mappings=None):
         if row['Layer']!=side or item['side']!=side:
             raise ValueError(f'Unqualified side/bottom-side supplier mapping: {ref}')
         mode=entry.get('fit_method','rigid_centres')
+        if entry.get('include_mechanical_smd'):
+            if not entry.get('mechanical_pad_basis'):
+                raise ValueError('Missing mechanical pad identity basis')
+            item=copy.deepcopy(item)
+            item['pads']+=item.get('mechanical_smd',[])
         projection=entry.get('bottom_projection')
         allowed_projection='mirror_local_x_then_ccw' if mode=='smd_pad_overlap' else 'unmirrored_catalog_board_xy'
         if side=='Bottom' and (projection!=allowed_projection
@@ -145,6 +151,24 @@ def correct_placements(placements, geometry, selections, mappings=None):
         target=[(a['number'],a['xy_mm'][0],-a['xy_mm'][1]) for a in item['pads']]
         if mode=='rigid_centres':
             fit=fit_pads(supplier_pads(entry),target)
+        elif mode=='rigid_body_centres':
+            # Coax connectors have electrically identical shell pads. The
+            # asymmetric body outline resolves their otherwise ambiguous exit.
+            source=supplier_pads(entry)
+            shape=entry['body_shape'].split('~')
+            if shape[:2]!=['SOLIDREGION','99'] or not entry.get('body_fit_basis'):
+                raise ValueError('Missing supplier body outline/basis')
+            import re
+            points=[float(v) for v in re.findall(r'-?\d+(?:\.\d+)?',shape[3])]
+            if len(points)<8 or len(points)%2:raise ValueError('Invalid supplier body polygon')
+            xs,ys=points[::2],points[1::2];ox,oy=entry['origin_easyeda']
+            body=((min(xs)+max(xs))/2-ox)*.254,-((min(ys)+max(ys))/2-oy)*.254
+            native=item['body_center_mm']
+            tolerance=entry['centre_tolerance_mm']
+            if not 0<tolerance<=.025:raise ValueError('Invalid body registration tolerance')
+            fit=fit_pads(source+[('@body',*body)],target+[('@body',native[0],-native[1])],tolerance)
+            fit['pads_checked']-=1
+            fit['body_outline_checks']=1
         elif mode=='smd_pad_overlap':
             fit=register_smd(entry,item)
         else:
@@ -163,8 +187,18 @@ def correct_placements(placements, geometry, selections, mappings=None):
 
 def board_geometry(board):
     import pcbnew as p
+    def mechanical(f):
+        return [dict(number='@mount',xy_mm=list(p.ToMM(a.GetPosition())),size_mm=list(p.ToMM(a.GetSize())),rotation_deg=a.GetOrientationDegrees())
+                for a in f.Pads() if not a.GetNumber() and a.GetAttribute()==p.PAD_ATTRIB_SMD
+                and (a.IsOnLayer(p.F_Cu) or a.IsOnLayer(p.B_Cu))]
+    def body(f):
+        points=[q for a in f.GraphicalItems() if a.GetClass()=='PCB_SHAPE' and a.GetLayer() in (p.F_Fab,p.B_Fab)
+                for q in (a.GetStart(),a.GetEnd())]
+        if not points:return None
+        return [p.ToMM((min(getattr(q,axis) for q in points)+max(getattr(q,axis) for q in points))/2) for axis in ('x','y')]
     return [dict(reference=f.GetReference(),side='Bottom' if f.IsFlipped() or f.GetReference()=='J1' else 'Top',
                  footprint_origin_mm=list(p.ToMM(f.GetPosition())),rotation_deg=f.GetOrientationDegrees()%360,
+                 mechanical_smd=mechanical(f),body_center_mm=body(f),
                  pads=[dict(number=a.GetNumber(),xy_mm=list(p.ToMM(a.GetPosition())))
                        |dict(size_mm=list(p.ToMM(a.GetSize())),rotation_deg=a.GetOrientationDegrees())
                        for a in f.Pads() if a.GetNumber()]) for f in board.GetFootprints()]

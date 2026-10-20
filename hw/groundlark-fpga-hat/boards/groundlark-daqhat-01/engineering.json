@@ -40,7 +40,7 @@
             "net": "GND",
             "resistance_ohm": 0.001228701385271173,
             "grid_mm": 0.1,
-            "nodes": 1625935,
+            "nodes": 1625942,
             "conductor_temperature_C": 85,
             "barrel_plating_mm": 0.02
           }
