@@ -145,9 +145,20 @@ class ExactAssemblyBOMTests(unittest.TestCase):
             self.assertEqual(row['Comment'],row['MPN'])
             self.assertNotIn('__',row['Footprint'])
             self.assertNotIn('service ONLY',row['Comment'])
-        self.assertEqual({row['Designator'] for row in bom if not row['JLCPCB Part #']},{'L140','L141'})
-        self.assertEqual({row['MPN'] for row in bom if not row['JLCPCB Part #']},
-                         {'0402HPH-56NXJRW','0402HP-3N6XJRW'})
+        self.assertEqual([row for row in bom if not row['JLCPCB Part #']],[])
+
+    def test_rf_substitutions_preserve_source_identity_and_use_exact_catalog_parts(self):
+        bom,_,selections=self.rows()
+        for ref,source,mpn,code in [('L140','0402HPH-56NXJRW','LQW15AN56NG80D','C1330587'),
+                                    ('L141','0402HP-3N6XJRW','LQW15AN3N6G80D','C412276')]:
+            row=next(r for r in bom if r['Designator']==ref)
+            self.assertEqual((row['MPN'],row['JLCPCB Part #']),(mpn,code))
+            self.assertEqual(selections[ref]['source_mpn'],source)
+            self.assertIn('Murata',selections[ref]['manufacturer'])
+            self.assertIn('JELF243A-0100.pdf',selections[ref]['manufacturer_evidence'])
+            registry=copy.deepcopy(self.registry)
+            next(p for p in registry['parts'] if ref in p['designators'])['resolution']=''
+            with self.assertRaisesRegex(ValueError,'Undocumented'):build_bom(self.source,1,registry)
 
     def test_placeholder_and_generic_device_resolutions_are_explicit(self):
         _, _, selections = self.rows()

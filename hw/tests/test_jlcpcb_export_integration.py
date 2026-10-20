@@ -26,7 +26,7 @@ class AssemblyExportIntegrationTests(unittest.TestCase):
             expected={name:(base/name).read_bytes() for name in ('BOM-review.csv','CPL-review.csv')}
             manifest=json.loads((base/'manifest.json').read_text())
             self.assertFalse(manifest['inventory_checked'])
-            self.assertEqual(manifest['unmapped_catalog_placements'],['L140','L141'])
+            self.assertEqual(manifest['unmapped_catalog_placements'],[])
             # A reviewed procurement update intentionally changes this hash;
             # source CAD hashes must still match, as tested separately.
             manifest['source_sha256']['hw/assembly/groundlark-fpga-hat/daqhat-01-jlcpcb-parts.json']='0'*64

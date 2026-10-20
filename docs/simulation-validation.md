@@ -74,8 +74,8 @@ Maxwell capacitance. A vacuum solve supplies quasi-TEM inductance. Reciprocity,
 passivity, dielectric scaling, analytical microstrip agreement and mesh convergence
 have independent fixtures.
 
-The native circuit uses a **Coilcraft 0402HPH-56NXJRW, 56 nH choke (L140)** and
-**0402HP-3N6XJRW, 3.6 nH series matching inductor (L141)**, retaining the 47 pF
+The assembly selections are **Murata LQW15AN56NG80D, 56 nH choke (L140)** and
+**LQW15AN3N6G80D, 3.6 nH series matching inductor (L141)**, retaining the 47 pF
 C0G blocking capacitor and PESD5V0F1BL ESD protection. All five RF traces are
 0.17 mm B.Cu over the 0.0994 mm reference spacing. Bias/ESD branches are shortened
 to 1.02/0.80 mm; series segments total approximately 4.28 mm. Every RF segment,
@@ -84,7 +84,10 @@ coverage is checked outside the bounded SMA antipad; both shunt branches are
 inside that unreferenced transition. Its surrounding return annulus is checked
 separately. The line/connector surrogate does not solve this launch in 3-D.
 L141 remains a VNA tuning position with provisional 3.6 nH, dependent on estimated
-pad capacitance. Both Coilcraft catalog mappings remain unresolved assembly holds.
+pad capacitance. Both Murata catalog mappings are established. Their Coilcraft source identities
+remain in native authoring metadata as documented procurement overrides.
+Manufacturer terminal-tolerance checks confirm centered overlap with native
+lands; they do not clear supplier placement/process holds.
 
 The nominal filled-mask field impedance is approximately 46.2 Ω. Etch ±20 µm,
 dielectric thickness ±10%, epsilon 3.8–4.6 and mask 0–25 µm are sensitivity ranges,
@@ -93,16 +96,25 @@ it omits conformal coating and nearby coplanar metal.
 
 The RF network includes separate distributed bias/ESD branches, node-specific
 pad areas, blocking capacitor ESL/ESR, matching inductor loss/self-capacitance,
-connector parasitics and a passive Foster choke model. The latter matches the
-[Coilcraft typical inductance/frequency and self-resonance data](https://www.coilcraft.com/getmedia/54459dcc-b821-4a9d-b91e-0416ea86a9b2/0402hp.pdf).
+connector parasitics and passive parallel-capacitance/series-RL inductor models.
+[Murata JELF243A_0100K-01](https://search.murata.co.jp/Ceramy/image/img/P02/JELF243A-0100.pdf)
+specifies minimum SRFs of 2.9/10 GHz and maximum DCRs of 0.996/0.030 Ω.
+The sweep includes those SRFs and zero winding capacitance, with inductance
+±7% (wider than the initial ±2% tolerance). Both inductors sweep assumed L1
+Q from 10 to no AC loss, retaining DCR. Datasheet Q minima of 25/30 are
+measured at 200/250 MHz and do not establish Q at L1. This is a sensitivity
+surrogate, not fitted vendor S-parameter data or a guaranteed RF bound.
+The reference case uses minimum specified SRF and assumed choke/matching Q
+of 30/60; it must not be interpreted as a manufacturer-typical prediction.
 The [Nexperia capacitance specification](https://assets.nexperia.com/documents/data-sheet/PESD5V0F1BL.pdf)
 is measured at 1 MHz; using it at GNSS frequencies is an approximation. Parasitic
-ranges and manufacturer-typical SRF extrapolations are recorded in the report.
+ranges and the unresolved L1-Q assumption are recorded in the report.
 
-**98,304 corner cases** and **771 additional frequency points** pass unchanged
+**196,608 corner cases** and **771 additional frequency points** pass unchanged
 allocations: return loss ≥10 dB, insertion loss ≤1 dB and choke impedance ≥500 Ω.
-Nominal return/insertion loss is approximately **19.49/0.13 dB**; sampled worst
-values are **10.86/0.53 dB**, with minimum choke impedance **578 Ω**. A separately
+Reference-case return/insertion loss is approximately **19.02/0.15 dB**; sampled
+worst values are **10.15/0.94 dB**, with minimum choke impedance **519.94 Ω**.
+The narrow margins remain conditional on the model assumptions. A separately
 assembled ngspice circuit agrees with the ABCD calculation. Removing the matching
 inductor, increasing ESD capacitance, or restoring long stubs exercises failure
 controls. A failed RF allocation now fails the lab stage. The model is not a

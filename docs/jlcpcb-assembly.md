@@ -2,9 +2,10 @@
 
 The package targets **one fabricated PCB and one assembled HAT**, the same
 physical board. The current HAT is 140 × 56 mm with 190 fitted placements.
-The exact-part registry covers all 190 placements in 72 BOM lines: 70 catalog
-identities and two unmapped Coilcraft inductors, L140/L141. Inventory checks are
-excluded from this simulation revision. Historical observations remain in the
+The exact-part registry covers all 190 placements in 72 BOM lines, all with exact catalog
+identities. L140/L141 use explicit Murata substitutions for the Coilcraft source
+parts. Only these two stock observations were refreshed on 2026-10-20; a full
+inventory recheck remains excluded. Historical observations remain in the
 registry and do not establish present availability. Procurement identities include the revised FPGA power input,
 Pi supervisor, GNSS and SDP32 pressure sensor; older packages are incompatible.
 
@@ -62,8 +63,21 @@ reference to its source value/footprint and approved manufacturer, MPN and C-cod
 Catalog listing does not reserve stock or guarantee assembly eligibility.
 Recheck allocation at ordering; do not accept automatic substitutes.
 
-Current stock is not checked. Existing mapped parts retain their dated
-2026-10-19 observations; the revised L140/L141 require exact-MPN procurement.
+L140 uses **LQW15AN56NG80D / C1330587** (56 nH); L141 uses
+**LQW15AN3N6G80D / C412276** (3.6 nH). JLCPCB reported available order
+quantities of **9,736 / 793**, respectively, with stock MOQ 1 on 2026-10-20.
+Other mapped parts retain their older observations. These are observations,
+not reserved inventory or confirmation of whole-BOM availability.
+
+Both replacements have +/-2% inductance. Their manufacturer terminal envelopes
+overlap the centered native lands and fit within the conservative source-part
+3-D envelopes. The existing 0.40 mm land gap and 0.62 mm width differ from
+Murata's recommended 0.60/0.66 mm; process review remains open. Native source
+MPNs are retained for traceability; the assembly registry, exported BOM and RF
+simulation select Murata. The updated RF model sweeps resonance/loss rather
+than reusing the Coilcraft fit. L141 remains a tuning position. See
+[Murata JELF243A_0100K-01](https://search.murata.co.jp/Ceramy/image/img/P02/JELF243A-0100.pdf)
+and [simulation assumptions](simulation-validation.md#rf-network).
 `require_available_stock` is explicitly false for this design/simulation scope.
 Recheck supplier allocation, minimum quantities and assembly attrition before
 ordering; offline tests cannot establish availability.
@@ -102,9 +116,9 @@ The Pi, Trenz module, external geophone and risers remain outside this PCB BOM.
 | Footprint / package | `Footprint` |
 | JLCPCB / LCSC part number | `JLCPCB Part #` |
 
-Do not use `Description` as the ordering code. Confirm all 70 nonblank catalog
-identities and all 190 placements survive import. Resolve the two blank catalog
-fields using the exact Coilcraft MPNs before placing an assembly order.
+Do not use `Description` as the ordering code. Confirm all 72 nonblank catalog
+identities and all 190 placements survive import. The two former blank RF
+inductor fields now contain the exact Murata C-codes above.
 
 | References | Assembly selection | Required specification |
 | --- | --- | --- |

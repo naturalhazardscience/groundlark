@@ -45,7 +45,7 @@ integration remains unqualified.
 
 The full and simulation profiles execute 28 stages. The current simulation run
 completes all 28 stages: 27 pass and the signal-integrity stage fails its coupling
-allocation. Its 267 hardware regression tests and 315
+allocation. Its 270 hardware regression tests and 315
 software tests pass; ERC/DRC report zero violations and native SES replay matches.
 The expanded coupling model introduces an electrical acceptance hold: the current
 board exceeds its 0.20 V allocation. A previous simulation-profile pass predates this gate and does not
@@ -100,9 +100,11 @@ series route, including reference-plane coverage. The uncoated microstrip
 estimate is approximately 49.7 Ω. A 0.3 mm route is a regression fault.
 The electrostatic model gives approximately 46.2 Ω for the nominal filled-mask
 scenario. The revised 56 nH choke and 3.6 nH series matching network has
-nominal loss around 0.13 dB. Across 98,304 corners and 771 dense-frequency checks,
-worst loss is 0.53 dB and worst return loss is 10.86 dB, meeting the unchanged
-1 dB / 10 dB allocations. Choke impedance stays above 578 Ω. Independently
+reference-case loss around 0.15 dB for the selected Murata substitutes. Across
+196,608 corners and 771 dense-frequency checks, worst loss is 0.94 dB and worst
+return loss is 10.15 dB, meeting the unchanged 1 dB / 10 dB allocations. Choke
+impedance stays above 519 Ω. L1 Q >=10 and the single-resonance surrogate
+remain assumptions; datasheet Q is specified at lower frequencies. Independently
 assembled ngspice and ABCD models agree; removing matching or restoring long
 branches are failure controls. Unmodeled three-dimensional effects remain open.
 

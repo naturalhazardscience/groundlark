@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "coordinate_basis": "EasyEDA catalog zero, 10 mil units, Y down; exporter converts to mm Y up and fits numbered pads.",
-  "limitation": "190 fitted components; 137 frozen supplier-pad fits and 53 explicit placement holds. Inventory is outside this simulation revision.",
+  "limitation": "190 fitted components; 137 frozen supplier-pad fits and 53 explicit placement holds. All 72 BOM lines mapped; only L140/L141 inventory refreshed.",
   "shield_alias_basis": "LSHM S1/S2 are the two GND mounting pads: native J80/J81 pad 101 and J82 pad 61. Both physical centres must pass.",
   "footprints": [
     {
@@ -2203,23 +2203,23 @@
       "designators": [
         "L140"
       ],
-      "lcsc": "",
-      "mpn": "0402HPH-56NXJRW",
+      "lcsc": "C1330587",
+      "mpn": "LQW15AN56NG80D",
       "source_footprint": "GNSS_HP0402",
-      "evidence_url": "https://www.coilcraft.com/getmedia/54459dcc-b821-4a9d-b91e-0416ea86a9b2/0402hp.pdf",
+      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN56NG80D/C1330587",
       "checked_on": "2026-10-20",
-      "reason": "Manufacturer identity and native lands checked; supplier centroid/numbered-pad evidence absent. Inventory excluded. Retain native placement as an explicit manufacturing hold."
+      "reason": "Exact Murata catalog identity established and manufacturer terminal envelope overlaps native lands. Public supplier numbered-pad service returned HTTP 403 on 2026-10-20. Native origin/rotation retained; supplier centroid/numbered-pad review remains a manufacturing hold."
     },
     {
       "designators": [
         "L141"
       ],
-      "lcsc": "",
-      "mpn": "0402HP-3N6XJRW",
+      "lcsc": "C412276",
+      "mpn": "LQW15AN3N6G80D",
       "source_footprint": "GNSS_HP0402",
-      "evidence_url": "https://www.coilcraft.com/getmedia/54459dcc-b821-4a9d-b91e-0416ea86a9b2/0402hp.pdf",
+      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN3N6G80D/C412276",
       "checked_on": "2026-10-20",
-      "reason": "Manufacturer identity and native lands checked; supplier centroid/numbered-pad evidence absent. Inventory excluded. Retain native placement as an explicit manufacturing hold."
+      "reason": "Exact Murata catalog identity established and manufacturer terminal envelope overlaps native lands. Public supplier numbered-pad service returned HTTP 403 on 2026-10-20. Native origin/rotation retained; supplier centroid/numbered-pad review remains a manufacturing hold."
     }
   ],
   "require_complete_coverage": true

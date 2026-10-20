@@ -2354,18 +2354,30 @@
       "designators": [
         "L140"
       ],
-      "mpn": "0402HPH-56NXJRW",
-      "manufacturer": "Coilcraft",
+      "mpn": "LQW15AN56NG80D",
+      "manufacturer": "Murata Electronics",
       "package": "0402",
-      "lcsc": "",
-      "evidence_url": "https://www.coilcraft.com/getmedia/54459dcc-b821-4a9d-b91e-0416ea86a9b2/0402hp.pdf",
-      "manufacturer_evidence": "https://www.coilcraft.com/getmedia/54459dcc-b821-4a9d-b91e-0416ea86a9b2/0402hp.pdf",
+      "lcsc": "C1330587",
+      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN56NG80D/C1330587",
+      "manufacturer_evidence": "https://search.murata.co.jp/Ceramy/image/img/P02/JELF243A-0100.pdf",
       "checked_on": "2026-10-20",
-      "evidence_basis": "Manufacturer Doc 526-2 electrical ratings and Doc 526-1 package; inventory excluded at user request.",
-      "resolution": "Exact authored MPN. RF redesign; prior L140 catalog selection no longer applies.",
-      "sourcing_note": "Exact manufacturer MPN required. JLCPCB catalog identity and inventory not checked for this revision.",
-      "assembly_description": "Coilcraft 56 nH bias choke; short B.Cu branch and local C151 bypass.",
-      "jlc_match_status": "unconfirmed"
+      "evidence_basis": "Exact manufacturer/MPN/0402 identity returned by JLCPCB public stock catalog API; dated observation.",
+      "resolution": "Explicit same-value Murata assembly substitution for the Coilcraft source MPN. JELF243A_0100K-01 specifies +/-2% inductance and minimum SRF 2.9 GHz (56 nH) / 10 GHz (3.6 nH). Native 0.56 x 0.62 mm lands at 0.96 mm centers overlap both end terminations; 1.10 x 0.70 x 0.60 mm maximum body fits within the existing 1.17 x 0.71 x 0.82 mm conservative envelope. The RF simulator uses the selected Murata sensitivity model. Native source identity is retained for traceable substitution.",
+      "sourcing_note": "Exact catalog mapping established. Supplier numbered-pad/centroid evidence and assembly allocation remain open; stock is not reserved.",
+      "assembly_description": "56nH +/-2% RF bias choke, 340mA, 2.9GHz minimum SRF, 0402",
+      "jlc_match_status": "catalog_listed",
+      "stock_observation": {
+        "checked_at": "2026-10-20T19:31:47.736876+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN56NG80D/C1330587",
+        "status": "available_to_order",
+        "displayed_stock": 9847,
+        "available_order_quantity": 9736,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "a3b4c1e14140a0ec36adf3cc2b7acca11f45b6cc32516f3de71107ea7bee058d",
+        "snapshot_format": "Parsed public response serialized as UTF-8 JSON",
+        "scope": "Only L140/L141 refreshed; public stock is not reserved. Price tier minimum applies to current stock, not preorder.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      }
     },
     {
       "source_mpn": "PESD5V0F1BL,315",
@@ -2434,25 +2446,37 @@
       "designators": [
         "L141"
       ],
-      "mpn": "0402HP-3N6XJRW",
-      "manufacturer": "Coilcraft",
+      "mpn": "LQW15AN3N6G80D",
+      "manufacturer": "Murata Electronics",
       "package": "0402",
-      "lcsc": "",
-      "evidence_url": "https://www.coilcraft.com/getmedia/54459dcc-b821-4a9d-b91e-0416ea86a9b2/0402hp.pdf",
-      "manufacturer_evidence": "https://www.coilcraft.com/getmedia/54459dcc-b821-4a9d-b91e-0416ea86a9b2/0402hp.pdf",
+      "lcsc": "C412276",
+      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN3N6G80D/C412276",
+      "manufacturer_evidence": "https://search.murata.co.jp/Ceramy/image/img/P02/JELF243A-0100.pdf",
       "checked_on": "2026-10-20",
-      "evidence_basis": "Manufacturer Doc 526-2 electrical ratings and Doc 526-1 package; inventory excluded at user request.",
-      "resolution": "Exact authored MPN. RF redesign; prior L140 catalog selection no longer applies.",
-      "sourcing_note": "Exact manufacturer MPN required. JLCPCB catalog identity and inventory not checked for this revision.",
-      "assembly_description": "Series RF matching inductor; retain C148 DC block.",
-      "jlc_match_status": "unconfirmed"
+      "evidence_basis": "Exact manufacturer/MPN/0402 identity returned by JLCPCB public stock catalog API; dated observation.",
+      "resolution": "Explicit same-value Murata assembly substitution for the Coilcraft source MPN. JELF243A_0100K-01 specifies +/-2% inductance and minimum SRF 2.9 GHz (56 nH) / 10 GHz (3.6 nH). Native 0.56 x 0.62 mm lands at 0.96 mm centers overlap both end terminations; 1.10 x 0.70 x 0.60 mm maximum body fits within the existing 1.17 x 0.71 x 0.82 mm conservative envelope. The RF simulator uses the selected Murata sensitivity model. Native source identity is retained for traceable substitution.",
+      "sourcing_note": "Exact catalog mapping established. Supplier numbered-pad/centroid evidence and assembly allocation remain open; stock is not reserved.",
+      "assembly_description": "3.6nH +/-2% RF series tuning inductor, 1.95A, 10GHz minimum SRF, 0402",
+      "jlc_match_status": "catalog_listed",
+      "stock_observation": {
+        "checked_at": "2026-10-20T19:31:47.736876+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN3N6G80D/C412276",
+        "status": "available_to_order",
+        "displayed_stock": 908,
+        "available_order_quantity": 793,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "afc4988a98de1dd3b9e33665ca550aba9ce324cb537fee00ba315a269999819b",
+        "snapshot_format": "Parsed public response serialized as UTF-8 JSON",
+        "scope": "Only L140/L141 refreshed; public stock is not reserved. Price tier minimum applies to current stock, not preorder.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      }
     }
   ],
   "procurement_policy": {
     "require_available_stock": false,
     "maximum_component_moq": 1,
     "allow_preorder": false,
-    "scope": "Inventory excluded at user request for simulation/design work. Historical stock observations are not current availability; a manufacturing release still requires procurement and placement review."
+    "scope": "Full inventory recheck excluded at user request; only L140/L141 refreshed for the requested RF substitutions. Historical observations are not current whole-BOM availability; manufacturing release requires procurement and placement review."
   },
-  "revision_status": "190 fitted components in 72 exact-MPN BOM lines; 70 catalog mappings and two unmapped Coilcraft inductors. Inventory excluded. Supplier placement audit and test results govern package release."
+  "revision_status": "190 fitted components in 72 exact-MPN BOM lines; all 72 have catalog mappings. Only L140/L141 stock refreshed on 2026-10-20. Supplier placement audit and electrical acceptance remain release holds."
 }

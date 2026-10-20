@@ -157,7 +157,7 @@ def verify_board(board):
     _require_hardware((ground_path<=2), lambda: ('C151 ground return must reach a local connected plane stitch'))
     return dict(pin_checks=checks,deliberate_no_connects=len(NC),pps_bcm=24,
         antenna='3.3 V active SMA, <=20 mA; 50 ohm connector',sample_timing_qualified=False,
-        sustained_short_limit_mA=[50,100],choke_rated_mA=330,
+        sustained_short_limit_mA=[50,100],choke_rated_mA=340,choke_derated_at_125C_mA=170,
         rf_bypass_path_mm=bypass,rf_bypass_ground_path_mm=ground_path,input_bypass_path_mm=input_bypass,
         rf_geometry=rf_geometry(board),
         host_bus_low_margin_scenario=dict(host_rail_minimum_assumed_V=3.135,input_low_fraction=.2,

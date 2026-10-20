@@ -1,6 +1,6 @@
 {
-  "date_utc": "2026-10-20T04:58:30.844540+00:00",
-  "revision": "Compact backside RF network, 56 nH choke and 3.6 nH series match; vented parallel-capillary pressure model; inventory excluded",
+  "date_utc": "2026-10-20T19:41:20.734980+00:00",
+  "revision": "Mapped Murata RF assembly substitutions and matching sensitivity model; coupling allocation remains failed; only RF stock refreshed",
   "physical_qualification": false,
   "manufacturing_package_released": false,
   "input_sha256": {
@@ -19,7 +19,12 @@
     "hw/shared/elec/symbols/GNSS_56N.kicad_sym": "485dfd273de735e516cf58928c4ab5c721cf11477e88a28176167e34e3f1e77c",
     "hw/shared/elec/symbols/PRESSURE_SDP32.kicad_sym": "000cc8a7ba7ee1621d8ebd447c71385f96ff48ee5986643da32b808f9499b221",
     "hw/shared/libraries/Groundlark.pretty/GNSS_HP0402.kicad_mod": "571a86c213f2f0471aba55a4346d4465af6d8a4015e555c89b6c1957f5b5206c",
-    "hw/shared/libraries/Groundlark.pretty/Groundlark__SDP32.kicad_mod": "116a78e3f511115cd12e85030017df1eb165f2ceba253aa9aa604aa4399a2d43"
+    "hw/shared/libraries/Groundlark.pretty/Groundlark__SDP32.kicad_mod": "116a78e3f511115cd12e85030017df1eb165f2ceba253aa9aa604aa4399a2d43",
+    "hw/tools/simulate_signal_integrity.py": "4e4f48a7f55458860189a621a59904afd2bd554122c927680f3008124ae1cef2",
+    "hw/tools/rf_substitution.py": "0d7fbee1bb3a802407bc51a04604327f8cb6c540dc8d5473d23a24ff3dcd2fd8",
+    "hw/tests/test_rf_network.py": "3c1b5027798313ee03610f67e3632d49d462b46be0dc5010fff77491b66379b0",
+    "hw/tests/test_jlcpcb_bom.py": "e4c627ac6ff7f8c5d0cd201610641c8cc2bb78b6f1d335aa3a4390ae956539bd",
+    "hw/tests/test_jlcpcb_export_integration.py": "47e99caccc1a1833876cec4d9f98e7dab3e154541831464fa1c8911af97fcf34"
   },
   "native_validation": {
     "status": "DAQHAT-01 engineering prototype; not fabrication released",
@@ -174,7 +179,8 @@
         50,
         100
       ],
-      "choke_rated_mA": 330,
+      "choke_rated_mA": 340,
+      "choke_derated_at_125C_mA": 170,
       "rf_bypass_path_mm": 1.6760146180746753,
       "rf_bypass_ground_path_mm": 0,
       "input_bypass_path_mm": 4.981370849898476,
@@ -322,7 +328,7 @@
     "unconnected_items": 0
   },
   "portable_lab": {
-    "run_id": "20261020T045150Z-a34b647d",
+    "run_id": "20261020T193430Z-50ca6e40",
     "profile": "simulation",
     "status": "failed",
     "scope": "Simulation profile with procurement excluded; failed electrical gate is retained",
@@ -333,27 +339,27 @@
       {
         "name": "build-field_head",
         "exit_code": 0,
-        "seconds": 6.48
+        "seconds": 6.73
       },
       {
         "name": "constraints-field_head",
         "exit_code": 0,
-        "seconds": 4.82
+        "seconds": 4.87
       },
       {
         "name": "build-trenz_hat",
         "exit_code": 0,
-        "seconds": 17.5
+        "seconds": 17.75
       },
       {
         "name": "constraints-trenz_hat",
         "exit_code": 0,
-        "seconds": 19.56
+        "seconds": 20.06
       },
       {
         "name": "build-skylark",
         "exit_code": 0,
-        "seconds": 8.33
+        "seconds": 8.53
       },
       {
         "name": "constraints-skylark",
@@ -368,7 +374,7 @@
       {
         "name": "hardware-regressions",
         "exit_code": 0,
-        "seconds": 109.62
+        "seconds": 114.72
       },
       {
         "name": "check_circuit",
@@ -378,17 +384,17 @@
       {
         "name": "check_design",
         "exit_code": 0,
-        "seconds": 1.07
+        "seconds": 1.12
       },
       {
         "name": "check_trenz",
         "exit_code": 0,
-        "seconds": 29.69
+        "seconds": 29.63
       },
       {
         "name": "daqhat_01_engineering",
         "exit_code": 0,
-        "seconds": 13.92
+        "seconds": 14.47
       },
       {
         "name": "prefab_review",
@@ -403,12 +409,12 @@
       {
         "name": "routing-replay",
         "exit_code": 0,
-        "seconds": 8.69
+        "seconds": 8.73
       },
       {
         "name": "burrowlark-routing-replay",
         "exit_code": 0,
-        "seconds": 2.02
+        "seconds": 1.97
       },
       {
         "name": "simulate",
@@ -443,22 +449,22 @@
       {
         "name": "power_review",
         "exit_code": 0,
-        "seconds": 0.52
+        "seconds": 0.51
       },
       {
         "name": "simulate_signal_integrity",
         "exit_code": 1,
-        "seconds": 37.23
+        "seconds": 40.44
       },
       {
         "name": "pressure_pneumatics",
         "exit_code": 0,
-        "seconds": 32.04
+        "seconds": 31.58
       },
       {
         "name": "fpga-loopback-rtl",
         "exit_code": 0,
-        "seconds": 43.84
+        "seconds": 43.94
       },
       {
         "name": "fpga-implementation-evidence",
@@ -468,15 +474,15 @@
       {
         "name": "sensor-contracts",
         "exit_code": 0,
-        "seconds": 26.12
+        "seconds": 26.57
       }
     ],
-    "hardware_tests": 267,
+    "hardware_tests": 270,
     "software_tests": 315,
     "environment_unit_tests": 25,
     "environment_unit_skips": 2,
     "excluded_test": "test_pcb_handedness.HandednessTests.test_supplier_placement_release_gate",
-    "source_inputs_manifest_sha256": "4cbcc8e5910c6c85e456f492c603a5e63ed97b3b5286592f7111605e58a21eef",
+    "source_inputs_manifest_sha256": "eb34eb2e403f04a25c7dd9e473fa32f702d54da16c58e9379ca696892224c632",
     "evidence_binding": "This verification summary and saved generated reports are updated after the run; the retained input manifest describes the pre-run snapshot. Authored CAD and tested checker sources are unchanged."
   },
   "workbench": {
@@ -535,16 +541,17 @@
   },
   "assembly": {
     "status": "supplier placement release hold",
-    "reason": "53 supplier origins/rotations unverified; L140/L141 catalog identities unmapped; inventory excluded",
+    "reason": "53 supplier origins/rotations unverified; coupling allocation failed; whole-BOM inventory not rechecked",
     "placements": 190,
     "verified_supplier_placements": 137,
-    "catalog_mapped_BOM_lines": 70,
-    "unmapped_catalog_placements": [
+    "catalog_mapped_BOM_lines": 72,
+    "unmapped_catalog_placements": [],
+    "inventory_checked": false,
+    "registry": "hw/assembly/groundlark-fpga-hat/daqhat-01-jlcpcb-parts.json",
+    "stock_refreshed_designators": [
       "L140",
       "L141"
-    ],
-    "inventory_checked": false,
-    "registry": "hw/assembly/groundlark-fpga-hat/daqhat-01-jlcpcb-parts.json"
+    ]
   },
   "limitations": [
     "No battery chosen; qualify thresholds and shutdown energy reserve before automatic use",
@@ -921,12 +928,12 @@
     "unverified_supplier_placements": 53,
     "physical_qualification": false,
     "manufacturing_released": false,
-    "native_lab": ".lab/runs/20261020T045150Z-a34b647d",
+    "native_lab": ".lab/runs/20261020T193430Z-50ca6e40",
     "compiled_board_sha256": "e080edb46b390ed08e3b1618bb9ecd7a080afb605038fc34c4d3b617109d4616"
   },
   "simulation_acceptance": {
     "rf_sampled_envelope_pass": true,
-    "rf_cases": 98304,
+    "rf_cases": 196608,
     "rf_dense_frequency_cases": 771,
     "pneumatic_conditional_pass": true,
     "pneumatic_corner_count": 4096,
@@ -1205,7 +1212,108 @@
         "far_peak_V": 0.3439688774958343
       }
     },
-    "coupling_report_sha256": "cecc11164b715e27511826e7ed1e4f0de31bbdf607940a12a160fc53cecb7d41",
+    "coupling_report_sha256": "3ae5a8015a452ff520f34db9a36ed146327af6167ff875cea2122ec43352baaa",
+    "rf_assembly_mpns": {
+      "L140": "LQW15AN56NG80D",
+      "L141": "LQW15AN3N6G80D"
+    },
+    "rf_substitution_lands": {
+      "L140": {
+        "minimum_axial_overlap_mm": 0.09999999999999998,
+        "minimum_width_overlap_mm": 0.5,
+        "centered_only": true,
+        "manufacturer_recommended_gap_mm": 0.6,
+        "actual_gap_mm": 0.4000000000000008,
+        "manufacturer_recommended_pad_width_mm": 0.66,
+        "actual_pad_width_mm": 0.62,
+        "supplier_placement_verified": false,
+        "process_note": "Existing lands differ from recommended lands; assembly process review remains open"
+      },
+      "L141": {
+        "minimum_axial_overlap_mm": 0.09999999999999998,
+        "minimum_width_overlap_mm": 0.5,
+        "centered_only": true,
+        "manufacturer_recommended_gap_mm": 0.6,
+        "actual_gap_mm": 0.4000000000000079,
+        "manufacturer_recommended_pad_width_mm": 0.66,
+        "actual_pad_width_mm": 0.62,
+        "supplier_placement_verified": false,
+        "process_note": "Existing lands differ from recommended lands; assembly process review remains open"
+      }
+    },
+    "rf_model_scope": "Murata sensitivity surrogate; L1 Q >=10 assumed, no vendor S-parameters",
     "manufacturing_release": false
+  },
+  "rf_substitution": {
+    "parts": [
+      {
+        "source_mpn": "0402HPH-56NXJRW",
+        "source_value": "56n",
+        "source_footprint": "GNSS_HP0402",
+        "designators": [
+          "L140"
+        ],
+        "mpn": "LQW15AN56NG80D",
+        "manufacturer": "Murata Electronics",
+        "package": "0402",
+        "lcsc": "C1330587",
+        "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN56NG80D/C1330587",
+        "manufacturer_evidence": "https://search.murata.co.jp/Ceramy/image/img/P02/JELF243A-0100.pdf",
+        "checked_on": "2026-10-20",
+        "evidence_basis": "Exact manufacturer/MPN/0402 identity returned by JLCPCB public stock catalog API; dated observation.",
+        "resolution": "Explicit same-value Murata assembly substitution for the Coilcraft source MPN. JELF243A_0100K-01 specifies +/-2% inductance and minimum SRF 2.9 GHz (56 nH) / 10 GHz (3.6 nH). Native 0.56 x 0.62 mm lands at 0.96 mm centers overlap both end terminations; 1.10 x 0.70 x 0.60 mm maximum body fits within the existing 1.17 x 0.71 x 0.82 mm conservative envelope. The RF simulator uses the selected Murata sensitivity model. Native source identity is retained for traceable substitution.",
+        "sourcing_note": "Exact catalog mapping established. Supplier numbered-pad/centroid evidence and assembly allocation remain open; stock is not reserved.",
+        "assembly_description": "56nH +/-2% RF bias choke, 340mA, 2.9GHz minimum SRF, 0402",
+        "jlc_match_status": "catalog_listed",
+        "stock_observation": {
+          "checked_at": "2026-10-20T19:31:47.736876+00:00",
+          "source_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN56NG80D/C1330587",
+          "status": "available_to_order",
+          "displayed_stock": 9847,
+          "available_order_quantity": 9736,
+          "minimum_quantity": 1,
+          "snapshot_sha256": "a3b4c1e14140a0ec36adf3cc2b7acca11f45b6cc32516f3de71107ea7bee058d",
+          "snapshot_format": "Parsed public response serialized as UTF-8 JSON",
+          "scope": "Only L140/L141 refreshed; public stock is not reserved. Price tier minimum applies to current stock, not preorder.",
+          "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+        }
+      },
+      {
+        "source_mpn": "0402HP-3N6XJRW",
+        "source_value": "3.6n",
+        "source_footprint": "GNSS_HP0402",
+        "designators": [
+          "L141"
+        ],
+        "mpn": "LQW15AN3N6G80D",
+        "manufacturer": "Murata Electronics",
+        "package": "0402",
+        "lcsc": "C412276",
+        "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN3N6G80D/C412276",
+        "manufacturer_evidence": "https://search.murata.co.jp/Ceramy/image/img/P02/JELF243A-0100.pdf",
+        "checked_on": "2026-10-20",
+        "evidence_basis": "Exact manufacturer/MPN/0402 identity returned by JLCPCB public stock catalog API; dated observation.",
+        "resolution": "Explicit same-value Murata assembly substitution for the Coilcraft source MPN. JELF243A_0100K-01 specifies +/-2% inductance and minimum SRF 2.9 GHz (56 nH) / 10 GHz (3.6 nH). Native 0.56 x 0.62 mm lands at 0.96 mm centers overlap both end terminations; 1.10 x 0.70 x 0.60 mm maximum body fits within the existing 1.17 x 0.71 x 0.82 mm conservative envelope. The RF simulator uses the selected Murata sensitivity model. Native source identity is retained for traceable substitution.",
+        "sourcing_note": "Exact catalog mapping established. Supplier numbered-pad/centroid evidence and assembly allocation remain open; stock is not reserved.",
+        "assembly_description": "3.6nH +/-2% RF series tuning inductor, 1.95A, 10GHz minimum SRF, 0402",
+        "jlc_match_status": "catalog_listed",
+        "stock_observation": {
+          "checked_at": "2026-10-20T19:31:47.736876+00:00",
+          "source_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN3N6G80D/C412276",
+          "status": "available_to_order",
+          "displayed_stock": 908,
+          "available_order_quantity": 793,
+          "minimum_quantity": 1,
+          "snapshot_sha256": "afc4988a98de1dd3b9e33665ca550aba9ce324cb537fee00ba315a269999819b",
+          "snapshot_format": "Parsed public response serialized as UTF-8 JSON",
+          "scope": "Only L140/L141 refreshed; public stock is not reserved. Price tier minimum applies to current stock, not preorder.",
+          "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+        }
+      }
+    ],
+    "manufacturer_specification": "JELF243A_0100K-01",
+    "manufacturer_pdf_sha256": "2bca847ecc569c11674d6af7ab390ed19be23467d925f48e04e7800825cb0a7c",
+    "native_cad_unchanged": true,
+    "source_identity_retained": true
   }
 }

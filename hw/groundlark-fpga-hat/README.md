@@ -41,12 +41,14 @@ FPGA sources remain under [sw/fpga/](../../sw/fpga/README.md).
 
 Assembly uses an 8.5 mm JLCPCB socket, two external GPIO risers and measured
 supports (28.06 mm nominal Pi gap). Sensor supply and bias returns have local
-ground stitches. Inventory is excluded from the current simulation revision; see [JLCPCB assembly](../../docs/jlcpcb-assembly.md).
+ground stitches. Only the two RF inductor stock observations were refreshed on 2026-10-20; see [JLCPCB assembly](../../docs/jlcpcb-assembly.md).
 
 D90 uses TI **TPD2E2U06QDCKRQ1 / JLCPCB C915089** as the pin-compatible
 replacement for TPD2E2U06DCKR. Its SC-70 footprint and routing are unchanged.
-The 190 fitted placements have 72 exact-MPN BOM lines, of which 70 have catalog
-mappings. L140/L141 are Coilcraft RF inductors with unmapped catalog identities.
+The 190 fitted placements have 72 exact-MPN BOM lines, all with catalog
+mappings. L140/L141 use Murata LQW15AN56NG80D / C1330587 and
+LQW15AN3N6G80D / C412276 as documented assembly substitutions. The RF model
+uses these selected parts; the sensor-acquisition/UI simulator is unchanged.
 U23 uses the redesigned SDP32-125PA circuit and driver. Supplier geometry remains
 unverified for 53 placements, so the matching Gerber/BOM/CPL package remains a
 review package; see the assembly guide before ordering.

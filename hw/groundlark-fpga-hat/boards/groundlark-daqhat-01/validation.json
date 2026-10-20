@@ -151,7 +151,8 @@
       50,
       100
     ],
-    "choke_rated_mA": 330,
+    "choke_rated_mA": 340,
+    "choke_derated_at_125C_mA": 170,
     "rf_bypass_path_mm": 1.6760146180746753,
     "rf_bypass_ground_path_mm": 0,
     "input_bypass_path_mm": 4.981370849898476,

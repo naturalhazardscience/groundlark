@@ -57,30 +57,31 @@ def terminated_line(z, epsilon, length_mm, frequency, load):
     return (a*load+b)/(c*load+d)
 
 
-def choke_impedance(frequency, nominal_nh=56, srf_ghz=2.07, loss_ohm=10):
-    """Passive Foster fit to Coilcraft 0402HPH-56N typical data.
+def inductor_impedance(frequency, nominal_nh, srf_ghz, q, dcr_ohm):
+    """Series RL shunted by winding capacitance; a sensitivity surrogate.
 
-    58.8 nH at 900 MHz, 72.2 nH at 1.7 GHz, resonance 2.07 GHz.
-    A single parallel LC cannot fit these three points simultaneously.
-    The fit is an engineering model, not a vendor statistical/tolerance model.
+    None SRF omits winding capacitance; None Q omits AC loss but retains DCR.
+    Q at GNSS frequencies is an engineering assumption, not the datasheet Q
+    measured at 200/250 MHz. This is not a fitted Murata S-parameter model.
     """
-    f1,f2,fr=.9,1.7,2.07
-    a=f1*f1/(fr*fr-f1*f1);b=f2*f2/(fr*fr-f2*f2)
-    resonant=(72.2-58.8)/(b-a)
-    low=58.8-resonant*a
-    lp=resonant*nominal_nh/56*1e-9;ls=(low-resonant)*nominal_nh/56*1e-9
-    w=2*np.pi*frequency;cp=1/((2*np.pi*srf_ghz*1e9)**2*lp)
-    return loss_ohm+1j*w*ls+1/(1/(.2+1j*w*lp)+1j*w*cp)
+    w=2*np.pi*frequency;l=nominal_nh*1e-9
+    resistance=dcr_ohm+(w*l/q if q is not None else 0)
+    capacitance=1/((2*np.pi*srf_ghz*1e9)**2*l) if srf_ghz is not None else 0
+    return 1/(1/(resistance+1j*w*l)+1j*w*capacitance)
+
+
+def choke_impedance(frequency, nominal_nh=56, srf_ghz=2.9, q=30):
+    return inductor_impedance(frequency,nominal_nh,srf_ghz,q,.996)
 
 
 def rf_network(frequency,z,epsilon,lengths,pad_pf,diode_pf=.55,choke_nh=56,
-               choke_srf_ghz=2.07,series_cap_pf=47,connector_nh=.8,
+               choke_srf_ghz=2.9,series_cap_pf=47,connector_nh=.8,
                connector_pf=.3,cap_esl_nh=.2,bypass_esl_nh=1,
-               match_nh=3.6,match_q=60,match_srf_ghz=11.7,
-               branch_z=35.7,branch_epsilon=3.5,choke_loss_ohm=15,
+               match_nh=3.6,match_q=60,match_srf_ghz=10,
+               branch_z=35.7,branch_epsilon=3.5,choke_q=30,
                diode_esl_nh=.2):
     w=2*np.pi*frequency
-    choke=choke_impedance(frequency,choke_nh,choke_srf_ghz,choke_loss_ohm)
+    choke=choke_impedance(frequency,choke_nh,choke_srf_ghz,choke_q)
     bypass=.1+1j*w*bypass_esl_nh*1e-9+1/(1j*w*10e-9)
     block=.1+1j*w*cap_esl_nh*1e-9+1/(1j*w*series_cap_pf*1e-12)
     bias_load=1/(1/(choke+bypass)+1j*w*pad_pf.get('BIAS',0)*1e-12)
@@ -94,8 +95,7 @@ def rf_network(frequency,z,epsilon,lengths,pad_pf,diode_pf=.55,choke_nh=56,
     network=network@transmission(z,epsilon,lengths.get('GNSS_MATCH',0),frequency)
     network=network@shunt(1j*w*pad_pf.get('GNSS_MATCH',0)*1e-12)
     if match_nh:
-        match=1/(1/(w*match_nh*1e-9/match_q+1j*w*match_nh*1e-9)+
-                 1j*w/((2*np.pi*match_srf_ghz*1e9)**2*match_nh*1e-9))
+        match=inductor_impedance(frequency,match_nh,match_srf_ghz,match_q,.03)
         network=network@series(match)
     network=network@transmission(z,epsilon,lengths['GNSS_RF'],frequency)
     network=network@shunt(1j*w*pad_pf['GNSS_RF']*1e-12)
@@ -108,13 +108,15 @@ def rf_network(frequency,z,epsilon,lengths,pad_pf,diode_pf=.55,choke_nh=56,
 def rf_review(board):
     import pcbnew as p
     from gnss_checks import rf_geometry
+    from rf_substitution import review as substitution_review
+    substitution=substitution_review(board)
     values={f.GetReference():f.GetValue() for f in board.GetFootprints()}
     expected={'C148':'47p C0G','L140':'56n','L141':'3.6n','D140':'PESD5V0F1BL','C151':'10n'}
     for ref,value in expected.items():
         if values.get(ref)!=value:raise ValueError(f'RF circuit model does not match native {ref}: {values.get(ref)}')
     from jlcpcb_bom import load_registry
     selected={ref:part['mpn'] for part in load_registry()['parts'] for ref in part['designators']}
-    for ref,mpn in {'L140':'0402HPH-56NXJRW','L141':'0402HP-3N6XJRW',
+    for ref,mpn in {'L140':'LQW15AN56NG80D','L141':'LQW15AN3N6G80D',
                     'C148':'GRM1555C1H470JA01D','D140':'PESD5V0F1BL,315'}.items():
         if selected.get(ref)!=mpn:raise ValueError(f'RF model does not match assembly selection {ref}')
     native=rf_geometry(board);h=native['dielectric_mm'];width=native['tracks'][0]['width_mm']
@@ -134,13 +136,13 @@ def rf_review(board):
         f=microstrip(width=width+dw,height=h*dh,thickness=native['copper_mm'],er=er,mask=mask,pitch=.01)
         field.append(dict(width_mm=width+dw,height_mm=h*dh,er=er,mask_mm=mask,**f))
     extrema={};count=0
-    component_corners=list(itertools.product((.93,1.07),(.93,1.07),(1.8,2.4),(.95,1.05),(.1,.3),(10,16),(5,30)))
+    component_corners=list(itertools.product((.93,1.07),(.93,1.07),(2.9,None),(.95,1.05),(.1,.3),(10,None),(10,None),(10,None)))
     for f,frequency,pad_scale,connector_nh,diode,connector_pf in itertools.product(
             field,(1.559e9,1.57542e9,1.61e9),(.8,1.3),(.3,1.5),(.3,.55),(.15,.45)):
-        for match_tol,choke_tol,srf,cap_tol,esl,match_srf,loss in component_corners:
+        for match_tol,choke_tol,srf,cap_tol,esl,match_srf,choke_q,match_q in component_corners:
             inputs=dict(connector_nh=connector_nh,connector_pf=connector_pf,diode_pf=diode,
-                match_nh=3.6*match_tol,match_q=30,match_srf_ghz=match_srf,
-                choke_nh=56*choke_tol,choke_srf_ghz=srf,choke_loss_ohm=loss,
+                match_nh=3.6*match_tol,match_q=match_q,match_srf_ghz=match_srf,
+                choke_nh=56*choke_tol,choke_srf_ghz=srf,choke_q=choke_q,
                 series_cap_pf=47*cap_tol,cap_esl_nh=esl,
                 branch_z=f['z_ohm'],branch_epsilon=f['epsilon_effective'])
             row=dict(frequency_hz=frequency,field={k:f[k] for k in ('width_mm','height_mm','er','mask_mm')},
@@ -159,7 +161,7 @@ def rf_review(board):
             dense.append(rf_network(frequency,f['z_ohm'],f['epsilon_effective'],lengths,
                 {net:value*worst['pad_multiplier'] for net,value in pads.items()},**worst['inputs']))
     dense_pass=all(row['return_loss_db']>=10 and row['insertion_loss_db']<=1 and row['choke_impedance_ohm']>=500 for row in dense)
-    return dict(native=native,components={ref:values[ref] for ref in expected},nominal_masked=nominal,nominal_network=nominal_network,field_corners=field,pad_area_mm2=areas,
+    return dict(native=native,components={ref:values[ref] for ref in expected},assembly_mpns={ref:selected[ref] for ref in ('L140','L141')},substitution_lands=substitution,nominal_masked=nominal,nominal_network=nominal_network,field_corners=field,pad_area_mm2=areas,
                 pad_parallel_plate_pf=pads,circuit_cases=count,
                 worst_return_loss=worst_rl,worst_insertion_loss=worst_il,
                 worst_choke_isolation=extrema['choke_impedance_ohm'],
@@ -169,12 +171,17 @@ def rf_review(board):
                 assumptions=dict(ports_ohm=50,pad_capacitance_multiplier=[.8,1.3],connector_nh=[.3,1.5],
                     connector_pf=[.15,.45],block_esl_nh=[.1,.3],bypass_esl_nh=1,
                     inductance_multiplier=[.93,1.07],block_cap_multiplier=[.95,1.05],
-                    match_q=30,match_srf_ghz=[10,16],choke_srf_ghz=[1.8,2.4],choke_loss_ohm=[5,30]),
+                    match_q=[10,None],choke_q=[10,None],match_srf_ghz=[10,None],choke_srf_ghz=[2.9,None],
+                    null_endpoint='No winding capacitance / no AC resistance; DCR retained',
+                    manufacturer_reference='https://search.murata.co.jp/Ceramy/image/img/P02/JELF243A-0100.pdf',
+                    manufacturer_specification='JELF243A_0100K-01 pp3,8,9',
+                    reference_case='Minimum specified SRF, assumed Q 30/60; not a measured typical prediction'),
                 scope='2-D quasi-TEM traces and lumped pads/components; no 3-D connector or antenna model',
                 limitations=['Mask is bounded by bare copper and planar filled mask; not a conformal-mask mesh.',
                              'Nearby coplanar metal is omitted; pad area is a lumped parallel-plate estimate.',
                              'The SMA antipad leaves bias/ESD branches unreferenced. Their transmission-line surrogate plus connector parasitics is not a 3-D launch solution.',
                              'L141 is a VNA tuning position; 3.6 nH is provisional and depends on modeled pad capacitance.',
+                             'Murata Q minima are specified at 200/250 MHz, not GNSS L1. Q >=10 at L1 and the single-resonance surrogate remain unqualified assumptions; no vendor S-parameters were used.',
                              'Material/etch/connector bounds are assumptions, not verified manufacturing tolerances.',
                              'A false all_corners_meet_targets fails the simulation profile.'])
 
