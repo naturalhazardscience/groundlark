@@ -79,7 +79,12 @@ The native circuit uses a **Coilcraft 0402HPH-56NXJRW, 56 nH choke (L140)** and
 C0G blocking capacitor and PESD5V0F1BL ESD protection. All five RF traces are
 0.17 mm B.Cu over the 0.0994 mm reference spacing. Bias/ESD branches are shortened
 to 1.02/0.80 mm; series segments total approximately 4.28 mm. Every RF segment,
-reference plane, value and selected MPN is checked against the model inputs.
+value and selected MPN is checked against the model inputs. Reference-plane
+coverage is checked outside the bounded SMA antipad; both shunt branches are
+inside that unreferenced transition. Its surrounding return annulus is checked
+separately. The line/connector surrogate does not solve this launch in 3-D.
+L141 remains a VNA tuning position with provisional 3.6 nH, dependent on estimated
+pad capacitance. Both Coilcraft catalog mappings remain unresolved assembly holds.
 
 The nominal filled-mask field impedance is approximately 46.2 Ω. Etch ±20 µm,
 dielectric thickness ±10%, epsilon 3.8–4.6 and mask 0–25 µm are sensitivity ranges,
@@ -105,22 +110,46 @@ three-dimensional connector solution or a controlled-impedance fabrication claim
 
 ## Adjacent signal layers
 
-Native In2/In3 segment lengths, widths and offsets feed coupled capacitance and
-inductance extraction. The stress cross-sections add 20 µm width, reduce the
-central dielectric by 10%, and use epsilon 4.6. Separated parallel regions are
-collapsed into a coherent equivalent line for each net pair. That is a scenario,
-not a proof that it bounds every whole-net topology.
+Native In2/In3 segments are screened using exact round-ended proximity intervals
+within three dielectric heights of edge separation. Angled segments, crossings,
+and endpoints are included. Intervals are unioned per In2 segment and opposing
+net, preventing duplicate length at bends. The reported length follows In2;
+it is not the sum of both traces. IMU3_INT/SPI_MISO measures approximately
+**9.47 mm**, compared with 4.8 mm in the retained parallel-only diagnostic.
+The 5 mm parallel-only regression limit remains separate from electrical acceptance.
 
-Each pair is exercised at 0.5/2 ns edge times, 20/100 Ω aggressor drive,
+Distance contours split the intervals into 25 µm bins, rounded toward closer
+coupling. Tests check both length and distance-bin invariance when straight
+tracks are subdivided. The stress cross-sections add 20 µm width, reduce the
+central dielectric by 10%, and use epsilon 4.6. Angled regions use a parallel
+surrogate; separated regions are collapsed into a coherent equivalent line for
+each net pair. This is a conservative engineering scenario, not a proof that it
+bounds every 3-D crossing or whole-net topology.
+
+Each pair is exercised in **both aggressor directions**, at 0.5/2 ns edge times, 20/100 Ω aggressor drive,
 20 Ω/4.7 kΩ quiet termination and 2/10 pF end loads, at a 3.465 V step. A passive
 six-section coupled LC ladder predicts near/far-end excursions. Doubling the
 section count and halving the timestep checks convergence; an independently
 generated ngspice circuit agrees within 5 mV. A disconnected-coupling control
 must produce zero noise, and an excessive parallel-length fault must increase it.
+There are 32 scenarios per pair.
 
-Worst modeled pair excursion is approximately 0.43 V on IMU3_INT/SPI_MISO;
-the largest Pi-connected pair is approximately 0.19 V. These are sensitivity
-results, not universal receiver margins. The model excludes perpendicular
-crossings, vias, same-layer coupling, whole-net reflections, simultaneous
-aggressors and nonlinear receiver behavior. It replaces a length-only estimate
-with a reproducible electrical model while preserving those limits explicitly.
+The model has a **0.20 V maximum near/far-end excursion allocation**, applied to
+every evaluated pair. A missing, nonfinite or excessive result fails acceptance;
+the signal-integrity stage writes its evidence before failing the build.
+This is a project allocation for one coupling mechanism, not a guaranteed
+receiver noise margin. It is below the 0.227 V assumed host-bus static margin
+in the [GNSS rail/threshold scenario](gnss-hardware.md), leaving only 27 mV in
+that scenario for other effects. The actual receiver thresholds, output levels,
+ground movement and combined noise budget remain unqualified.
+
+The current board **fails this allocation** on 32 of 233 net pairs
+under the expanded stress model. Worst excursion is 0.736 V on
+IMU3_INT/SPI_MISO; the largest Pi-connected pair is 0.344 V.
+The former 0.43 V / 0.19 V summaries used the narrower parallel-only extraction
+and must not be used as current acceptance evidence. Use the saved
+`coupling.acceptance.failed_pairs` and each pair's worst aggressor/scenario.
+Resolving this electrical hold requires routing changes or a justified,
+independently checked model of the actual drive/termination states. The model
+omits vias, same-layer coupling, whole-net reflections, simultaneous aggressors
+and nonlinear receiver behavior.

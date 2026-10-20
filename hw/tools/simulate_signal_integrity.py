@@ -3,11 +3,38 @@ import hashlib
 import itertools
 import json
 import math
+import os
 from pathlib import Path
+# Thousands of small ladder solves do not benefit from a large default BLAS
+# thread pool. Preserve an explicitly configured thread count.
+os.environ.setdefault('OPENBLAS_NUM_THREADS','1')
 import numpy as np
 from field_solver import microstrip, broadside, C0, EPS0
 from coupled_line import step
 from project_paths import board_dir
+
+# Project allocation for this modeled coupling mechanism, not a universal
+# receiver noise margin. Reserve the remaining static margin for other effects.
+CROSSTALK_LIMIT_V = .2
+
+
+def coupling_acceptance(rows):
+    if not rows:raise ValueError('No adjacent-layer coupling cases evaluated')
+    failed=[]
+    for row in rows:
+        value=row['worst']['peak_V']
+        if not math.isfinite(value) or value<0 or value>CROSSTALK_LIMIT_V:
+            failed.append(dict(nets=row['nets'],peak_V=value))
+    return dict(maximum_excursion_V=CROSSTALK_LIMIT_V,all_pairs_meet_target=not failed,
+                failed_pairs=failed,basis='Project allocation for one modeled aggressor; not receiver or physical qualification')
+
+
+def require_acceptance(result):
+    failures=[]
+    if not result['rf']['all_corners_meet_targets']:failures.append('RF design envelope failed')
+    if not result['coupling']['acceptance']['all_pairs_meet_target']:
+        failures.append('Adjacent-layer crosstalk allocation failed')
+    if failures:raise ValueError('; '.join(failures))
 
 
 def transmission(z,epsilon,length_mm,frequency):
@@ -146,6 +173,8 @@ def rf_review(board):
                 scope='2-D quasi-TEM traces and lumped pads/components; no 3-D connector or antenna model',
                 limitations=['Mask is bounded by bare copper and planar filled mask; not a conformal-mask mesh.',
                              'Nearby coplanar metal is omitted; pad area is a lumped parallel-plate estimate.',
+                             'The SMA antipad leaves bias/ESD branches unreferenced. Their transmission-line surrogate plus connector parasitics is not a 3-D launch solution.',
+                             'L141 is a VNA tuning position; 3.6 nH is provisional and depends on modeled pad capacitance.',
                              'Material/etch/connector bounds are assumptions, not verified manufacturing tolerances.',
                              'A false all_corners_meet_targets fails the simulation profile.'])
 
@@ -161,7 +190,7 @@ def coupling_review(board):
         widths=[p.ToMM(tracks[row[k]].GetWidth()) for k in ('first','second')]
         # Round displacement toward zero to 25 um; include a 20 um etch-width
         # sensitivity and 10% thinner central dielectric in this stress model.
-        offset=math.floor(row['center_gap_mm']/.025)*.025
+        offset=math.floor(row['center_gap_mm']/.025+1e-8)*.025
         key=(*widths,offset)
         if key not in models:
             models[key]=broadside(width1=widths[0]+.02,width2=widths[1]+.02,
@@ -178,19 +207,23 @@ def coupling_review(board):
     for pair,(length,c,l) in pairs.items():
         c/=length;l/=length
         cases=[]
-        for drive,victim,rise,load in itertools.product((20,100),(20,4700),(.5,2),(2,10)):
-            value=step(c,l,length,driver_ohm=drive,victim_ohm=victim,rise_ns=rise,load_pf=load)
+        for direction,drive,victim,rise,load in itertools.product((0,1),(20,100),(20,4700),(.5,2),(2,10)):
+            order=[direction,1-direction]
+            value=step(c[np.ix_(order,order)],l[np.ix_(order,order)],length,
+                       driver_ohm=drive,victim_ohm=victim,rise_ns=rise,load_pf=load)
             cases.append(dict(driver_ohm=drive,victim_ohm=victim,rise_ns=rise,load_pf=load,
-                              peak_V=max(value.values()),**value))
-        rows.append(dict(nets=list(pair),parallel_mm=length,mutual_pf=float(-c[0,1]*length*1e-3*1e12),
+                              aggressor=pair[direction],victim=pair[1-direction],peak_V=max(value.values()),**value))
+        rows.append(dict(nets=list(pair),proximity_mm=length,mutual_pf=float(-c[0,1]*length*1e-3*1e12),
                          mutual_nh=float(l[0,1]*length*1e-3*1e9),worst=max(cases,key=lambda c:c['peak_V'])))
     return dict(pairs=sorted(rows,key=lambda r:-r['worst']['peak_V']),field_sections=len(models),
-                worst_pi_pair=max((r for r in rows if any(n.startswith('PI_') for n in r['nets'])),key=lambda r:r['worst']['peak_V']),
-                cases_per_pair=16,rail_step_V=3.465,
-                scope='Adjacent In2/In3 parallel regions collapsed into coherent equivalent coupled lines',
+                worst_pi_pair=max((r for r in rows if any(n.startswith('PI_') for n in r['nets'])),key=lambda r:r['worst']['peak_V'],default=None),
+                cases_per_pair=32,rail_step_V=3.465,acceptance=coupling_acceptance(rows),
+                native=native,
+                scope='Adjacent In2/In3 proximity regions collapsed into coherent equivalent coupled lines; angled regions modeled parallel at minimum separation',
                 limitations=['Corners are sensitivity scenarios, not vendor-guaranteed transistor/stackup bounds.',
                              'Receiver load and output resistance are swept; no IBIS clamp or nonlinear pad model.',
-                             'Crossings, vias, same-layer coupling, whole-net reflections and simultaneous aggressors are excluded.'])
+                             'Crossings use a parallel surrogate, not a 3-D field solution.',
+                             'Vias, same-layer coupling, whole-net reflections and simultaneous aggressors are excluded.'])
 
 
 def report():
@@ -202,11 +235,17 @@ def report():
     return result
 
 
+def save_report(result,output):
+    output=Path(output);output.parent.mkdir(parents=True,exist_ok=True)
+    output.write_text(json.dumps(result,indent=2)+'\n')
+    require_acceptance(result)
+
+
 if __name__=='__main__':
     output=Path('hw/groundlark-fpga-hat/simulation/signal-integrity.json')
-    output.parent.mkdir(parents=True,exist_ok=True)
-    result=report();output.write_text(json.dumps(result,indent=2)+'\n')
+    result=report()
     print(json.dumps(dict(rf_return_loss=result['rf']['worst_return_loss'],
                          rf_insertion_loss=result['rf']['worst_insertion_loss'],
                          coupling_worst=result['coupling']['pairs'][:3]),indent=2))
-    if not result['rf']['all_corners_meet_targets']:raise SystemExit('RF design envelope failed')
+    try:save_report(result,output)
+    except ValueError as error:raise SystemExit(str(error)) from error

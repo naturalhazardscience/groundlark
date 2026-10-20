@@ -351,3 +351,15 @@ reset during shutdown and repeated failed boots. Verify bounded shutdown, full
 rail discharge, restart hysteresis and minimum off time. Test geophone noise
 with the Pi converter running. Missing limits or measurements remain failures;
 CAD, arithmetic and configuration validation are not hardware qualification.
+
+D130 remains an **open thermal bench item**. The 8 V input / 3 A combined-load
+scenario dissipates approximately 1.2 W in it. Connected copper and nine vias
+establish heat-spreading geometry only; junction temperature and effective
+thermal resistance are unset. Qualify junction temperature in the closed
+enclosure with the intended ambient and load limits. A simulation-only run
+must retain this item as open.
+
+For GNSS, retain L141 as a VNA tuning position. Start with the provisional
+3.6 nH model value, record S11/S21 with the actual connector and assembled
+stackup, and select the production matching value from those results. Include
+the SMA antipad and unreferenced bias/ESD branches in that measurement.

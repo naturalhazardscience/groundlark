@@ -44,9 +44,14 @@ target firmware is built and tested with native fixtures. Hardware shutdown
 integration remains unqualified.
 
 The full and simulation profiles execute 28 stages. The current simulation run
-passes all 28 stages, with 259 hardware tests, 315 software tests, zero ERC/DRC
-violations and identical native routing replay. Its signal bench passes all
-12 checks. The simulation profile
+completes all 28 stages: 27 pass and the signal-integrity stage fails its coupling
+allocation. Its 267 hardware regression tests and 315
+software tests pass; ERC/DRC report zero violations and native SES replay matches.
+The expanded coupling model introduces an electrical acceptance hold: the current
+board exceeds its 0.20 V allocation. A previous simulation-profile pass predates this gate and does not
+clear it. Current run status and per-stage results are recorded in
+`verification.json` under `portable_lab.run_id`, `profile` and `status`.
+The simulation profile
 excludes one explicitly named procurement release gate and retains native
 geometry, exporter and available supplier-pad checks. The full profile still
 requires all 190 supplier placements to be verified; 53 remain unverified.
@@ -101,14 +106,17 @@ worst loss is 0.53 dB and worst return loss is 10.86 dB, meeting the unchanged
 assembled ngspice and ABCD models agree; removing matching or restoring long
 branches are failure controls. Unmodeled three-dimensional effects remain open.
 
-The adjacent In2/In3 screen reports parallel signal lengths within three
-dielectric heights of edge separation. Its 5 mm aggregate pair limit is a
-layout regression limit, not a crosstalk acceptance voltage. Perpendicular
-crossings and distant controls are independent fixtures. The existing
-0.1088 mm interlayer gap remains part of the stock stackup; physical signal
-integrity is unqualified. Field-extracted coupled-line scenarios now produce
-near/far-end transients and have an independent ngspice cross-check. The largest
-modeled Pi-connected pair excursion is approximately 0.19 V. Whole-net and
+The adjacent In2/In3 screen includes angled tracks, crossings and endpoints
+within three dielectric heights of edge separation. It unions intervals to
+avoid double-counting bends and splits them at 25 µm distance contours.
+IMU3_INT/SPI_MISO now measures 9.47 mm along In2, including round-ended proximity.
+The former parallel-only 5 mm regression gate remains a separate diagnostic.
+Independent geometry and subdivision fixtures exercise the expanded extraction.
+The 0.1088 mm interlayer gap remains part of the stock stackup.
+Field-extracted coupled-line scenarios evaluate both aggressor directions and
+fail the build above 0.20 V near/far-end excursion. The current board fails this
+allocation. The ladder has an independent ngspice cross-check; its parallel
+surrogate for crossings does not establish a 3-D solution. Whole-net and
 simultaneous-aggressor behavior remain outside this model. See
 [simulation scope and assumptions](simulation-validation.md).
 

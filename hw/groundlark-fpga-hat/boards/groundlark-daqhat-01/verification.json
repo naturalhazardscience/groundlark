@@ -1,5 +1,5 @@
 {
-  "date_utc": "2026-10-20T04:06:27.830549+00:00",
+  "date_utc": "2026-10-20T04:58:30.844540+00:00",
   "revision": "Compact backside RF network, 56 nH choke and 3.6 nH series match; vented parallel-capillary pressure model; inventory excluded",
   "physical_qualification": false,
   "manufacturing_package_released": false,
@@ -15,8 +15,8 @@
     "hw/groundlark-fpga-hat/layout/placement.json": "d96287995c053d7160639273796328c7f78c1f0f6ea23d97434f4566c3f7f34d",
     "hw/shared/elec/GNSS_HP0402.kicad_mod": "571a86c213f2f0471aba55a4346d4465af6d8a4015e555c89b6c1957f5b5206c",
     "hw/shared/elec/Groundlark__SDP32.kicad_mod": "9bbc3e41c56ec0e8c2d88f6c32108574227e53acea69b216ca665a9df0e4c2fc",
-    "hw/shared/elec/symbols/GNSS_3N6.kicad_sym": "3719173867547f1297d6927025ecfe234a06dd7fbeea2b88aac8ab2eaed2829d",
-    "hw/shared/elec/symbols/GNSS_56N.kicad_sym": "d6e1a50c4559c52879c35d0912b4fa57b3da5050682a865ef45d8418964710fd",
+    "hw/shared/elec/symbols/GNSS_3N6.kicad_sym": "db2ee6595b79178c3fae1af5bc910cdf35697e1849c374ffbcc7a2527779ed98",
+    "hw/shared/elec/symbols/GNSS_56N.kicad_sym": "485dfd273de735e516cf58928c4ab5c721cf11477e88a28176167e34e3f1e77c",
     "hw/shared/elec/symbols/PRESSURE_SDP32.kicad_sym": "000cc8a7ba7ee1621d8ebd447c71385f96ff48ee5986643da32b808f9499b221",
     "hw/shared/libraries/Groundlark.pretty/GNSS_HP0402.kicad_mod": "571a86c213f2f0471aba55a4346d4465af6d8a4015e555c89b6c1957f5b5206c",
     "hw/shared/libraries/Groundlark.pretty/Groundlark__SDP32.kicad_mod": "116a78e3f511115cd12e85030017df1eb165f2ceba253aa9aa604aa4399a2d43"
@@ -152,7 +152,9 @@
         "loss_scenario_W": 1.2035826676349552,
         "thermal_resistance_measured": false,
         "junction_temperature_C": null,
-        "qualified": false
+        "qualified": false,
+        "bench_status": "open",
+        "bench_requirement": "D130 junction-temperature qualification at 8 V input / 3 A combined load in the closed enclosure; copper/via counts do not close this item"
       },
       "firmware": "prototype implemented; battery policy disabled pending qualification",
       "physical_qualification": false
@@ -183,35 +185,55 @@
             "role": "GNSS_RF",
             "width_mm": 0.17,
             "length_mm": 1.8629009635512028,
-            "estimated_ohm": 49.71591709061459
+            "estimated_ohm": 49.71591709061459,
+            "reference_samples_checked": 228,
+            "antipad_samples": 0,
+            "unreferenced_launch_mm": 0,
+            "fully_inside_antipad": false
           },
           {
             "net": "GNSS_ANT",
             "role": "ESD",
             "width_mm": 0.17,
             "length_mm": 0.799999,
-            "estimated_ohm": 49.71591709061459
+            "estimated_ohm": 49.71591709061459,
+            "reference_samples_checked": 0,
+            "antipad_samples": 99,
+            "unreferenced_launch_mm": 0.799999,
+            "fully_inside_antipad": true
           },
           {
             "net": "GNSS_ANT",
             "role": "GNSS_ANT",
             "width_mm": 0.17,
             "length_mm": 1.3602940858505561,
-            "estimated_ohm": 49.71591709061459
+            "estimated_ohm": 49.71591709061459,
+            "reference_samples_checked": 30,
+            "antipad_samples": 138,
+            "unreferenced_launch_mm": 1.12,
+            "fully_inside_antipad": false
           },
           {
             "net": "GNSS_ANT",
             "role": "BIAS",
             "width_mm": 0.17,
             "length_mm": 1.02,
-            "estimated_ohm": 49.71591709061459
+            "estimated_ohm": 49.71591709061459,
+            "reference_samples_checked": 0,
+            "antipad_samples": 126,
+            "unreferenced_launch_mm": 1.02,
+            "fully_inside_antipad": true
           },
           {
             "net": "GNSS_MATCH",
             "role": "GNSS_MATCH",
             "width_mm": 0.17,
             "length_mm": 1.0570237272649086,
-            "estimated_ohm": 49.71591709061459
+            "estimated_ohm": 49.71591709061459,
+            "reference_samples_checked": 132,
+            "antipad_samples": 0,
+            "unreferenced_launch_mm": 0,
+            "fully_inside_antipad": false
           }
         ],
         "path_lengths_mm": {
@@ -224,6 +246,9 @@
         "dielectric_mm": 0.0994,
         "copper_mm": 0.035,
         "epsilon_r": 4.3,
+        "sma_antipad_radius_mm": 1.12,
+        "sma_return_annulus_samples": 1980,
+        "reference_sampling_pitch_mm": 0.025,
         "model": "Uncoated Hammerstad-Jensen microstrip; mask, coplanar copper and pads require supplier field-solver review",
         "qualified": false
       },
@@ -297,35 +322,38 @@
     "unconnected_items": 0
   },
   "portable_lab": {
-    "full_run": "20261020T035829Z-60bc1173",
+    "run_id": "20261020T045150Z-a34b647d",
     "profile": "simulation",
-    "full_status": "passed",
-    "failed_steps": [],
+    "status": "failed",
+    "scope": "Simulation profile with procurement excluded; failed electrical gate is retained",
+    "failed_steps": [
+      "simulate_signal_integrity"
+    ],
     "steps": [
       {
         "name": "build-field_head",
         "exit_code": 0,
-        "seconds": 6.32
+        "seconds": 6.48
       },
       {
         "name": "constraints-field_head",
         "exit_code": 0,
-        "seconds": 4.52
+        "seconds": 4.82
       },
       {
         "name": "build-trenz_hat",
         "exit_code": 0,
-        "seconds": 17.19
+        "seconds": 17.5
       },
       {
         "name": "constraints-trenz_hat",
         "exit_code": 0,
-        "seconds": 20.16
+        "seconds": 19.56
       },
       {
         "name": "build-skylark",
         "exit_code": 0,
-        "seconds": 8.38
+        "seconds": 8.33
       },
       {
         "name": "constraints-skylark",
@@ -335,12 +363,12 @@
       {
         "name": "reject-overvoltage",
         "exit_code": 0,
-        "seconds": 3.02
+        "seconds": 3.07
       },
       {
         "name": "hardware-regressions",
         "exit_code": 0,
-        "seconds": 106.57
+        "seconds": 109.62
       },
       {
         "name": "check_circuit",
@@ -355,17 +383,17 @@
       {
         "name": "check_trenz",
         "exit_code": 0,
-        "seconds": 29.04
+        "seconds": 29.69
       },
       {
         "name": "daqhat_01_engineering",
         "exit_code": 0,
-        "seconds": 14.18
+        "seconds": 13.92
       },
       {
         "name": "prefab_review",
         "exit_code": 0,
-        "seconds": 1.47
+        "seconds": 3.67
       },
       {
         "name": "check_skylark",
@@ -375,7 +403,7 @@
       {
         "name": "routing-replay",
         "exit_code": 0,
-        "seconds": 8.58
+        "seconds": 8.69
       },
       {
         "name": "burrowlark-routing-replay",
@@ -410,7 +438,7 @@
       {
         "name": "signal_response",
         "exit_code": 0,
-        "seconds": 0.52
+        "seconds": 0.51
       },
       {
         "name": "power_review",
@@ -419,18 +447,18 @@
       },
       {
         "name": "simulate_signal_integrity",
-        "exit_code": 0,
-        "seconds": 107.94
+        "exit_code": 1,
+        "seconds": 37.23
       },
       {
         "name": "pressure_pneumatics",
         "exit_code": 0,
-        "seconds": 31.74
+        "seconds": 32.04
       },
       {
         "name": "fpga-loopback-rtl",
         "exit_code": 0,
-        "seconds": 44.99
+        "seconds": 43.84
       },
       {
         "name": "fpga-implementation-evidence",
@@ -440,15 +468,16 @@
       {
         "name": "sensor-contracts",
         "exit_code": 0,
-        "seconds": 26.22
+        "seconds": 26.12
       }
     ],
-    "hardware_tests": 259,
+    "hardware_tests": 267,
     "software_tests": 315,
     "environment_unit_tests": 25,
     "environment_unit_skips": 2,
     "excluded_test": "test_pcb_handedness.HandednessTests.test_supplier_placement_release_gate",
-    "source_inputs_manifest_sha256": "1182b74c722ab3ab998d8c3761d325ee40153dd671081f2cfbc386c9b2cfb453"
+    "source_inputs_manifest_sha256": "4cbcc8e5910c6c85e456f492c603a5e63ed97b3b5286592f7111605e58a21eef",
+    "evidence_binding": "This verification summary and saved generated reports are updated after the run; the retained input manifest describes the pre-run snapshot. Authored CAD and tested checker sources are unchanged."
   },
   "workbench": {
     "http_smoke": true,
@@ -892,7 +921,7 @@
     "unverified_supplier_placements": 53,
     "physical_qualification": false,
     "manufacturing_released": false,
-    "native_lab": ".lab/runs/20261020T035829Z-60bc1173",
+    "native_lab": ".lab/runs/20261020T045150Z-a34b647d",
     "compiled_board_sha256": "e080edb46b390ed08e3b1618bb9ecd7a080afb605038fc34c4d3b617109d4616"
   },
   "simulation_acceptance": {
@@ -902,6 +931,281 @@
     "pneumatic_conditional_pass": true,
     "pneumatic_corner_count": 4096,
     "pneumatic_interior_count": 101,
-    "manufacturer_resistance_bound_established": false
+    "manufacturer_resistance_bound_established": false,
+    "coupling_allocation": {
+      "maximum_excursion_V": 0.2,
+      "all_pairs_meet_target": false,
+      "failed_pairs": [
+        {
+          "nets": [
+            "ID_SDA",
+            "PI_IMU1_INT"
+          ],
+          "peak_V": 0.22669744803501662
+        },
+        {
+          "nets": [
+            "IMU3_CS",
+            "PI_IMU1_INT"
+          ],
+          "peak_V": 0.3066932556512098
+        },
+        {
+          "nets": [
+            "PI_SHUTDOWN_N",
+            "PI_SPI_MOSI"
+          ],
+          "peak_V": 0.21861466425613651
+        },
+        {
+          "nets": [
+            "PI_IMU1_INT",
+            "PI_SPI_MOSI"
+          ],
+          "peak_V": 0.20584019557080852
+        },
+        {
+          "nets": [
+            "PI_IMU3_INT",
+            "PI_SPI_MISO"
+          ],
+          "peak_V": 0.21244855725128192
+        },
+        {
+          "nets": [
+            "FPGA_IO_ENABLE",
+            "PI_IMU1_INT"
+          ],
+          "peak_V": 0.3439688774958343
+        },
+        {
+          "nets": [
+            "PI_IMU2_CS",
+            "PI_SPI_SCLK"
+          ],
+          "peak_V": 0.26757639479519213
+        },
+        {
+          "nets": [
+            "PI_SHUTDOWN_N",
+            "PI_SPI_SCLK"
+          ],
+          "peak_V": 0.27120947985071764
+        },
+        {
+          "nets": [
+            "PI_IMU1_CS",
+            "PI_IMU2_CS"
+          ],
+          "peak_V": 0.27478165452304615
+        },
+        {
+          "nets": [
+            "LINK_DQ2",
+            "PI_IMU1_CS"
+          ],
+          "peak_V": 0.2771166167489316
+        },
+        {
+          "nets": [
+            "FPGA_UART_RX",
+            "PI_IMU3_CS"
+          ],
+          "peak_V": 0.24963578139178783
+        },
+        {
+          "nets": [
+            "FPGA_RESET_N",
+            "PI_SPI_MISO"
+          ],
+          "peak_V": 0.34108243109803404
+        },
+        {
+          "nets": [
+            "FPGA_RESET_N",
+            "IMU1_INT"
+          ],
+          "peak_V": 0.23112795539699293
+        },
+        {
+          "nets": [
+            "EEP_WP",
+            "FPGA_EN1"
+          ],
+          "peak_V": 0.36872516987238385
+        },
+        {
+          "nets": [
+            "LINK_DQ2",
+            "PI_IMU3_CS"
+          ],
+          "peak_V": 0.22131466106231784
+        },
+        {
+          "nets": [
+            "I2C_SDA",
+            "LINK_JTAG_SEL"
+          ],
+          "peak_V": 0.40394277482284496
+        },
+        {
+          "nets": [
+            "FPGA_LINK_CS_N",
+            "LINK_CS_N"
+          ],
+          "peak_V": 0.32774574969915005
+        },
+        {
+          "nets": [
+            "IMU3_CS",
+            "IMU3_INT"
+          ],
+          "peak_V": 0.39387279451442997
+        },
+        {
+          "nets": [
+            "ID_SCL",
+            "SENSOR_OE_N"
+          ],
+          "peak_V": 0.21116777470154569
+        },
+        {
+          "nets": [
+            "IMU3_INT",
+            "SPI_MISO"
+          ],
+          "peak_V": 0.7360704980384469
+        },
+        {
+          "nets": [
+            "LINK_DQ1",
+            "PI_IMU3_CS"
+          ],
+          "peak_V": 0.3405994957479784
+        },
+        {
+          "nets": [
+            "FPGA_LINK_CS_N",
+            "PI_I2C_SCL"
+          ],
+          "peak_V": 0.2544755701191289
+        },
+        {
+          "nets": [
+            "IMU2_CS",
+            "PI_I2C_SDA"
+          ],
+          "peak_V": 0.32281967313000004
+        },
+        {
+          "nets": [
+            "SPI_MOSI",
+            "SPI_SCLK"
+          ],
+          "peak_V": 0.2930136943918992
+        },
+        {
+          "nets": [
+            "I2C_SCL",
+            "I2C_SDA"
+          ],
+          "peak_V": 0.5742518623643202
+        },
+        {
+          "nets": [
+            "I2C_SDA",
+            "SPI_SCLK"
+          ],
+          "peak_V": 0.2671126118507304
+        },
+        {
+          "nets": [
+            "IMU2_CS",
+            "PI_SPI_MISO"
+          ],
+          "peak_V": 0.3057082566093117
+        },
+        {
+          "nets": [
+            "PI_IMU3_CS",
+            "SPI_MOSI"
+          ],
+          "peak_V": 0.25655154368743
+        },
+        {
+          "nets": [
+            "GEO_DRDY_N",
+            "I2C_SCL"
+          ],
+          "peak_V": 0.31028385912895623
+        },
+        {
+          "nets": [
+            "GEO_DRDY_N",
+            "GEO_VCM"
+          ],
+          "peak_V": 0.24745018103508595
+        },
+        {
+          "nets": [
+            "FPGA_RESET_GPIO",
+            "IMU2_INT"
+          ],
+          "peak_V": 0.2724798954122603
+        },
+        {
+          "nets": [
+            "PI_GEO_DRDY_N",
+            "PI_I2C_SDA"
+          ],
+          "peak_V": 0.29180810329361334
+        }
+      ],
+      "basis": "Project allocation for one modeled aggressor; not receiver or physical qualification"
+    },
+    "coupling_pairs": 233,
+    "coupling_cases_per_pair": 32,
+    "coupling_worst": {
+      "nets": [
+        "IMU3_INT",
+        "SPI_MISO"
+      ],
+      "proximity_mm": 9.46518789433051,
+      "mutual_pf": 0.7379813203986687,
+      "mutual_nh": 2.8304539467634524,
+      "worst": {
+        "driver_ohm": 20,
+        "victim_ohm": 4700,
+        "rise_ns": 0.5,
+        "load_pf": 2,
+        "aggressor": "IMU3_INT",
+        "victim": "SPI_MISO",
+        "peak_V": 0.7360704980384469,
+        "near_peak_V": 0.707268062487793,
+        "far_peak_V": 0.7360704980384469
+      }
+    },
+    "coupling_worst_pi_pair": {
+      "nets": [
+        "FPGA_IO_ENABLE",
+        "PI_IMU1_INT"
+      ],
+      "proximity_mm": 4.977402599445845,
+      "mutual_pf": 0.30509190271709774,
+      "mutual_nh": 1.1940124387525644,
+      "worst": {
+        "driver_ohm": 20,
+        "victim_ohm": 4700,
+        "rise_ns": 0.5,
+        "load_pf": 2,
+        "aggressor": "PI_IMU1_INT",
+        "victim": "FPGA_IO_ENABLE",
+        "peak_V": 0.3439688774958343,
+        "near_peak_V": 0.3001623819116632,
+        "far_peak_V": 0.3439688774958343
+      }
+    },
+    "coupling_report_sha256": "cecc11164b715e27511826e7ed1e4f0de31bbdf607940a12a160fc53cecb7d41",
+    "manufacturing_release": false
   }
 }

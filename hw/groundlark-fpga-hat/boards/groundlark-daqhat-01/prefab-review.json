@@ -502,8 +502,8 @@
     "dielectric_mm": 0.1088,
     "edge_proximity_mm": 0.32639999999999997,
     "parallel_tolerance_sine": 0.01,
-    "pair_limit_mm": 5,
-    "signal_pair_totals": [
+    "parallel_pair_limit_mm": 5,
+    "parallel_pair_totals": [
       {
         "nets": [
           "IMU3_INT",
@@ -974,1201 +974,1644 @@
         "total_parallel_mm": 0.10606601717797615
       }
     ],
-    "segment_pairs": [
+    "signal_pair_totals": [
       {
         "nets": [
-          "IMU3_CS",
-          "PI_IMU1_INT"
+          "IMU3_INT",
+          "SPI_MISO"
         ],
-        "length_mm": 0.5303300858899106,
-        "center_gap_mm": 0.0,
-        "first": "0cac9e42-5d11-4d90-baff-591757ccbb36",
-        "second": "a823a253-a023-4057-ab8a-51dcb52c5353"
+        "proximity_mm": 9.46518789433051
       },
       {
         "nets": [
           "IMU3_CS",
+          "IMU3_INT"
+        ],
+        "proximity_mm": 5.686929041135777
+      },
+      {
+        "nets": [
+          "I2C_SCL",
+          "I2C_SDA"
+        ],
+        "proximity_mm": 5.138021548441348
+      },
+      {
+        "nets": [
+          "LINK_DQ1",
+          "PI_IMU3_CS"
+        ],
+        "proximity_mm": 5.1013581511200705
+      },
+      {
+        "nets": [
+          "FPGA_IO_ENABLE",
           "PI_IMU1_INT"
         ],
-        "length_mm": 0.8131727983645236,
-        "center_gap_mm": 0.0,
-        "first": "2334de7b-9034-42de-92b0-5866bc12443c",
-        "second": "f6915886-0146-4dac-bd24-d251630be6f6"
+        "proximity_mm": 4.977402599445845
       },
       {
         "nets": [
-          "ID_SDA",
-          "PI_IMU1_INT"
-        ],
-        "length_mm": 1.697056274847713,
-        "center_gap_mm": 0.17543319241237554,
-        "first": "cd4e0ae4-48bc-4698-8bd2-a383a1995377",
-        "second": "819878fd-3cf5-458a-911a-31bcd0d76ae9"
-      },
-      {
-        "nets": [
-          "PI_SHUTDOWN_N",
-          "PI_SPI_MOSI"
-        ],
-        "length_mm": 1.319461253694092,
-        "center_gap_mm": 0.23857782797234295,
-        "first": "135faa60-744c-4a64-aace-b1fd4dc59230",
-        "second": "e0b944ae-6470-45ab-9b14-911fb902de4c"
-      },
-      {
-        "nets": [
-          "PI_IMU1_INT",
-          "PI_SPI_MOSI"
-        ],
-        "length_mm": 0.282842712474623,
-        "center_gap_mm": 0.05854844148224797,
-        "first": "9803a52c-56ee-4aa2-a2a8-88f278a687f0",
-        "second": "9a108650-78b0-4e2e-9a95-f996b5f5fae4"
-      },
-      {
-        "nets": [
-          "PI_IMU1_INT",
-          "PI_SPI_MOSI"
-        ],
-        "length_mm": 0.5656854249492409,
-        "center_gap_mm": 0.0939037805415725,
-        "first": "9803a52c-56ee-4aa2-a2a8-88f278a687f0",
-        "second": "fac09900-abc4-4d49-9dd9-73597d0e77b5"
-      },
-      {
-        "nets": [
-          "JTAG_TMS",
-          "PI_SPI_MOSI"
-        ],
-        "length_mm": 0.12600642840744553,
-        "center_gap_mm": 0.31742023407464753,
-        "first": "9b289db2-7add-411d-8fd1-922e10872b7d",
-        "second": "5835d956-65cf-48d5-9bd6-4b187a15b849"
-      },
-      {
-        "nets": [
-          "PI_IMU3_INT",
+          "FPGA_RESET_N",
           "PI_SPI_MISO"
         ],
-        "length_mm": 0.8838834764831842,
-        "center_gap_mm": 0.0,
-        "first": "37b02c6f-56d6-4a67-9235-f0fc44a073fc",
-        "second": "51fa7667-7017-4fce-851b-7ebcc349f931"
+        "proximity_mm": 4.530781318863648
       },
       {
         "nets": [
-          "FPGA_IO_ENABLE",
-          "PI_IMU1_INT"
+          "SPI_MOSI",
+          "SPI_SCLK"
         ],
-        "length_mm": 0.3999999999999915,
-        "center_gap_mm": 0.012399999999999523,
-        "first": "7c104fa3-984f-490f-8efa-ea00541c24cf",
-        "second": "496df110-2621-47a5-9376-e2825478719f"
+        "proximity_mm": 4.487084110253907
       },
       {
         "nets": [
-          "FPGA_IO_ENABLE",
-          "PI_IMU1_INT"
+          "FPGA_LINK_CS_N",
+          "LINK_CS_N"
         ],
-        "length_mm": 1.5499999999999972,
-        "center_gap_mm": 0.36240000000000094,
-        "first": "7c104fa3-984f-490f-8efa-ea00541c24cf",
-        "second": "5e8ac2fb-1224-4b3c-9775-6f50285fa0d8"
-      },
-      {
-        "nets": [
-          "FPGA_IO_ENABLE",
-          "PI_IMU1_INT"
-        ],
-        "length_mm": 0.19999999999998863,
-        "center_gap_mm": 0.012399999999999523,
-        "first": "7c104fa3-984f-490f-8efa-ea00541c24cf",
-        "second": "94b5f638-ff25-4f96-8bc9-beedf45188db"
-      },
-      {
-        "nets": [
-          "FPGA_IO_ENABLE",
-          "PI_IMU1_INT"
-        ],
-        "length_mm": 0.25,
-        "center_gap_mm": 0.062400000000003786,
-        "first": "7c104fa3-984f-490f-8efa-ea00541c24cf",
-        "second": "bb92aabf-7905-4653-bd29-924b9bc50871"
-      },
-      {
-        "nets": [
-          "PI_IMU1_INT",
-          "PI_SPI_SCLK"
-        ],
-        "length_mm": 0.45000000000000284,
-        "center_gap_mm": 0.14000000000000057,
-        "first": "285d3fbd-4cca-40df-95c1-e93267df02a4",
-        "second": "0b2a3812-1e48-4892-ad7d-4729ce15111f"
-      },
-      {
-        "nets": [
-          "PI_SHUTDOWN_N",
-          "PI_SPI_SCLK"
-        ],
-        "length_mm": 1.0606601717798214,
-        "center_gap_mm": 0.2745695631347471,
-        "first": "d501d09a-29b3-4692-855b-f5711d7208bf",
-        "second": "ade15d09-de22-447f-a5a7-1c247ca8bc2d"
-      },
-      {
-        "nets": [
-          "PI_SHUTDOWN_N",
-          "PI_SPI_SCLK"
-        ],
-        "length_mm": 0.6411337185018378,
-        "center_gap_mm": 0.09779286783809682,
-        "first": "d501d09a-29b3-4692-855b-f5711d7208bf",
-        "second": "e0b944ae-6470-45ab-9b14-911fb902de4c"
+        "proximity_mm": 4.303384974254682
       },
       {
         "nets": [
           "LINK_DQ2",
           "PI_IMU1_CS"
         ],
-        "length_mm": 0.21213203435597228,
-        "center_gap_mm": 0.1414213562373115,
-        "first": "b090e570-69a3-4dae-a7e7-86e41411965a",
-        "second": "3acb4158-ae3e-45e6-ad44-c3815ee27411"
-      },
-      {
-        "nets": [
-          "PI_IMU1_CS",
-          "PI_IMU2_CS"
-        ],
-        "length_mm": 0.4750000000000014,
-        "center_gap_mm": 0.45000000000000284,
-        "first": "b46595cb-3f31-4560-b3fe-3ae7518837ae",
-        "second": "7205a61d-eaf8-4fae-97ee-d1f54318b95f"
-      },
-      {
-        "nets": [
-          "PI_IMU1_CS",
-          "PI_IMU2_CS"
-        ],
-        "length_mm": 0.35355339059327373,
-        "center_gap_mm": 0.07071067811865073,
-        "first": "f3450a7b-fc97-4b83-bfb6-ceffe35430e9",
-        "second": "6411ced1-b54c-4225-bb64-449724c2c89b"
-      },
-      {
-        "nets": [
-          "LINK_DQ2",
-          "PI_IMU1_CS"
-        ],
-        "length_mm": 0.30052038200429076,
-        "center_gap_mm": 0.3712310601229414,
-        "first": "f3450a7b-fc97-4b83-bfb6-ceffe35430e9",
-        "second": "51b9cfee-ddbf-4f19-8515-e1f5d3afb091"
-      },
-      {
-        "nets": [
-          "PI_IMU1_CS",
-          "PI_SHUTDOWN_N"
-        ],
-        "length_mm": 0.4242640687119345,
-        "center_gap_mm": 0.28284271247461296,
-        "first": "f3450a7b-fc97-4b83-bfb6-ceffe35430e9",
-        "second": "ade15d09-de22-447f-a5a7-1c247ca8bc2d"
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "PI_SPI_MISO"
-        ],
-        "length_mm": 0.14142135623730148,
-        "center_gap_mm": 0.3535533905932736,
-        "first": "1f9446fd-2ba6-43b0-9e9c-0c0ce414edbc",
-        "second": "7c65a772-71e0-4f2a-97a0-5bbd53ebaf56"
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "PI_SPI_MISO"
-        ],
-        "length_mm": 0.22499999999999432,
-        "center_gap_mm": 0.0,
-        "first": "4299cd6c-f7c5-445e-b13e-8fcf8471926b",
-        "second": "5d4a0539-3357-4dbd-b631-fd8911949ed6"
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "IMU1_INT"
-        ],
-        "length_mm": 0.15000000000000568,
-        "center_gap_mm": 0.0,
-        "first": "78f9dde9-5f2e-4620-b232-5d48d1cdd911",
-        "second": "df3da4c5-cc19-4902-acee-530f04a06673"
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "PI_SPI_MISO"
-        ],
-        "length_mm": 1.0960155108391565,
-        "center_gap_mm": 0.0,
-        "first": "87368764-8b4b-496e-bb0e-5ecf3c625f80",
-        "second": "5d000227-de51-411f-a4ee-08e737e7a9f5"
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "IMU1_INT"
-        ],
-        "length_mm": 0.9545941546018349,
-        "center_gap_mm": 0.3181980515339484,
-        "first": "87368764-8b4b-496e-bb0e-5ecf3c625f80",
-        "second": "9f399595-6494-4dd4-ae76-ea1cabd27afd"
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "PI_IMU3_INT"
-        ],
-        "length_mm": 0.8838834764831842,
-        "center_gap_mm": 0.3181980515339484,
-        "first": "b0ce1302-c766-4d83-9943-db397ea7df77",
-        "second": "51fa7667-7017-4fce-851b-7ebcc349f931"
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "FPGA_UART_RX"
-        ],
-        "length_mm": 0.10606601717797615,
-        "center_gap_mm": 0.31819805153394837,
-        "first": "dd4a3059-30e8-4ec8-8887-7fb331c73c8d",
-        "second": "4daf29ba-c44f-4271-89f3-59cfda0b3a1a"
-      },
-      {
-        "nets": [
-          "JTAG_TDI",
-          "PI_SPI_MISO"
-        ],
-        "length_mm": 0.24748737341530772,
-        "center_gap_mm": 0.26516504294495524,
-        "first": "d5a7bf80-fdf4-4a01-aa5a-37e635cb2859",
-        "second": "7c65a772-71e0-4f2a-97a0-5bbd53ebaf56"
-      },
-      {
-        "nets": [
-          "IMU2_CS",
-          "JTAG_TDI"
-        ],
-        "length_mm": 0.24748737341530772,
-        "center_gap_mm": 0.21213203435596228,
-        "first": "d5a7bf80-fdf4-4a01-aa5a-37e635cb2859",
-        "second": "2c085c0c-459f-4e74-9351-5d6b40c1aa7d"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_SCLK",
-          "JTAG_TDI"
-        ],
-        "length_mm": 0.125,
-        "center_gap_mm": 0.44999999999998863,
-        "first": "dae43e5f-5913-40ac-9e12-53c287a03643",
-        "second": "49dba34f-429b-4353-b8b9-0248d03c8494"
+        "proximity_mm": 4.207948136689185
       },
       {
         "nets": [
           "EEP_WP",
           "FPGA_EN1"
         ],
-        "length_mm": 2.4220000000000113,
-        "center_gap_mm": 0.12319999999999709,
-        "first": "5d77027e-3803-440a-9ef2-75ecb45a9f60",
-        "second": "4cdf91f8-cc7d-404f-9077-e8fb2701330e"
+        "proximity_mm": 3.8204937931134593
       },
       {
         "nets": [
-          "FPGA_CONFIG_RESET_N",
-          "PI_IMU3_INT"
+          "I2C_SDA",
+          "LINK_JTAG_SEL"
         ],
-        "length_mm": 0.3181980515339584,
-        "center_gap_mm": 0.19445436482630452,
-        "first": "ec98da2d-fc7c-4e0e-a17d-563f205f5642",
-        "second": "1646f88b-7b05-4736-bf98-8aee5673dda2"
+        "proximity_mm": 3.8061513137073235
+      },
+      {
+        "nets": [
+          "PI_IMU1_CS",
+          "PI_IMU2_CS"
+        ],
+        "proximity_mm": 3.7165297044024177
+      },
+      {
+        "nets": [
+          "GEO_DRDY_N",
+          "I2C_SCL"
+        ],
+        "proximity_mm": 3.418943646873789
+      },
+      {
+        "nets": [
+          "IMU2_CS",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 3.416600153047268
+      },
+      {
+        "nets": [
+          "PI_IMU2_CS",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 3.4004784824621677
       },
       {
         "nets": [
           "LINK_DQ2",
-          "PI_LINK_DQ1"
-        ],
-        "length_mm": 0.24748737341529203,
-        "center_gap_mm": 0.459619407771255,
-        "first": "f51c4e91-cba7-46b8-a3ca-b283d3f4c093",
-        "second": "04188674-2224-4a60-a319-7a03d408b378"
-      },
-      {
-        "nets": [
-          "I2C_SDA",
-          "LINK_JTAG_SEL"
-        ],
-        "length_mm": 0.45961940777124966,
-        "center_gap_mm": 0.07071067811865062,
-        "first": "dd579dc2-2d94-4c1d-9a89-b6f2924abcb5",
-        "second": "6e124028-d421-4c11-86b7-9d41718b5c55"
-      },
-      {
-        "nets": [
-          "I2C_SDA",
-          "LINK_JTAG_SEL"
-        ],
-        "length_mm": 0.8308504678941913,
-        "center_gap_mm": 0.1237436867076438,
-        "first": "e271bc81-5842-46d5-a1e1-7af33f594a6c",
-        "second": "6e124028-d421-4c11-86b7-9d41718b5c55"
-      },
-      {
-        "nets": [
-          "IMU1_CS",
-          "SPI_SCLK"
-        ],
-        "length_mm": 0.2474873734152876,
-        "center_gap_mm": 0.12374368670764374,
-        "first": "2bb99b1b-3c3f-4d7f-8c32-778b87731a91",
-        "second": "4d62286d-39b2-473f-b8a5-c08f37c9ccd9"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_DQ3",
-          "IMU1_INT"
-        ],
-        "length_mm": 0.32500000000000284,
-        "center_gap_mm": 0.20000000000000284,
-        "first": "97d317a0-d38d-475c-8f4c-ae454a45269f",
-        "second": "39062bc7-c9f0-444c-9fb9-a6caceee6971"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_DQ3",
-          "IMU1_INT"
-        ],
-        "length_mm": 0.15000000000000568,
-        "center_gap_mm": 0.2750000000000057,
-        "first": "97d317a0-d38d-475c-8f4c-ae454a45269f",
-        "second": "df3da4c5-cc19-4902-acee-530f04a06673"
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "IMU3_INT"
-        ],
-        "length_mm": 0.10606601717798604,
-        "center_gap_mm": 0.0,
-        "first": "1962ab2b-c6ab-426b-a8b0-945c9e898087",
-        "second": "fb2f1c6d-2b80-4012-a7fa-c8997ea8ffa5"
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "IMU3_INT"
-        ],
-        "length_mm": 0.125,
-        "center_gap_mm": 0.375,
-        "first": "38e2d543-56ba-4f68-aa0a-be546a0c09cf",
-        "second": "9be8ee93-805b-469f-84c5-3e2348ee4713"
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "IMU3_INT"
-        ],
-        "length_mm": 0.22500000000000853,
-        "center_gap_mm": 0.22499999999999432,
-        "first": "5ffc6d8f-5096-4e39-9209-639abde91122",
-        "second": "eaa7a0c6-ebaa-4403-b58b-80400d1d61cd"
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "IMU3_INT"
-        ],
-        "length_mm": 0.22500000000000853,
-        "center_gap_mm": 0.0,
-        "first": "861c1ad5-8cd3-4d95-8e19-310c1fb9a247",
-        "second": "46037308-c36d-422c-acc8-c36085eeecd2"
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "PI_IMU2_INT"
-        ],
-        "length_mm": 0.21213203435595215,
-        "center_gap_mm": 0.35355339059327373,
-        "first": "a9c11347-2f0e-4d69-abcd-6897ee13bf11",
-        "second": "2b597666-24e7-4123-b1dc-bee1b24c1d77"
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "IMU3_INT"
-        ],
-        "length_mm": 0.10606601717798891,
-        "center_gap_mm": 0.17677669529665274,
-        "first": "d6002a7a-5d1d-491e-85ec-4be449895e0e",
-        "second": "733a82fe-bc64-4b4e-9a6a-a4ebf44798ae"
-      },
-      {
-        "nets": [
-          "ID_SCL",
-          "SENSOR_OE_N"
-        ],
-        "length_mm": 0.6272999999999911,
-        "center_gap_mm": 0.17660000000000053,
-        "first": "3a449702-c913-492a-95e2-ab991d6aa355",
-        "second": "13a89e42-fe46-4c6f-9e20-4ec0b5d966b2"
-      },
-      {
-        "nets": [
-          "IMU3_INT",
-          "SPI_MISO"
-        ],
-        "length_mm": 0.15000000000000568,
-        "center_gap_mm": 0.07500000000000284,
-        "first": "25b93d23-4d12-4015-be6b-bb08292961f7",
-        "second": "eaa7a0c6-ebaa-4403-b58b-80400d1d61cd"
-      },
-      {
-        "nets": [
-          "IMU3_INT",
-          "SPI_MISO"
-        ],
-        "length_mm": 0.5,
-        "center_gap_mm": 0.07500000000000284,
-        "first": "2774673e-9c95-4fd6-b0ed-27ede8d6eb11",
-        "second": "66dd91f1-7ee1-4f4a-947c-fd499bb6b2c9"
-      },
-      {
-        "nets": [
-          "IMU3_INT",
-          "SPI_MISO"
-        ],
-        "length_mm": 1.4249999999999972,
-        "center_gap_mm": 0.07500000000000284,
-        "first": "4770f130-1f6f-47a8-86d3-cfde0edaacd8",
-        "second": "ccb342fb-e9fa-4f23-9050-6f394ddfbfbd"
-      },
-      {
-        "nets": [
-          "IMU3_INT",
-          "SPI_MISO"
-        ],
-        "length_mm": 0.31819805153395003,
-        "center_gap_mm": 0.07071067811866164,
-        "first": "49fc177d-d02b-48b5-b8b1-35f5fd317151",
-        "second": "001d59a9-13f8-469a-b4c9-b7fd435104e3"
-      },
-      {
-        "nets": [
-          "IMU3_INT",
-          "SPI_MISO"
-        ],
-        "length_mm": 0.22499999999999432,
-        "center_gap_mm": 0.07499999999998863,
-        "first": "80c67ec0-3dd6-4945-bd39-286cd6d0aad0",
-        "second": "9be8ee93-805b-469f-84c5-3e2348ee4713"
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "SPI_MISO"
-        ],
-        "length_mm": 0.5,
-        "center_gap_mm": 0.45000000000000284,
-        "first": "a3fc1e43-8eec-4d90-a41e-e60883626840",
-        "second": "3f61a428-bd03-4bf3-8a28-fced27596934"
-      },
-      {
-        "nets": [
-          "IMU3_INT",
-          "SPI_MISO"
-        ],
-        "length_mm": 0.5,
-        "center_gap_mm": 0.07500000000000284,
-        "first": "a3fc1e43-8eec-4d90-a41e-e60883626840",
-        "second": "62f7ab55-4349-409e-b221-2b84122184a2"
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "SPI_MISO"
-        ],
-        "length_mm": 0.375,
-        "center_gap_mm": 0.45000000000000284,
-        "first": "d231ed6c-a3b6-4d34-a429-ba39818f4d1e",
-        "second": "3f61a428-bd03-4bf3-8a28-fced27596934"
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "SPI_MISO"
-        ],
-        "length_mm": 0.22499999999999432,
-        "center_gap_mm": 0.4000000000000057,
-        "first": "d231ed6c-a3b6-4d34-a429-ba39818f4d1e",
-        "second": "72fddb80-4221-4ecc-86e0-ed295111a8b9"
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "SPI_MISO"
-        ],
-        "length_mm": 0.5500000000000114,
-        "center_gap_mm": 0.45000000000000284,
-        "first": "d231ed6c-a3b6-4d34-a429-ba39818f4d1e",
-        "second": "a7c9e3b7-041a-433b-9cda-bbfd612b0131"
-      },
-      {
-        "nets": [
-          "IMU3_INT",
-          "SPI_MISO"
-        ],
-        "length_mm": 1.3500000000000085,
-        "center_gap_mm": 0.07500000000000284,
-        "first": "d231ed6c-a3b6-4d34-a429-ba39818f4d1e",
-        "second": "62f7ab55-4349-409e-b221-2b84122184a2"
-      },
-      {
-        "nets": [
-          "IMU3_INT",
-          "SPI_MISO"
-        ],
-        "length_mm": 0.3005203820042807,
-        "center_gap_mm": 0.05303300858899308,
-        "first": "d6cb2bfd-f2ec-4aaf-a27d-3843f7160004",
-        "second": "62775ed8-ff3d-4068-aa9a-6d1e3d4d900c"
-      },
-      {
-        "nets": [
-          "ID_SDA",
-          "PI_SHUTDOWN_N"
-        ],
-        "length_mm": 0.8053239130933638,
-        "center_gap_mm": 0.26749849532286807,
-        "first": "a195fe2d-9acf-4578-aff5-0ca31d5d3845",
-        "second": "c455ac5e-fc15-4c6b-9b68-27cfd92b38ad"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_SCLK",
-          "LINK_DQ0"
-        ],
-        "length_mm": 0.22499999999999432,
-        "center_gap_mm": 0.44999999999998863,
-        "first": "d9fa734d-0bed-4bee-bc74-e6d0c64de5f8",
-        "second": "a27f6394-24e6-4faf-8c86-81bdeb07296d"
-      },
-      {
-        "nets": [
-          "LINK_DQ1",
           "PI_IMU3_CS"
         ],
-        "length_mm": 0.35355339059327373,
-        "center_gap_mm": 7.188694084447889e-15,
-        "first": "5f09252d-c849-4bb6-9e0c-1b4b6ef04f63",
-        "second": "f1449405-a87d-4542-a748-592bf9d3b9a6"
+        "proximity_mm": 3.1958196933849985
       },
       {
         "nets": [
-          "LINK_DQ1",
-          "PI_IMU2_CS"
+          "FPGA_RESET_N",
+          "IMU1_INT"
         ],
-        "length_mm": 0.2474873734152977,
-        "center_gap_mm": 0.03535533905932531,
-        "first": "bb49d733-6786-4415-beeb-28eb70d1e6b2",
-        "second": "e30a1f8b-83f0-4c19-8a5b-a66bd28cf7b0"
+        "proximity_mm": 3.1193733617172725
       },
       {
         "nets": [
-          "FPGA_LINK_CS_N",
-          "LINK_CS_N"
+          "PI_SHUTDOWN_N",
+          "PI_SPI_SCLK"
         ],
-        "length_mm": 0.14999999999999147,
-        "center_gap_mm": 0.05000000000001137,
-        "first": "210dab08-3220-4b49-b0ea-ce7c394add3a",
-        "second": "e27fcec3-8794-4256-b674-dcb4f90e8f08"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "LINK_CS_N"
-        ],
-        "length_mm": 0.9192388155425197,
-        "center_gap_mm": 0.03535533905932531,
-        "first": "726846bf-404f-4766-9780-cc08e25b81bf",
-        "second": "bdbfaa7c-6e6e-4331-bae0-f9bb1bad48e5"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "LINK_CS_N"
-        ],
-        "length_mm": 0.21213203435596228,
-        "center_gap_mm": 0.01767766952966776,
-        "first": "726846bf-404f-4766-9780-cc08e25b81bf",
-        "second": "c535c7ec-ffc6-45a8-8e4b-b83563667b74"
-      },
-      {
-        "nets": [
-          "LINK_CS_N",
-          "SPI_MOSI"
-        ],
-        "length_mm": 0.25,
-        "center_gap_mm": 0.0,
-        "first": "79c3a83c-334b-45f0-b0d4-28b7a4a3a872",
-        "second": "207df696-f49f-4c55-bbbd-e35d7813b3b3"
-      },
-      {
-        "nets": [
-          "IMU2_CS",
-          "LINK_CS_N"
-        ],
-        "length_mm": 1.0783378413094893,
-        "center_gap_mm": 0.4419417382415922,
-        "first": "9949fb0d-6d3d-475b-ac66-ca69b7cb0870",
-        "second": "c772d400-6111-4358-9f16-d4a1ccae2f22"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "LINK_CS_N"
-        ],
-        "length_mm": 0.3535533905932738,
-        "center_gap_mm": 0.35355339059326363,
-        "first": "a3d67140-2886-421e-9600-b094679beb6c",
-        "second": "74e735f4-5baf-4772-9a4f-314d4a8316a9"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "PI_I2C_SCL"
-        ],
-        "length_mm": 0.4596203169088103,
-        "center_gap_mm": 0.14142140674472214,
-        "first": "3d429694-79d6-48ff-bf1a-326fed36680f",
-        "second": "ed7c9884-6aeb-4e15-9c46-5190c695af30"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "PI_I2C_SCL"
-        ],
-        "length_mm": 0.27500100000000316,
-        "center_gap_mm": 0.125,
-        "first": "64674d8e-264f-4fa7-9b63-f64cbeed8670",
-        "second": "984258df-2ec0-4ee6-a132-35c8484cdf57"
-      },
-      {
-        "nets": [
-          "IMU2_CS",
-          "PI_I2C_SDA"
-        ],
-        "length_mm": 0.7778174593051983,
-        "center_gap_mm": 0.21213203435596223,
-        "first": "70619b1f-8e2a-4061-8442-714149a8d8ea",
-        "second": "4fe79e76-5355-40ab-bab4-c574b881f267"
-      },
-      {
-        "nets": [
-          "FPGA_UART_TX",
-          "PI_I2C_SDA"
-        ],
-        "length_mm": 0.15000000000000568,
-        "center_gap_mm": 0.12959999999999638,
-        "first": "c03a7513-0045-4db9-916d-7340855c9065",
-        "second": "4c3f1e4d-de01-42fe-9a6e-76a983482489"
-      },
-      {
-        "nets": [
-          "I2C_SCL",
-          "PI_I2C_SDA"
-        ],
-        "length_mm": 0.15000000000000568,
-        "center_gap_mm": 0.20000000000000284,
-        "first": "c03a7513-0045-4db9-916d-7340855c9065",
-        "second": "06091742-4a09-4e61-aa85-5da648211c8f"
-      },
-      {
-        "nets": [
-          "PI_I2C_SCL",
-          "SPI_SCLK"
-        ],
-        "length_mm": 0.7778174593052083,
-        "center_gap_mm": 0.4772970773009064,
-        "first": "12ebd187-0390-49e9-b728-0ed2e67c2eca",
-        "second": "b84ddba0-b87a-4154-87bf-9b33c8a18b95"
-      },
-      {
-        "nets": [
-          "SPI_MOSI",
-          "SPI_SCLK"
-        ],
-        "length_mm": 0.3499999999999943,
-        "center_gap_mm": 0.32789999999999964,
-        "first": "5d13a99a-bd81-49f8-af63-ca84fc2b7778",
-        "second": "d70e37f2-4075-4790-b327-c449edc36864"
-      },
-      {
-        "nets": [
-          "SPI_MOSI",
-          "SPI_SCLK"
-        ],
-        "length_mm": 0.29999999999999716,
-        "center_gap_mm": 0.42789999999999395,
-        "first": "8c112e7b-a680-4409-9a9f-62e5f0fc5644",
-        "second": "d70e37f2-4075-4790-b327-c449edc36864"
-      },
-      {
-        "nets": [
-          "SPI_MOSI",
-          "SPI_SCLK"
-        ],
-        "length_mm": 0.15000000000000568,
-        "center_gap_mm": 0.42789999999999395,
-        "first": "f4778c96-5a20-4018-8cd9-4fd93eaf6658",
-        "second": "d70e37f2-4075-4790-b327-c449edc36864"
-      },
-      {
-        "nets": [
-          "PI_IMU2_INT",
-          "SPI_MOSI"
-        ],
-        "length_mm": 0.17499999999999716,
-        "center_gap_mm": 0.0,
-        "first": "fcece63c-0eb1-4c76-a222-07a7a36d32f0",
-        "second": "f5fd8339-3e88-4a77-824e-be7add736961"
-      },
-      {
-        "nets": [
-          "GEO_VCM",
-          "I2C_SDA"
-        ],
-        "length_mm": 0.883883476483178,
-        "center_gap_mm": 0.45961940777125443,
-        "first": "2c33a2d7-1e92-4685-abc6-4d3fa6123e43",
-        "second": "5e3eec7a-bc86-428f-9f98-1f6ad4d9f7d5"
-      },
-      {
-        "nets": [
-          "I2C_SCL",
-          "I2C_SDA"
-        ],
-        "length_mm": 0.4242640687119245,
-        "center_gap_mm": 0.3889087296526089,
-        "first": "2c33a2d7-1e92-4685-abc6-4d3fa6123e43",
-        "second": "13fb2464-0c63-44a3-b931-07fe8391e414"
-      },
-      {
-        "nets": [
-          "I2C_SCL",
-          "I2C_SDA"
-        ],
-        "length_mm": 0.9192388155425049,
-        "center_gap_mm": 7.327471962526033e-15,
-        "first": "2c33a2d7-1e92-4685-abc6-4d3fa6123e43",
-        "second": "71f4b3a5-b9f1-42c4-876c-9d5a96a5b7dd"
-      },
-      {
-        "nets": [
-          "I2C_SCL",
-          "I2C_SDA"
-        ],
-        "length_mm": 0.14142135623731655,
-        "center_gap_mm": 0.035355339059328084,
-        "first": "2c33a2d7-1e92-4685-abc6-4d3fa6123e43",
-        "second": "dd8eebdf-2437-4ff7-bcf0-282eaf950a9c"
-      },
-      {
-        "nets": [
-          "I2C_SCL",
-          "I2C_SDA"
-        ],
-        "length_mm": 0.42426336160514505,
-        "center_gap_mm": 0.0,
-        "first": "7ef5bf06-3701-4d48-9ffa-d9897bb588b6",
-        "second": "e5ca4e45-ce0d-4096-8134-30d67cf18468"
+        "proximity_mm": 3.0451204715717424
       },
       {
         "nets": [
           "I2C_SDA",
-          "PI_I2C_SCL"
+          "SPI_SCLK"
         ],
-        "length_mm": 0.45961940777125976,
-        "center_gap_mm": 0.6010407640085614,
-        "first": "e293577b-0a35-4290-b1aa-58502f66c788",
-        "second": "7669b1ef-5f11-46f2-a01c-b2c93268e071"
+        "proximity_mm": 2.958410227424193
       },
       {
         "nets": [
-          "I2C_SCL",
-          "I2C_SDA"
+          "IMU3_CS",
+          "PI_IMU1_INT"
         ],
-        "length_mm": 0.34999899999999684,
-        "center_gap_mm": 0.0,
-        "first": "f026eaa5-1302-4d2c-b9d1-b5baa03bc0c1",
-        "second": "9aee0348-6583-4bb1-bf92-acabca1c169c"
-      },
-      {
-        "nets": [
-          "I2C_SCL",
-          "I2C_SDA"
-        ],
-        "length_mm": 0.21213203435595718,
-        "center_gap_mm": 0.0,
-        "first": "f804390a-79ba-4afb-bb12-9abd58da8d5e",
-        "second": "962cb1ea-854d-4e5c-9422-964145321d21"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "I2C_SCL"
-        ],
-        "length_mm": 0.21213203435597217,
-        "center_gap_mm": 0.4242640687119244,
-        "first": "0f7accb3-d267-4671-983c-ae4151eadeae",
-        "second": "bdbfaa7c-6e6e-4331-bae0-f9bb1bad48e5"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "I2C_SCL"
-        ],
-        "length_mm": 0.21213203435596223,
-        "center_gap_mm": 0.4419417382415821,
-        "first": "0f7accb3-d267-4671-983c-ae4151eadeae",
-        "second": "c535c7ec-ffc6-45a8-8e4b-b83563667b74"
-      },
-      {
-        "nets": [
-          "I2C_SCL",
-          "PI_IMU2_INT"
-        ],
-        "length_mm": 0.26516504294494503,
-        "center_gap_mm": 0.30052038200428066,
-        "first": "95c1b305-ff49-4279-ae18-aa6ed2e9110d",
-        "second": "6418bce2-33cc-4be4-bfb2-bbba65d4cd5f"
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "I2C_SCL"
-        ],
-        "length_mm": 0.5999999999999943,
-        "center_gap_mm": 0.125,
-        "first": "a744f54f-02f3-4f61-9019-a60c5d98dfd4",
-        "second": "984258df-2ec0-4ee6-a132-35c8484cdf57"
+        "proximity_mm": 2.897923547250214
       },
       {
         "nets": [
           "IMU2_CS",
           "PI_SPI_MISO"
         ],
-        "length_mm": 1.3435028842544443,
-        "center_gap_mm": 0.0,
-        "first": "16d19247-abab-41d1-bc43-057fa93be95b",
-        "second": "7c65a772-71e0-4f2a-97a0-5bbd53ebaf56"
+        "proximity_mm": 2.8830409149122076
       },
       {
         "nets": [
-          "IMU2_CS",
-          "PI_SPI_MISO"
+          "IMU1_INT",
+          "IMU2_INT"
         ],
-        "length_mm": 0.125,
-        "center_gap_mm": 0.0,
-        "first": "5595cd29-b69d-4cea-9b23-627693bb2312",
-        "second": "b50fd4f2-a37d-49c6-8260-da51c5ef9e5f"
-      },
-      {
-        "nets": [
-          "IMU2_CS",
-          "SPI_MOSI"
-        ],
-        "length_mm": 0.22500000000000853,
-        "center_gap_mm": 0.42499999999999716,
-        "first": "7278a51b-de80-4cf9-97d9-084134e557aa",
-        "second": "a695e3a0-4539-4b44-905d-b5a954831fd5"
+        "proximity_mm": 2.8586350298323153
       },
       {
         "nets": [
           "ID_SDA",
+          "PI_IMU1_INT"
+        ],
+        "proximity_mm": 2.760450991432776
+      },
+      {
+        "nets": [
+          "PI_SHUTDOWN_N",
+          "PI_SPI_MOSI"
+        ],
+        "proximity_mm": 2.730390768891508
+      },
+      {
+        "nets": [
+          "PI_GEO_DRDY_N",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 2.7202585043052654
+      },
+      {
+        "nets": [
+          "FPGA_UART_RX",
           "PI_IMU3_CS"
         ],
-        "length_mm": 0.5750899451390177,
-        "center_gap_mm": 0.10472251429372731,
-        "first": "97646977-1027-4c2f-ac6c-4e937f03f42c",
-        "second": "819878fd-3cf5-458a-911a-31bcd0d76ae9"
+        "proximity_mm": 2.6739030567398703
+      },
+      {
+        "nets": [
+          "FPGA_RESET_GPIO",
+          "IMU2_INT"
+        ],
+        "proximity_mm": 2.6697180983317366
+      },
+      {
+        "nets": [
+          "FPGA_LINK_CS_N",
+          "PI_I2C_SCL"
+        ],
+        "proximity_mm": 2.5581343209298275
       },
       {
         "nets": [
           "PI_IMU3_CS",
           "SPI_MOSI"
         ],
-        "length_mm": 1.1667261889578076,
-        "center_gap_mm": 0.0,
-        "first": "a2e2c689-cb8d-4d09-94f0-1a2e26565f07",
-        "second": "1973211e-f933-471f-bb7b-0d7cbd8489e8"
-      },
-      {
-        "nets": [
-          "IMU2_CS",
-          "PI_IMU3_CS"
-        ],
-        "length_mm": 0.1767766952966371,
-        "center_gap_mm": 0.282842712474623,
-        "first": "a2e2c689-cb8d-4d09-94f0-1a2e26565f07",
-        "second": "6e408b32-89fb-42a6-a7cc-e3b39ba063af"
-      },
-      {
-        "nets": [
-          "LINK_DQ1",
-          "PI_IMU3_CS"
-        ],
-        "length_mm": 1.3258252147247758,
-        "center_gap_mm": 0.441941738241586,
-        "first": "d68acaf2-d30a-41d6-8561-5d1aa25327e7",
-        "second": "9aad693b-7758-4db4-9495-3d1557967a8a"
+        "proximity_mm": 2.534027163190793
       },
       {
         "nets": [
           "GEO_DRDY_N",
           "GEO_VCM"
         ],
-        "length_mm": 1.0606601717798212,
-        "center_gap_mm": 1.1102230246251565e-15,
-        "first": "a766efa4-7a7f-40dd-922c-138c0ccc1f0a",
-        "second": "5e3eec7a-bc86-428f-9f98-1f6ad4d9f7d5"
+        "proximity_mm": 2.4712945611110504
       },
       {
         "nets": [
-          "GEO_DRDY_N",
-          "I2C_SCL"
+          "ID_SCL",
+          "SENSOR_OE_N"
         ],
-        "length_mm": 0.42426406871192446,
-        "center_gap_mm": 0.07071067811865563,
-        "first": "a766efa4-7a7f-40dd-922c-138c0ccc1f0a",
-        "second": "13fb2464-0c63-44a3-b931-07fe8391e414"
+        "proximity_mm": 2.401112797344168
       },
       {
         "nets": [
-          "GEO_DRDY_N",
-          "I2C_SCL"
+          "ID_SDA",
+          "PI_SHUTDOWN_N"
         ],
-        "length_mm": 0.9192388155425046,
-        "center_gap_mm": 0.45961940777125293,
-        "first": "a766efa4-7a7f-40dd-922c-138c0ccc1f0a",
-        "second": "71f4b3a5-b9f1-42c4-876c-9d5a96a5b7dd"
+        "proximity_mm": 2.2989434390589003
       },
       {
         "nets": [
-          "GEO_DRDY_N",
-          "I2C_SCL"
+          "LINK_CS_N",
+          "PI_IMU2_INT"
         ],
-        "length_mm": 0.14142135623731655,
-        "center_gap_mm": 0.4242640687119329,
-        "first": "a766efa4-7a7f-40dd-922c-138c0ccc1f0a",
-        "second": "dd8eebdf-2437-4ff7-bcf0-282eaf950a9c"
+        "proximity_mm": 2.255284319457956
       },
       {
         "nets": [
-          "GEO_DRDY_N",
-          "I2C_SCL"
+          "PI_IMU3_INT",
+          "PI_SPI_MISO"
         ],
-        "length_mm": 0.3499999999999943,
-        "center_gap_mm": 0.05000000000001137,
-        "first": "f416e491-fd58-4665-a712-11bf05d70b2e",
-        "second": "c1eb65e3-f185-41bf-88d2-b89846611c74"
+        "proximity_mm": 2.254425208616378
       },
       {
         "nets": [
-          "IMU1_CS",
-          "IMU2_INT"
+          "FPGA_RESET_N",
+          "PI_IMU3_INT"
         ],
-        "length_mm": 0.38890872965260914,
-        "center_gap_mm": 0.0,
-        "first": "417db85e-9a3b-49f2-ab12-afba2c8956c3",
-        "second": "136eb73f-6a56-4d97-bcdf-d26117efbcaa"
+        "proximity_mm": 2.2540474451437396
       },
       {
         "nets": [
-          "IMU1_INT",
-          "IMU2_INT"
+          "LINK_JTAG_SEL",
+          "PI_I2C_SDA"
         ],
-        "length_mm": 0.45000000000000284,
-        "center_gap_mm": 0.3499999999999943,
-        "first": "4d073ef9-5166-4d3b-bace-d12c3f76db29",
-        "second": "0901efda-6454-465d-bb1a-a6fe08ccc235"
+        "proximity_mm": 2.2177320343559304
       },
       {
         "nets": [
-          "IMU1_INT",
-          "IMU2_INT"
+          "PI_IMU1_INT",
+          "PI_SPI_MOSI"
         ],
-        "length_mm": 0.125,
-        "center_gap_mm": 0.44999999999998863,
-        "first": "4d073ef9-5166-4d3b-bace-d12c3f76db29",
-        "second": "77f4986a-0a6d-4ecb-a890-cd959a04a27e"
-      },
-      {
-        "nets": [
-          "IMU1_CS",
-          "IMU2_INT"
-        ],
-        "length_mm": 0.22499999999999432,
-        "center_gap_mm": 0.0,
-        "first": "6d906b02-0e60-4df4-9821-1688406566e0",
-        "second": "04cdd192-de4c-4aec-bc2f-d3c77d9f7b58"
+        "proximity_mm": 2.215675803254862
       },
       {
         "nets": [
           "IMU2_INT",
-          "LINK_JTAG_SEL"
+          "PI_IMU2_INT"
         ],
-        "length_mm": 0.6717514421272122,
-        "center_gap_mm": 0.42426406871192457,
-        "first": "deb80a50-db58-4a26-85dd-9592c9da4ae0",
-        "second": "e838eb34-4443-4f1b-ba4c-bb30d9d90b33"
+        "proximity_mm": 2.1911760020551485
       },
       {
         "nets": [
-          "FPGA_RESET_GPIO",
-          "IMU2_INT"
+          "PI_IMU2_CS",
+          "PI_IMU3_CS"
         ],
-        "length_mm": 0.5303300858899107,
-        "center_gap_mm": 0.03535533905933541,
-        "first": "deb80a50-db58-4a26-85dd-9592c9da4ae0",
-        "second": "52430eeb-8162-49f0-8027-6248837b7055"
+        "proximity_mm": 2.1795520041104006
       },
       {
         "nets": [
-          "FPGA_RESET_GPIO",
-          "IMU2_INT"
+          "PI_I2C_SCL",
+          "SPI_SCLK"
         ],
-        "length_mm": 0.22499999999999432,
-        "center_gap_mm": 0.0,
-        "first": "e2de8cb3-4d7d-407a-8c81-488d672b21b0",
-        "second": "4ad2ce12-7261-4763-a054-f375e5acb3a3"
-      },
-      {
-        "nets": [
-          "IMU1_INT",
-          "IMU2_INT"
-        ],
-        "length_mm": 1.1749999999999972,
-        "center_gap_mm": 0.29999999999999716,
-        "first": "fed66ca2-f0d3-4b66-9824-9d3c18f6c31e",
-        "second": "cad7a69d-b053-4f00-adef-7574c72731d5"
+        "proximity_mm": 2.1470351996126227
       },
       {
         "nets": [
           "IMU2_CS",
           "PI_IMU3_INT"
         ],
-        "length_mm": 0.9192388155425095,
-        "center_gap_mm": 0.10606601717797592,
-        "first": "03ddea2e-19cf-468b-bdc9-34d907e083b6",
-        "second": "cfde72d2-81a0-48c7-a0d4-07d465c6f54d"
-      },
-      {
-        "nets": [
-          "I2C_SDA",
-          "PI_IMU3_INT"
-        ],
-        "length_mm": 0.1060660171779761,
-        "center_gap_mm": 0.33587572106378527,
-        "first": "16f85424-b921-4eb4-b83c-81fdb7d31e0e",
-        "second": "cea6f0bd-f29f-49f7-9534-c5ee767c52fa"
-      },
-      {
-        "nets": [
-          "I2C_SDA",
-          "PI_IMU3_INT"
-        ],
-        "length_mm": 0.14142135623731153,
-        "center_gap_mm": 0.31819805153380276,
-        "first": "b730c5ab-ea9d-4b66-94cc-99048828fecd",
-        "second": "cea6f0bd-f29f-49f7-9534-c5ee767c52fa"
-      },
-      {
-        "nets": [
-          "IMU1_INT",
-          "PI_IMU3_INT"
-        ],
-        "length_mm": 0.3358757210636162,
-        "center_gap_mm": 0.4419417382415821,
-        "first": "dfbb4c8c-2019-4eaa-ad83-3baa0cab81a6",
-        "second": "e8841e4d-80af-427b-9c1a-3fe9f60f9d25"
-      },
-      {
-        "nets": [
-          "PI_GEO_DRDY_N",
-          "PI_I2C_SDA"
-        ],
-        "length_mm": 0.30000000000001137,
-        "center_gap_mm": 0.09999999999999432,
-        "first": "069e8a39-27cb-4132-b1ef-2c3a23002101",
-        "second": "760b3550-b227-4a37-b585-4c207520f258"
-      },
-      {
-        "nets": [
-          "PI_GEO_DRDY_N",
-          "PI_I2C_SDA"
-        ],
-        "length_mm": 0.282842712474613,
-        "center_gap_mm": 0.07071067811866327,
-        "first": "44d801a0-129e-467a-a2df-f361a9a9d74d",
-        "second": "a862a1a1-5fff-427b-bf8e-135f2fd5a62f"
-      },
-      {
-        "nets": [
-          "JTAG_TMS",
-          "PI_GEO_DRDY_N"
-        ],
-        "length_mm": 0.5,
-        "center_gap_mm": 0.0,
-        "first": "5b2b888b-1236-4a84-b16a-e4c3d04c1b3f",
-        "second": "5341baf4-48c9-42f0-887a-857a7eeaf7ed"
-      },
-      {
-        "nets": [
-          "PI_GEO_DRDY_N",
-          "PI_IMU3_INT"
-        ],
-        "length_mm": 0.14142135623732155,
-        "center_gap_mm": 0.0,
-        "first": "6c700df2-1376-47e6-8264-042231d698a2",
-        "second": "952a6c5a-5ec6-4859-9b65-7d6ad9e265b8"
-      },
-      {
-        "nets": [
-          "PI_GEO_DRDY_N",
-          "PI_I2C_SDA"
-        ],
-        "length_mm": 0.49497474683058573,
-        "center_gap_mm": 0.07071067811865778,
-        "first": "bc33245d-7870-48af-a713-5ab087133da1",
-        "second": "e0d9fbd3-fcfe-4981-881b-c00c731e9342"
+        "proximity_mm": 2.132758504305084
       },
       {
         "nets": [
           "FPGA_UART_TX",
           "PI_UART_TX"
         ],
-        "length_mm": 0.1414213562373065,
-        "center_gap_mm": 0.42426406871190436,
-        "first": "fff20a43-8a4e-42cb-bfc9-091f06aa7fef",
-        "second": "fa102e89-d030-4908-9bd0-db1d631bd557"
+        "proximity_mm": 2.0393274441824296
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "PI_IMU3_CS"
+        ],
+        "proximity_mm": 2.0320245214833377
+      },
+      {
+        "nets": [
+          "JTAG_TMS",
+          "PI_GEO_DRDY_N"
+        ],
+        "proximity_mm": 1.9934157028337154
+      },
+      {
+        "nets": [
+          "IMU1_CS",
+          "IMU2_INT"
+        ],
+        "proximity_mm": 1.9469095062325614
+      },
+      {
+        "nets": [
+          "LINK_CS_N",
+          "LINK_JTAG_SEL"
+        ],
+        "proximity_mm": 1.9295556200508932
+      },
+      {
+        "nets": [
+          "IMU2_CS",
+          "LINK_CS_N"
+        ],
+        "proximity_mm": 1.907627591533754
+      },
+      {
+        "nets": [
+          "FPGA_LINK_CS_N",
+          "I2C_SCL"
+        ],
+        "proximity_mm": 1.9070820900003331
+      },
+      {
+        "nets": [
+          "LINK_JTAG_SEL",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 1.9041876544068967
+      },
+      {
+        "nets": [
+          "IMU3_CS",
+          "SPI_MISO"
+        ],
+        "proximity_mm": 1.8897483310046532
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 1.8095952686653491
+      },
+      {
+        "nets": [
+          "I2C_SDA",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 1.7775808347756716
+      },
+      {
+        "nets": [
+          "PI_IMU1_INT",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 1.7647087571660844
+      },
+      {
+        "nets": [
+          "PI_IMU1_CS",
+          "PI_SHUTDOWN_N"
+        ],
+        "proximity_mm": 1.760635480593517
+      },
+      {
+        "nets": [
+          "I2C_SCL",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 1.6649248024749355
+      },
+      {
+        "nets": [
+          "I2C_SCL",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 1.6279474116443313
+      },
+      {
+        "nets": [
+          "FPGA_CONFIG_RESET_N",
+          "ID_SDA"
+        ],
+        "proximity_mm": 1.5912208468192421
+      },
+      {
+        "nets": [
+          "LINK_DQ1",
+          "PI_IMU2_CS"
+        ],
+        "proximity_mm": 1.5595947165850415
+      },
+      {
+        "nets": [
+          "IMU2_CS",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 1.5530917926462453
+      },
+      {
+        "nets": [
+          "IMU2_CS",
+          "JTAG_TDI"
+        ],
+        "proximity_mm": 1.5449500556443816
+      },
+      {
+        "nets": [
+          "JTAG_TDI",
+          "PI_SPI_MISO"
+        ],
+        "proximity_mm": 1.5449500556443803
+      },
+      {
+        "nets": [
+          "FPGA_CONFIG_RESET_N",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 1.5444163818326526
+      },
+      {
+        "nets": [
+          "I2C_SCL",
+          "IMU3_INT"
+        ],
+        "proximity_mm": 1.5242394904143102
+      },
+      {
+        "nets": [
+          "LINK_CS_N",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 1.5154524163601188
+      },
+      {
+        "nets": [
+          "PI_GEO_DRDY_N",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 1.5124194077711453
+      },
+      {
+        "nets": [
+          "LINK_CS_N",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 1.4959049273067326
+      },
+      {
+        "nets": [
+          "FPGA_LINK_DQ3",
+          "IMU1_INT"
+        ],
+        "proximity_mm": 1.491448691482543
+      },
+      {
+        "nets": [
+          "FPGA_CONFIG_RESET_N",
+          "FPGA_UART_RX"
+        ],
+        "proximity_mm": 1.4665500934713798
+      },
+      {
+        "nets": [
+          "LINK_REQUEST",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 1.4621073431697416
+      },
+      {
+        "nets": [
+          "FPGA_LINK_CS_N",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 1.4535286994070835
+      },
+      {
+        "nets": [
+          "I2C_SDA",
+          "IMU3_INT"
+        ],
+        "proximity_mm": 1.442441045000157
+      },
+      {
+        "nets": [
+          "JTAG_TMS",
+          "PI_SPI_MOSI"
+        ],
+        "proximity_mm": 1.4381137715771928
+      },
+      {
+        "nets": [
+          "FPGA_RESET_N",
+          "FPGA_UART_RX"
+        ],
+        "proximity_mm": 1.4175308842047185
+      },
+      {
+        "nets": [
+          "I2C_SCL",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.401572242539718
+      },
+      {
+        "nets": [
+          "PI_IMU1_INT",
+          "PI_LINK_DQ1"
+        ],
+        "proximity_mm": 1.3785323153475832
+      },
+      {
+        "nets": [
+          "PI_I2C_SDA",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.3781254206128035
+      },
+      {
+        "nets": [
+          "GEO_VCM",
+          "I2C_SDA"
+        ],
+        "proximity_mm": 1.3763362628572926
+      },
+      {
+        "nets": [
+          "LINK_CS_N",
+          "LINK_DQ3"
+        ],
+        "proximity_mm": 1.3656679656440305
+      },
+      {
+        "nets": [
+          "I2C_SDA",
+          "IMU3_CS"
+        ],
+        "proximity_mm": 1.358553952576469
+      },
+      {
+        "nets": [
+          "JTAG_TCK",
+          "PI_IMU3_CS"
+        ],
+        "proximity_mm": 1.3530047830979657
+      },
+      {
+        "nets": [
+          "FPGA_EN1",
+          "SENSOR_OE_N"
+        ],
+        "proximity_mm": 1.3474626822290858
+      },
+      {
+        "nets": [
+          "EEP_WP",
+          "FPGA_UART_TX"
+        ],
+        "proximity_mm": 1.3474626822290858
+      },
+      {
+        "nets": [
+          "FPGA_JTAGEN",
+          "FPGA_UART_TX"
+        ],
+        "proximity_mm": 1.3474626822290854
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "PI_SPI_MOSI"
+        ],
+        "proximity_mm": 1.3474626822290847
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "SENSOR_OE_N"
+        ],
+        "proximity_mm": 1.3474626822290838
+      },
+      {
+        "nets": [
+          "FPGA_CONFIG_RESET_N",
+          "JTAG_TDI"
+        ],
+        "proximity_mm": 1.3371091517842537
+      },
+      {
+        "nets": [
+          "I2C_SDA",
+          "PI_GEO_DRDY_N"
+        ],
+        "proximity_mm": 1.3303090106442075
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "PI_GEO_DRDY_N"
+        ],
+        "proximity_mm": 1.3121076055913587
+      },
+      {
+        "nets": [
+          "FPGA_RESET_N",
+          "SENSOR_OE_N"
+        ],
+        "proximity_mm": 1.3121073431697576
+      },
+      {
+        "nets": [
+          "EEP_WP",
+          "FPGA_UART_RX"
+        ],
+        "proximity_mm": 1.3121073431697576
+      },
+      {
+        "nets": [
+          "PI_HALTED",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 1.3121073431697572
+      },
+      {
+        "nets": [
+          "FPGA_JTAGEN",
+          "FPGA_UART_RX"
+        ],
+        "proximity_mm": 1.3121073431697567
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 1.3121073431697559
+      },
+      {
+        "nets": [
+          "JTAG_TCK",
+          "SENSOR_OE_N"
+        ],
+        "proximity_mm": 1.3121073431697514
+      },
+      {
+        "nets": [
+          "PI_SPI_MISO",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.3097031801137329
+      },
+      {
+        "nets": [
+          "I2C_SDA",
+          "PI_I2C_SCL"
+        ],
+        "proximity_mm": 1.296523376892075
+      },
+      {
+        "nets": [
+          "PI_IMU2_INT",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 1.2949572875249902
+      },
+      {
+        "nets": [
+          "IMU1_CS",
+          "PI_GEO_DRDY_N"
+        ],
+        "proximity_mm": 1.2933293926484677
+      },
+      {
+        "nets": [
+          "PI_GEO_DRDY_N",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.2913966650510869
+      },
+      {
+        "nets": [
+          "IMU1_CS",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.2870538403764806
+      },
+      {
+        "nets": [
+          "JTAG_TCK",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 1.286375027822189
+      },
+      {
+        "nets": [
+          "LINK_JTAG_SEL",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 1.2767520041104303
+      },
+      {
+        "nets": [
+          "FPGA_RESET_GPIO",
+          "LINK_JTAG_SEL"
+        ],
+        "proximity_mm": 1.27675200411043
+      },
+      {
+        "nets": [
+          "IMU1_INT",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 1.271482292278909
+      },
+      {
+        "nets": [
+          "FPGA_IO_ENABLE",
+          "FPGA_RESET_GPIO"
+        ],
+        "proximity_mm": 1.2649651042194188
+      },
+      {
+        "nets": [
+          "FPGA_RESET_N",
+          "FPGA_UART_TX"
+        ],
+        "proximity_mm": 1.2603306478731207
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "PI_SPI_MOSI"
+        ],
+        "proximity_mm": 1.259897935143409
+      },
+      {
+        "nets": [
+          "LINK_CS_N",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.249975308813791
+      },
+      {
+        "nets": [
+          "FPGA_CONFIG_RESET_N",
+          "FPGA_UART_TX"
+        ],
+        "proximity_mm": 1.2480699264268773
+      },
+      {
+        "nets": [
+          "LINK_DQ0",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 1.2463036851466538
+      },
+      {
+        "nets": [
+          "FPGA_RESET_N",
+          "JTAG_TDI"
+        ],
+        "proximity_mm": 1.2457823430260109
+      },
+      {
+        "nets": [
+          "FPGA_UART_RX",
+          "LINK_DQ1"
+        ],
+        "proximity_mm": 1.2425028499177704
+      },
+      {
+        "nets": [
+          "FPGA_LINK_SCLK",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 1.2396550370201056
+      },
+      {
+        "nets": [
+          "FPGA_LINK_SCLK",
+          "JTAG_TDI"
+        ],
+        "proximity_mm": 1.234090296114371
+      },
+      {
+        "nets": [
+          "IMU1_INT",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 1.2324536715848198
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 1.2254124445650683
+      },
+      {
+        "nets": [
+          "IMU2_CS",
+          "LINK_JTAG_SEL"
+        ],
+        "proximity_mm": 1.2198279782157009
+      },
+      {
+        "nets": [
+          "LINK_CS_N",
+          "PI_GEO_DRDY_N"
+        ],
+        "proximity_mm": 1.217749493661143
+      },
+      {
+        "nets": [
+          "FPGA_RESET_GPIO",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 1.214124707279324
+      },
+      {
+        "nets": [
+          "FPGA_LINK_CS_N",
+          "LINK_DQ0"
+        ],
+        "proximity_mm": 1.2134601717797833
+      },
+      {
+        "nets": [
+          "ID_SCL",
+          "JTAG_TMS"
+        ],
+        "proximity_mm": 1.2131230044894354
+      },
+      {
+        "nets": [
+          "JTAG_TMS",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 1.2108091480608145
+      },
+      {
+        "nets": [
+          "I2C_SCL",
+          "PI_I2C_SCL"
+        ],
+        "proximity_mm": 1.194956994635696
+      },
+      {
+        "nets": [
+          "I2C_SCL",
+          "IMU3_CS"
+        ],
+        "proximity_mm": 1.194953439957648
+      },
+      {
+        "nets": [
+          "I2C_SDA",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 1.1916734428112554
+      },
+      {
+        "nets": [
+          "IMU2_CS",
+          "LINK_DQ0"
+        ],
+        "proximity_mm": 1.1909244652893913
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "LINK_DQ0"
+        ],
+        "proximity_mm": 1.181431958213821
+      },
+      {
+        "nets": [
+          "LINK_REQUEST",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 1.1649284184154007
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "SENSOR_OE_N"
+        ],
+        "proximity_mm": 1.162847697479397
+      },
+      {
+        "nets": [
+          "FPGA_RESET_GPIO",
+          "PI_GEO_DRDY_N"
+        ],
+        "proximity_mm": 1.1519080364111467
+      },
+      {
+        "nets": [
+          "FPGA_RESET_GPIO",
+          "LINK_CS_N"
+        ],
+        "proximity_mm": 1.151908036411074
+      },
+      {
+        "nets": [
+          "PI_SHUTDOWN_N",
+          "SENSOR_OE_N"
+        ],
+        "proximity_mm": 1.145874721449868
+      },
+      {
+        "nets": [
+          "FPGA_LINK_CS_N",
+          "LINK_DQ3"
+        ],
+        "proximity_mm": 1.140664349703522
+      },
+      {
+        "nets": [
+          "PI_IMU2_INT",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.1385518605354301
+      },
+      {
+        "nets": [
+          "FPGA_RESET_GPIO",
+          "FPGA_RESET_N"
+        ],
+        "proximity_mm": 1.1379993067585672
+      },
+      {
+        "nets": [
+          "IMU1_INT",
+          "LINK_CS_N"
+        ],
+        "proximity_mm": 1.1324787911139476
+      },
+      {
+        "nets": [
+          "IMU2_INT",
+          "IMU3_INT"
+        ],
+        "proximity_mm": 1.1308472737920847
+      },
+      {
+        "nets": [
+          "FPGA_LINK_DQ3",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.1257112401018692
+      },
+      {
+        "nets": [
+          "FPGA_IO_ENABLE",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 1.1181805922287416
+      },
+      {
+        "nets": [
+          "IMU1_CS",
+          "SPI_MISO"
+        ],
+        "proximity_mm": 1.1156695450512875
+      },
+      {
+        "nets": [
+          "JTAG_TCK",
+          "LINK_DQ2"
+        ],
+        "proximity_mm": 1.1140831797215867
+      },
+      {
+        "nets": [
+          "PI_GEO_DRDY_N",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 1.1104866801738453
+      },
+      {
+        "nets": [
+          "FPGA_CONFIG_RESET_N",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.1064172084781028
+      },
+      {
+        "nets": [
+          "PI_GEO_DRDY_N",
+          "PI_I2C_SCL"
+        ],
+        "proximity_mm": 1.1050033045597494
+      },
+      {
+        "nets": [
+          "FPGA_RESET_N",
+          "JTAG_TCK"
+        ],
+        "proximity_mm": 1.1010160728223333
+      },
+      {
+        "nets": [
+          "LINK_DQ3",
+          "LINK_JTAG_SEL"
+        ],
+        "proximity_mm": 1.0995514421272117
+      },
+      {
+        "nets": [
+          "IMU1_INT",
+          "PI_I2C_SCL"
+        ],
+        "proximity_mm": 1.0893130393983645
+      },
+      {
+        "nets": [
+          "IMU2_INT",
+          "PI_GEO_DRDY_N"
+        ],
+        "proximity_mm": 1.08008719160574
+      },
+      {
+        "nets": [
+          "PI_I2C_SDA",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 1.0798020905568477
+      },
+      {
+        "nets": [
+          "LINK_CS_N",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 1.0777999999999999
+      },
+      {
+        "nets": [
+          "PI_I2C_SCL",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 1.0777999999999999
+      },
+      {
+        "nets": [
+          "FPGA_IO_ENABLE",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.0755314785311498
+      },
+      {
+        "nets": [
+          "FPGA_RESET_N",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.0739345448052227
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "PI_IMU3_CS"
+        ],
+        "proximity_mm": 1.0643247901581705
+      },
+      {
+        "nets": [
+          "IMU1_INT",
+          "PI_SPI_MISO"
+        ],
+        "proximity_mm": 1.0587365956732124
+      },
+      {
+        "nets": [
+          "I2C_SCL",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 1.0508063758161685
+      },
+      {
+        "nets": [
+          "IMU1_CS",
+          "LINK_JTAG_SEL"
+        ],
+        "proximity_mm": 1.0483546458178927
+      },
+      {
+        "nets": [
+          "FPGA_LINK_DQ3",
+          "IMU1_CS"
+        ],
+        "proximity_mm": 1.0408972623308077
+      },
+      {
+        "nets": [
+          "GNSS_PPS",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 1.0331945510816443
+      },
+      {
+        "nets": [
+          "FPGA_IO_ENABLE",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 1.0174410450001743
+      },
+      {
+        "nets": [
+          "GNSS_PPS",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 1.0172886286399225
+      },
+      {
+        "nets": [
+          "IMU1_INT",
+          "SPI_MISO"
+        ],
+        "proximity_mm": 1.0069332895805843
+      },
+      {
+        "nets": [
+          "LINK_JTAG_SEL",
+          "PI_GEO_DRDY_N"
+        ],
+        "proximity_mm": 1.0063533905932085
+      },
+      {
+        "nets": [
+          "LINK_DQ3",
+          "PI_GEO_DRDY_N"
+        ],
+        "proximity_mm": 0.9958744852008712
+      },
+      {
+        "nets": [
+          "JTAG_TDI",
+          "PI_IMU3_CS"
+        ],
+        "proximity_mm": 0.9899484687114585
+      },
+      {
+        "nets": [
+          "SPI_MISO",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 0.9872639958295715
+      },
+      {
+        "nets": [
+          "FPGA_LINK_DQ3",
+          "FPGA_RESET_GPIO"
+        ],
+        "proximity_mm": 0.9862226114619416
+      },
+      {
+        "nets": [
+          "PI_IMU1_CS",
+          "PI_IMU3_CS"
+        ],
+        "proximity_mm": 0.9853341495197014
+      },
+      {
+        "nets": [
+          "FPGA_EN1",
+          "PI_SHUTDOWN_N"
+        ],
+        "proximity_mm": 0.9777999999999998
+      },
+      {
+        "nets": [
+          "IMU1_CS",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 0.9726187145298283
+      },
+      {
+        "nets": [
+          "FPGA_CONFIG_RESET_N",
+          "IMU3_CS"
+        ],
+        "proximity_mm": 0.9652963840594986
+      },
+      {
+        "nets": [
+          "IMU2_INT",
+          "LINK_JTAG_SEL"
+        ],
+        "proximity_mm": 0.9611474142440011
+      },
+      {
+        "nets": [
+          "JTAG_TDI",
+          "LINK_DQ1"
+        ],
+        "proximity_mm": 0.9574738252048153
+      },
+      {
+        "nets": [
+          "FPGA_IO_ENABLE",
+          "FPGA_UART_TX"
+        ],
+        "proximity_mm": 0.9563238982256806
+      },
+      {
+        "nets": [
+          "ID_SCL",
+          "PI_SPI_MOSI"
+        ],
+        "proximity_mm": 0.9527999999999999
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 0.9527999999999999
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 0.9527999999999999
+      },
+      {
+        "nets": [
+          "ID_SCL",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 0.9527999999999999
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "PI_IMU1_CS"
+        ],
+        "proximity_mm": 0.9527999999999999
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "PI_IMU1_CS"
+        ],
+        "proximity_mm": 0.9527999999999999
+      },
+      {
+        "nets": [
+          "LINK_REQUEST",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 0.9527999999999999
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "LINK_DQ1"
+        ],
+        "proximity_mm": 0.9527999999999999
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "LINK_DQ1"
+        ],
+        "proximity_mm": 0.9527999999999999
+      },
+      {
+        "nets": [
+          "GEO_DRDY_N",
+          "SENSOR_OE_N"
+        ],
+        "proximity_mm": 0.9527999999999999
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "JTAG_TMS"
+        ],
+        "proximity_mm": 0.9482010880726709
+      },
+      {
+        "nets": [
+          "PI_GEO_DRDY_N",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 0.9467339828220078
+      },
+      {
+        "nets": [
+          "PI_IMU1_INT",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 0.9387406371049952
+      },
+      {
+        "nets": [
+          "IMU1_CS",
+          "LINK_CS_N"
+        ],
+        "proximity_mm": 0.9344459161652829
+      },
+      {
+        "nets": [
+          "PI_IMU3_CS",
+          "PI_SPI_MOSI"
+        ],
+        "proximity_mm": 0.933053268366018
+      },
+      {
+        "nets": [
+          "IMU3_CS",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 0.9286970773008318
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "PI_SPI_MISO"
+        ],
+        "proximity_mm": 0.9285419433412795
+      },
+      {
+        "nets": [
+          "FPGA_UART_RX",
+          "SENSOR_OE_N"
+        ],
+        "proximity_mm": 0.9278000000000013
+      },
+      {
+        "nets": [
+          "FPGA_UART_RX",
+          "PI_IMU1_CS"
+        ],
+        "proximity_mm": 0.9278
+      },
+      {
+        "nets": [
+          "JTAG_TDI",
+          "PI_IMU1_CS"
+        ],
+        "proximity_mm": 0.9278
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "PI_IMU2_CS"
+        ],
+        "proximity_mm": 0.9278
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "PI_IMU2_CS"
+        ],
+        "proximity_mm": 0.9278
+      },
+      {
+        "nets": [
+          "LINK_JTAG_SEL",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 0.9278
+      },
+      {
+        "nets": [
+          "IMU3_CS",
+          "LINK_REQUEST"
+        ],
+        "proximity_mm": 0.9278
+      },
+      {
+        "nets": [
+          "IMU3_INT",
+          "LINK_REQUEST"
+        ],
+        "proximity_mm": 0.9278
+      },
+      {
+        "nets": [
+          "LINK_DQ3",
+          "SPI_MISO"
+        ],
+        "proximity_mm": 0.9278
+      },
+      {
+        "nets": [
+          "FPGA_IO_ENABLE",
+          "GNSS_PPS"
+        ],
+        "proximity_mm": 0.9277999999999995
+      },
+      {
+        "nets": [
+          "FPGA_UART_RX",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 0.9277999999999995
+      },
+      {
+        "nets": [
+          "JTAG_TDI",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 0.9277999999999995
+      },
+      {
+        "nets": [
+          "PI_IMU3_CS",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 0.9277999999999995
+      },
+      {
+        "nets": [
+          "JTAG_TMS",
+          "PI_IMU1_CS"
+        ],
+        "proximity_mm": 0.9277999999999995
+      },
+      {
+        "nets": [
+          "LINK_JTAG_SEL",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 0.9240905771059689
+      },
+      {
+        "nets": [
+          "IMU1_CS",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 0.9229632072592987
+      },
+      {
+        "nets": [
+          "FPGA_CONFIG_RESET_N",
+          "PI_SPI_MISO"
+        ],
+        "proximity_mm": 0.9110194077711102
+      },
+      {
+        "nets": [
+          "LINK_DQ0",
+          "PI_IMU1_INT"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "FPGA_UART_RX",
+          "PI_IMU2_CS"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "JTAG_TDI",
+          "PI_IMU2_CS"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "IMU3_INT",
+          "LINK_JTAG_SEL"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "FPGA_LINK_DQ3",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "SENSOR_OE_N",
+          "SPI_MISO"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "IMU1_CS",
+          "IMU1_INT"
+        ],
+        "proximity_mm": 0.9027999999999999
+      },
+      {
+        "nets": [
+          "I2C_SCL",
+          "IMU1_CS"
+        ],
+        "proximity_mm": 0.9027999999999997
+      },
+      {
+        "nets": [
+          "FPGA_RESET_N",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 0.9027999999999908
+      },
+      {
+        "nets": [
+          "FPGA_LINK_DQ3",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 0.9027999999999659
+      },
+      {
+        "nets": [
+          "LINK_DQ2",
+          "PI_LINK_DQ1"
+        ],
+        "proximity_mm": 0.8671219612505843
+      },
+      {
+        "nets": [
+          "IMU2_CS",
+          "PI_IMU3_CS"
+        ],
+        "proximity_mm": 0.7706859869324383
+      },
+      {
+        "nets": [
+          "IMU3_CS",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 0.7311536492398818
+      },
+      {
+        "nets": [
+          "IMU1_INT",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 0.5930032377651839
+      },
+      {
+        "nets": [
+          "IMU1_INT",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 0.4277966653582044
+      },
+      {
+        "nets": [
+          "IMU1_CS",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 0.39927361354105473
+      },
+      {
+        "nets": [
+          "FPGA_LINK_SCLK",
+          "LINK_DQ0"
+        ],
+        "proximity_mm": 0.2974481526856092
+      },
+      {
+        "nets": [
+          "IMU2_CS",
+          "JTAG_TCK"
+        ],
+        "proximity_mm": 0.27370745134029684
+      },
+      {
+        "nets": [
+          "FPGA_RESET_GPIO",
+          "IMU1_INT"
+        ],
+        "proximity_mm": 0.18979289631435184
+      },
+      {
+        "nets": [
+          "FPGA_LINK_CS_N",
+          "IMU3_INT"
+        ],
+        "proximity_mm": 0.02360167290845777
+      },
+      {
+        "nets": [
+          "FPGA_RESET_GPIO",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 0.01965756851698175
+      },
+      {
+        "nets": [
+          "FPGA_UART_RX",
+          "JTAG_TMS"
+        ],
+        "proximity_mm": 0.015321332200076046
+      },
+      {
+        "nets": [
+          "LINK_DQ2",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 0.009540715070317785
+      },
+      {
+        "nets": [
+          "FPGA_LINK_CS_N",
+          "PI_SPI_MISO"
+        ],
+        "proximity_mm": 0.0037376646599739105
+      },
+      {
+        "nets": [
+          "IMU1_CS",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 0.00197989898731854
       }
     ],
-    "method": "Parallel segment projection with edge separation <=3 dielectric heights; pair-wise lengths may overlap",
+    "segment_interval_count": 30241,
+    "method": "Exact round-ended proximity intervals, unioned per In2 segment/opposing net; includes angled crossings and endpoints",
     "qualified": false,
-    "limitations": "Geometric screen only. Crossings, vias, planes, edge rates and receiver thresholds require SI qualification."
+    "limitations": "In2 path length, not a voltage margin. Electrical acceptance is enforced by simulate_signal_integrity.py; vias and whole-net effects remain unmodeled.",
+    "segment_pair_evidence": "signal-integrity.json coupling.native.segment_pairs in the same lab run"
   },
   "sensor_supply_layout": {
     "ground_track_to_plane_via_mm": {

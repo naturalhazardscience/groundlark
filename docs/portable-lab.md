@@ -64,7 +64,12 @@ The simulation profile prints its one named procurement exclusion; it never
 converts that exclusion into a pass or changes the full profile's release gate.
 Model reports retain their design acceptance flags. An RF corner missing its
 allocation sets `all_corners_meet_targets: false` and fails the signal-integrity
-stage; the pneumatic conditional envelope is also a failing gate when missed. See [model assumptions and acceptance](simulation-validation.md).
+stage. The same stage enforces a 0.20 V adjacent-layer crosstalk allocation in
+both aggressor directions; angled proximity and crossings are included through
+a parallel surrogate. The pneumatic conditional envelope is also a failing gate
+when missed. Summary evidence uses `run_id`, `profile` and `status`; a simulation
+profile result is never labelled a full-profile pass.
+See [model assumptions and acceptance](simulation-validation.md).
 Any failed check still fails the overall run; `run.json` lists `failed_steps`
 and each check has its own log. In particular, an assembly-registry mismatch
 does not suppress the later circuit, SPICE or software results. Checks with

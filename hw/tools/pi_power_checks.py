@@ -90,7 +90,8 @@ def diode_spreader(board):
     current=budget()['input_scenario_A']
     return dict(cathode_copper_area_mm2=areas,through_vias=len(vias),input_scenario_A=current,
                 diode_forward_drop_assumed_V=.5,loss_scenario_W=current*.5,
-                thermal_resistance_measured=False,junction_temperature_C=None,qualified=False)
+                thermal_resistance_measured=False,junction_temperature_C=None,qualified=False,
+                bench_status='open',bench_requirement='D130 junction-temperature qualification at 8 V input / 3 A combined load in the closed enclosure; copper/via counts do not close this item')
 
 
 def verify_board(board, spec):

@@ -51,6 +51,11 @@ U23 uses the redesigned SDP32-125PA circuit and driver. Supplier geometry remain
 unverified for 53 placements, so the matching Gerber/BOM/CPL package remains a
 review package; see the assembly guide before ordering.
 
+The expanded adjacent-layer coupling model currently fails its 0.20 V allocation.
+The simulation build retains this electrical hold even with inventory excluded.
+L141 is a provisional 3.6 nH VNA tuning position; D130 junction-temperature
+qualification remains open. See [simulation scope](../../docs/simulation-validation.md).
+
 Use the [R3 enclosure](../mechanical/daqhat-01-case/README.md) for the 140 × 56 mm
 board. It adds power-wing supports, a rear DC opening opposite the geophone and
 switch access. First-print fit and thermal qualification remain pending.

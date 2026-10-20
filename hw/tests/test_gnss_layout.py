@@ -9,6 +9,35 @@ class AntennaLayoutTests(unittest.TestCase):
   import pcbnew as p
   return p.LoadBoard(str(Path(__file__).resolve().parents[1]/'groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb'))
  def test_native_antenna(self):verify_board(self.load())
+ def void(self,b,box):
+  import pcbnew as p
+  layer=b.GetLayerID('In4.Cu');cut=p.SHAPE_POLY_SET();cut.NewOutline()
+  x,y,z,w=box
+  for a,c in ((x,y),(z,y),(z,w),(x,w)):cut.Append(p.FromMM(a),p.FromMM(c))
+  removed=0
+  for zone in b.Zones():
+   if zone.GetNetname()=='GND' and zone.IsOnLayer(layer):
+    polygon=p.SHAPE_POLY_SET(zone.GetFilledPolysList(layer));area=polygon.Area()
+    polygon.BooleanSubtract(cut);removed+=area-polygon.Area()
+    zone.SetFilledPolysList(layer,polygon)
+  self.assertGreater(removed,0,'Fault must remove actual filled reference copper')
+ def test_sma_return_void_inside_old_exemption(self):
+  from gnss_checks import rf_geometry
+  b=self.load()
+  # 1.15 mm from the launch: inside the former blanket 1.2 mm skip.
+  self.void(b,(53.97,64.62,54.03,64.67))
+  with self.assertRaisesRegex(ValueError,'return annulus void'):rf_geometry(b)
+ def test_reference_void_away_from_connector(self):
+  from gnss_checks import rf_geometry
+  b=self.load();self.void(b,(57.48,66.10,57.57,66.18))
+  with self.assertRaisesRegex(ValueError,'reference plane void'):rf_geometry(b)
+ def test_unreferenced_branches_reported(self):
+  from gnss_checks import rf_geometry
+  r=rf_geometry(self.load());rows={r['role']:r for r in r['tracks']}
+  self.assertTrue(rows['ESD']['fully_inside_antipad'])
+  self.assertTrue(rows['BIAS']['fully_inside_antipad'])
+  self.assertEqual(rows['ESD']['reference_samples_checked'],0)
+  self.assertGreater(r['sma_return_annulus_samples'],1900)
  def test_old_rf_width_fails_real_stack(self):
   import pcbnew as p
   from gnss_checks import rf_geometry

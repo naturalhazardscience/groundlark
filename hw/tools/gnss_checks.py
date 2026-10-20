@@ -50,8 +50,31 @@ def rf_geometry(board):
         'BIAS':(position('J140',1),position('L140',2)),
         'ESD':(position('J140',1),position('D140',1))}
     layer=board.GetLayerID(reference['name'])
-    planes=[z.GetFilledPolysList(layer) for z in board.Zones()
-            if z.GetNetname()=='GND' and z.IsOnLayer(layer) and not z.GetIsRuleArea()]
+    zones=[z for z in board.Zones() if z.GetNetname()=='GND' and z.IsOnLayer(layer) and not z.GetIsRuleArea()]
+    planes=[z.GetFilledPolysList(layer) for z in zones]
+    if not planes:raise ValueError('GNSS RF reference plane missing')
+    center=position('J140',1)
+    signal_pad=next(q for q in fps['J140'].Pads() if q.GetNumber()=='1')
+    # Bound the intentional PTH antipad using authored geometry, not an
+    # arbitrary exemption around the connector. Do not let a larger clearance
+    # silently enlarge the accepted unreferenced launch.
+    clearance=max(p.ToMM(signal_pad.GetOwnClearance(layer)),max(p.ToMM(z.GetLocalClearance()) for z in zones))
+    if clearance>.2 or signal_pad.GetShape()!=p.PAD_SHAPE_CIRCLE:
+        raise ValueError('GNSS SMA antipad geometry changed')
+    error=p.ToMM(board.GetDesignSettings().m_MaxError)
+    if error>.005:raise ValueError('GNSS reference polygon accuracy changed')
+    antipad=p.ToMM(signal_pad.GetSize().x)/2+clearance+4*error
+    if antipad>1.12+1e-9:raise ValueError('GNSS SMA antipad too large')
+    # Check the surrounding return plane even for branches wholly inside the
+    # antipad. A short unreferenced branch is reported explicitly below.
+    annulus_checks=0
+    for radial in range(11):
+        radius=antipad+.005+radial*.02
+        for degree in range(0,360,2):
+            angle=math.radians(degree)
+            v=center+p.VECTOR2I(p.FromMM(radius*math.cos(angle)),p.FromMM(radius*math.sin(angle)))
+            if not any(poly.Contains(v) for poly in planes):raise ValueError('GNSS SMA return annulus void')
+            annulus_checks+=1
     for track in board.GetTracks():
         if track.GetNetname() not in ('GNSS_RF','GNSS_ANT','GNSS_MATCH'):continue
         if isinstance(track,p.PCB_VIA) or track.GetLayer()!=p.B_Cu:raise ValueError('RF path changes layers')
@@ -64,21 +87,26 @@ def rf_geometry(board):
         width=p.ToMM(track.GetWidth());impedance,_=microstrip(width,height,outer['thickness_mm'],er)
         if not 47.5<=impedance<=52.5:raise ValueError(f'GNSS native RF geometry is {impedance:.2f} ohm')
         a,z=track.GetStart(),track.GetEnd()
-        # Ignore the connector/land endpoint discontinuities, but require a
-        # continuous reference under the intervening routed line.
-        for j in range(1,20):
-            v=p.VECTOR2I(round(a.x+(z.x-a.x)*j/20),round(a.y+(z.y-a.y)*j/20))
-            # SMA through-hole antipad is a connector discontinuity, not a
-            # missing ground plane below the microstrip section.
-            connector_hole=any(q.GetNetname()==track.GetNetname() and q.GetAttribute()==p.PAD_ATTRIB_PTH
-                and p.ToMM((q.GetPosition()-v).EuclideanNorm())<=p.ToMM(max(q.GetSize()))/2+.3
-                for f in board.GetFootprints() if f.GetReference()=='J140' for q in f.Pads())
-            if connector_hole:continue
-            if not any(poly.Contains(v) for poly in planes):raise ValueError('GNSS RF reference plane void')
-        rows.append(dict(net=track.GetNetname(),role=role,width_mm=width,length_mm=p.ToMM(track.GetLength()),estimated_ohm=impedance))
+        samples=max(1,math.ceil(paths[role]/.025));checked=0;inside=0
+        dx=p.ToMM(z.x-a.x);dy=p.ToMM(z.y-a.y)
+        normal=(-dy/paths[role],dx/paths[role])
+        for j in range(samples+1):
+            for side in (-.5,0,.5):
+                v=p.VECTOR2I(round(a.x+(z.x-a.x)*j/samples)+p.FromMM(normal[0]*width*side),
+                             round(a.y+(z.y-a.y)*j/samples)+p.FromMM(normal[1]*width*side))
+                if p.ToMM((center-v).EuclideanNorm())<=antipad:
+                    inside+=1;continue
+                checked+=1
+                if not any(poly.Contains(v) for poly in planes):raise ValueError('GNSS RF reference plane void')
+        launch=min(paths[role],antipad) if role in ('GNSS_ANT','BIAS','ESD') else 0
+        rows.append(dict(net=track.GetNetname(),role=role,width_mm=width,length_mm=paths[role],estimated_ohm=impedance,
+                         reference_samples_checked=checked,antipad_samples=inside,unreferenced_launch_mm=launch,
+                         fully_inside_antipad=checked==0))
     if set(paths)!=set(endpoints):raise ValueError('GNSS RF branch missing')
     if max(paths['BIAS'],paths['ESD'])>1.5:raise ValueError('GNSS shunt branch too long')
     return dict(tracks=rows,path_lengths_mm=paths,dielectric_mm=height,copper_mm=outer['thickness_mm'],epsilon_r=er,
+                sma_antipad_radius_mm=antipad,sma_return_annulus_samples=annulus_checks,
+                reference_sampling_pitch_mm=.025,
                 model='Uncoated Hammerstad-Jensen microstrip; mask, coplanar copper and pads require supplier field-solver review',qualified=False)
 
 

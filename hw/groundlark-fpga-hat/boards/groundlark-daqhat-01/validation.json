@@ -129,7 +129,9 @@
       "loss_scenario_W": 1.2035826676349552,
       "thermal_resistance_measured": false,
       "junction_temperature_C": null,
-      "qualified": false
+      "qualified": false,
+      "bench_status": "open",
+      "bench_requirement": "D130 junction-temperature qualification at 8 V input / 3 A combined load in the closed enclosure; copper/via counts do not close this item"
     },
     "firmware": "prototype implemented; battery policy disabled pending qualification",
     "physical_qualification": false
@@ -160,35 +162,55 @@
           "role": "GNSS_RF",
           "width_mm": 0.17,
           "length_mm": 1.8629009635512028,
-          "estimated_ohm": 49.71591709061459
+          "estimated_ohm": 49.71591709061459,
+          "reference_samples_checked": 228,
+          "antipad_samples": 0,
+          "unreferenced_launch_mm": 0,
+          "fully_inside_antipad": false
         },
         {
           "net": "GNSS_ANT",
           "role": "ESD",
           "width_mm": 0.17,
           "length_mm": 0.799999,
-          "estimated_ohm": 49.71591709061459
+          "estimated_ohm": 49.71591709061459,
+          "reference_samples_checked": 0,
+          "antipad_samples": 99,
+          "unreferenced_launch_mm": 0.799999,
+          "fully_inside_antipad": true
         },
         {
           "net": "GNSS_ANT",
           "role": "GNSS_ANT",
           "width_mm": 0.17,
           "length_mm": 1.3602940858505561,
-          "estimated_ohm": 49.71591709061459
+          "estimated_ohm": 49.71591709061459,
+          "reference_samples_checked": 30,
+          "antipad_samples": 138,
+          "unreferenced_launch_mm": 1.12,
+          "fully_inside_antipad": false
         },
         {
           "net": "GNSS_ANT",
           "role": "BIAS",
           "width_mm": 0.17,
           "length_mm": 1.02,
-          "estimated_ohm": 49.71591709061459
+          "estimated_ohm": 49.71591709061459,
+          "reference_samples_checked": 0,
+          "antipad_samples": 126,
+          "unreferenced_launch_mm": 1.02,
+          "fully_inside_antipad": true
         },
         {
           "net": "GNSS_MATCH",
           "role": "GNSS_MATCH",
           "width_mm": 0.17,
           "length_mm": 1.0570237272649086,
-          "estimated_ohm": 49.71591709061459
+          "estimated_ohm": 49.71591709061459,
+          "reference_samples_checked": 132,
+          "antipad_samples": 0,
+          "unreferenced_launch_mm": 0,
+          "fully_inside_antipad": false
         }
       ],
       "path_lengths_mm": {
@@ -201,6 +223,9 @@
       "dielectric_mm": 0.0994,
       "copper_mm": 0.035,
       "epsilon_r": 4.3,
+      "sma_antipad_radius_mm": 1.12,
+      "sma_return_annulus_samples": 1980,
+      "reference_sampling_pitch_mm": 0.025,
       "model": "Uncoated Hammerstad-Jensen microstrip; mask, coplanar copper and pads require supplier field-solver review",
       "qualified": false
     },

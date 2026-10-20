@@ -28,7 +28,11 @@ U141 TPS2553 follows the LDO. ILIM and EN connect to its input, selecting a
 C152 (100 nF) bypasses the limiter input. C151 (10 nF) bypasses the cold end of
 L140 beside the SMA with a local ground-plane stitch. L140 (Coilcraft 0402HPH-56NXJRW, 56 nH) feeds DC onto the coax.
 C148 (47 pF C0G) blocks antenna DC; L141 (0402HP-3N6XJRW, 3.6 nH)
-provides series matching before RF_IN.
+is retained as a **VNA tuning position** before RF_IN. Its provisional 3.6 nH
+fit depends on estimated pad capacitance; select the production value from
+measured S-parameters. Do not treat the sampled model pass as a fixed matching
+solution. An In4 void under large RF pads would change that capacitance and
+requires a new field/network model and return-path review before use.
 D140 PESD5V0F1BL provides 0.4 pF nominal ESD protection. There is no antenna
 open/short telemetry; the limiter’s unused open-drain FAULT output is NC.
 Current-limit response, repeated shorts and thermal recovery require physical
@@ -58,12 +62,19 @@ on In4.Cu and through-hole SMA grounds. The short RF layout uses the existing
 stock six-layer stack. Its five RF traces are 0.17 mm wide over the recorded
 0.0994 mm dielectric; the uncoated microstrip estimate is about 49.7 Ω.
 The native check rejects the previous 0.3 mm width and missing reference copper.
+The SMA signal antipad has a bounded 1.12 mm radius including polygon allowance.
+The 1.02 mm bias and 0.80 mm ESD branches lie entirely inside that unreferenced
+transition; they do not pass a microstrip ground-coverage test. The check reports
+their unreferenced lengths, samples the surrounding ground annulus at 1,980
+locations, and checks the remaining traces across their width at ≤25 µm spacing.
 The [simulation profile](simulation-validation.md#rf-network) now includes
 mask/etch/dielectric sensitivity and a lumped pad/connector RF network. Its
 nominal loss is about 0.13 dB. The 98,304 sampled corners meet the
 1 dB insertion-loss / 10 dB return-loss allocations (worst 0.53/10.86 dB);
-choke impedance stays above 578 Ω. The model checks each short bias/ESD branch. Coplanar metal and the
-three-dimensional transitions remain outside that model.
+choke impedance stays above 578 Ω. The model includes each short bias/ESD branch,
+but treats the unreferenced launch using transmission-line surrogates and lumped
+connector parasitics. Coplanar metal and three-dimensional transitions remain
+outside that model.
 It has **no controlled-impedance fabrication claim**;
 measure insertion loss/return loss, satellite C/N0, ESD behavior and receiver
 performance with the FPGA and power converters active before release.
@@ -87,6 +98,8 @@ across stations before claiming millisecond alignment.
 | TPS70933DBVR | TI, 3.3 V antenna regulator | [TI datasheet](https://www.ti.com/lit/ds/symlink/tps709.pdf) |
 | PESD5V0F1BL,315 | Nexperia, SOD882 | [Manufacturer specification](https://www.nexperia.com/product/PESD5V0F1BL) |
 
+L140/L141 remain assembly holds until catalog mapping or an approved sourcing
+route is established. Inventory is outside the current simulation scope.
 Confirm stock and assembly eligibility at order time. The SMA footprint follows
 the drawing's 5.10 mm ground-pin pitch, four 1.50 mm ground drills and 1.20 mm
 center drill. The authored STEP uses the same drawing and is an envelope, not

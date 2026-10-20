@@ -214,7 +214,7 @@ def main():
         board_sha256=before,physical_pin_checks=pin_checks,purchasing_package_checks=len(packages),
         analog=analog_review(),layout_and_fit=geometry_review(board),
         imu_bypass=__import__('imu_layout').review(board),
-        adjacent_signal_layers=__import__('layer_coupling').review(board),
+        adjacent_signal_layers=__import__('layer_coupling').review(board,include_segments=False),
         sensor_supply_layout=__import__('sensor_supply_layout').review(board))
     _require_hardware((hashlib.sha256(path.read_bytes()).hexdigest()==before), lambda: ('prefab_review.py:217: hardware validation condition'))
     (BOARD/'prefab-review.json').write_text(json.dumps(report,indent=2)+'\n')

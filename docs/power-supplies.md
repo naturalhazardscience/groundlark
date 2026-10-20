@@ -114,7 +114,9 @@ allowance is a bench acceptance limit, not a measured result. At this low-input,
 full-load scenario D130 dissipates about 1.2 W and the converter about 2.7 W at
 85% efficiency. D130 has connected cathode pours on both outer layers and nine spreading
 vias. Geometry checks require at least 40 mm² per layer and six vias; they
-do not predict junction temperature. Qualify both in the closed enclosure. F130 is the 1206
+do not predict junction temperature. D130 remains an open thermal bench item,
+with junction temperature and effective thermal resistance unset. Qualify both
+devices in the closed enclosure. F130 is the 1206
 Littelfuse 0466004.NRHF; its temperature/current derating and startup I²t must
 be checked with the selected battery and load. Do not assume 3 A output is
 available at every enclosure temperature.
