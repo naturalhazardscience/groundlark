@@ -130,6 +130,10 @@ class Sessions:
             if b.sensor_id == 8:
                 require(all(s.time.domain == (1 if state.board == 1 else 2) for s in b.samples),
                         'pressure clock does not match board identity')
+                if cfg.HasField('pressure_measurement_command'):
+                    require(all(not s.pressure.HasField('read_interval_min_ns') or
+                                cfg.pressure_measurement_command == 0x3615 for s in b.samples),
+                            'pressure averaging interval disagrees with measurement command')
             previous = state.last.get(b.sensor_id)
             first, last = b.samples[0], b.samples[-1]
             next_sequence = 0 if previous is None else previous[0] + 1

@@ -55,7 +55,11 @@ def validate(message):
                        {5: {"tilt_mode"}, 6: set(), 7: {"cycle_count_x", "cycle_count_y", "cycle_count_z"},
                         8: {"pressure_min_pa", "pressure_max_pa", "pressure_part_number"}, 9: {"geophone_gain", "geophone_reference_v"}, **{i: set() for i in range(10, 18)}, **{i: {"cycle_count_x", "cycle_count_y", "cycle_count_z"} for i in (18,19,20)}}[sensor.sensor_id])
             supplied = {field.name for field, _ in sensor.ListFields() if field.number >= 5}
-            require(supplied <= allowed, "settings incompatible with sensor")
+            optional = {'pressure_measurement_command'} if sensor.sensor_id == 8 else set()
+            require(supplied <= allowed | optional, "settings incompatible with sensor")
+            if sensor.HasField('pressure_measurement_command'):
+                require(sensor.pressure_part_number == 'SDP32-125PA-TR-250PCS' and
+                        sensor.pressure_measurement_command in (0x3615, 0x361e), 'invalid SDP32 measurement command')
             if sensor.enabled:
                 require(allowed <= supplied, "enabled sensor settings required")
                 if sensor.sensor_id <= 4:
@@ -151,6 +155,12 @@ def validate_batch(batch):
             require(len(sample.barometer.response) == 6 and len(sample.barometer.calibration) == 21, "BMP raw/trim length")
         elif raw == "pressure":
             pressure = sample.pressure
+            bounded = pressure.HasField('read_interval_min_ns')
+            require(bounded == pressure.HasField('read_interval_max_ns'), 'pressure interval requires both bounds')
+            if bounded:
+                require(bool(pressure.sdp3x_response) and
+                        1_000_000 <= pressure.read_interval_min_ns <= pressure.read_interval_max_ns <= 25_000_000,
+                        'invalid SDP32 arithmetic averaging interval')
             require(bool(pressure.response) != bool(pressure.sdp3x_response), "exactly one pressure response format")
             if pressure.sdp3x_response:
                 data = pressure.sdp3x_response

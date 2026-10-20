@@ -260,3 +260,14 @@ scale must be 240 counts/Pa, and temperature uses 200 counts/C. Exactly one
 pressure response field may be populated. The four-byte `response` field
 retains its original DLVR meaning, so old recordings remain interpretable.
 Neither field supplies physical conversion timestamps or qualifies a passband.
+
+Current SDP32 configurations additionally record `pressure_measurement_command`:
+0x3615 is differential-pressure average-until-read; 0x361e identifies the older
+unaveraged mode. Absence in old recordings remains unknown. The driver retains
+`read_interval_min_ns` and `read_interval_max_ns` together on accepted averaged
+samples: the bracket between consecutive I2C transaction boundaries, constrained
+to 1–25 ms. These bounds describe the reset interval, not sensor group delay.
+Missing bounds remain absent in legacy data. Invalid/unknown windows emit missing
+samples with unknown loss and a `DataGap` status, then re-anchor; they do not
+manufacture a zero pressure value. Session validation rejects averaging bounds
+when the effective configuration explicitly selects unaveraged measurements.

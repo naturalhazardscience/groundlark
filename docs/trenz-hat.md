@@ -46,7 +46,7 @@ holes must remain clear. Existing pull-ups and Pi/FPGA signals are preserved.
 Maximum continuous current is 5.5 mA; 14 mA reserve remains in the 50 mA
 sensor-domain allocation. Differential pressure range is +/-125 Pa.
 
-Live acquisition uses differential-pressure compensation without averaging,
+Live acquisition uses differential-pressure compensation with average-until-read,
 checks product identity, scale and each word's CRC, and preserves signed raw
 pressure and temperature counts. Read completion timestamps do not qualify
 conversion timing. Legacy DLVR recordings remain readable. Pneumatic response,
@@ -148,7 +148,10 @@ U80. All nine carrier VIN/3.3VIN contacts are connected: J80 pads 2/4/6/14/16
 and J81 pads 1/3/5/7. Ground return uses both internal reference planes.
 Filled/capped processing applies to converter, MCU/load-switch thermal-pad vias
 as well as the ADC supply-pad vias.
-No extracted resistance, measured current capacity or thermal signoff is claimed.
+The native finite-difference copper extraction gives about 9.37 mΩ for the FPGA
+loop at an assumed 85 °C, including its 20% modeling reserve; a separate 5 mΩ
+contact allocation fits the 15 mΩ target. See [the extraction assumptions](power-supplies.md).
+Measured current capacity, contact resistance and thermal signoff remain pending.
 
 The Pi header does not supply FPGA_VIN or the module's sequenced FPGA_3V3 rail.
 The switched Pi supply powers sensors and its side of the isolated interfaces; grounds remain
@@ -223,5 +226,5 @@ route connectivity, sensor regressions, power/geophone models and stack envelope
 These checks do not establish physical power, timing, noise or thermal performance.
 Follow the [bench procedure](bench-procedure.md) for first-article qualification.
 
-The TI Pi supervisor, J130 input range, shutdown handshake, software placeholders
+The TI Pi supervisor, J130 input range, shutdown handshake, prototype firmware
 and shared Pi/HAT budget are specified in [power supplies](power-supplies.md#pi-supervisor-and-battery-input).

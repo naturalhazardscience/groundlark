@@ -66,6 +66,12 @@ class GPIOFaultTests(unittest.TestCase):
         self.pins['U100','16'] = 'PI_5V'
         with self.assertRaises(AssertionError): audit.check(self.pins)
 
+    def test_trenz_mode_and_noseq_are_distinct_from_sequence_enable(self):
+        for key,net in ((('EXTRA','1'),'FPGA_MODE'),(('JP80','1'),'FPGA_NOSEQ'),
+                        (('R81','2'),'FPGA_3V3'),(('J80','31'),'GND')):
+            self.pins=self.original.copy();self.pins[key]=net
+            with self.subTest(pin=key),self.assertRaises(AssertionError):audit.check(self.pins)
+
     def test_unintended_shared_gpio(self):
         self.pins['EXTRA','1'] = self.pins['J80','32']
         with self.assertRaises(AssertionError): audit.check(self.pins)

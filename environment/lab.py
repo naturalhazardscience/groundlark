@@ -233,7 +233,7 @@ def commands(profile):
 
 
 def collect(workspace, report, profile):
-    files = [workspace / "sw/build" / name for name in ("verification.json", "demo.ssrec", "demo-summary.json", "hat-signals.ssrec", "hat-signals.json", "acquisition-stress.json")]
+    files = [workspace / "sw/build" / name for name in ("verification.json", "demo.ssrec", "demo-summary.json", "hat-signals.ssrec", "hat-signals.json", "pressure-response.json", "acquisition-stress.json")]
     files += [workspace/'sw/build/skylark-arm'/name for name in ('skylark.elf','skylark.bin','skylark.map','firmware.json')]
     files += [workspace/'sw/build/burrowlark-arm'/name for name in ('burrowlark.elf','burrowlark.bin','burrowlark.map','firmware.json')]
     files += [workspace/'sw/build/supervisor-arm'/name for name in ('supervisor.elf','supervisor.bin','supervisor.map')]

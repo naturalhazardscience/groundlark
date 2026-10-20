@@ -328,11 +328,14 @@ incomplete; loss and raw precision survive segment boundaries.
 
 Live HAT acquisition includes the SDP32-125PA at I2C 0x21, with its +/-125 Pa
 range. Startup validates the product ID and 240 counts/Pa scale, then starts
-continuous differential-pressure compensated measurements without averaging.
+continuous differential-pressure compensated averaging (command 0x3615).
 All nine bytes (signed pressure and temperature, scale, and three CRCs) are
 retained in `PressureRaw.sdp3x_response`. CRC, identity, scale and bus failures
 enter bounded recovery; recovery stops only this device, without resetting
-other sensors on the bus. Legacy four-byte DLVR responses remain readable.
+other sensors on the bus. Uncertain/overlong averaging windows instead produce
+unknown-loss `DataGap` records and re-anchor without resetting a healthy sensor.
+The 100 Hz profile targets the [1–20 Hz landslide research band](sensor-response.md).
+Legacy four-byte DLVR responses remain readable.
 Modeled protocol and fault checks do not establish physical pneumatic response.
 
 The [supervisor target](../sw/supervisor/README.md) defaults to RUN off. Its

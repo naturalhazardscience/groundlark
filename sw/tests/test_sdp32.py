@@ -5,6 +5,7 @@ from groundlark_contract.validation import sht_crc, validate
 from groundlark import messages
 from groundlark.calibration import raw_values
 from groundlark.workbench import project_sample
+from groundlark.sensors import DataGap, NotReady
 
 IDENTITY = bytes.fromhex('03019d0201690123a045675389ab77cdef84')
 ZERO = bytes.fromhex('00008113880100f003')
@@ -26,12 +27,71 @@ class Bus:
 
 
 class SDP32Tests(unittest.TestCase):
+    def test_average_window_bounds_long_read_and_recovery(self):
+        now=[0]; bus=Bus(); device=SDP32(bus,lambda _:None,clock_ns=lambda:now[0])
+        device.configure(SETTINGS)
+        with self.assertRaises(NotReady):device.read()
+        now[0]=10_000_000
+        reading=device.read()
+        self.assertEqual(reading.raw['read_interval_min_ns'],10_000_000)
+        self.assertEqual(reading.raw['read_interval_max_ns'],10_000_000)
+        frame=messages.batch('hat',1,8,1,now[0],reading.raw,dropped=None)
+        validate(frame)
+        self.assertFalse(frame.batch.HasField('dropped_before'))
+        now[0]=40_000_001
+        with self.assertRaisesRegex(DataGap,'1-25 ms'):device.read()
+        now[0]+=10_000_000
+        self.assertEqual(device.read().raw['sdp3x_response'],ZERO)
+        self.assertEqual(sum(write=='3615' for _,write,_ in bus.calls),1)
+
+    def test_crc_failure_makes_next_window_unknown_without_device_reset(self):
+        now=[0]; bus=Bus(); device=SDP32(bus,lambda _:None,clock_ns=lambda:now[0])
+        device.configure(SETTINGS);now[0]=10_000_000;bus.sample=bytes(9)
+        with self.assertRaises(OSError):device.read()
+        bus.sample=ZERO;now[0]+=10_000_000
+        with self.assertRaisesRegex(DataGap,'unknown'):device.read()
+        now[0]+=10_000_000
+        self.assertEqual(device.read().raw['read_interval_min_ns'],10_000_000)
+        self.assertEqual(sum(write=='3ff9' for _,write,_ in bus.calls),1)
+
+    def test_transaction_duration_and_clock_regression_do_not_hide_invalid_windows(self):
+        ticks=iter((0, 100_000, 10_000_000, 10_200_000, 9_000_000, 9_100_000,
+                    19_000_000, 19_100_000, 29_000_000, 45_000_000))
+        device=SDP32(Bus(),lambda _:None,clock_ns=lambda:next(ticks))
+        device.configure(SETTINGS)
+        reading=device.read()
+        self.assertEqual((reading.raw['read_interval_min_ns'],reading.raw['read_interval_max_ns']),
+                         (9_900_000,10_200_000))
+        with self.assertRaises(DataGap):device.read()
+        self.assertEqual(device.read().raw['read_interval_max_ns'],10_100_000)
+        with self.assertRaises(DataGap):device.read()
+
+    def test_configuration_and_interval_metadata_preserve_legacy_absence(self):
+        current=messages.configuration('hat',1,[SETTINGS])
+        self.assertEqual(current.configuration.sensors[0].pressure_measurement_command,0x3615)
+        legacy=dict(SETTINGS);del legacy['pressure_measurement_command']
+        validate(messages.configuration('hat',1,[legacy]))
+        with self.assertRaises(ValueError):messages.configuration('hat',1,[dict(SETTINGS,pressure_measurement_command=0x3603)])
+        for fields in (dict(read_interval_min_ns=0),dict(read_interval_min_ns=10,read_interval_max_ns=10),
+                       dict(read_interval_min_ns=10_000_000,read_interval_max_ns=26_000_000)):
+            with self.assertRaises(ValueError):messages.batch('hat',1,8,0,0,dict(sdp3x_response=ZERO,**fields))
+
+    def test_session_rejects_averaging_bounds_for_explicit_unaveraged_configuration(self):
+        from groundlark.session import Sessions
+        sessions=Sessions()
+        sessions.accept(messages.identity('hat',1,1,[8]))
+        sessions.accept(messages.configuration('hat',1,[dict(SETTINGS,pressure_measurement_command=0x361e)]))
+        raw=dict(sdp3x_response=ZERO,read_interval_min_ns=10_000_000,read_interval_max_ns=10_000_000)
+        with self.assertRaisesRegex(ValueError,'measurement command'):
+            sessions.accept(messages.batch('hat',1,8,0,10_000_000,raw,clock_domain=1))
+        sessions.accept(messages.batch('hat',1,8,0,10_000_000,dict(sdp3x_response=ZERO),clock_domain=1))
+
     def test_startup_identity_and_recovery_command_order(self):
         bus, delays = Bus(), []
         device = SDP32(bus, delays.append)
         self.assertEqual(device.configure(SETTINGS), SETTINGS)
         expected = [(0x21, '3ff9', 0), (0x21, '367c', 0), (0x21, 'e102', 0),
-                    (0x21, '', 18), (0x21, '361e', 0), (0x21, '', 9)]
+                    (0x21, '', 18), (0x21, '3615', 0), (0x21, '', 9)]
         self.assertEqual(bus.calls, expected)
         self.assertEqual(delays, [.025, .001, .020])
         device.configure(SETTINGS)

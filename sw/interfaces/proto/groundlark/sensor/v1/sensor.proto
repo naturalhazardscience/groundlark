@@ -99,6 +99,8 @@ message SensorConfiguration {
   string pressure_part_number = 13;
   optional uint32 geophone_gain = 14;
   optional double geophone_reference_v = 15;
+  // SDP3x continuous command actually acknowledged; absent in older recordings.
+  optional uint32 pressure_measurement_command = 16;
 }
 
 message Timestamp {
@@ -154,6 +156,11 @@ message PressureRaw {
   // SDP32: exactly nine bytes, pressure/temperature/scale words and their CRCs.
   // Exactly one response format must be populated. Signed counts are retained.
   bytes sdp3x_response = 2;
+  // Host-observed bounds between consecutive pressure read transactions.
+  // These bound the read/reset interval, not physical conversion/filter delay.
+  // Absent means unknown. Both fields must be present together.
+  optional uint64 read_interval_min_ns = 3;
+  optional uint64 read_interval_max_ns = 4;
 }
 
 message GnssRaw {

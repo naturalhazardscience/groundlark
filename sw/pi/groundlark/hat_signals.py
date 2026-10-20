@@ -24,7 +24,7 @@ PROFILE = {"version": 1, "initial": {
     "orientation_deg": [{"amplitude": 5, "frequency_hz": .5}, 0, 0],
     "acceleration_m_s2": [{"amplitude": .3, "frequency_hz": 2}, 0, 0],
     "geophone_velocity_m_s": {"amplitude": .0001, "frequency_hz": 10}, "gnss_position": [0, 0, 10], "gnss_velocity_ned_m_s": [1, 2, -.5],
-    "pressure_pa": {"amplitude": 20, "frequency_hz": 1}}}
+    "pressure_pa": {"amplitude": .5, "frequency_hz": 5}}}
 SECONDS = 8
 SCOPE = "Modeled IMU/ADC/GNSS/SDP32 buses through production Pi drivers; physical timing and noise unqualified"
 
@@ -91,14 +91,18 @@ def check_recording(data):
             if len(samples[sid]) > 4000:
                 raise ValueError("HAT bench sample bound")
     inventory = all(samples.values()) and set(configs) == set(samples)
-    check("Inventory & quality", inventory and completed and all(s.quality == 1 for rows in samples.values() for s in rows),
+    quality_ok = all(s.quality == (2 if sid==8 and i==0 else 1)
+                     for sid,rows in samples.items() for i,s in enumerate(rows))
+    check("Inventory & quality", inventory and completed and quality_ok,
           f"{sum(map(len, samples.values()))} samples; six HAT sensors; completion={completed}")
     settings_ok = inventory and all(configs[i].period_ns == next(c["period_ns"] for c in configurations() if c["sensor_id"] == i) for i in samples)
     if settings_ok:
         settings_ok = all(configs[i].acceleration_range_g == 2 and configs[i].angular_rate_range_dps == 250 for i in range(1, 4))
-        settings_ok &= (configs[8].pressure_min_pa,configs[8].pressure_max_pa,configs[8].pressure_part_number)==(-125,125,'SDP32-125PA-TR-250PCS')
+        settings_ok &= (configs[8].pressure_min_pa,configs[8].pressure_max_pa,configs[8].pressure_part_number,configs[8].pressure_measurement_command)==(-125,125,'SDP32-125PA-TR-250PCS',0x3615)
     check("Effective configuration", settings_ok, "26 Hz / Ã‚Â±2 g / Ã‚Â±250 Ã‚Â°/s IMUs; 330 SPS vertical geophone")
-    if not inventory or not settings_ok or any(s.quality != 1 for rows in samples.values() for s in rows):
+    # The first pressure poll follows the startup drain immediately; no new
+    # conversion exists yet. Its explicit missing record is expected.
+    if not inventory or not settings_ok or not quality_ok:
         return dict(passed=False, checks=checks, samples=sum(map(len, samples.values())), recording_sha256=hashlib.sha256(data).hexdigest(), scope=SCOPE)
     timing_errors = []
     continuity = True
@@ -154,19 +158,23 @@ def check_recording(data):
     check("Geophone gain, phase & counter", max(errors) < 150 and counters_ok,
           f"10 Hz / 100 um/s reference; maximum count error {max(errors):.2f}; limit 150; counter wrap checked")
     # Independent SDP32 nominal transfer: signed pressure *240, temperature *200.
-    frames=[s.pressure.sdp3x_response for s in samples[8]]
+    pressure_rows = samples[8][1:]
+    frames=[s.pressure.sdp3x_response for s in pressure_rows]
     valid_frames=all(len(frame)==9 for frame in frames)
     pressure_errors=[]
     if valid_frames:
-        for sample,frame in zip(samples[8],frames):
+        for sample,frame in zip(pressure_rows,frames):
             word=int.from_bytes(frame[:2],'big',signed=True)
             temp=int.from_bytes(frame[3:5],'big',signed=True)
             valid_frames &= temp==5000 and int.from_bytes(frame[6:8],'big')==240
             valid_frames &= all(sht_crc(frame[i:i+2])==frame[i+2] for i in (0,3,6))
-            expected=4800*math.sin(2*math.pi*sample.time.acquisition_ns/1e9)
+            valid_frames &= sample.pressure.read_interval_min_ns==10_000_000 and sample.pressure.read_interval_max_ns==10_000_000
+            # Independent twenty-conversion boxcar fixture, including the
+            # quantized internal counts and the resulting 4.75 ms phase delay.
+            expected=round(sum(round(120*math.sin(10*math.pi*(sample.time.acquisition_ns-j*500_000)/1e9)) for j in range(20))/20)
             pressure_errors.append(abs(word-expected))
     check("Infrasound raw response & waveform", valid_frames and bool(pressure_errors) and max(pressure_errors)<=.501,
-          "SDP32 driver: 100 Hz, 1 Hz / 20 Pa sine; signed pressure within 0.501 count, temperature and three CRCs preserved")
+          "SDP32: 100 Hz averages of twenty 2 kHz conversions; 5 Hz / 0.5 Pa sine; interval, signed counts and CRCs preserved")
     return dict(passed=all(c["passed"] for c in checks), checks=checks, samples=sum(map(len, samples.values())),
                 recording_sha256=hashlib.sha256(data).hexdigest(), scope=SCOPE)
 
@@ -177,7 +185,7 @@ def run_bench():
     channels = [Channel("bench-pi", 1, cfg, GNSSSimulation(scenario, clock) if cfg["sensor_id"] == 6 else
                         VirtualDriver(cfg["sensor_id"], scenario, clock)) for cfg in configurations()]
     writer = Writer(stream, dict(format="groundlark-acquisition-v1", source="modeled-timing", utc_capture="m10-tim-tp-v1",
-        calibrations=[], bench="hat-signals-v3", scenario=deepcopy(PROFILE), timing="modeled 1 ms polling clock", model_scope=SCOPE), max_bytes=2 * 1024 * 1024)
+        calibrations=[], bench="hat-signals-v4", scenario=deepcopy(PROFILE), timing="modeled 1 ms polling clock", model_scope=SCOPE), max_bytes=2 * 1024 * 1024)
     acquisition = Acquisition(writer, Sessions(), channels)
     try:
         acquisition.start(0)

@@ -4,7 +4,9 @@ Underside TP90–TP93 provide passive calibration probe access; see the [bench c
 
 The active 140 × 56 mm, six-layer Trenz carrier combines three XYZ IMUs and
 an ADS122C04 input for an external Racotech geophone, plus a fitted SDP32-125PA
-infrasound pressure sensor on I2C1 (0x21). The stack is Raspberry Pi,
+infrasound pressure sensor on I2C1 (0x21), with a 100 Hz averaged acquisition
+profile targeting the [1–20 Hz landslide research band](../../docs/sensor-response.md).
+The stack is Raspberry Pi,
 DAQHAT-01, then Trenz TE0712-03-81I36-A. Physical qualification remains pending.
 J90 uses a horizontal Phoenix 1803280 header with the existing 1803581 cable
 plug. Pin order remains positive, negative, shield.
@@ -12,7 +14,8 @@ plug. Pin order remains positive, negative, shield.
 MAX-M10S GNSS uses Pi I²C1 and BCM24 PPS, with a side-facing SMA and a
 TPS2553 antenna fault limiter. ISO1640 side 2 faces the Pi/GNSS bus. J130 feeds
 the separate MSPM0L1106 supervisor and 5.115 V Pi supply; battery policy and
-MCU firmware remain pending. See [GNSS setup](../../docs/gnss-hardware.md).
+physical qualification remain pending; prototype MCU firmware is implemented.
+See [GNSS setup](../../docs/gnss-hardware.md).
 
 J83 takes a Nexys Video-compatible 12 V, center-positive 5.5/2.1 mm adapter
 rated at least 3 A. It faces the opposite edge from the geophone. U80 supplies
@@ -41,7 +44,7 @@ MOQ 1; see [JLCPCB assembly](../../docs/jlcpcb-assembly.md).
 
 D90 uses TI **TPD2E2U06QDCKRQ1 / JLCPCB C915089** as the pin-compatible
 replacement for TPD2E2U06DCKR. Its SC-70 footprint and routing are unchanged.
-All 188 fitted placements have exact catalog selections with dated stock evidence.
+All 189 fitted placements have exact catalog selections with dated stock evidence.
 U23 uses the redesigned SDP32-125PA circuit and driver. Supplier geometry remains
 unverified for 52 placements, so the matching Gerber/BOM/CPL package remains a
 review package; see the assembly guide before ordering.

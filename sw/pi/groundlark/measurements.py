@@ -56,7 +56,7 @@ def analyze(path):
                     sessions.disconnect(item['device'])
                 continue
             kind = sessions.accept(item)
-            if kind != 'batch' or item.batch.sensor_id not in (1,2,3,4,5,9): continue
+            if kind != 'batch' or item.batch.sensor_id not in (1,2,3,4,5,8,9): continue
             sid = item.batch.sensor_id
             cfg = sessions.devices[item.device_id].settings[sid]
             digest = configuration_hash(cfg)
@@ -78,7 +78,19 @@ def analyze(path):
                 row[{1:'valid', 2:'missing', 3:'saturated', 4:'fault'}[sample.quality]] += 1
                 if sample.quality != 1: continue
                 seconds = (t - row['first']) / 1e9
-                if sid == 9:
+                if sid == 8:
+                    frame=sample.pressure.sdp3x_response
+                    if frame:
+                        values={'pressure_pa':int.from_bytes(frame[:2],'big',signed=True)/240,
+                                'temperature_k':int.from_bytes(frame[3:5],'big',signed=True)/200+273.15}
+                    else:
+                        frame=sample.pressure.response
+                        values={'legacy_pressure_counts':int.from_bytes(frame[:2],'big') & 0x3fff,
+                                'legacy_temperature_counts':int.from_bytes(frame[2:],'big') >> 5}
+                    if sample.pressure.HasField('read_interval_min_ns'):
+                        values.update(read_interval_min_s=sample.pressure.read_interval_min_ns/1e9,
+                                      read_interval_max_s=sample.pressure.read_interval_max_ns/1e9)
+                elif sid == 9:
                     values = {'adc_counts': sample.geophone.counts,
                               'input_voltage_v': sample.geophone.counts * cfg.geophone_reference_v / cfg.geophone_gain / 8388608}
                 else:

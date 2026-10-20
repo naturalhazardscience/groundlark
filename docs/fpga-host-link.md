@@ -39,11 +39,21 @@ the TCA9534 output latch low before configuring P0/P1 as outputs; grounded
 P2–P7 must remain inputs (configuration register 0xFC). The driver reads back
 the configuration before enabling the link.
 
-The Trenz system-controller MODE signal is firmware dependent. The
-[CPLD v24 description](https://www.trenz-electronic.de/trenzdownloads/Trenz_Electronic/Modules_and_Module_Carriers/4x5/TE0712/REV02/Firmware/TE0712%20CPLD-v24-09_27_2023.pdf)
-marks MODE unused but does not establish its pull setting. Record the fitted
-module's CPLD firmware and verify its input behavior during bring-up; the
-carrier does not rely on an unverified internal MODE pull.
+The carrier baseline is **Trenz CPLD firmware REV03**, documented in
+[TE0712 CPLD v27](https://wiki.trenz-electronic.de/display/PD/TE0712%2BCPLD).
+It specifies an internal pull-up on MODE (U3.13). Module JM1.32 mates with
+carrier J80.31; the native pin audit requires this net to remain unloaded.
+MODE is a module GPIO/status input, distinct from the carrier JTAG/SPI selector.
+R81 biases NOSEQ low; JP80 grounds **EN1**, the actual sequence inhibit.
+Record and verify the fitted firmware revision and MODE level during bring-up.
+
+The vendor release is `SC-PGM-TE0712-010203_SC712-03_20221128.zip`.
+Its revision is readable at register 0x00 of the CPLD's internal I2C address
+0x20, through FPGA W22 (SCL) and U22 (SDA); MODE is register 0x02 bit 1.
+The reference echo bitstream does not expose that internal bus. Use vendor
+programming/verification evidence or a qualified module diagnostic to identify
+the installed firmware. **Pi I2C1 address 0x20 is U102, not this CPLD**; do not
+copy the vendor's example Linux bus commands onto the Pi.
 
 U104/U105 monitor Pi/FPGA 3.3 V with TLV809EA30DBZR supervisors (3.0 V threshold,
 nominal 200 ms release). Each new IC has local 100 nF decoupling. R100–R105 are

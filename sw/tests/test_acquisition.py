@@ -275,7 +275,36 @@ class GappedDevice:
         raise DataGap('conversion gap; loss unknown')
 
 
+class PressureGapDevice:
+    """Real SDP32 driver, deterministic successful bus and late service."""
+    def __init__(self):
+        from groundlark.pressure import SDP32
+        self.now=0;self.index=0
+        self.driver=SDP32(self,lambda _:None,clock_ns=lambda:self.now)
+    def exchange(self,address,write,count):
+        if count==18:return bytes.fromhex('03019d0201690123a045675389ab77cdef84')
+        if count==9:return bytes.fromhex('00008113880100f003')
+        return b''
+    def configure(self,settings):return self.driver.configure(settings)
+    def read(self):
+        self.now=(10_000_000,40_000_000,50_000_000)[self.index];self.index+=1
+        return self.driver.read()
+
+
 class WorkerTests(unittest.TestCase):
+    def test_sdp32_late_average_survives_worker_ipc_and_recovers_without_restart(self):
+        from groundlark.pressure import SETTINGS
+        from groundlark.sensors import DataGap
+        worker=Worker(PressureGapDevice,SETTINGS,startup_timeout=5)
+        try:
+            worker.configure();pid=worker.process.pid
+            self.assertEqual(worker.read().raw['read_interval_max_ns'],10_000_000)
+            with self.assertRaisesRegex(DataGap,'1-25 ms'):worker.read()
+            self.assertEqual(worker.read().raw['read_interval_max_ns'],10_000_000)
+            self.assertEqual(worker.process.pid,pid)
+            self.assertEqual(worker.restarts,0)
+        finally:worker.close()
+
     def test_conversion_gap_type_survives_real_worker_ipc(self):
         from groundlark.sensors import DataGap
         worker = Worker(GappedDevice, {}, startup_timeout=5)

@@ -78,11 +78,15 @@ def main():
         if path.exists(): path.unlink()
     run(sys.executable, str(ROOT / "sw/tools/check_hat_signals.py"), "--output", str(signal_capture),
         env=env, capture_output=True, text=True)
+    pressure_response = run(sys.executable, str(ROOT / 'sw/tools/pressure_response.py'),
+                            env=env, capture_output=True, text=True).stdout
+    (BUILD / 'pressure-response.json').write_text(pressure_response)
     (BUILD / "verification.json").write_text(json.dumps({
         "status": "passed", "buf": run(BUF, "--version", capture_output=True, text=True).stdout.strip(),
         "breaking_baseline": "sw/interfaces/baseline.binpb", "incompatible_change_rejected": True,
         "application_demo": json.loads(replayed.stdout),
         "hat_signals": json.loads(signal_report.read_text()),
+        "pressure_response": 'pressure-response.json; ideal averaging and alias model, not physical qualification',
         "skylark_firmware": "ARM image linked; production C drivers/encoder and flash journal tested with native fault fixtures",
         "burrowlark_firmware": "ARM image linked; four-lane timing, readback/status faults, saturation, encoder bounds and complete-quartet loss tested natively",
         "scope": "Schemas, software acquisition/replay, modeled sensor buses and injected faults; not physical buses, USB enumeration or MCU emulation"

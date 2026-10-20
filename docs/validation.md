@@ -43,8 +43,8 @@ The supervisor battery policy stays disabled with unset thresholds; prototype
 target firmware is built and tested with native fixtures. Hardware shutdown
 integration remains unqualified.
 
-The full portable profile executes 26 stages. All 302 software tests pass.
-The final hardware regression run passes 234 of 235 tests; its sole error is
+The full portable profile executes 26 stages. All 314 software tests pass.
+The final hardware regression run passes 235 of 236 tests; its sole error is
 the supplier placement acceptance gate. It remains blocked because 52 of 189
 placements lack verified numbered supplier pads.
 All 71 catalog identities have dated stock observations; 137 placements fit frozen
@@ -54,6 +54,20 @@ faults. No physical
 power, noise, thermal, battery or RF qualification is implied. See
 [power operation](power-supplies.md#pi-supervisor-and-battery-input) and
 [assembly status](jlcpcb-assembly.md).
+
+The 100 Hz SDP32 profile uses average-until-read for a 1–20 Hz landslide
+research target. Independent tests measure sub-pascal tones across that band,
+reject unaveraged/corrupt data and exercise late-window recovery through real
+worker IPC. The retained `pressure-response.json` models ideal conversion
+averaging and explicitly shows residual aliases; it does not establish a
+pneumatic filter or minimum detectable signal. Raw frames and optional timing
+bounds retain backward compatibility with older SDP32 and DLVR recordings.
+
+The carrier control audit now rejects loading MODE or confusing NOSEQ with EN1.
+Its documented module baseline is Trenz CPLD REV03. Physical bench report v4
+requires installed firmware evidence, pressure gain/phase/noise/alias checks,
+shared-bus signal integrity and GNSS RF evidence. Missing limits or measurements
+remain incomplete; software and geometry results cannot satisfy those checks.
 
 ## Native copper regression checks
 

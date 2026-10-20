@@ -68,6 +68,14 @@ def check(pins):
                 _require_hardware((net and degree[net] == 1), lambda: (('Reserved or unused pin connected', key, net)))
         _require_hardware((pins[CARRIER[connector], str(count+1)] == 'GND'), lambda: ('gpio_audit.py:68: hardware validation condition'))
     _require_hardware((not any(ref in {f'J{i}' for i in range(84,90)} for ref, _ in pins)), lambda: ('External expansion/programming header remains'))
+    # Trenz TE0712 CPLD v27 / firmware REV03: U3.13 MODE has an internal
+    # pull-up. JM1.32 mates with carrier J80.31 and has no carrier load.
+    # MODE is distinct from the carrier's JTAG/SPI switch mode select.
+    _require_hardware((degree['FPGA_MODE']==1), lambda: ('MODE must remain unloaded for the documented REV03 pull-up'))
+    for key,net in {('R80','1'):'FPGA_JTAGEN',('R80','2'):'GND',
+                    ('R81','1'):'FPGA_NOSEQ',('R81','2'):'GND',
+                    ('JP80','1'):'FPGA_EN1',('JP80','2'):'GND'}.items():
+        _require_hardware((pins.get(key)==net), lambda: (('Trenz control bias/disable',key,net)))
     from host_link_checks import verify
     link_checks = verify(pins)
     return {'module_gpio_checks':158, 'module_contact_checks':260,

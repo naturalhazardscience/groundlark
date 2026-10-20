@@ -62,6 +62,7 @@ class HatSignalsTests(unittest.TestCase):
             def edit(m):
                 if m.WhichOneof('body')=='batch' and m.batch.sensor_id==8:
                     for sample in m.batch.samples:
+                        if sample.quality==2:continue
                         frame=bytearray(sample.pressure.sdp3x_response)
                         if fault=='gain':frame[:2]=(2*int.from_bytes(frame[:2],'big',signed=True)).to_bytes(2,'big',signed=True)
                         elif fault=='temperature':frame[3]^=1
@@ -77,10 +78,20 @@ class HatSignalsTests(unittest.TestCase):
 
     def test_infrasound_missing_sample_fails_quality(self):
         def edit(m):
-            if m.WhichOneof('body')=='batch' and m.batch.sensor_id==8 and m.batch.samples[0].sequence==0:
+            if m.WhichOneof('body')=='batch' and m.batch.sensor_id==8 and m.batch.samples[0].sequence==1:
                 m.batch.samples[0].ClearField('pressure')
                 m.batch.samples[0].quality=2
         self.assert_check_fails(altered(self.data,edit),'Inventory & quality')
+
+    def test_unaveraged_pressure_values_fail_even_with_valid_crc(self):
+        import math
+        def edit(m):
+            if m.WhichOneof('body')=='batch' and m.batch.sensor_id==8:
+                for sample in m.batch.samples:
+                    if sample.quality!=1:continue
+                    word=round(120*math.sin(10*math.pi*sample.time.acquisition_ns/1e9)).to_bytes(2,'big',signed=True)
+                    sample.pressure.sdp3x_response=word+bytes([sht_crc(word)])+sample.pressure.sdp3x_response[3:]
+        self.assert_check_fails(altered(self.data,edit),'Infrasound raw response & waveform')
 
     def test_consistent_but_wrong_rocking_motion_is_rejected(self):
         profile = deepcopy(PROFILE)

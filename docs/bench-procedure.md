@@ -35,6 +35,9 @@ FPGA bitstream or explicit unconfigured state, instruments/calibration reference
 mounting, cooling, temperature range, sample/filter settings and power cases.
 Enter application targets for geophone timing error and input noise, inter-IMU skew, acceleration noise,
 thermal bias change and FPGA noise ratio before evaluating those tests.
+Version 4 also requires pressure gain/phase/noise/alias limits, tubing/reference
+details, Trenz CPLD identity, RF evidence and shared-bus signal-integrity evidence.
+The pressure qualification band is fixed at 1–20 Hz; missing limits cannot pass.
 
 Use a current-limited adjustable supply, DMM, oscilloscope with suitable differential
 voltage/current measurements, electronic load, logic analyzer, temperature probes,
@@ -72,15 +75,19 @@ or infer physical truth from a filename.
    for faster measured switching behavior. Avoid double-counting FPGA plus dummy
    load: the total initial operating envelope is 3 A.
 4. After thermal settling, measure the complete positive-and-ground loop drop
-   differentially at a known current: R = ΔV/I. Include connectors, fuse, copper
-   and return paths. Record probe locations and uncertainty.
+   differentially at a known current: R = ΔV/I. Measure the FPGA output loop from
+   U80's output/ground to the module's VIN/ground, including copper, contacts and
+   return paths. The upstream F80 input fuse is outside this output-loop budget.
+   Separately measure the Pi copper/contact loop from U133 OUT to Pi header 5 V
+   and back through ground; the load-switch resistance is a separate allocation.
+   Record probe locations and uncertainty.
 5. Repeat Pi-only, FPGA-only, both-powered and both turn-on/off orders. Capture
    leakage/back-power, reset/OE levels and interface behavior against component
    limits. Summarize `power_sequence` and `partial_power_isolation` only after all
    cases are covered, with individual traces in the evidence.
 
 Fixed report limits: operating module rail **3.201–3.399 V** and hot loop
-**≤0.030 Ω**. If limits fail, correct supply/path/decoupling/protection and repeat
+**≤0.015 Ω**, with the Pi copper/contact loop **≤0.050 Ω**. If limits fail, correct supply/path/decoupling/protection and repeat
 affected cases. Document measured inrush and component temperatures in the notes;
 they are evaluated against the actual component ratings, not invented thresholds.
 
@@ -90,11 +97,16 @@ Assemble the intended Pi, two SSQ risers, DAQHAT-01, Trenz, cooler and four stra
 Check full socket engagement and pin orientation, spacer seating without board
 bow, fastener clearance, geophone/power-plug withdrawal and cooling access. The
 internal FPGA link needs no ribbon cables or external JTAG connector. Measure
-closest gaps and record photos. The nominal Pi-to-HAT gap is 27.179 mm; fit depends
+closest gaps and record photos. The nominal Pi-to-HAT gap is 28.06 mm; fit depends
 on actual socket seating/cooler/cables. A dimensioned mock-up can precede assembly.
 Set `connector_cable_cooler_fit=true` only after the intended configuration fits.
 
 ## 2a. Internal FPGA programming and transport
+
+Record the Trenz **CPLD REV03** image/programming evidence and verify the unloaded
+module MODE input is high, as described in [the host-link guide](fpga-host-link.md).
+Populate `trenz_cpld_revision` and `trenz_mode_pull_up`; a successful FPGA scan
+does not identify the CPLD firmware. The Pi's 0x20 expander is a different device.
 
 1. Follow the [host-link bring-up](fpga-host-link.md#bring-up) on the selected Pi 4
    and kernel. Record JTAG IDCODE, actual TCK frequency and successful volatile
@@ -120,6 +132,25 @@ Set `connector_cable_cooler_fit=true` only after the intended configuration fits
    `fpga_loopback_errors=0` for this valid-traffic soak; report deliberately injected
    faults and recovery separately. A numerical zero without captures and test
    conditions does not establish a bit-error-rate guarantee.
+
+## 2b. Shared buses and GNSS RF
+
+Capture analog waveforms at receivers, not just logic-analyzer decodes. Exercise
+SPI clock/data with simultaneous IMU interrupts, I2C SCL/SDA with GNSS/geophone/
+pressure acquisition, and the Pi/FPGA link in every power state. Include the
+In2/In3 pairs listed in the native `adjacent_signal_layers` report. Record edge
+rates, overshoot/undershoot, settling, idle-line crosstalk and receiver margins
+at the intended voltage, temperature and load corners. Compare against each
+receiver's datasheet limits and retain that interpretation. The 5 mm geometric
+parallel-length screen alone cannot set `shared_bus_signal_integrity=true`.
+
+For GNSS, obtain the supplier's actual laminate and mask geometry for field-solver
+review of the 0.17 mm route, pads, coplanar grounds and SMA transition. Measure
+feed loss/mismatch with calibrated fixtures and repeat receiver C/N0/acquisition
+tests with the FPGA and converters active. Record the antenna/cable, reference
+receiver or RF source and test conditions. Populate `gnss_rf_performance` only
+against recorded receiver/feed limits; the 49.7 Ω uncoated estimate is not a
+controlled-impedance acceptance result. See [GNSS hardware](gnss-hardware.md).
 
 ## 3. Geophone, IRQ and acquisition timing
 
@@ -151,6 +182,41 @@ Set `connector_cable_cooler_fit=true` only after the intended configuration fits
 Start with 10 minutes per load state and repeated cold starts, then extend
 through thermal settling and the intended operating envelope. No absolute UTC
 qualification is implied by this board or a passing relative timing test.
+
+## 3a. Infrasound response and aliasing
+
+Use a calibrated differential pressure source and independent reference sensor.
+Keep the final reference volume, port assignments, tube lengths/diameters,
+restrictors, vents and wind protection recorded with the enclosure configuration.
+Equal exposure of both ports can cancel the acoustic signal; port plumbing is
+part of the transducer, not an interchangeable accessory.
+
+1. Predeclare maximum gain error, phase error, 1–20 Hz RMS noise and input-referred
+   alias RMS in the report's `targets`. Specify excitation amplitudes and the
+   expected reference transfer/delay before measuring. Research frequencies
+   alone do not determine a minimum detectable pressure or alarm threshold.
+2. Measure the complete chain at 1/2/5/10/12.5/15/20 Hz, with 0.5 Hz as an
+   exploratory low-frequency point. Start with 0.5 Pa, then 0.1 and 0.05 Pa where
+   the source/reference accuracy supports it. Include gain, phase, offset,
+   clipping and recovery with the final enclosure and repeat after tubing changes.
+3. Sweep above the 50 Hz read Nyquist limit, including 80 and 90 Hz and relevant
+   local acoustic interference. Retain input and output spectra; 80 Hz can alias
+   into the 20 Hz band even with sensor averaging. If the predeclared alias limit
+   fails, qualify a pneumatic filter or faster acquisition/filtering design before
+   using the data. A digital smoother after 100 Hz sampling is not a remedy.
+4. Record stationary background and reference noise, with FPGA off/idle/active,
+   and repeat under representative wind/temperature conditions. Compute band RMS
+   over 1–20 Hz with a recorded analysis method; preserve raw samples and gaps.
+   Measure 1–10 and 6–15 Hz separately for diagnostic comparison. Do not bridge
+   missing windows or subtract reference noise without an uncertainty budget.
+5. Load CPU/storage and the shared I2C bus. Check read-interval bounds, induce a
+   delay over 25 ms and a failed read, and confirm explicit unknown-loss gaps and
+   recovery. Preserve the raw read-completion timestamps; do not relabel them as
+   pressure arrival times. Populate `pressure_gap_recovery` from these traces.
+
+Populate `pressure_port_response` and the four numerical pressure checks only
+with retained physical evidence. `python sw/tools/pressure_response.py` and the
+modeled 5 Hz bench capture are software/averaging checks, not that evidence.
 
 ## 4. Noise, thermal drift and FPGA coupling
 

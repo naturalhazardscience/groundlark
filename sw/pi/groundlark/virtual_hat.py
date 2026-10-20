@@ -100,9 +100,10 @@ class GeophoneBus:
 
 
 class PressureBus:
-    """SDP32 command-state model; waveform and wire CRCs come from the stimulus."""
+    """SDP32 2 kHz arithmetic average; physical pneumatic response excluded."""
     def __init__(self, model):
         self.model, self.started, self.product_stage = model, False, 0
+        self.last_read = None
 
     def exchange(self, address, write, count):
         if address != 0x21: raise OSError('wrong modeled SDP32 address')
@@ -115,10 +116,25 @@ class PressureBus:
         elif not write and count == 18 and self.product_stage == 2:
             self.product_stage = 0
             return bytes.fromhex('03019d0201690123a045675389ab77cdef84')
-        elif write == bytes.fromhex('361e') and not count and not self.started:
+        elif write == bytes.fromhex('3615') and not count and not self.started:
             self.started = True
+            self.last_read = self.model.clock()
         elif not write and count == 9 and self.started:
-            return self.model.read().raw['sdp3x_response']
+            from .stimulus import reading
+            from groundlark_contract.validation import sht_crc
+            sample = self.model.read()
+            frame = sample.raw['sdp3x_response']
+            now = self.model.clock()
+            # Independent internal conversion clock, not one sample per poll.
+            ticks = range(self.last_read//500_000+1, now//500_000+1)
+            if len(ticks) > 50: ticks = range(now//500_000-49, now//500_000+1)
+            values = [int.from_bytes(reading(8,self.model.settings,self.model.scenario,
+                      tick*500_000,self.model.seed).raw['sdp3x_response'][:2],'big',signed=True) for tick in ticks]
+            self.last_read = now
+            if values and sample.quality != 3:
+                word = round(sum(values)/len(values)).to_bytes(2,'big',signed=True)
+                frame = word+bytes([sht_crc(word)])+frame[3:]
+            return frame
         else: raise OSError('unexpected SDP32 command/state')
         return b''
 
@@ -130,7 +146,8 @@ class VirtualDriver:
         self.model = Simulated(sensor, seed=1, scenario=scenario, clock=clock)
         if sensor == 8:
             from .pressure import SDP32
-            self.driver = SDP32(PressureBus(self.model), sleep=lambda _: None)
+            self.driver = SDP32(PressureBus(self.model), sleep=lambda _: None, clock_ns=clock)
+            self.loss_unknown = True
             return
         if sensor == 9:
             from .geophone import ADS122C04

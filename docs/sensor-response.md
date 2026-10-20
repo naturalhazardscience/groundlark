@@ -1,12 +1,10 @@
 # Sensor bandwidth and timing
 
-DAQHAT-01 U23 is an SDP32-125PA at I2C 0x21, read at 100 Hz using differential
-pressure compensation with continuous averaging disabled. It returns signed
-pressure at 240 counts/Pa and temperature at 200 counts/C, with separate CRCs
-and a verified scale word. Records preserve all nine response bytes. Polling
-timestamps are read-completion times, not qualified conversion timestamps.
-The port/tubing response, anti-alias filtering and usable infrasound noise floor
-remain unmeasured; the ideal waveform model does not qualify them.
+DAQHAT-01 U23 is an SDP32-125PA at I2C 0x21. Its landslide research profile
+targets a **1–20 Hz pressure band**, acquiring at 100 Hz with differential
+pressure compensation and **average-until-read command 0x3615**. Raw recordings
+retain all nine response bytes and bounds on the interval between reads.
+The port/tubing response, alias rejection and usable noise floor remain unmeasured.
 
 These specifications cover the current Groundlark FPGA HAT and Skylark USB.
 Raw recordings preserve sensor counts. They do not apply inverse response,
@@ -14,6 +12,55 @@ gas compensation, or a shared phase correction. Modeled response is not
 physical qualification.
 
 ## Groundlark
+
+### Infrasound selection and limits
+
+The 1–20 Hz choice covers debris-flow observations from four field sites in
+[the 2011 multi-site study](https://rosa.uniroma1.it/rosa02/engineering_geology_environment/article/view/1317).
+[Marchetti et al. (2019)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2018JF004785)
+found a roughly 5 Hz infrasound peak at Illgraben and processed 1–10 Hz array
+signals. A [Beijing field study](https://dzkjtb.cug.edu.cn/en/article/doi/10.19509/j.cnki.dzkq.tb20240223)
+found 6–15 Hz useful for separating debris flows from local background. Retain
+both diagnostic bands, 1–10 and 6–15 Hz, during subsequent analysis; do not narrow
+the recording to a single 5 Hz tone. These results concern moving debris and
+depend on site and propagation. They do not establish a universal precursor
+frequency, a detection range, or a warning threshold for all landslide types.
+
+The [Sensirion digital datasheet](https://sensirion.com/media/documents/4D045D69/6375F34F/DP_DS_SDP3x_digital_D1.pdf)
+specifies nominal 2 kHz internal conversions (1.8–2.2 kHz). Arithmetic averaging
+applies for the first 25 ms between reads; longer windows change to exponential
+averaging. The driver discards uncertain or overlong windows with `DataGap`,
+then resumes without resetting a healthy sensor. Reads less than 1 ms after the
+previous transaction complete return `NotReady`. These are host transaction
+bounds, not conversion times or measured sensor/filter delay.
+
+At ideal 100 Hz service, the nominal twenty-conversion boxcar contributes:
+
+| Frequency | Averaging gain | Ideal averaging delay |
+| --- | --- | --- |
+| 1 Hz | −0.0014 dB | 4.75 ms |
+| 5 Hz | −0.036 dB | 4.75 ms |
+| 10 Hz | −0.143 dB | 4.75 ms |
+| 20 Hz | −0.578 dB | 4.75 ms |
+
+This is not the complete pneumatic or sensor response. Reset phase and bus
+timing add uncertainty. An 80 Hz input still aliases to 20 Hz at about −12.6 dB;
+averaging alone is **not adequate evidence of anti-alias performance**. Filtering
+after acquisition cannot remove that alias. Run the reproducible model with
+`python sw/tools/pressure_response.py`; the portable software profile retains
+its report and tests 1/5/12.5/20 Hz tones at 0.05/0.1/0.5 Pa through the driver.
+These amplitudes test arithmetic and quantization, not physical sensitivity.
+
+One pressure count is 1/240 Pa. The specified 0.025 Pa zero-point repeatability
+is not a noise spectral density or a guaranteed minimum detectable signal.
+Keep the required noise floor and alarm threshold unset until the deployment's
+distance, background and reference measurements support them. Use the
+[pressure bench procedure](bench-procedure.md#3a-infrasound-response-and-aliasing)
+to qualify the actual ports, reference volume, tubing and wind protection.
+Coincident geophone observations can aid interpretation; they do not share the
+pressure transfer function. Groundlark does not implement a validated alarm.
+
+### Geophone and IMUs
 
 The 4.5 Hz geophone measures ground velocity through its mechanical response,
 coil/loading network, ADS122C04 PGA and digital filter. The nominal mechanical
