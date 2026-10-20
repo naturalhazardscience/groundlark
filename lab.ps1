@@ -1,7 +1,7 @@
 param(
     [ValidateSet('build', 'test', 'doctor', 'clean', 'unit')]
     [string]$Action = 'test',
-    [ValidateSet('full', 'quick', 'spice', 'software')]
+    [ValidateSet('full', 'quick', 'spice', 'software', 'simulation')]
     [string]$Profile = 'full',
     [switch]$Apply,
     [switch]$All

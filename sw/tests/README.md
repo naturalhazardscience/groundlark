@@ -22,8 +22,10 @@ The software profile retains `hat-signals.ssrec` and `hat-signals.json`; the UI'
 These thresholds apply to ideal models, not unqualified physical hardware.
 
 `test_pressure_response.py` measures 1/5/12.5/20 Hz pressure tones at
-0.05/0.1/0.5 Pa through the SDP32 driver and modeled averaging bus. An 80 Hz
-negative control exposes residual aliasing. `test_sdp32.py` covers CRC, product
+0.05/0.1/0.5 Pa through the SDP32 driver and modeled averaging bus at 200 Hz.
+The 80 Hz tone stays out of the detection band; a 180 Hz negative control
+exposes residual aliasing. Alternating 1 ms service delays preserve interval
+bounds and agree with an independent integral reference. `test_sdp32.py` covers CRC, product
 identity, read-interval bounds and unknown-window recovery; the acquisition
 suite verifies `DataGap` transport through a real worker process without a reset.
 The portable profile retains `pressure-response.json` alongside the signal bench.

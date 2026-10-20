@@ -12,7 +12,7 @@ BAND_HZ = (1, 20)
 DIAGNOSTIC_BANDS_HZ = ((1, 10), (6, 15))
 
 
-def boxcar(frequency_hz, conversion_hz=2000, read_hz=100):
+def boxcar(frequency_hz, conversion_hz=2000, read_hz=200):
     """Uniform conversion ticks ending at an ideal instantaneous read."""
     if not all(math.isfinite(v) for v in (frequency_hz, conversion_hz, read_hz)):
         raise ValueError('finite frequencies required')
@@ -32,13 +32,13 @@ def boxcar(frequency_hz, conversion_hz=2000, read_hz=100):
 def report(settings=None):
     settings = SETTINGS if settings is None else settings
     if (settings.get('pressure_measurement_command') != 0x3615 or
-            settings.get('period_ns') != 10_000_000 or
+            settings.get('period_ns') != 5_000_000 or
             settings.get('pressure_part_number') != 'SDP32-125PA-TR-250PCS'):
-        raise ValueError('response requires the fitted SDP32 average-until-read 100 Hz profile')
-    frequencies = (.5, 1, 5, 10, 12.5, 15, 20, 50, 80, 90, 100)
+        raise ValueError('response requires the fitted SDP32 average-until-read 200 Hz profile')
+    frequencies = (.5, 1, 5, 10, 12.5, 15, 20, 50, 80, 100, 180, 190, 200)
     return dict(scope='ideal conversion averaging only; physical qualification pending',
                 band_hz=BAND_HZ, diagnostic_bands_hz=DIAGNOSTIC_BANDS_HZ,
-                read_hz=100, command='0x3615', pressure_count_pa=1/240,
+                read_hz=200, command='0x3615', pressure_count_pa=1/240,
                 required_noise_floor_pa=None, qualified=False,
                 oscillator_cases_hz={rate:[dict(input_hz=f, **boxcar(f, rate)) for f in frequencies]
                                      for rate in (1800, 2000, 2200)},

@@ -137,7 +137,9 @@ Live seismic capture stores raw geophone and IMU counts locally as
 
 For the full test environment, run `./lab.ps1 build` once, then `./lab.ps1 test`.
 Use `./lab.ps1 test -Profile software` for sensor contracts, acquisition,
-recording/replay and recovery. See the [portable lab guide](docs/portable-lab.md)
+recording/replay and recovery. Use `./lab.ps1 test -Profile simulation` for fresh
+circuit builds, CAD checks and all models while excluding the procurement release
+gate. See the [simulation scope](docs/simulation-validation.md) and [portable lab guide](docs/portable-lab.md)
 for Linux commands, test scope, five-run retention and cleanup.
 
 Hardware sources: [DAQHAT-01 circuit](hw/groundlark-fpga-hat/elec/hat_trenz.ato),

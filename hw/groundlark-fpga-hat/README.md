@@ -4,7 +4,7 @@ Underside TP90–TP93 provide passive calibration probe access; see the [bench c
 
 The active 140 × 56 mm, six-layer Trenz carrier combines three XYZ IMUs and
 an ADS122C04 input for an external Racotech geophone, plus a fitted SDP32-125PA
-infrasound pressure sensor on I2C1 (0x21), with a 100 Hz averaged acquisition
+infrasound pressure sensor on I2C1 (0x21), with a 200 Hz averaged acquisition
 profile targeting the [1–20 Hz landslide research band](../../docs/sensor-response.md).
 The stack is Raspberry Pi,
 DAQHAT-01, then Trenz TE0712-03-81I36-A. Physical qualification remains pending.

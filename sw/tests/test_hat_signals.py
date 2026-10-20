@@ -51,10 +51,10 @@ class HatSignalsTests(unittest.TestCase):
              patch.object(SDP32, "read", spy(SDP32.read, "pressure")):
             data, report = run_bench()
         self.assertTrue(report["passed"], report)
-        self.assertEqual(counts, dict(imu=624, tilt=0, geophone=2640, pressure=801))
+        self.assertEqual(counts, dict(imu=624, tilt=0, geophone=2640, pressure=1601))
         self.assertEqual(data, self.data)
         self.assertEqual(len(report["checks"]), 12)
-        self.assertEqual(report['samples'],4072)
+        self.assertEqual(report['samples'],4872)
         self.assertIn('SDP32',report['scope'])
 
     def test_infrasound_gain_status_and_temperature_faults_fail(self):

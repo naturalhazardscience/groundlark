@@ -213,19 +213,21 @@ def versions():
 
 def commands(profile):
     steps = []
-    if profile == "full":
+    if profile in ("full", "simulation"):
         for target in TARGETS:
             steps += [(f"build-{target}", ["/opt/atopile/bin/python", "-m", "atopile", "build", "-b", target, "hw"]),
                       (f"constraints-{target}", ["/opt/atopile/bin/python", "hw/tools/solve_constraints.py", "--target", target])]
         steps.append(("reject-overvoltage", ["/opt/atopile/bin/python", "hw/tools/solve_constraints.py", "--negative"]))
-    if profile in ("full", "quick"):
-        steps += [("hardware-regressions", ["python3", "-m", "unittest", "discover", "-s", "hw/tests", "-p", "test_*.py"])]
+    if profile in ("full", "quick", "simulation"):
+        hardware=["python3", "/source/environment/hardware_regressions.py"] if profile=="simulation" else ["python3", "-m", "unittest", "discover", "-s", "hw/tests", "-p", "test_*.py"]
+        steps += [("hardware-regressions", hardware)]
         steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("check_circuit", "check_design", "check_trenz", "daqhat_01_engineering", "prefab_review", "check_skylark")]
         steps.append(("routing-replay", ["python3", "hw/tools/replay_trenz.py"]))
         steps.append(("burrowlark-routing-replay", ["python3", "hw/tools/replay_burrowlark.py"]))
     if profile != "software":
         steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate", "simulate_trenz", "simulate_geophone", "simulate_geophone_review", "simulate_host_link", "signal_response", "power_review")]
-    if profile in ("full", "quick", "software"):
+        steps += [(name, ["python3", f"hw/tools/{name}.py"]) for name in ("simulate_signal_integrity", "pressure_pneumatics")]
+    if profile in ("full", "quick", "software", "simulation"):
         steps.append(("fpga-loopback-rtl", ["python3", "sw/fpga/test.py"]))
         steps.append(("fpga-implementation-evidence", ["python3", "sw/fpga/verify_reports.py"]))
         steps.append(("sensor-contracts", ["/opt/atopile/bin/python", "sw/tools/check_interfaces.py"]))
@@ -244,7 +246,7 @@ def collect(workspace, report, profile):
     for board in BOARDS:
         folder = board_dir(board, workspace)
         files.extend(folder / name for name in ("drc.json", "erc.json", "validation.json", "schematic-netlist.xml", "engineering.json", "prefab-review.json", "replay.json", "fabrication-audit.json"))
-    if profile == "full":
+    if profile in ("full", "simulation"):
         for target in TARGETS:
             files.append(compiled_dir(target, workspace) / f"{target}.kicad_pcb")
     for path in files:
@@ -324,7 +326,7 @@ def test(source, root, workspace, profile, ident=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("test", "clean", "doctor", "unit"))
-    parser.add_argument("--profile", choices=("full", "quick", "spice", "software"), default="full")
+    parser.add_argument("--profile", choices=("full", "quick", "spice", "software", "simulation"), default="full")
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--run-id")
     parser.add_argument("--all", action="store_true", help="Clean every marked run, including latest evidence")

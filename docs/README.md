@@ -18,6 +18,7 @@
 - [JLCPCB assembly](jlcpcb-assembly.md): upload files, selected parts, placement and manufacturing requirements.
 - [Physical bench procedure](bench-procedure.md): power, fit, timing and noise measurements.
 - [Validation and release limits](validation.md).
+- [Simulation scope and assumptions](simulation-validation.md): extracted coupling/RF and pneumatic filter models.
 - [Burrowlark DAQUSB-01 USB sensor head](usb-sensor-head.md): magnetometer and firmware interface.
 
 ## Interfaces and reproducible builds

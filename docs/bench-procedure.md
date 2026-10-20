@@ -203,7 +203,7 @@ part of the transducer, not an interchangeable accessory.
    local acoustic interference. Retain input and output spectra; 80 Hz can alias
    into the 20 Hz band even with sensor averaging. If the predeclared alias limit
    fails, qualify a pneumatic filter or faster acquisition/filtering design before
-   using the data. A digital smoother after 100 Hz sampling is not a remedy.
+   using the data. A digital smoother after 200 Hz sampling is not a remedy.
 4. Record stationary background and reference noise, with FPGA off/idle/active,
    and repeat under representative wind/temperature conditions. Compute band RMS
    over 1–20 Hz with a recorded analysis method; preserve raw samples and gaps.

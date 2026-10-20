@@ -258,8 +258,8 @@ preserve the fault for replay, and unlocked timing cannot supply a UTC reference
 **Test selected board** now exercises the production M10 I2C configuration and
 readback driver, TIM-TP/NAV-TIMEUTC parsing, modeled BCM24 PPS and navigation
 alongside the IMU, geophone and SDP32 production drivers on modeled buses. Its checks cover
-4,072 samples from all six HAT sensors, including pressure waveform, temperature,
-CRC and scale. The pressure stimulus is 5 Hz at 0.5 Pa, with twenty nominal
+4,872 samples from all six HAT sensors, including pressure waveform, temperature,
+CRC and scale. The pressure stimulus is 5 Hz at 0.5 Pa, with ten nominal
 2 kHz conversions averaged per read; the startup drain leaves one explicit
 missing sample before the first new window. The SDP32 driver also validates
 product identity and records read-interval bounds. Legacy DLVR recordings remain readable. Download

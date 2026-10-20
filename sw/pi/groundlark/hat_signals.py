@@ -109,7 +109,7 @@ def check_recording(data):
     for sid, rows in samples.items():
         if sid == 6: continue
         period = configs[sid].period_ns
-        continuity &= len(rows) == SECONDS * (26 if sid in (1, 2, 3) else 100 if sid==8 else 330)
+        continuity &= len(rows) == SECONDS * (26 if sid in (1, 2, 3) else 200 if sid==8 else 330)
         for index, sample in enumerate(rows):
             continuity &= sample.sequence == index and sample.time.domain == 1 and sample.time.HasField("acquisition_ns")
             timing_errors.append(abs(sample.time.acquisition_ns - index * period))
@@ -168,13 +168,13 @@ def check_recording(data):
             temp=int.from_bytes(frame[3:5],'big',signed=True)
             valid_frames &= temp==5000 and int.from_bytes(frame[6:8],'big')==240
             valid_frames &= all(sht_crc(frame[i:i+2])==frame[i+2] for i in (0,3,6))
-            valid_frames &= sample.pressure.read_interval_min_ns==10_000_000 and sample.pressure.read_interval_max_ns==10_000_000
-            # Independent twenty-conversion boxcar fixture, including the
-            # quantized internal counts and the resulting 4.75 ms phase delay.
-            expected=round(sum(round(120*math.sin(10*math.pi*(sample.time.acquisition_ns-j*500_000)/1e9)) for j in range(20))/20)
+            valid_frames &= sample.pressure.read_interval_min_ns==5_000_000 and sample.pressure.read_interval_max_ns==5_000_000
+            # Independent ten-conversion boxcar fixture, including the
+            # quantized internal counts and the resulting 2.25 ms phase delay.
+            expected=round(sum(round(120*math.sin(10*math.pi*(sample.time.acquisition_ns-j*500_000)/1e9)) for j in range(10))/10)
             pressure_errors.append(abs(word-expected))
     check("Infrasound raw response & waveform", valid_frames and bool(pressure_errors) and max(pressure_errors)<=.501,
-          "SDP32: 100 Hz averages of twenty 2 kHz conversions; 5 Hz / 0.5 Pa sine; interval, signed counts and CRCs preserved")
+          "SDP32: 200 Hz averages of ten 2 kHz conversions; 5 Hz / 0.5 Pa sine; interval, signed counts and CRCs preserved")
     return dict(passed=all(c["passed"] for c in checks), checks=checks, samples=sum(map(len, samples.values())),
                 recording_sha256=hashlib.sha256(data).hexdigest(), scope=SCOPE)
 
@@ -185,7 +185,7 @@ def run_bench():
     channels = [Channel("bench-pi", 1, cfg, GNSSSimulation(scenario, clock) if cfg["sensor_id"] == 6 else
                         VirtualDriver(cfg["sensor_id"], scenario, clock)) for cfg in configurations()]
     writer = Writer(stream, dict(format="groundlark-acquisition-v1", source="modeled-timing", utc_capture="m10-tim-tp-v1",
-        calibrations=[], bench="hat-signals-v4", scenario=deepcopy(PROFILE), timing="modeled 1 ms polling clock", model_scope=SCOPE), max_bytes=2 * 1024 * 1024)
+        calibrations=[], bench="hat-signals-v5", scenario=deepcopy(PROFILE), timing="modeled 1 ms polling clock", model_scope=SCOPE), max_bytes=2 * 1024 * 1024)
     acquisition = Acquisition(writer, Sessions(), channels)
     try:
         acquisition.start(0)

@@ -7,7 +7,7 @@ DLVR_SETTINGS = dict(sensor_id=8, enabled=True, period_ns=10_000_000,
                 pressure_min_pa=-125, pressure_max_pa=125,
                 pressure_part_number='DLVR-F50D-E1BS-I-NI3F')
 SETTINGS = dict(DLVR_SETTINGS, pressure_part_number='SDP32-125PA-TR-250PCS',
-                pressure_measurement_command=0x3615)
+                pressure_measurement_command=0x3615, period_ns=5_000_000)
 
 
 def words(data, count):

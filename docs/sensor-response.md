@@ -1,7 +1,7 @@
 # Sensor bandwidth and timing
 
 DAQHAT-01 U23 is an SDP32-125PA at I2C 0x21. Its landslide research profile
-targets a **1–20 Hz pressure band**, acquiring at 100 Hz with differential
+targets a **1–20 Hz pressure band**, acquiring at 200 Hz with differential
 pressure compensation and **average-until-read command 0x3615**. Raw recordings
 retain all nine response bytes and bounds on the interval between reads.
 The port/tubing response, alias rejection and usable noise floor remain unmeasured.
@@ -34,22 +34,28 @@ then resumes without resetting a healthy sensor. Reads less than 1 ms after the
 previous transaction complete return `NotReady`. These are host transaction
 bounds, not conversion times or measured sensor/filter delay.
 
-At ideal 100 Hz service, the nominal twenty-conversion boxcar contributes:
+At ideal 200 Hz service, the nominal ten-conversion boxcar contributes:
 
 | Frequency | Averaging gain | Ideal averaging delay |
 | --- | --- | --- |
-| 1 Hz | −0.0014 dB | 4.75 ms |
-| 5 Hz | −0.036 dB | 4.75 ms |
-| 10 Hz | −0.143 dB | 4.75 ms |
-| 20 Hz | −0.578 dB | 4.75 ms |
+| 1 Hz | −0.00035 dB | 2.25 ms |
+| 5 Hz | −0.0088 dB | 2.25 ms |
+| 10 Hz | −0.035 dB | 2.25 ms |
+| 20 Hz | −0.142 dB | 2.25 ms |
 
 This is not the complete pneumatic or sensor response. Reset phase and bus
-timing add uncertainty. An 80 Hz input still aliases to 20 Hz at about −12.6 dB;
+timing add uncertainty. The former 80 Hz input stays at 80 Hz. A 180 Hz input
+now aliases to 20 Hz at about −19.1 dB;
 averaging alone is **not adequate evidence of anti-alias performance**. Filtering
 after acquisition cannot remove that alias. Run the reproducible model with
 `python sw/tools/pressure_response.py`; the portable software profile retains
 its report and tests 1/5/12.5/20 Hz tones at 0.05/0.1/0.5 Pa through the driver.
 These amplitudes test arithmetic and quantization, not physical sensitivity.
+An independent integral fixture also checks alternating 1 ms service delays.
+The [pneumatic design simulation](simulation-validation.md#pressure-path) combines
+finite sensor flow, oscillatory tube impedance, chamber compliance and the actual
+200 Hz averaging profile. It specifies an external accessory and its conditional
+operating envelope; that accessory is not part of the PCB package.
 
 One pressure count is 1/240 Pa. The specified 0.025 Pa zero-point repeatability
 is not a noise spectral density or a guaranteed minimum detectable signal.

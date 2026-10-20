@@ -23,6 +23,7 @@ From the project folder in PowerShell:
 .\lab.ps1 test -Profile quick   # Saved compiled circuit/PCB + SPICE checks
 .\lab.ps1 test -Profile spice   # Only bounded SPICE cases
 .\lab.ps1 test -Profile software # Sensor application, contracts and recovery
+.\lab.ps1 test -Profile simulation # Fresh builds and models; procurement excluded
 .\lab.ps1 unit                  # Cleanup/staging safeguards
 ```
 
@@ -47,9 +48,10 @@ drive-sharing configuration. No host directory is mounted into the container.
 
 | Profile | Checks |
 | --- | --- |
-| `full` (default) | Fresh atopile builds for Burrowlark DAQUSB-01 USB field head, DAQHAT-01 and Skylark; numeric constraint solves; unsafe 5 V IMU rejection; independent hardware regressions; native KiCad ERC/DRC/connectivity; DAQHAT-01 power/clearance and pre-fab review; clean routing replay; SPICE; the software profile (25 stages). |
+| `full` (default) | Fresh atopile builds for all three boards; numeric constraints and unsafe overvoltage rejection; independent hardware regressions including procurement; native KiCad ERC/DRC/connectivity; power/clearance review; routing replay; SPICE, electrostatic/RF/coupling and pneumatic models; the software profile (28 stages). |
+| `simulation` | Same 28 stages as `full`, excluding exactly `test_supplier_placement_release_gate`. Native mating geometry, known supplier-pad fixtures, exporter regressions and all electrical/software checks still run. This is not procurement or fabrication approval. |
 | `quick` | Same GPIO/component fault, circuit/PCB consistency, routing replay, SPICE and software checks using saved compiled layouts. Does **not** prove `.ato` changes were rebuilt. |
-| `spice` | 18 shared/USB, 14 Trenz, 15 geophone response, 8 geophone transient and 38 host-link switch/RC cases, including expected fault detection. |
+| `spice` | Bounded shared/USB, Trenz, geophone and host-link SPICE cases, signal/power review, plus electrostatic/RF/coupling and pneumatic models; includes expected fault detection. |
 | `software` | RTL and Python-to-RTL co-simulation; recorded Vivado evidence/hash gate; Buf format/lint/build and compatibility; acquisition/replay, modeled driver and Linux TTY/worker fault tests; retained acquisition demo; Skylark native C fault tests and ARM firmware build. No physical hardware execution. |
 
 The runner calls the existing project entrypoints. Routing reconstruction stays
@@ -58,6 +60,11 @@ compares freshly compiled connectivity with the saved routed boards and should
 fail if they disagree.
 
 The runner records every check, including checks after a failure or timeout.
+The simulation profile prints its one named procurement exclusion; it never
+converts that exclusion into a pass or changes the full profile's release gate.
+Model execution/test success and design acceptance are separate: for example,
+`signal-integrity.json` retains `all_corners_meet_targets: false` when an RF
+corner misses its design allocation. See [model assumptions and acceptance](simulation-validation.md).
 Any failed check still fails the overall run; `run.json` lists `failed_steps`
 and each check has its own log. In particular, an assembly-registry mismatch
 does not suppress the later circuit, SPICE or software results. Checks with
@@ -65,7 +72,7 @@ missing build prerequisites can fail as well; inspect the earlier build logs.
 
 These are bounded electrical models, RTL simulations and CAD checks. They do not
 emulate sensor silicon, USB enumeration, a booted Raspberry Pi or FPGA execution.
-They do not establish regulator stability, extracted signal/power integrity,
+They do not establish regulator stability, complete signal/power integrity,
 thermal performance, physical mating, or fabrication readiness.
 
 ## Where files go

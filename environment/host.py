@@ -119,7 +119,7 @@ def execute(action, profile):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("build", "test", "clean", "doctor", "unit"), nargs="?", default="test")
-    parser.add_argument("--profile", choices=("full", "quick", "spice", "software"), default="full")
+    parser.add_argument("--profile", choices=("full", "quick", "spice", "software", "simulation"), default="full")
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--all", action="store_true")
     args = parser.parse_args()

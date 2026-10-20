@@ -57,8 +57,12 @@ on In4.Cu and through-hole SMA grounds. The short RF layout uses the existing
 stock six-layer stack. Its two series traces are 0.17 mm wide over the recorded
 0.0994 mm dielectric; the uncoated microstrip estimate is about 49.7 Ω.
 The native check rejects the previous 0.3 mm width and missing reference copper.
-Soldermask, coplanar copper, pads and connector transitions need field-solver
-review. It has **no controlled-impedance fabrication claim**;
+The [simulation profile](simulation-validation.md#rf-network) now includes
+mask/etch/dielectric sensitivity and a lumped pad/connector RF network. Its
+nominal loss is about 0.42 dB, but the sampled corner envelope misses the
+1 dB insertion-loss / 10 dB return-loss allocations. Coplanar metal and the
+three-dimensional transitions remain outside that model.
+It has **no controlled-impedance fabrication claim**;
 measure insertion loss/return loss, satellite C/N0, ESD behavior and receiver
 performance with the FPGA and power converters active before release.
 

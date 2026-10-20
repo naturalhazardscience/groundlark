@@ -190,10 +190,25 @@ class LabSafetyTests(unittest.TestCase):
         self.assertTrue({source / rel for rel in expected} <= set(source_files(source)))
 
     def test_hardware_profiles_replay_authored_routing(self):
-        for profile in ('full','quick'):
+        for profile in ('full','quick','simulation'):
             self.assertIn('routing-replay',dict(commands(profile)))
         root=Path(self.temp.name)
         self.assertIn(root/'hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.ses',source_files(root))
+
+    def test_simulation_excludes_only_explicit_procurement_gate(self):
+        from hardware_regressions import without_procurement,PROCUREMENT_GATE
+        class Fixture(unittest.TestCase):
+            def __init__(self,name):super().__init__();self.name=name
+            def id(self):return self.name
+        selected,excluded=without_procurement(unittest.TestSuite([
+            Fixture('native.geometry'),unittest.TestSuite([Fixture(PROCUREMENT_GATE),Fixture('supplier.pad_fault')])]))
+        self.assertEqual([x.id() for x in selected],['native.geometry','supplier.pad_fault'])
+        self.assertEqual(excluded,[PROCUREMENT_GATE])
+        with self.assertRaises(RuntimeError):without_procurement(unittest.TestSuite([Fixture('native.geometry')]))
+        full=dict(commands('full'));simulation=dict(commands('simulation'))
+        self.assertEqual(set(full),set(simulation))
+        self.assertIn('unittest',full['hardware-regressions'])
+        self.assertTrue(simulation['hardware-regressions'][-1].endswith('hardware_regressions.py'))
 
     def test_assembly_regression_inputs_are_staged_without_release_archives(self):
         source=Path(self.temp.name)/'assembly-source'

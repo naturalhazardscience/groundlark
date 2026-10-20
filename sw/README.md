@@ -3,7 +3,7 @@
 The sensor HAT is driven by Pi software; it does not need separate MCU firmware.
 The [acquisition software](../docs/sensor-software.md) supports sensors on the
 DAQHAT-01 FPGA stack and runs without a configured FPGA. Its SDP32 pressure
-profile uses average-until-read at 100 Hz for the 1–20 Hz landslide research band;
+profile uses average-until-read at 200 Hz for the 1–20 Hz landslide research band;
 see [response and qualification limits](../docs/sensor-response.md).
 The sensor contracts and Pi acquisition application are executable:
 

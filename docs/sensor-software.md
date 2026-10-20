@@ -334,7 +334,10 @@ retained in `PressureRaw.sdp3x_response`. CRC, identity, scale and bus failures
 enter bounded recovery; recovery stops only this device, without resetting
 other sensors on the bus. Uncertain/overlong averaging windows instead produce
 unknown-loss `DataGap` records and re-anchor without resetting a healthy sensor.
-The 100 Hz profile targets the [1–20 Hz landslide research band](sensor-response.md).
+The 200 Hz profile targets the [1–20 Hz landslide research band](sensor-response.md).
+At 400 kbit/s, its nine-byte reads plus address consume about 4.5% of bus clock
+time, excluding transaction gaps. All raw averages remain recorded; no digital
+decimation or assumed pneumatic correction is applied.
 Legacy four-byte DLVR responses remain readable.
 Modeled protocol and fault checks do not establish physical pneumatic response.
 

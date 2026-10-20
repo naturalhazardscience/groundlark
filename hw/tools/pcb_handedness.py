@@ -38,7 +38,7 @@ def check_header(actual,expected):
     return 40
 
 
-def audit():
+def audit(require_supplier_complete=True):
     reference=ROOT/'hw/shared/reference/raspberrypi_hat.kicad_pcb'
     template=p.LoadBoard(str(reference))
     header=next(f for f in template.GetFootprints()
@@ -66,15 +66,17 @@ def audit():
             geometry=[g for g in board_geometry(board) if g['reference'] in selections]
             placements=[{'Designator':g['reference'],'Layer':g['side'],'MidX':str(g['footprint_origin_mm'][0]),'MidY':str(-g['footprint_origin_mm'][1]),'Rotation':str(g['rotation_deg'])} for g in geometry]
             rows,checks=correct_placements(placements,geometry,selections)
-            require_verified_placements(checks)
+            if require_supplier_complete:require_verified_placements(checks)
             sides={row['Designator']:row['Layer'] for row in rows}
             _require_hardware((sides['J1']=='Bottom' and all(sides[r]=='Top' for r in ('J80','J81','J82','J90'))), lambda: ('pcb_handedness.py:70: hardware validation condition'))
-            result['supplier_numbered_placements']=len(checks)
+            result['supplier_numbered_placements']=sum('pads_checked' in c for c in checks)
+            result['supplier_placement_candidates']=len(checks)
+            result['supplier_release_gate_checked']=require_supplier_complete
             result['assembly_sides']={r:sides[r] for r in ('J1','J80','J81','J82','J90')}
             result['J1_convention']='Through-hole footprint drawn on front in native CAD; selected socket body and assembly CPL explicitly below PCB. Board-view hole numbers are retained.'
         _require_hardware((hashlib.sha256(source.read_bytes()).hexdigest()==before), lambda: ('Audit changed CAD'))
         report['boards'][name]=result
-    report['status']='PASS: native header handedness, power/ground, module contacts and supplier-side mappings'
+    report['status']='PASS: native header handedness, power/ground, module contacts and available supplier-side mappings'
     return report
 
 

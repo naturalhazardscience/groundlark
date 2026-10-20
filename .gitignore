@@ -5,6 +5,8 @@ __pycache__/
 /hw/shared/simulation/power-review/
 /hw/shared/simulation/ic-review/
 /hw/releases/
+/hw/groundlark-fpga-hat/simulation/signal-integrity.json
+/hw/groundlark-fpga-hat/simulation/pressure-pneumatics.json
 groundlark-lab-image.tar
 *.pyc
 *.log
