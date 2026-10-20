@@ -19,80 +19,89 @@ the first relevant image is now 180 Hz. Raw data and timing bounds are preserved
 An alternating 1 ms scheduler-delay fixture checks interval metadata and the
 continuous-integral reference independently of the bus model.
 
-`pressure_pneumatics.py` specifies this external acoustic network:
+`pressure_pneumatics.py` reads the [external pneumatic network](../hw/mechanical/daqhat-01-pressure/README.md):
 
 ```text
-ambient -> 10 mm capillary -> 80 mL chamber -> 10 mm capillary -> 80 mL chamber
-                                                                         |
-                                                                    SDP32 (+)
-                                                                    SDP32 (-)
-                                                                         |
-                                                               2 L reference volume
+ambient -> four parallel capillaries -> 320 mL -> four parallel capillaries -> 320 mL -> SDP32 (+)
+ambient -> separate slow reference vent -> 4 L reference ---------------------------> SDP32 (-)
 ```
 
-Both capillaries have 1.2 mm internal diameter. The reference equalizes through
-the sensor's flow path. A sealed diaphragm assumption would give a misleading
-result: the [Sensirion engineering guide](https://sensirion.com/media/documents/C3059EE6/667E9FD4/DP_AN_Engineering_Guide_V1.0.pdf)
-explains why flow through these sensors loads attached pneumatic networks.
-Use a sealing manifold adapter for the SDP32 ports; this model does not specify
-a manufactured adapter, weather barrier or dust filter. The volumes are external
-to the HAT enclosure and are not included in Gerber/BOM/CPL exports.
+Each main capillary is 10 mm long with 1.2 mm internal diameter. The reference
+vent is 10 mm long with 0.3 mm internal diameter. Parallel capillaries lower source
+impedance; proportionally larger chambers preserve filtering. The independent
+vent equalizes the reference even when sensor flow tends toward zero. The
+[Sensirion engineering guide](https://sensirion.com/media/documents/C3059EE6/667E9FD4/DP_AN_Engineering_Guide_V1.0.pdf)
+provides approximate family-level flow estimates, not guaranteed SDP32 small-signal
+resistance limits. Do not treat the sensor as a sealed diaphragm. Use a sealing
+manifold adapter; the model does not specify a manufactured adapter, weather
+barrier or dust filter. The external volumes are outside the PCB package.
 
 Pressure/flow use the voltage/current analogy. Chamber compliance is `V/(gamma P)`.
-The circular-tube impedance uses the oscillatory viscous-flow Bessel solution
-with an explicit end-inertance allowance, rather than treating the Poiseuille
-resistance as valid at every frequency. The low-frequency limit is independently
-checked against Poiseuille resistance and the 4/3 inertance correction; see
-[Womersley's derivation](https://pmc.ncbi.nlm.nih.gov/articles/PMC1365740/).
+Circular-tube impedance uses the oscillatory viscous-flow Bessel solution with
+an end-inertance allowance. Independent fixtures check the Poiseuille limit,
+4/3 inertance correction, parallel-tube scaling, open sensor flow and vent faults;
+a separately assembled ngspice network also checks the vented nodal solution;
+see [Womersley's derivation](https://pmc.ncbi.nlm.nih.gov/articles/PMC1365740/).
 
-The retained report sweeps 256 corners: diameter ±3%, chamber volume ±10%,
-−10 to 40 °C, 80–105 kPa, chamber gamma 1–1.4, internal clock 1.8/2.2 kHz,
-and assumed sensor first-order time constants 0/3 ms. The step-response
-specification does **not** guarantee a first-order transfer; these are scenarios.
-Host-sampling images into 1–20 Hz are evaluated through 4.4 kHz, including
-images near the internal conversion clock. High-frequency lumped-model results
-are diagnostic: compressible chamber/tube modes are not included.
+The report evaluates **4,096 corners**, with independent stage diameters ±3%,
+chamber and reference volumes ±10%, vent diameter ±3%, −10 to 40 °C,
+80–105 kPa, chamber gamma 1–1.4, internal clock 1.8/2.2 kHz and assumed
+first-order sensor time constants 0/3 ms. Tube lengths remain nominal.
+The step-response specification does not guarantee a first-order transfer.
+An additional 101-point resistance sweep checks the interior at nominal geometry.
+These sampled cases do not prove every combination of continuous parameters.
 
-Within an assumed sensor resistance of **10^8–10^10 Pa·s/m³**, the design
-allocation is gain between −6 and +3 dB across 1–20 Hz and alias amplitude below
-−40 dB for uniform sampling. The amplitude allowance preserves at least half
-the input signal; it is not a landslide detection threshold. A 10^7 Pa·s/m³
-negative control fails the band-gain allocation. No manufacturer resistance
-bound for SDP32 has been established, so `conditional_design_pass` applies only
-to the stated envelope. Keep that unknown visible. Wind, leaks, nonlinear flow,
-noise spectra, rigid-volume accuracy and timing-modulated aliases are not covered
-by the uniform alias sweep. Software jitter tests establish data semantics only.
+Across the **10^7–10^12 Pa·s/m³** resistance scenarios, gain is **−5.21 to
++2.07 dB** over 1–20 Hz and the largest uniform-sampling alias is **−53.22 dB**.
+The unchanged allocations are −6 to +3 dB gain and alias below −40 dB.
+The old 10^7 Pa·s/m³ failure now passes; the old geometry and 10^6 Pa·s/m³
+remain independent failure controls. The amplitude allowance is not a landslide
+detection threshold. `conditional_design_pass` remains conditional because no
+manufacturer resistance bound has been established. Flow estimates at 100/500 Pa
+cannot establish a small-signal bound; the 500 Pa family point exceeds SDP32's range.
+
+Host-sampling images into 1–20 Hz are evaluated through 4.4 kHz, including images
+near the internal conversion clock. High-frequency lumped results omit compressible
+chamber/tube modes. Wind, leaks, nonlinear flow, sensor noise spectra and
+nonuniform-sampling aliases remain outside this model. Software jitter tests
+establish data semantics only.
 
 ## RF network
 
-`field_solver.py` solves the electrostatic potential on a rectangular conforming
-mesh. Dielectric interfaces and copper edges fall on mesh lines; flux gives
-Maxwell capacitance. A second vacuum solve supplies quasi-TEM inductance.
-Reciprocity, passivity, uniform-dielectric scaling, analytical microstrip
-agreement and mesh convergence have independent tests.
+`field_solver.py` solves electrostatic potential on a conforming rectangular
+mesh. Copper edges and dielectric interfaces fall on mesh lines; flux gives
+Maxwell capacitance. A vacuum solve supplies quasi-TEM inductance. Reciprocity,
+passivity, dielectric scaling, analytical microstrip agreement and mesh convergence
+have independent fixtures.
 
-`simulate_signal_integrity.py` reads the native 0.17 mm tracks, their 3.79 mm total
-length, the 0.0994 mm reference spacing and pad dimensions. Native C148/L140/D140/
-C151 values are checked before using the circuit model. Nominal filled-mask
-impedance is approximately 46.2 Ω. The mask model bounds bare copper and a
-planar filled coating; it does not resolve a conformal coating or nearby coplanar
-metal. Etch ±20 µm, dielectric thickness ±10%, epsilon 3.8–4.6 and mask 0–25 µm
-are engineering sensitivity ranges, not supplier tolerances.
+The native circuit uses a **Coilcraft 0402HPH-56NXJRW, 56 nH choke (L140)** and
+**0402HP-3N6XJRW, 3.6 nH series matching inductor (L141)**, retaining the 47 pF
+C0G blocking capacitor and PESD5V0F1BL ESD protection. All five RF traces are
+0.17 mm B.Cu over the 0.0994 mm reference spacing. Bias/ESD branches are shortened
+to 1.02/0.80 mm; series segments total approximately 4.28 mm. Every RF segment,
+reference plane, value and selected MPN is checked against the model inputs.
 
-The ABCD network includes distributed traces, pad capacitance, a series capacitor,
-RF choke with self-capacitance, bypass/connector parasitics and ESD capacitance.
-The [Nexperia datasheet](https://assets.nexperia.com/documents/data-sheet/PESD5V0F1BL.pdf)
-supplies the 0.4 pF typical and 0.55 pF maximum diode values at its stated test
-conditions. Its use at GNSS frequencies is a lumped approximation. The remaining
-parasitics and their multipliers are assumptions recorded in the JSON.
+The nominal filled-mask field impedance is approximately 46.2 Ω. Etch ±20 µm,
+dielectric thickness ±10%, epsilon 3.8–4.6 and mask 0–25 µm are sensitivity ranges,
+not supplier tolerances. The mask model bounds bare copper and planar coating;
+it omits conformal coating and nearby coplanar metal.
 
-Nominal network loss is approximately 0.42 dB with 10.5 dB return loss. The
-sampled sensitivity envelope reaches approximately **1.03 dB loss and 6.83 dB
-return loss**, missing the 1 dB / 10 dB allocations. Consequently
-`all_corners_meet_targets` is false. Changing only the blocking-capacitor value
-does not resolve the modeled reflection. These assumptions do not justify
-claiming a robust RF pass or changing the PCB matching network without a better
-pad/connector model. The PCB retains its existing RF circuit.
+The RF network includes separate distributed bias/ESD branches, node-specific
+pad areas, blocking capacitor ESL/ESR, matching inductor loss/self-capacitance,
+connector parasitics and a passive Foster choke model. The latter matches the
+[Coilcraft typical inductance/frequency and self-resonance data](https://www.coilcraft.com/getmedia/54459dcc-b821-4a9d-b91e-0416ea86a9b2/0402hp.pdf).
+The [Nexperia capacitance specification](https://assets.nexperia.com/documents/data-sheet/PESD5V0F1BL.pdf)
+is measured at 1 MHz; using it at GNSS frequencies is an approximation. Parasitic
+ranges and manufacturer-typical SRF extrapolations are recorded in the report.
+
+**98,304 corner cases** and **771 additional frequency points** pass unchanged
+allocations: return loss ≥10 dB, insertion loss ≤1 dB and choke impedance ≥500 Ω.
+Nominal return/insertion loss is approximately **19.49/0.13 dB**; sampled worst
+values are **10.86/0.53 dB**, with minimum choke impedance **578 Ω**. A separately
+assembled ngspice circuit agrees with the ABCD calculation. Removing the matching
+inductor, increasing ESD capacitance, or restoring long stubs exercises failure
+controls. A failed RF allocation now fails the lab stage. The model is not a
+three-dimensional connector solution or a controlled-impedance fabrication claim.
 
 ## Adjacent signal layers
 

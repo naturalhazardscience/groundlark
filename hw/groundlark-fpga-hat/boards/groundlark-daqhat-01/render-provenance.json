@@ -1,17 +1,18 @@
 {
   "generator": "KiCad 9.0.9 native PCB render",
-  "board_sha256": "e20c411be6e5d23e3cbc883171f6f8140cb34a64f27656e24b5c6b5d3ac3d681",
+  "board_sha256": "a4f1566e7b993c04e9c302ff2ed2b7fa0e1a4ea6f7f89138e6b8082cca89ae75",
   "models": "Vendor Trenz STEP; authored Pi, SDP32, power envelopes and manufacturer-dimensioned SMA/MAX-M10S STEP envelopes",
   "physical_fit_qualified": false,
   "sha256": {
-    "3d.png": "7e1e13e807eab774355103a8f313f723ee43b9b64b2a969d2bdd6f40317cc62b",
-    "3d-bottom.png": "eee20ffa22f5bfa28694b1e574506134dc1a4d23671001b4eeccd0c7766867e3",
-    "trenz-mounted.png": "2444865d8349024abd87177a2e638949e715f3201cf87aca9c0b72c2dc322ee4",
-    "pi-trenz-stack-concept.png": "f41d5162d8f854913d5fc4d78921c5e489e7058c521567d400829e3fe8911148",
-    "stack-service-envelopes.png": "53c9c7954a65a1d60f5eee2d58ac72bbd5a83418b8bf2234c66018bc659da4af",
-    "stack-exploded.png": "a73ee715586dc398391c8e2547cd50773edbd4bf6d853381a13fac42ed17c148"
+    "3d.png": "cc07f8002a3bae77706874ed4bf12a425bdbf754e7356b00f134284c96900bd4",
+    "3d-bottom.png": "e398c7d1aa39cdcfebf9bd327a60fb60acd67d952c15ab5362cb00732c64ee5f",
+    "trenz-mounted.png": "7c0a9038a7e3c008d62682341bd7145f9166a5a870d5976e7ddc8b82282fd95d",
+    "pi-trenz-stack-concept.png": "e353688f5621dad54d75acbe34bd02ec632de706baeeaaedc0b5ccb707624836",
+    "stack-service-envelopes.png": "231018345af04009a10c7428100bac7148b1c0d527cb8ba7b5cd9efabed40c7f",
+    "stack-exploded.png": "a1977aeac716ae9d5ac0803521da028e2a3781365f8fd34ec28bd9a246b76568"
   },
   "calibration_access": "TP90-TP93 underside pads; no fitted components or additional enclosure cutouts.",
   "pressure_model_sha256": "8c2fac308af653c219f8b502c2ed1daa6d3490034d28bb0be4e044907b03a9a0",
-  "revision": "Power copper and R118; native 3D renders refreshed. Subsequent schematic path pagination preserves rendered geometry."
+  "revision": "Compact backside RF circuit, L140 56 nH and L141 3.6 nH; all native renders regenerated and underside reviewed.",
+  "rf_model_sha256": "d1a078885b88fb6fa6045988deb906c7a38ab533ece3def2bf7db933649b8144"
 }

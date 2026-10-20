@@ -25,6 +25,8 @@ class AssemblyExportIntegrationTests(unittest.TestCase):
             export(base,1)
             expected={name:(base/name).read_bytes() for name in ('BOM-review.csv','CPL-review.csv')}
             manifest=json.loads((base/'manifest.json').read_text())
+            self.assertFalse(manifest['inventory_checked'])
+            self.assertEqual(manifest['unmapped_catalog_placements'],['L140','L141'])
             # A reviewed procurement update intentionally changes this hash;
             # source CAD hashes must still match, as tested separately.
             manifest['source_sha256']['hw/assembly/groundlark-fpga-hat/daqhat-01-jlcpcb-parts.json']='0'*64
@@ -54,19 +56,19 @@ class AssemblyExportIntegrationTests(unittest.TestCase):
             for name,data in expected.items():
                 self.assertEqual((overlay/name).read_bytes(),data,name)
             self.assertEqual({name:sha(base/name) for name in names},before)
-            self.assertEqual(report['physical_placements'],189)
-            self.assertEqual(report['BOM_lines'],71)
+            self.assertEqual(report['physical_placements'],190)
+            self.assertEqual(report['BOM_lines'],72)
             self.assertEqual(report['catalog_fitted_components'],137)
             self.assertEqual(report['pads_checked'],713)
-            self.assertEqual(len(report['unverified_placements']),52)
+            self.assertEqual(len(report['unverified_placements']),53)
             self.assertFalse(manifest['supplier_placement_complete'])
-            self.assertEqual(len(manifest['unverified_placements']),52)
+            self.assertEqual(len(manifest['unverified_placements']),53)
             self.assertEqual({a['reference'] for a in report['placement_changes']},set(old_angles))
             self.assertIn('Unverified supplier-footprint exceptions',(overlay/'README.md').read_text())
             self.assertIn('C7499354',(overlay/'README.md').read_text())
             self.assertIn('C140950',(overlay/'README.md').read_text())
             purchase=read_csv(overlay/'procurement.csv')
-            self.assertEqual(sum(int(r['Installed_total']) for r in purchase),189)
+            self.assertEqual(sum(int(r['Installed_total']) for r in purchase),190)
             self.assertTrue(all(r['Requested_HATs']=='1' for r in purchase))
             bundle_overlay(overlay,name='assembly.zip')
             with zipfile.ZipFile(overlay/'assembly.zip') as archive:

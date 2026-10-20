@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "coordinate_basis": "EasyEDA catalog zero, 10 mil units, Y down; exporter converts to mm Y up and fits numbered pads.",
-  "limitation": "All 189 fitted components inventoried; 137 have frozen numbered supplier pads; 52 remain explicit supplier-placement holds. Native CAD/ERC/DRC cannot close feeder orientation review.",
+  "limitation": "190 fitted components; 137 frozen supplier-pad fits and 53 explicit placement holds. Inventory is outside this simulation revision.",
   "shield_alias_basis": "LSHM S1/S2 are the two GND mounting pads: native J80/J81 pad 101 and J82 pad 61. Both physical centres must pass.",
   "footprints": [
     {
@@ -1563,8 +1563,7 @@
       "designators": [
         "C139",
         "C144",
-        "C145",
-        "C151"
+        "C145"
       ],
       "side": "Top",
       "source_footprints": [
@@ -1604,6 +1603,38 @@
       "source_footprints": [
         "GNSS_SOT23_6"
       ]
+    },
+    {
+      "lcsc": "C77053",
+      "mpn": "GRM188R71H103KA01D",
+      "evidence_url": "https://jlcpcb.com/user-center/lcsvg/svg.html?code=C77053",
+      "checked_on": "2026-10-19",
+      "response_sha256": "f6dd0490c2b16261837548d41e622c78f1d9239640fe58943cdeb754cd86b0b1",
+      "footprint_uuid": "archived-svg-sha256:f6dd0490c2b16261837548d41e622c78f1d9239640fe58943cdeb754cd86b0b1",
+      "footprint_title": "C0603",
+      "footprint_updated": "unknown; archived supplier DOM reviewed",
+      "origin_easyeda": [
+        4000.0,
+        3000.0
+      ],
+      "pad_shapes": [
+        "PAD~RECT~4002.76~3000~3.1496~3.5433~1~~2~0~~0~gge1002~0~0~Y~0",
+        "PAD~RECT~3997.24~3000~3.1496~3.5433~1~~1~0~~0~gge1004~0~0~Y~0"
+      ],
+      "pad_aliases": {},
+      "fit_method": "smd_pad_overlap",
+      "nonpolar_two_terminal": true,
+      "evidence_format": "Archived public supplier SVG DOM, numbered pads and origin preserved",
+      "evidence_file": "hw/assembly/groundlark-fpga-hat/supplier-svg/C77053-pads.json",
+      "designators": [
+        "C151"
+      ],
+      "side": "Bottom",
+      "source_footprints": [
+        "SUP_C_0603_1608Metric"
+      ],
+      "bottom_projection": "mirror_local_x_then_ccw",
+      "bottom_basis": "Reflect local supplier X, then rotate CCW into the top-view board frame. Absolute PCB coordinates are not mirrored. Numbered pads must fit individually."
     }
   ],
   "unverified": [
@@ -2159,17 +2190,6 @@
     },
     {
       "designators": [
-        "L140"
-      ],
-      "lcsc": "C98057",
-      "mpn": "LQW15AN27NG00D",
-      "source_footprint": "GNSS_L0402",
-      "evidence_url": "https://jlcpcb.com/partdetail/MurataElectronics-LQW15AN27NG00D/C98057",
-      "checked_on": "2026-10-19",
-      "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
-    },
-    {
-      "designators": [
         "D140"
       ],
       "lcsc": "C45961",
@@ -2178,6 +2198,28 @@
       "evidence_url": "https://jlcpcb.com/partdetail/Nexperia-PESD5V0F1BL315/C45961",
       "checked_on": "2026-10-19",
       "reason": "Exact stocked catalog identity established; supplier numbered footprint unavailable because public EasyEDA service returns HTTP 403/418. Native placement retained without rotation correction; supplier pin-1 and centroid review is a manufacturing hold."
+    },
+    {
+      "designators": [
+        "L140"
+      ],
+      "lcsc": "",
+      "mpn": "0402HPH-56NXJRW",
+      "source_footprint": "GNSS_HP0402",
+      "evidence_url": "https://www.coilcraft.com/getmedia/54459dcc-b821-4a9d-b91e-0416ea86a9b2/0402hp.pdf",
+      "checked_on": "2026-10-20",
+      "reason": "Manufacturer identity and native lands checked; supplier centroid/numbered-pad evidence absent. Inventory excluded. Retain native placement as an explicit manufacturing hold."
+    },
+    {
+      "designators": [
+        "L141"
+      ],
+      "lcsc": "",
+      "mpn": "0402HP-3N6XJRW",
+      "source_footprint": "GNSS_HP0402",
+      "evidence_url": "https://www.coilcraft.com/getmedia/54459dcc-b821-4a9d-b91e-0416ea86a9b2/0402hp.pdf",
+      "checked_on": "2026-10-20",
+      "reason": "Manufacturer identity and native lands checked; supplier centroid/numbered-pad evidence absent. Inventory excluded. Retain native placement as an explicit manufacturing hold."
     }
   ],
   "require_complete_coverage": true

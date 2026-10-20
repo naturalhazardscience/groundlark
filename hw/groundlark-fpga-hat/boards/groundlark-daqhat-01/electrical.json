@@ -4885,10 +4885,10 @@
       "footprint": "Groundlark:GNSS_C0402",
       "local_fp": "GNSS_C0402",
       "xy": [
-        6.4,
-        15.8
+        5.5,
+        14.9
       ],
-      "angle": 0,
+      "angle": 0.0,
       "section": "04-gnss-page-01",
       "names": {},
       "side": "back",
@@ -4896,25 +4896,25 @@
       "note": "",
       "pins": {
         "1": "GNSS_ANT",
-        "2": "GNSS_RF"
+        "2": "GNSS_MATCH"
       }
     },
     {
       "ref": "L140",
-      "value": "27n",
-      "mpn": "LQW15AN27NJ00D",
-      "footprint": "Groundlark:GNSS_L0402",
-      "local_fp": "GNSS_L0402",
+      "value": "56n",
+      "mpn": "0402HPH-56NXJRW",
+      "footprint": "Groundlark:GNSS_HP0402",
+      "local_fp": "GNSS_HP0402",
       "xy": [
-        4,
-        11.5
+        4.0,
+        14.3
       ],
-      "angle": 270,
+      "angle": 270.0,
       "section": "04-gnss-page-01",
       "names": {},
-      "side": "front",
+      "side": "back",
       "dnp": false,
-      "note": "27nH wirewound RF choke; u-blox reference family. Verify impedance and RF matching on fabricated stack.",
+      "note": "Coilcraft 56 nH bias choke; short B.Cu branch and local C151 bypass.",
       "pins": {
         "1": "GNSS_BIAS",
         "2": "GNSS_ANT"
@@ -4993,15 +4993,15 @@
       "footprint": "Groundlark:GNSS_SOD882",
       "local_fp": "GNSS_SOD882",
       "xy": [
-        4,
-        21.2
+        4.0,
+        17.2
       ],
-      "angle": 270,
+      "angle": 270.0,
       "section": "04-gnss-page-01",
       "names": {},
-      "side": "front",
+      "side": "back",
       "dnp": false,
-      "note": "Nexperia low-capacitance unidirectional ESD; cathode pin1 to RF/bias.",
+      "note": "Bidirectional low-capacitance ESD diode; short RF branch and local ground stitch.",
       "pins": {
         "1": "GNSS_ANT",
         "2": "GND"
@@ -5039,13 +5039,13 @@
       "footprint": "Groundlark:SUP_C_0603_1608Metric",
       "local_fp": "SUP_C_0603_1608Metric",
       "xy": [
-        4,
-        8.8
+        5,
+        11.7
       ],
-      "angle": 90,
+      "angle": 90.0,
       "section": "04-gnss-page-01",
       "names": {},
-      "side": "front",
+      "side": "back",
       "dnp": false,
       "note": "Local RF bypass at L140 cold end; short ground stitch.",
       "pins": {
@@ -5092,6 +5092,27 @@
       "pins": {
         "1": "PI_UART_RX",
         "2": "PI_3V3"
+      }
+    },
+    {
+      "ref": "L141",
+      "value": "3.6n",
+      "mpn": "0402HP-3N6XJRW",
+      "footprint": "Groundlark:GNSS_HP0402",
+      "local_fp": "GNSS_HP0402",
+      "xy": [
+        6.95,
+        15.8
+      ],
+      "angle": 270.0,
+      "section": "04-gnss-page-02",
+      "names": {},
+      "side": "back",
+      "dnp": false,
+      "note": "Series RF matching inductor; retain C148 DC block.",
+      "pins": {
+        "1": "GNSS_MATCH",
+        "2": "GNSS_RF"
       }
     }
   ]

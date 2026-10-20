@@ -113,6 +113,7 @@ class D90ReplacementTests(unittest.TestCase):
         for fault in ({'available_order_quantity': 0}, {'minimum_quantity': 35},
                       {'status': 'preorder_required'}):
             registry = copy.deepcopy(self.registry)
+            registry['procurement_policy']['require_available_stock'] = True
             registry['parts'][0]['stock_observation'].update(fault)
             with self.subTest(fault=fault), self.assertRaisesRegex(ValueError, 'procurement policy'):
                 build_bom(self.source, 1, registry)

@@ -2,7 +2,8 @@ from "gnss_parts.ato" import GNSS_LIMIT
 from "gnss_parts.ato" import GNSS_4U7
 from "gnss_parts.ato" import GNSS_SMA
 from "gnss_parts.ato" import GNSS_47P
-from "gnss_parts.ato" import GNSS_27N
+from "gnss_parts.ato" import GNSS_56N
+from "gnss_parts.ato" import GNSS_3N6
 from "gnss_parts.ato" import GNSS_ESD
 from "calibration_parts.ato" import CAL_TP
 from "supervisor_parts.ato" import SUP_FUSE
@@ -1683,10 +1684,10 @@ module TrenzHat:
     c148 = new GNSS_47P
     trait c148 has_designator<designator="C148">
     c148.p1 ~ GNSS_ANT
-    c148.p2 ~ GNSS_RF
+    c148.p2 ~ GNSS_MATCH
 
-    # 27n: 27nH wirewound RF choke; u-blox reference family. Verify impedance and RF matching on fabricated stack.
-    l140 = new GNSS_27N
+    # 56n: Coilcraft RF choke; modeled impedance above 500 ohm at GNSS L1.
+    l140 = new GNSS_56N
     trait l140 has_designator<designator="L140">
     l140.p1 ~ GNSS_BIAS
     l140.p2 ~ GNSS_ANT
@@ -1740,3 +1741,10 @@ module TrenzHat:
     trait c152 has_designator<designator="C152">
     c152.p1 ~ GNSS_LDO
     c152.p2 ~ GND
+
+    signal GNSS_MATCH
+    trait GNSS_MATCH has_net_name_suggestion<name="GNSS_MATCH", level="EXPECTED">
+    l141 = new GNSS_3N6
+    trait l141 has_designator<designator="L141">
+    l141.p1 ~ GNSS_MATCH
+    l141.p2 ~ GNSS_RF

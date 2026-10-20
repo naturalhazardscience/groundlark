@@ -1,14 +1,15 @@
 # JLCPCB assembled DAQHAT-01 HAT
 
 The package targets **one fabricated PCB and one assembled HAT**, the same
-physical board. The current HAT is 140 × 56 mm with 189 fitted placements.
-The current exact-part registry covers all 189 placements with 71 unique JLCPCB
-catalog identities. Dated live inventory and MOQ observations are recorded in
-the registry. Procurement identities include the revised FPGA power input,
+physical board. The current HAT is 140 × 56 mm with 190 fitted placements.
+The exact-part registry covers all 190 placements in 72 BOM lines: 70 catalog
+identities and two unmapped Coilcraft inductors, L140/L141. Inventory checks are
+excluded from this simulation revision. Historical observations remain in the
+registry and do not establish present availability. Procurement identities include the revised FPGA power input,
 Pi supervisor, GNSS and SDP32 pressure sensor; older packages are incompatible.
 
 **Assembly hold:** 137 placements have frozen numbered supplier-pad fits;
-52 retain explicitly unverified supplier origins/rotations. The complete review
+53 retain explicitly unverified supplier origins/rotations. The complete review
 export includes these exceptions and cannot be submitted as a released assembly.
 The placement release gate rejects unresolved entries. Obtain supplier geometry
 and verify the actual order preview before manufacture.
@@ -61,11 +62,11 @@ reference to its source value/footprint and approved manufacturer, MPN and C-cod
 Catalog listing does not reserve stock or guarantee assembly eligibility.
 Recheck allocation at ordering; do not accept automatic substitutes.
 
-All 71 unique selections have dated **2026-10-19** JLCPCB available-order
-observations and component minimum quantity 1, sufficient for one HAT.
-Pre-order-only parts are rejected. Shared catalog identities are counted across
-all source groups when checking inventory. Offline checks validate the recorded
-snapshot; recheck allocation and assembly attrition at ordering.
+Current stock is not checked. Existing mapped parts retain their dated
+2026-10-19 observations; the revised L140/L141 require exact-MPN procurement.
+`require_available_stock` is explicitly false for this design/simulation scope.
+Recheck supplier allocation, minimum quantities and assembly attrition before
+ordering; offline tests cannot establish availability.
 
 D90 uses TI **TPD2E2U06QDCKRQ1 / C915089** in the authored circuit, BOM and
 review schematic. It preserves the SC-70 pinout and existing bottom-side copper.
@@ -101,8 +102,9 @@ The Pi, Trenz module, external geophone and risers remain outside this PCB BOM.
 | Footprint / package | `Footprint` |
 | JLCPCB / LCSC part number | `JLCPCB Part #` |
 
-Do not use `Description` as the ordering code. Confirm all 71 nonblank catalog
-identities and all 189 placements survive import.
+Do not use `Description` as the ordering code. Confirm all 70 nonblank catalog
+identities and all 190 placements survive import. Resolve the two blank catalog
+fields using the exact Coilcraft MPNs before placing an assembly order.
 
 | References | Assembly selection | Required specification |
 | --- | --- | --- |

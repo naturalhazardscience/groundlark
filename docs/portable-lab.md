@@ -62,9 +62,9 @@ fail if they disagree.
 The runner records every check, including checks after a failure or timeout.
 The simulation profile prints its one named procurement exclusion; it never
 converts that exclusion into a pass or changes the full profile's release gate.
-Model execution/test success and design acceptance are separate: for example,
-`signal-integrity.json` retains `all_corners_meet_targets: false` when an RF
-corner misses its design allocation. See [model assumptions and acceptance](simulation-validation.md).
+Model reports retain their design acceptance flags. An RF corner missing its
+allocation sets `all_corners_meet_targets: false` and fails the signal-integrity
+stage; the pneumatic conditional envelope is also a failing gate when missed. See [model assumptions and acceptance](simulation-validation.md).
 Any failed check still fails the overall run; `run.json` lists `failed_steps`
 and each check has its own log. In particular, an assembly-registry mismatch
 does not suppress the later circuit, SPICE or software results. Checks with

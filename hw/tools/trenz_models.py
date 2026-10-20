@@ -56,6 +56,8 @@ for r,y,h,color in [(3.25,-13.76,.16,'0.5 0.52 0.54'),(2.8,-13.86,.12,'0.018 0.0
 for x,y in [(0,0),(0,-6),(4.7,-3)]:jack+=box(x,y,-.8,1,1.6,3,'0.65 0.65 0.65')
 write('PJ_102AH_envelope',jack)
 write('TPSM53603_envelope',box(0,0,2,5,5.5,4,'0.12 0.12 0.14')+cylinder(-1.8,1.8,4.01,.23,.02,'0.8 0.8 0.8'))
+# Maximum 0402HP/HPH envelope including optional solder (Coilcraft Doc 526-1).
+write('Coilcraft_0402HP_envelope',box(0,0,.41,1.17,.71,.82,'0.17 0.14 0.11'))
 for n in [50,30]:
     s=box(0,0,2,(n-1)*.5+5.7,4.6,4,'0.08 0.09 0.1')
     for i in range(n):
@@ -63,10 +65,11 @@ for n in [50,30]:
     write(f'LSHM_{n}_4mm',s)
 b=p.LoadBoard(str(F/(NAME+'.kicad_pcb')))
 title=b.GetTitleBlock();title.SetRevision('DAQHAT-01 6L');title.SetDate('2026-10-19');b.SetTitleBlock(title)
-custom={'J1':'Pi_Megastar_2x20','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm','U23':'SDP32_envelope','J83':'PJ_102AH_envelope','U80':'TPSM53603_envelope','U132':'TPSM53603_envelope'}
+custom={'J1':'Pi_Megastar_2x20','J80':'LSHM_50_4mm','J81':'LSHM_50_4mm','J82':'LSHM_30_4mm','U23':'SDP32_envelope','J83':'PJ_102AH_envelope','U80':'TPSM53603_envelope','U132':'TPSM53603_envelope','L140':'Coilcraft_0402HP_envelope','L141':'Coilcraft_0402HP_envelope'}
 for fp in b.GetFootprints():
     if fp.GetReference()=='J140':model(fp,'${KIPRJMOD}/../../../shared/models/HL_SMA_KWE_02.step')
     elif fp.GetReference()=='U21':model(fp,'${KIPRJMOD}/../../../shared/models/MAX_M10S_envelope.step')
+    elif fp.GetReference() in ('L140','L141'):model(fp,'${KIPRJMOD}/../../../shared/models/Coilcraft_0402HP_envelope.step')
     elif fp.GetReference() in custom:model(fp,'${KIPRJMOD}/../../../shared/models/'+custom[fp.GetReference()]+'.wrl')
     else:
         for m in fp.Models():m.m_Filename=m.m_Filename.replace('${KICAD7_3DMODEL_DIR}','${KICAD9_3DMODEL_DIR}')

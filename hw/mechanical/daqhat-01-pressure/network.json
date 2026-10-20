@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "model": "DAQHAT-01 external pneumatic filter",
+  "geometry": {
+    "stages": 2,
+    "capillaries_per_stage": 4,
+    "capillary_ID_mm": 1.2,
+    "capillary_length_mm": 10,
+    "chamber_ml": 320,
+    "reference_ml": 4000,
+    "reference_vent_ID_mm": 0.3,
+    "reference_vent_length_mm": 10
+  },
+  "sensor_flow_evidence": {
+    "manufacturer": "Sensirion",
+    "source": "https://sensirion.com/media/documents/C3059EE6/667E9FD4/DP_AN_Engineering_Guide_V1.0.pdf",
+    "location": "Version 1.0, June 2024, section 3.2.3, Table 2",
+    "family": "SDP3x",
+    "approximate_flow_sccm_at_100_Pa": [25, 32],
+    "approximate_flow_sccm_at_500_Pa": [65, 85],
+    "interpretation": "Family-level approximate secant flow estimates, not SDP32 small-signal resistance limits. The 500 Pa family point exceeds the SDP32 measurement range and is not a calibration point for this sensor.",
+    "simulation_resistance_Pas_m3": [10000000, 1000000000000],
+    "guaranteed_bound": false
+  }
+}

@@ -134,6 +134,7 @@ def source_files(source):
         **{f"hw/{product}/elec": ("*.ato",) for product in PRODUCTS.values()},
         "hw/tools": ("*.py",), "hw/tests": ("*.py",), "docs": ("*.csv",),
         "hw/assembly": ("*.json",),
+        "hw/mechanical/daqhat-01-pressure": ("*.json",),
         "hw/shared/libraries": ("*.kicad_mod", "*.kicad_sym"),
         "hw/skylark-usb/models": ("*.wrl", "*.json"),
         "sw/interfaces": ("*.proto", "*.yaml", "*.binpb", "*.py", "*.options"),

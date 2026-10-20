@@ -7,7 +7,7 @@ side-facing SMA with a 3.3 V active-antenna supply. BCM4 remains geophone DRDY;
 BCM6/13 retain the TI power-supervisor handshake. FPGA interfaces and the
 independent adapter supply remain unchanged. Native checks report zero ERC
 findings, zero DRC findings and zero unconnected items. The complete
-13,099-track/via SES reproduces identical copper. Independent pin/no-connect,
+13,104-track/via SES reproduces identical copper. Independent pin/no-connect,
 power, RF geometry, fabrication and analog-layout checks pass.
 The antenna limiter and local bypasses are routed; ISO1640 side 2 faces GNSS.
 Pi rail calculations include resistor temperature drift and an unmeasured
@@ -37,20 +37,21 @@ Modeled UTC correlation and miniSEED round trips do not qualify physical 1 ms
 sample alignment; receiver RF, acquisition latency and filter delay need measurement.
 
 The 159 × 118 × 75 mm R3 enclosure adds a side SMA slot. Geometric/component
-checks, 556 native PCB underside checks and 25 enclosure fault tests pass.
+checks, 572 native PCB underside checks and 25 enclosure fault tests pass.
 The README renders use current CAD. Physical first-print fit remains pending.
 The supervisor battery policy stays disabled with unset thresholds; prototype
 target firmware is built and tested with native fixtures. Hardware shutdown
 integration remains unqualified.
 
 The full and simulation profiles execute 28 stages. The current simulation run
-passes all 28 stages, with 251 hardware tests, 315 software tests, zero ERC/DRC
+passes all 28 stages, with 259 hardware tests, 315 software tests, zero ERC/DRC
 violations and identical native routing replay. Its signal bench passes all
 12 checks. The simulation profile
 excludes one explicitly named procurement release gate and retains native
 geometry, exporter and available supplier-pad checks. The full profile still
-requires all 189 supplier placements to be verified; 52 remain unverified.
-All 71 catalog identities have dated stock observations; 137 placements fit frozen
+requires all 190 supplier placements to be verified; 53 remain unverified.
+Inventory is excluded; 70 BOM lines have catalog mappings and L140/L141 do not.
+137 placements fit frozen
 supplier geometry. Review export tests preserve exceptions rather than clearing
 the release gate. GNSS pin/layout checks include missing bypass and ground-stitch
 faults. No physical
@@ -65,11 +66,13 @@ worker IPC. The retained `pressure-response.json` models ideal conversion
 averaging and explicitly shows residual aliases; it does not establish a
 pneumatic filter or minimum detectable signal. Raw frames and optional timing
 bounds retain backward compatibility with older SDP32 and DLVR recordings.
-The additional `pressure-pneumatics.json` specifies two 80 mL chambers,
-1.2 mm ID / 10 mm capillaries and a 2 L reference. Across its 256 conditional
-corners, band gain is −4.72 to +2.02 dB and the largest uniform-sampling alias
-is below −53.2 dB. Sensor flow resistance is a swept assumption; the external
-pneumatic accessory is not part of the PCB package.
+The additional `pressure-pneumatics.json` specifies two 320 mL chambers,
+each fed by four parallel 1.2 mm ID / 10 mm capillaries, and a separately vented
+4 L reference. Across 4,096 conditional corners and a 101-point resistance sweep,
+band gain is −5.21 to +2.07 dB and the largest uniform-sampling alias is −53.22 dB.
+The resistance scenarios now span 10^7–10^12 Pa·s/m³ and pass the previous failure
+case. This is not a manufacturer-guaranteed range. The external pneumatic
+accessory is not part of the PCB package.
 
 The carrier control audit now rejects loading MODE or confusing NOSEQ with EN1.
 Its documented module baseline is Trenz CPLD REV03. Physical bench report v4
@@ -91,10 +94,12 @@ The GNSS check reads the actual 0.0994 mm dielectric and 0.17 mm back-layer
 series route, including reference-plane coverage. The uncoated microstrip
 estimate is approximately 49.7 Ω. A 0.3 mm route is a regression fault.
 The electrostatic model gives approximately 46.2 Ω for the nominal filled-mask
-scenario. Its complete lumped RF network has nominal loss around 0.42 dB,
-but a sensitivity corner reaches 1.03 dB loss / 6.83 dB return loss. The report
-explicitly records that the 1 dB / 10 dB design allocations are not met at every
-corner. Successful model execution does not clear this finding.
+scenario. The revised 56 nH choke and 3.6 nH series matching network has
+nominal loss around 0.13 dB. Across 98,304 corners and 771 dense-frequency checks,
+worst loss is 0.53 dB and worst return loss is 10.86 dB, meeting the unchanged
+1 dB / 10 dB allocations. Choke impedance stays above 578 Ω. Independently
+assembled ngspice and ABCD models agree; removing matching or restoring long
+branches are failure controls. Unmodeled three-dimensional effects remain open.
 
 The adjacent In2/In3 screen reports parallel signal lengths within three
 dielectric heights of edge separation. Its 5 mm aggregate pair limit is a

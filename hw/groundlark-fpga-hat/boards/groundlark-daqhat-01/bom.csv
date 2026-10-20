@@ -194,12 +194,13 @@ J140,GNSS ANT / 3V3,HL-SMA-KWE-02,GNSS_HL_SMA_KWE_02,False,HenryTech C20617216; 
 C146,4.7u,GRM21BR71C475KA73L,Capacitor_SMD__C_0805_2012Metric,False,
 C147,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,
 C148,47p C0G,GRM1555C1H470JA01D,GNSS_C0402,False,
-L140,27n,LQW15AN27NJ00D,GNSS_L0402,False,27nH wirewound RF choke; u-blox reference family. Verify impedance and RF matching on fabricated stack.
+L140,56n,0402HPH-56NXJRW,GNSS_HP0402,False,Coilcraft 56 nH bias choke; short B.Cu branch and local C151 bypass.
 U140,TPS70933,TPS70933DBVR,SUP_SOT-23-5,False,3.3 V antenna LDO; downstream U141 limits sustained shorts to 100 mA maximum. 20 mA antenna allocation.
 C149,4.7u,GRM21BR71C475KA73L,Capacitor_SMD__C_0805_2012Metric,False,
 C150,4.7u,GRM21BR71C475KA73L,Capacitor_SMD__C_0805_2012Metric,False,
-D140,PESD5V0F1BL,"PESD5V0F1BL,315",GNSS_SOD882,False,Nexperia low-capacitance unidirectional ESD; cathode pin1 to RF/bias.
+D140,PESD5V0F1BL,"PESD5V0F1BL,315",GNSS_SOD882,False,Bidirectional low-capacitance ESD diode; short RF branch and local ground stitch.
 U141,TPS2553,TPS2553DBVR,GNSS_SOT23_6,False,"TI DBV pin table: 1 IN, 2 GND, 3 EN, 4 FAULT NC, 5 ILIM tied IN, 6 OUT. 50..100 mA limit."
 C151,10n,GRM188R71H103KA01D,SUP_C_0603_1608Metric,False,Local RF bypass at L140 cold end; short ground stitch.
 C152,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,U141 input bypass.
 R118,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,Pi UART RX idle pull-up while U51 is disabled
+L141,3.6n,0402HP-3N6XJRW,GNSS_HP0402,False,Series RF matching inductor; retain C148 DC block.

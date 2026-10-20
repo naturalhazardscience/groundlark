@@ -33,9 +33,26 @@ class AntennaLayoutTests(unittest.TestCase):
  def test_missing_rf_ground_stitch(self):
   import pcbnew as p
   b=self.load()
+  removed=0
   for t in list(b.GetTracks()):
-   if isinstance(t,p.PCB_VIA) and t.GetNetname()=='GND' and abs(p.ToMM(t.GetPosition().x)-54)<.01 and abs(p.ToMM(t.GetPosition().y)-56.525)<.01:b.Delete(t)
+   if isinstance(t,p.PCB_VIA) and t.GetNetname()=='GND' and abs(p.ToMM(t.GetPosition().x)-54.9)<.01 and abs(p.ToMM(t.GetPosition().y)-60.925)<.01:
+    b.Delete(t);removed+=1
+  self.assertEqual(removed,1,'Ground-stitch fault must actually remove a via')
   with self.assertRaises(ValueError):verify_board(b)
+ def test_old_front_branch_cannot_escape_rf_model(self):
+  import pcbnew as p
+  from gnss_checks import rf_geometry
+  b=self.load()
+  branch=next(t for t in b.GetTracks() if t.GetNetname()=='GNSS_ANT')
+  branch.SetLayer(p.F_Cu)
+  with self.assertRaisesRegex(ValueError,'changes layers'):rf_geometry(b)
+ def test_extra_rf_stub_cannot_escape_model(self):
+  import pcbnew as p
+  from gnss_checks import rf_geometry
+  b=self.load();t=p.PCB_TRACK(b);t.SetStart(p.VECTOR2I(p.FromMM(54),p.FromMM(65.8)))
+  t.SetEnd(p.VECTOR2I(p.FromMM(54),p.FromMM(70)));t.SetWidth(p.FromMM(.17));t.SetLayer(p.B_Cu)
+  t.SetNet(b.FindNet('GNSS_ANT'));b.Add(t)
+  with self.assertRaisesRegex(ValueError,'Unmodeled'):rf_geometry(b)
  def test_isolator_old_orientation(self):
   b=self.load();fp=next(f for f in b.GetFootprints() if f.GetReference()=='U43')
   next(q for q in fp.Pads() if q.GetNumber()=='2').SetNet(b.GetNetsByName()['PI_I2C_SDA'])

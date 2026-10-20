@@ -42,3 +42,15 @@ component GNSS_4U7:
     trait has_designator_prefix<prefix="C">
     signal p1 ~ pin 1
     signal p2 ~ pin 2
+
+component GNSS_56N:
+    trait is_atomic_part<manufacturer="Coilcraft", partnumber="0402HPH-56NXJRW", footprint="../../shared/elec/GNSS_HP0402.kicad_mod", symbol="../../shared/elec/symbols/GNSS_56N.kicad_sym">
+    trait has_designator_prefix<prefix="L">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2
+
+component GNSS_3N6:
+    trait is_atomic_part<manufacturer="Coilcraft", partnumber="0402HP-3N6XJRW", footprint="../../shared/elec/GNSS_HP0402.kicad_mod", symbol="../../shared/elec/symbols/GNSS_3N6.kicad_sym">
+    trait has_designator_prefix<prefix="L">
+    signal p1 ~ pin 1
+    signal p2 ~ pin 2

@@ -1,9 +1,9 @@
 {
   "kicad": "9.0.9",
   "sha256": {
-    "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "e20c411be6e5d23e3cbc883171f6f8140cb34a64f27656e24b5c6b5d3ac3d681",
-    "hw/groundlark-fpga-hat/layout/placement.json": "a7029a2606669538746289bdfde34c40fa7e92ab8150df30635a48f3e33b566f",
-    "sw/ui/assets/daqhat-01.glb": "257d985954f6227f451acf3744f097e8f44468bea99c3a4b6567213f6c56ec43",
+    "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "a4f1566e7b993c04e9c302ff2ed2b7fa0e1a4ea6f7f89138e6b8082cca89ae75",
+    "hw/groundlark-fpga-hat/layout/placement.json": "d96287995c053d7160639273796328c7f78c1f0f6ea23d97434f4566c3f7f34d",
+    "sw/ui/assets/daqhat-01.glb": "e5549b800dc52627e9968a00310b28ad1846316b6849eb17d44d633be22032db",
     "sw/ui/geophone_scene.py": "65ef0de9df78e2b7c1c4697367f5a5b81486dd95f2fe4f01d9fa6f35b8dd461a",
     "hw/burrowlark-usb/layout/placement.json": "f180ef6b13946e4425e12864c34a310c905ea993b59d379671d8acee6e5ea2e6",
     "sw/ui/main.py": "af2d3138ef9f4510486a717394f27e25d8e28a799bbd37edcdd984af9c48bbb1",
@@ -12,11 +12,14 @@
     "hw/shared/models/HL_SMA_KWE_02.step": "b18f2a60e4e25e77c107b980174833ed797862ffed13c80aa63308e2b27086b1",
     "hw/shared/models/MAX_M10S_envelope.step": "fb429633d752229d4ccc5102222635e8f39344ec0800070b13eefb6b7e76faf1",
     "hw/tools/gnss_model.py": "ea896b8d2cc842f850764704ec253bbfcdccf26920b368a6103345208ba15d61",
-    "hw/shared/models/SDP32_envelope.wrl": "8c2fac308af653c219f8b502c2ed1daa6d3490034d28bb0be4e044907b03a9a0"
+    "hw/shared/models/SDP32_envelope.wrl": "8c2fac308af653c219f8b502c2ed1daa6d3490034d28bb0be4e044907b03a9a0",
+    "hw/shared/models/Coilcraft_0402HP_envelope.step": "d1a078885b88fb6fa6045988deb906c7a38ab533ece3def2bf7db933649b8144",
+    "hw/tools/rf_model.py": "161e3b5a2c15e9682525b0c1393e3dd18df2853b66f44c12cbf60cae6553b57e"
   },
   "metadata_review": "140 x 56 mm supervised Pi supply and separate FPGA input. J130 accepts protected 8-18 V DC; U130 MSPM0L1106 controls U132/U133. Native KiCad 9.0.9 GLB; local VRML parts use explicit display envelopes. Physical fit, thermal behavior and battery policy remain unqualified.",
   "calibration_access": "Four underside passive probe pads TP90-TP93; outline and assembly height unchanged. Native PCB fit checks pass; physical calibration pending.",
   "gnss": "MAX-M10S underside package envelope and drawing-based HL-SMA-KWE-02 STEP; native -X antenna. Timing evidence is modeled; physical RF/timing/fit qualification pending.",
   "label_review": "SDP32-125PA at U23 replaces DLVR. Regenerated native GLB plus explicit 8.5 x 5.5 x 4.4 mm two-port scene envelope; placement and model hashes refreshed. Physical fit and pneumatic behavior remain unqualified.",
-  "copper_revision": "Continuous Pi power pours, FPGA distribution bridge, D130 heat spreading, 0.17 mm GNSS series tracks and R118 UART idle pull-up. KiCad GLB node inventory and native render checked; physical fit remains unqualified."
+  "copper_revision": "Continuous Pi power pours, FPGA distribution bridge, D130 heat spreading, 0.17 mm GNSS series tracks and R118 UART idle pull-up. KiCad GLB node inventory and native render checked; physical fit remains unqualified.",
+  "rf_revision": "Compact backside RF branches; L140/L141 use conservative manufacturer-dimensioned STEP envelopes, present in native GLB. Native underside render inspected; physical fit remains unqualified."
 }

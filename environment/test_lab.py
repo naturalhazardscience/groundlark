@@ -32,6 +32,7 @@ class LabSafetyTests(unittest.TestCase):
             'hw/burrowlark-usb/elec/field_head.ato',
             'hw/shared/elec/parts.ato',
             'hw/shared/reference/raspberrypi_hat.kicad_pcb',
+            'hw/mechanical/daqhat-01-pressure/network.json',
         ]
         excluded = [
             'hw/releases/groundlark-fpga-hat/example.ato',

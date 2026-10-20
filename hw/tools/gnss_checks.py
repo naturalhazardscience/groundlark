@@ -7,7 +7,8 @@ PINS={('U21',str(n)):net for n,net in {
     1:'GND',4:'GNSS_PPS',5:'GND',7:'PI_3V3',8:'PI_3V3',10:'GND',
     11:'GNSS_RF',12:'GND',16:'PI_I2C_SDA',17:'PI_I2C_SCL'}.items()}
 PINS.update({('J1','18'):'GNSS_PPS',('J140','1'):'GNSS_ANT',('J140','2'):'GND',
-    ('C148','1'):'GNSS_ANT',('C148','2'):'GNSS_RF',
+    ('C148','1'):'GNSS_ANT',('C148','2'):'GNSS_MATCH',
+    ('L141','1'):'GNSS_MATCH',('L141','2'):'GNSS_RF',
     ('L140','1'):'GNSS_BIAS',('L140','2'):'GNSS_ANT',
     ('D140','1'):'GNSS_ANT',('D140','2'):'GND',
     ('U140','1'):'PI_5V',('U140','2'):'GND',('U140','5'):'GNSS_LDO',
@@ -37,13 +38,29 @@ def rf_geometry(board):
     from daqhat_01_engineering import microstrip
     stack=stackup(board.GetFileName());outer=stack[-1];reference=stack[-2]
     height=reference['dielectric_to_next_mm'];er=reference['dielectric_er']
-    rows=[]
+    rows=[];paths={}
+    fps={f.GetReference():f for f in board.GetFootprints()}
+    def position(ref,n):return next(q.GetPosition() for q in fps[ref].Pads() if q.GetNumber()==str(n))
+    # Every RF segment is assigned to a physical branch. Do not silently drop
+    # bias/ESD stubs or sum a branched net as if it were a single series line.
+    endpoints={
+        'GNSS_ANT':(position('J140',1),position('C148',1)),
+        'GNSS_MATCH':(position('C148',2),position('L141',1)),
+        'GNSS_RF':(position('L141',2),position('U21',11)),
+        'BIAS':(position('J140',1),position('L140',2)),
+        'ESD':(position('J140',1),position('D140',1))}
     layer=board.GetLayerID(reference['name'])
     planes=[z.GetFilledPolysList(layer) for z in board.Zones()
             if z.GetNetname()=='GND' and z.IsOnLayer(layer) and not z.GetIsRuleArea()]
     for track in board.GetTracks():
-        if track.GetNetname() not in ('GNSS_RF','GNSS_ANT') or track.GetLayer()!=p.B_Cu:continue
-        if isinstance(track,p.PCB_VIA):raise ValueError('RF series path changes layers')
+        if track.GetNetname() not in ('GNSS_RF','GNSS_ANT','GNSS_MATCH'):continue
+        if isinstance(track,p.PCB_VIA) or track.GetLayer()!=p.B_Cu:raise ValueError('RF path changes layers')
+        pair=(track.GetStart(),track.GetEnd())
+        close=lambda a,b:p.ToMM((a-b).EuclideanNorm())<.001
+        roles=[role for role,(a,b) in endpoints.items()
+               if (close(pair[0],a) and close(pair[1],b)) or (close(pair[0],b) and close(pair[1],a))]
+        if len(roles)!=1 or roles[0] in paths:raise ValueError('Unmodeled RF branch or segment')
+        role=roles[0];paths[role]=p.ToMM(track.GetLength())
         width=p.ToMM(track.GetWidth());impedance,_=microstrip(width,height,outer['thickness_mm'],er)
         if not 47.5<=impedance<=52.5:raise ValueError(f'GNSS native RF geometry is {impedance:.2f} ohm')
         a,z=track.GetStart(),track.GetEnd()
@@ -58,9 +75,10 @@ def rf_geometry(board):
                 for f in board.GetFootprints() if f.GetReference()=='J140' for q in f.Pads())
             if connector_hole:continue
             if not any(poly.Contains(v) for poly in planes):raise ValueError('GNSS RF reference plane void')
-        rows.append(dict(net=track.GetNetname(),width_mm=width,length_mm=p.ToMM(track.GetLength()),estimated_ohm=impedance))
-    if {r['net'] for r in rows}!={'GNSS_RF','GNSS_ANT'}:raise ValueError('GNSS series RF path missing')
-    return dict(tracks=rows,dielectric_mm=height,copper_mm=outer['thickness_mm'],epsilon_r=er,
+        rows.append(dict(net=track.GetNetname(),role=role,width_mm=width,length_mm=p.ToMM(track.GetLength()),estimated_ohm=impedance))
+    if set(paths)!=set(endpoints):raise ValueError('GNSS RF branch missing')
+    if max(paths['BIAS'],paths['ESD'])>1.5:raise ValueError('GNSS shunt branch too long')
+    return dict(tracks=rows,path_lengths_mm=paths,dielectric_mm=height,copper_mm=outer['thickness_mm'],epsilon_r=er,
                 model='Uncoated Hammerstad-Jensen microstrip; mask, coplanar copper and pads require supplier field-solver review',qualified=False)
 
 
@@ -111,7 +129,7 @@ def verify_board(board):
     _require_hardware((ground_path<=2), lambda: ('C151 ground return must reach a local connected plane stitch'))
     return dict(pin_checks=checks,deliberate_no_connects=len(NC),pps_bcm=24,
         antenna='3.3 V active SMA, <=20 mA; 50 ohm connector',sample_timing_qualified=False,
-        sustained_short_limit_mA=[50,100],choke_rated_mA=280,
+        sustained_short_limit_mA=[50,100],choke_rated_mA=330,
         rf_bypass_path_mm=bypass,rf_bypass_ground_path_mm=ground_path,input_bypass_path_mm=input_bypass,
         rf_geometry=rf_geometry(board),
         host_bus_low_margin_scenario=dict(host_rail_minimum_assumed_V=3.135,input_low_fraction=.2,

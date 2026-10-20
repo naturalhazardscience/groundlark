@@ -15,7 +15,9 @@ MAX-M10S GNSS uses Pi I²C1 and BCM24 PPS, with a side-facing SMA and a
 TPS2553 antenna fault limiter. ISO1640 side 2 faces the Pi/GNSS bus. J130 feeds
 the separate MSPM0L1106 supervisor and 5.115 V Pi supply; battery policy and
 physical qualification remain pending; prototype MCU firmware is implemented.
-See [GNSS setup](../../docs/gnss-hardware.md).
+See [GNSS setup](../../docs/gnss-hardware.md) for the matched RF input and
+[external pressure filter](../mechanical/daqhat-01-pressure/README.md) for the
+simulation-defined pneumatic accessory; it is outside the PCB package.
 
 J83 takes a Nexys Video-compatible 12 V, center-positive 5.5/2.1 mm adapter
 rated at least 3 A. It faces the opposite edge from the geophone. U80 supplies
@@ -39,14 +41,14 @@ FPGA sources remain under [sw/fpga/](../../sw/fpga/README.md).
 
 Assembly uses an 8.5 mm JLCPCB socket, two external GPIO risers and measured
 supports (28.06 mm nominal Pi gap). Sensor supply and bias returns have local
-ground stitches. Procurement accepts in-stock PCB selections with component
-MOQ 1; see [JLCPCB assembly](../../docs/jlcpcb-assembly.md).
+ground stitches. Inventory is excluded from the current simulation revision; see [JLCPCB assembly](../../docs/jlcpcb-assembly.md).
 
 D90 uses TI **TPD2E2U06QDCKRQ1 / JLCPCB C915089** as the pin-compatible
 replacement for TPD2E2U06DCKR. Its SC-70 footprint and routing are unchanged.
-All 189 fitted placements have exact catalog selections with dated stock evidence.
+The 190 fitted placements have 72 exact-MPN BOM lines, of which 70 have catalog
+mappings. L140/L141 are Coilcraft RF inductors with unmapped catalog identities.
 U23 uses the redesigned SDP32-125PA circuit and driver. Supplier geometry remains
-unverified for 52 placements, so the matching Gerber/BOM/CPL package remains a
+unverified for 53 placements, so the matching Gerber/BOM/CPL package remains a
 review package; see the assembly guide before ordering.
 
 Use the [R3 enclosure](../mechanical/daqhat-01-case/README.md) for the 140 × 56 mm

@@ -24,10 +24,11 @@ actual cable before printing a batch. Support the cable to avoid bending the PCB
 Use a GNSS antenna rated for **3.3 V bias and at most 20 mA**. U140 TPS70933
 derives its supply from switched PI_5V, with local 4.7 µF input/output bypass.
 U141 TPS2553 follows the LDO. ILIM and EN connect to its input, selecting a
-50–100 mA sustained current limit (75 mA typical), below L140’s 280 mA rating.
+50–100 mA sustained current limit (75 mA typical), below L140’s 330 mA rating.
 C152 (100 nF) bypasses the limiter input. C151 (10 nF) bypasses the cold end of
-L140 beside the SMA with a local ground-plane stitch. L140 (27 nH) feeds DC onto
-the coax; C148 (47 pF C0G) blocks antenna DC at RF_IN.
+L140 beside the SMA with a local ground-plane stitch. L140 (Coilcraft 0402HPH-56NXJRW, 56 nH) feeds DC onto the coax.
+C148 (47 pF C0G) blocks antenna DC; L141 (0402HP-3N6XJRW, 3.6 nH)
+provides series matching before RF_IN.
 D140 PESD5V0F1BL provides 0.4 pF nominal ESD protection. There is no antenna
 open/short telemetry; the limiter’s unused open-drain FAULT output is NC.
 Current-limit response, repeated shorts and thermal recovery require physical
@@ -54,13 +55,14 @@ power inputs. The vented R3 case has no outdoor ingress rating.
 
 The PCB keeps the RF input on B.Cu beside the connector with a ground reference
 on In4.Cu and through-hole SMA grounds. The short RF layout uses the existing
-stock six-layer stack. Its two series traces are 0.17 mm wide over the recorded
+stock six-layer stack. Its five RF traces are 0.17 mm wide over the recorded
 0.0994 mm dielectric; the uncoated microstrip estimate is about 49.7 Ω.
 The native check rejects the previous 0.3 mm width and missing reference copper.
 The [simulation profile](simulation-validation.md#rf-network) now includes
 mask/etch/dielectric sensitivity and a lumped pad/connector RF network. Its
-nominal loss is about 0.42 dB, but the sampled corner envelope misses the
-1 dB insertion-loss / 10 dB return-loss allocations. Coplanar metal and the
+nominal loss is about 0.13 dB. The 98,304 sampled corners meet the
+1 dB insertion-loss / 10 dB return-loss allocations (worst 0.53/10.86 dB);
+choke impedance stays above 578 Ω. The model checks each short bias/ESD branch. Coplanar metal and the
 three-dimensional transitions remain outside that model.
 It has **no controlled-impedance fabrication claim**;
 measure insertion loss/return loss, satellite C/N0, ESD behavior and receiver
@@ -81,6 +83,7 @@ across stations before claiming millisecond alignment.
 | MAX-M10S-00B | JLCPCB C4153167 | [u-blox integration manual](https://content.u-blox.com/sites/default/files/MAX-M10S_IntegrationManual_UBX-20053088.pdf) |
 | HL-SMA-KWE-02 | JLCPCB/LCSC C20617216 | [HenryTech drawing](https://datasheet.lcsc.com/datasheet/pdf/b2f602368ae573f1e0d7be688540576e.pdf?productCode=C20617216) |
 | TPS2553DBVR | JLCPCB C55266, SOT-23-6 | [TI datasheet](https://www.ti.com/lit/ds/symlink/tps2553.pdf) |
+| 0402HPH-56NXJRW / 0402HP-3N6XJRW | Coilcraft, L140 / L141; catalog unmapped | [Manufacturer ratings and package](https://www.coilcraft.com/getmedia/54459dcc-b821-4a9d-b91e-0416ea86a9b2/0402hp.pdf) |
 | TPS70933DBVR | TI, 3.3 V antenna regulator | [TI datasheet](https://www.ti.com/lit/ds/symlink/tps709.pdf) |
 | PESD5V0F1BL,315 | Nexperia, SOD882 | [Manufacturer specification](https://www.nexperia.com/product/PESD5V0F1BL) |
 

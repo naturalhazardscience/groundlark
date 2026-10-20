@@ -174,14 +174,14 @@ class NativeConnectorTests(unittest.TestCase):
 
     def test_all_bom_placements_have_mapping_or_explicit_exception(self):
         result,audit=self.solve()
-        self.assertEqual(len(result),189)
+        self.assertEqual(len(result),190)
         self.assertEqual(sum('pads_checked' in a for a in audit),137)
         missing={a['reference'] for a in audit if 'pads_checked' not in a}
-        self.assertEqual(len(missing),52)
+        self.assertEqual(len(missing),53)
         self.assertTrue({'J83','F80','U23','U11','U12','U13'} <= missing)
         # A complete review inventory is deliberately not a release approval.
         from jlcpcb_placement import require_verified_placements
-        with self.assertRaisesRegex(ValueError,'52 unverified supplier placements'):
+        with self.assertRaisesRegex(ValueError,'53 unverified supplier placements'):
             require_verified_placements(audit)
         extra=dict(self.placements[0],Designator='U999')
         with self.assertRaisesRegex(ValueError,'coverage'):self.solve(placements=self.placements+[extra])
