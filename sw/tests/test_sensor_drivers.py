@@ -79,7 +79,7 @@ class SensorTests(unittest.TestCase):
         bus = IMUBus()
         driver = LSM6DSO(bus, sleep=lambda _: None)
         effective = driver.configure(defaults()[0])
-        self.assertEqual(effective["register_config"], bytes.fromhex("10 20 11 20 12 44 13 00 15 00 16 00 17 00"))
+        self.assertEqual(effective["register_config"], bytes.fromhex("10 20 11 20 12 44 13 04 15 00 16 00 17 00 18 e2"))
         reading = driver.read()
         self.assertEqual(reading.raw["temperature"], -123)
         self.assertEqual(reading.raw["angular_rate"], (-32768, 0, 32767))
@@ -99,7 +99,7 @@ class SensorTests(unittest.TestCase):
         with self.assertRaises(NotReady): LSM6DSO(bus).read()
 
     def test_imu_filter_readback_faults_are_rejected(self):
-        for bad_register in (0x13,0x15,0x16,0x17):
+        for bad_register in (0x13,0x15,0x16,0x17,0x18):
             class FaultBus(IMUBus):
                 def transfer(self,data,**kwargs):
                     result=super().transfer(data,**kwargs)
@@ -108,6 +108,18 @@ class SensorTests(unittest.TestCase):
                     return result
             with self.assertRaises(OSError):
                 LSM6DSO(FaultBus(),sleep=lambda _:None).configure(defaults()[0])
+
+    def test_shared_spi_rejects_i2c_or_i3c_left_enabled(self):
+        # Manufacturer bits are independent of the driver's settings mapping.
+        for register, bit in ((0x13, 0x04), (0x18, 0x02)):
+            class EnabledBus(IMUBus):
+                def transfer(self, data, **kwargs):
+                    result = super().transfer(data, **kwargs)
+                    if data[0] == register:
+                        self.regs[register] &= ~bit
+                    return result
+            with self.subTest(register=register), self.assertRaises(OSError):
+                LSM6DSO(EnabledBus(), sleep=lambda _: None).configure(defaults()[0])
 
     def test_scl_manufacturer_command_vectors(self):
         for opcode, value, expected in ((4, 0, "040000f7"), (0xb4, 0x20, "b4002098"),

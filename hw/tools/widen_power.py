@@ -3,6 +3,7 @@
 This is geometric cleanup, not an ampacity or voltage-drop signoff. Each trial
 uses real DRC; every implicated trial segment returns to its previous width.
 """
+from hardware_require import require as _require_hardware
 from pathlib import Path
 from project_paths import board_dir
 import json,subprocess,collections,sys
@@ -33,7 +34,7 @@ for name in sys.argv[1:] or ['groundlark-field-head']:
                 for item in violation['items']:
                     key=item['uuid']
                     if key in changed and key not in reverted:undo.add(key)
-            assert undo,'DRC failure is unrelated to remaining width trials; inspect saved report'
+            _require_hardware((undo), lambda: ('DRC failure is unrelated to remaining width trials; inspect saved report'))
             for key in undo:
                 t,old=changed[key];t.SetWidth(old)
             reverted.update(undo)

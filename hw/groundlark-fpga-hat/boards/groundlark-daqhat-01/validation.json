@@ -9,9 +9,9 @@
   "internal_user_gpio": 9,
   "unused_user_gpio": 149,
   "exposed_gpio": 0,
-  "host_link_pin_checks": 143,
+  "host_link_pin_checks": 145,
   "gpio_voltage_v": 3.3,
-  "host_link_component_checks": 32,
+  "host_link_component_checks": 33,
   "fpga_power": {
     "pin_checks": 55,
     "thermal_vias": 9,
@@ -22,14 +22,39 @@
       "reference_and_divider_min_V": 3.2706203558882985,
       "reference_and_divider_max_V": 3.3806912721675157,
       "allocated_A": 3,
-      "loop_ohm": 0.015,
-      "minimum_V": 3.2256203558882985,
+      "loop_ohm": 0.014372287562896678,
+      "minimum_V": 3.2275034931996083,
       "maximum_V": 3.3806912721675157,
       "adapter_V": 12,
       "adapter_tolerance": 0.05,
       "adapter_rating_A": 3,
       "adapter_scenario_A": 1.029591763265894,
       "limitations": "Reference/divider/DC-drop scenario only; line/load regulation, ripple, startup and transient margins require measurement. 85% efficiency is an input-sizing assumption."
+    },
+    "copper_extraction": {
+      "paths": [
+        {
+          "net": "FPGA_VIN",
+          "resistance_ohm": 0.0065812163046800026,
+          "grid_mm": 0.1,
+          "nodes": 229646,
+          "conductor_temperature_C": 85,
+          "barrel_plating_mm": 0.02
+        },
+        {
+          "net": "GND",
+          "resistance_ohm": 0.0012290233310672286,
+          "grid_mm": 0.1,
+          "nodes": 1625789,
+          "conductor_temperature_C": 85,
+          "barrel_plating_mm": 0.02
+        }
+      ],
+      "copper_with_reserve_ohm": 0.009372287562896677,
+      "model_reserve_fraction": 0.2,
+      "contact_allocation_ohm": 0.005,
+      "contacts_measured": false,
+      "thermal_qualified": false
     },
     "physical_qualification": false
   },
@@ -39,7 +64,7 @@
     "spare_bcm": [],
     "budget": {
       "nominal_V": 5.11522633744856,
-      "minimum_V": 4.771771481703282,
+      "minimum_V": 4.777432164063142,
       "maximum_V": 5.234442772515668,
       "total_A": 3,
       "input_range_V": [
@@ -53,11 +78,60 @@
       ],
       "ripple_transient_allowance_V": 0.02,
       "adc_at_18V": 2.3519122829917762,
-      "copper_budget_ohm": 0.05,
+      "copper_budget_ohm": 0.04811310588004649,
       "switch_budget_ohm": 0.025,
       "measured": false
     },
-    "firmware": "configuration placeholder; MCU implementation pending",
+    "copper_extraction": {
+      "paths": [
+        {
+          "net": "PI_RAW_5V",
+          "resistance_ohm": 0.004686632860689064,
+          "grid_mm": 0.1,
+          "nodes": 12867,
+          "conductor_temperature_C": 85,
+          "barrel_plating_mm": 0.02
+        },
+        {
+          "net": "PI_5V",
+          "resistance_ohm": 0.021265926526695032,
+          "grid_mm": 0.1,
+          "nodes": 201063,
+          "conductor_temperature_C": 85,
+          "barrel_plating_mm": 0.02
+        },
+        {
+          "net": "GND",
+          "resistance_ohm": 0.0016416955126546465,
+          "grid_mm": 0.1,
+          "nodes": 1625789,
+          "conductor_temperature_C": 85,
+          "barrel_plating_mm": 0.02
+        }
+      ],
+      "estimated_copper_loop_ohm": 0.027594254900038744,
+      "model_reserve_fraction": 0.2,
+      "copper_with_reserve_ohm": 0.03311310588004649,
+      "remaining_of_50mohm_for_contacts": 0.016886894119953512,
+      "contacts_measured": false,
+      "thermal_qualified": false,
+      "method": "DC finite-difference native filled copper at 85 C; idealized pad/via interiors; 20 um barrel plating"
+    },
+    "contact_allocation_ohm": 0.015,
+    "diode_spreader": {
+      "cathode_copper_area_mm2": {
+        "F.Cu": 73.5566096730915,
+        "B.Cu": 82.098671917264
+      },
+      "through_vias": 9,
+      "input_scenario_A": 2.4071653352699105,
+      "diode_forward_drop_assumed_V": 0.5,
+      "loss_scenario_W": 1.2035826676349552,
+      "thermal_resistance_measured": false,
+      "junction_temperature_C": null,
+      "qualified": false
+    },
+    "firmware": "prototype implemented; battery policy disabled pending qualification",
     "physical_qualification": false
   },
   "calibration": {
@@ -79,7 +153,35 @@
     "rf_bypass_path_mm": 1.445,
     "rf_bypass_ground_path_mm": 1.5,
     "input_bypass_path_mm": 4.981370849898476,
-    "host_bus_low_margin_V": 0.22999999999999998,
+    "rf_geometry": {
+      "tracks": [
+        {
+          "net": "GNSS_RF",
+          "width_mm": 0.17,
+          "length_mm": 1.87,
+          "estimated_ohm": 49.71591709061459
+        },
+        {
+          "net": "GNSS_ANT",
+          "width_mm": 0.17,
+          "length_mm": 1.92,
+          "estimated_ohm": 49.71591709061459
+        }
+      ],
+      "dielectric_mm": 0.0994,
+      "copper_mm": 0.035,
+      "epsilon_r": 4.3,
+      "model": "Uncoated Hammerstad-Jensen microstrip; mask, coplanar copper and pads require supplier field-solver review",
+      "qualified": false
+    },
+    "host_bus_low_margin_scenario": {
+      "host_rail_minimum_assumed_V": 3.135,
+      "input_low_fraction": 0.2,
+      "isolator_output_low_maximum_assumed_V": 0.4,
+      "calculated_V": 0.22699999999999998,
+      "measured": false,
+      "note": "Static datasheet allocation; actual rail, sink current and bus waveforms require qualification"
+    },
     "rf_qualified": false,
     "receiver_peak_allocation_mA": 100,
     "antenna_allocation_mA": 20
@@ -115,12 +217,12 @@
       "open_center_gap_mm": 0.8
     }
   },
-  "compiled_pin_checks": 962,
+  "compiled_pin_checks": 964,
   "critical_module_pin_checks": 29,
   "drc_violations": 0,
   "unconnected_items": 0,
   "erc_violations": 0,
-  "tracks_and_vias": 13058,
+  "tracks_and_vias": 13099,
   "copper_layers": 6,
   "microvias": 0,
   "fabrication_process": "standard-six-layer-through-via",

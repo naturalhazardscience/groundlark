@@ -24,7 +24,7 @@ class ExactAssemblyBOMTests(unittest.TestCase):
         bom, _, _ = self.rows()
         by_ref = {ref: row for row in bom for ref in row['Designator'].split(',')}
         # Supplier suggested diode C19077484, inductor C20612919, 01005
-        # capacitor C161362, X7R filters C24497/C1588 and non-TI ICs.
+        # capacitor C161372, X7R filters C24497/C1588 and non-TI ICs.
         fixture = {
             'R61': ('RC0603FR-0747RL', 'C114623', '0603', 'YAGEO'),
             'R96': ('RC0603FR-0722RL', 'C107701', '0603', 'YAGEO'),
@@ -44,13 +44,13 @@ class ExactAssemblyBOMTests(unittest.TestCase):
             self.assertEqual(by_ref[ref], by_ref['R96'])
         self.assertEqual(by_ref['C92'], by_ref['C91'])
 
-    def test_all_188_placements_once_and_no_removed_sensors(self):
+    def test_all_189_placements_once_and_no_removed_sensors(self):
         bom, procurement, _ = self.rows()
         refs = [r for row in bom for r in row['Designator'].split(',')]
-        self.assertEqual(len(refs),188)
-        self.assertEqual(len(set(refs)),188)
+        self.assertEqual(len(refs),189)
+        self.assertEqual(len(set(refs)),189)
         self.assertFalse(set(refs) & {'U14','U20','C18','C19','C20','C21','C22','C23','R14','R20'})
-        self.assertEqual(sum(r['Installed_total'] for r in procurement),188)
+        self.assertEqual(sum(r['Installed_total'] for r in procurement),189)
         check_reference_sets(bom,[{'Designator':ref} for ref in refs])
 
     def test_preorder_bulk_minimum_unknown_or_insufficient_stock_rejected(self):
@@ -88,7 +88,7 @@ class ExactAssemblyBOMTests(unittest.TestCase):
                 self.assertTrue(selections[ref]['resolution'])
                 self.assertTrue(selections[ref]['manufacturer_evidence'])
         self.assertEqual(len(bom), 71)
-        self.assertEqual(sum(r['Installed_total'] for r in procurement), 188)
+        self.assertEqual(sum(r['Installed_total'] for r in procurement), 189)
         self.assertEqual(by_ref['F80']['Description'], '2A fast-acting fuse, 32V, 1206')
 
     def test_wrong_chip_package_and_undocumented_substitution_rejected(self):

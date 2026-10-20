@@ -2,6 +2,7 @@
 
 Reports model limits explicitly. No CAD mutation, rerouting, or physical PASS.
 """
+from hardware_require import require as _require_hardware
 from pathlib import Path
 import csv
 import hashlib
@@ -83,7 +84,7 @@ def geometry_review(board):
         return [min(a[0] for a in points),min(a[1] for a in points),max(a[0] for a in points),max(a[1] for a in points)]
     def pad(ref,num): return next(q for q in fps[ref].Pads() if q.GetNumber()==num)
     def route_length(a,b):
-        start,finish=pad(*a),pad(*b);net=start.GetNetname();assert net==finish.GetNetname()
+        start,finish=pad(*a),pad(*b);net=start.GetNetname();_require_hardware((net==finish.GetNetname()), lambda: ('prefab_review.py:86: hardware validation condition'))
         graph={};positions={}
         def node(v,layer):
             key=(v.x,v.y,layer);positions[key]=v;return key
@@ -114,7 +115,7 @@ def geometry_review(board):
         q=pad(ref,num)
         distance=min(p.ToMM((q.GetPosition()-t.GetPosition()).EuclideanNorm())
                      for t in board.GetTracks() if isinstance(t,p.PCB_VIA) and t.GetNetname()=='GND')
-        assert distance<=1.5,(ref,'ground stitching too far',distance)
+        _require_hardware((distance<=1.5), lambda: ((ref,'ground stitching too far',distance)))
         ground_returns.append(dict(reference=ref,nearest_ground_via_mm=distance))
     planes={board.GetLayerName(z.GetLayer()):z.GetFilledPolysList(z.GetLayer()) for z in board.Zones() if z.GetNetname()=='GND'}
     coverage={}
@@ -140,8 +141,8 @@ def geometry_review(board):
                       mating_axis='+Y, parallel to PCB',
                       cable_service_envelope_verified=False)
     drill=[p.ToMM(q.GetDrillSize().x) for q in fps['J90'].Pads()]
-    assert drill==[1.2]*3,drill
-    assert fit['J90']['module_xy_separation_mm']>8
+    _require_hardware((drill==[1.2]*3), lambda: (drill))
+    _require_hardware((fit['J90']['module_xy_separation_mm']>8), lambda: ('prefab_review.py:144: hardware validation condition'))
     findings=[]
     # Project review goals, NOT manufacturer absolute limits or noise guarantees.
     for path in paths:
@@ -150,7 +151,7 @@ def geometry_review(board):
             findings.append(dict(code='analog_path_review',start=path['start'],end=path['end'],
                 measured_mm=path['xy_copper_length_mm'],review_target_mm=target,
                 disposition='shorten protection paths / put final filter at ADC before layout freeze'))
-    assert not findings, findings
+    _require_hardware((not findings), lambda: (findings))
     from assembly_fit import review
     from assembly_fit import default_obstacles
     placements={ref:(*xy(fp.GetPosition()),fp.GetOrientationDegrees(),
@@ -207,14 +208,15 @@ def main():
         (('C95','C96'),'GRM188R71H104KA93D','Capacitor_SMD__C_0603_1608Metric')]:
         for ref in refs:packages[ref]=(mpn,footprint)
     for ref,(mpn,footprint) in packages.items():
-        assert rows[ref]['MPN']==mpn and rows[ref]['Footprint']==footprint,(ref,rows[ref])
+        _require_hardware((rows[ref]['MPN']==mpn and rows[ref]['Footprint']==footprint), lambda: ((ref,rows[ref])))
     report=dict(scope='pre-fab engineering review; no physical qualification',
         disposition='analog and internal-link stack reviewed; physical power/noise/fit and link throughput remain unqualified',
         board_sha256=before,physical_pin_checks=pin_checks,purchasing_package_checks=len(packages),
         analog=analog_review(),layout_and_fit=geometry_review(board),
         imu_bypass=__import__('imu_layout').review(board),
+        adjacent_signal_layers=__import__('layer_coupling').review(board),
         sensor_supply_layout=__import__('sensor_supply_layout').review(board))
-    assert hashlib.sha256(path.read_bytes()).hexdigest()==before
+    _require_hardware((hashlib.sha256(path.read_bytes()).hexdigest()==before), lambda: ('prefab_review.py:217: hardware validation condition'))
     (BOARD/'prefab-review.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
 

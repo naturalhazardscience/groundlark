@@ -5,6 +5,7 @@ drawing, vendor Trenz pin transcriptions and frozen numbered supplier pads.
 Native PCB coordinates are top-view X right/Y down; CPL uses Y up. Neither is
 an instruction to reflect an imported physical 3D component.
 """
+from hardware_require import require as _require_hardware
 import argparse
 import csv
 import hashlib
@@ -50,9 +51,9 @@ def audit():
         count=check_header(header_coordinates(board,'J1'),expected)
         fps={f.GetReference():f for f in board.GetFootprints()}
         pins={(f.GetReference(),q.GetNumber()):q.GetNetname() for f in fps.values() for q in f.Pads() if q.GetNumber()}
-        for n in (1,17):assert pins['J1',str(n)]=='PI_3V3'
-        for n in (2,4):assert pins['J1',str(n)]=='PI_5V'
-        for n in (6,9,14,20,25,30,34,39):assert pins['J1',str(n)]=='GND'
+        for n in (1,17):_require_hardware((pins['J1',str(n)]=='PI_3V3'), lambda: ('pcb_handedness.py:53: hardware validation condition'))
+        for n in (2,4):_require_hardware((pins['J1',str(n)]=='PI_5V'), lambda: ('pcb_handedness.py:54: hardware validation condition'))
+        for n in (6,9,14,20,25,30,34,39):_require_hardware((pins['J1',str(n)]=='GND'), lambda: ('pcb_handedness.py:55: hardware validation condition'))
         result={'source_sha256':before,'pi_numbered_positions':count,
                 'pi_power_and_ground_contacts':12,'odd_row':'board interior','even_row':'board edge'}
         if name=='groundlark-daqhat-01':
@@ -67,11 +68,11 @@ def audit():
             rows,checks=correct_placements(placements,geometry,selections)
             require_verified_placements(checks)
             sides={row['Designator']:row['Layer'] for row in rows}
-            assert sides['J1']=='Bottom' and all(sides[r]=='Top' for r in ('J80','J81','J82','J90'))
+            _require_hardware((sides['J1']=='Bottom' and all(sides[r]=='Top' for r in ('J80','J81','J82','J90'))), lambda: ('pcb_handedness.py:70: hardware validation condition'))
             result['supplier_numbered_placements']=len(checks)
             result['assembly_sides']={r:sides[r] for r in ('J1','J80','J81','J82','J90')}
             result['J1_convention']='Through-hole footprint drawn on front in native CAD; selected socket body and assembly CPL explicitly below PCB. Board-view hole numbers are retained.'
-        assert hashlib.sha256(source.read_bytes()).hexdigest()==before,'Audit changed CAD'
+        _require_hardware((hashlib.sha256(source.read_bytes()).hexdigest()==before), lambda: ('Audit changed CAD'))
         report['boards'][name]=result
     report['status']='PASS: native header handedness, power/ground, module contacts and supplier-side mappings'
     return report

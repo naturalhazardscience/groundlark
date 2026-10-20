@@ -1,4 +1,5 @@
 """Render the native PCB with KiCad, recording exact input hashes."""
+from hardware_require import require as _require_hardware
 import hashlib, json, os, shutil, subprocess
 from project_paths import board_dir
 
@@ -8,7 +9,7 @@ def main():
         output=folder/f'skylark-{name}.png'
         cmd=['kicad-cli','pcb','render','--width','1600','--height','1400','--quality','high','--background','opaque','--side',side,'--rotate',angle,'--zoom','0.85','-o',str(output),str(board)]
         if os.name!='nt' and not os.environ.get('DISPLAY'):
-            assert shutil.which('xvfb-run'),'Install Xvfb in the rendering environment'
+            _require_hardware((shutil.which('xvfb-run')), lambda: ('Install Xvfb in the rendering environment'))
             cmd=['xvfb-run','-a',*cmd]
         subprocess.run(cmd,check=True)
         outputs.append({'file':output.name,'sha256':hashlib.sha256(output.read_bytes()).hexdigest(),'side':side,'rotation':angle})

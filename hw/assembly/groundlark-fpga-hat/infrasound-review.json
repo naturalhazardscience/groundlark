@@ -1,23 +1,46 @@
 {
-  "status": "pending procurement and supplier pad review; export remains blocked",
-  "reviewed_on": "2026-09-29",
+  "status": "Exact catalog identities and dated stock recorded in canonical registry; numbered supplier placement holds remain; no fabrication release",
+  "reviewed_on": "2026-10-19",
   "changes": [
     {
       "reference": "U23",
-      "manufacturer": "Amphenol All Sensors",
-      "mpn": "DLVR-F50D-E1BS-I-NI3F",
-      "manufacturer_evidence": "hw/shared/reference/dlvr.pdf (DS-0300 Rev J, E1BS)",
-      "catalog_identity": null,
-      "stock_observation": null,
+      "manufacturer": "Sensirion",
+      "mpn": "SDP32-125PA-TR-250PCS",
+      "manufacturer_evidence": "https://sensirion.com/media/documents/4D045D69/6375F34F/DP_DS_SDP3x_digital_D1.pdf",
+      "catalog_identity": "C6473035",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:49.137598+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/Sensirion-SDP32_125PA_TR250PCS/C6473035",
+        "status": "available_to_order",
+        "displayed_stock": 89,
+        "available_order_quantity": 80,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "4ce21a4d5bfe60d37ce07bd34b5d5825325b7609c76ee6f7ba2ed7fd65e965ae",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
       "supplier_pad_fixture": null
     },
     {
       "reference": "C24",
-      "manufacturer": "Murata",
+      "manufacturer": "Murata Electronics",
       "mpn": "GRM188R71H104KA93D",
       "footprint": "0603",
       "side": "bottom",
-      "action": "Extend the existing exact capacitor selection and numbered supplier-pad mapping after review"
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410010301_Murata-Electronics-GRM188R71H104KA93D_C77055.pdf",
+      "catalog_identity": "C77055",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:36.954308+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM188R71H104KA93D/C77055",
+        "status": "available_to_order",
+        "displayed_stock": 694216,
+        "available_order_quantity": 506389,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "591032774f015388a854e512ce3985080e39831ac98e3f8714e499710072d22f",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": "daqhat-01-jlcpcb-placement.json"
     }
   ],
   "fabrication_approved": false

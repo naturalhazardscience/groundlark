@@ -183,7 +183,7 @@ velocity response. See [miniSEED storage](miniseed.md) and the
   uncertainty. Characterize ADC/IMU filtering delay separately from capture
   time. The GNSS revision captures PPS, but physical sample UTC remains unqualified. Do not
   claim phase calibration by aligning traces visually.
-- **Infrasound:** equalize both DLVR ports for zero, then compare pressure
+- **Infrasound:** equalize both SDP32 ports for zero, then compare pressure
   levels and frequency response with a calibrated low-pressure reference.
   Include the deployed tubing, inlet, wind filter and enclosure leakage. The
   current live acquisition and static fitter do not yet support this workflow.

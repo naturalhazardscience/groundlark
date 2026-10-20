@@ -1,0 +1,5 @@
+# Native pcbnew interpreter: routing replay and read-only copper extraction.
+sexpdata==1.0.2
+numpy==2.2.6
+scipy==1.15.3
+pillow==11.3.0

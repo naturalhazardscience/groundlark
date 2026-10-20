@@ -1,4 +1,5 @@
 """Trim only KiCad-reported dangling copper, verifying connectivity after each pass."""
+from hardware_require import require as _require_hardware
 from pathlib import Path
 from project_paths import board_dir
 import subprocess,json,sys
@@ -13,7 +14,7 @@ for name in sys.argv[1:] or ['groundlark-field-head']:
         remove={i['uuid'] for v in r['violations'] if v['type'] in {'track_dangling','via_dangling'} for i in v['items']}
         # Removal of a connector can leave isolated branches. Only allow an
         # initial airwire whose two ends are themselves reported dangling.
-        assert all(all(i['description'].startswith(('Track [','Via [')) for i in v['items']) for v in r['unconnected_items']),r['unconnected_items']
+        _require_hardware((all(all(i['description'].startswith(('Track [','Via [')) for i in v['items']) for v in r['unconnected_items'])), lambda: (r['unconnected_items']))
         if not remove:break
         b=p.LoadBoard(str(path));count=0
         for t in list(b.GetTracks()):
@@ -21,4 +22,4 @@ for name in sys.argv[1:] or ['groundlark-field-head']:
         if not count:break
         p.ZONE_FILLER(b).Fill(b.Zones());save_board(str(path),b)
     print(name,'dangling trim passes',iteration)
-    assert not r['unconnected_items'],r['unconnected_items']
+    _require_hardware((not r['unconnected_items']), lambda: (r['unconnected_items']))

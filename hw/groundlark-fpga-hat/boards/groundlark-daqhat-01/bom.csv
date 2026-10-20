@@ -202,3 +202,4 @@ D140,PESD5V0F1BL,"PESD5V0F1BL,315",GNSS_SOD882,False,Nexperia low-capacitance un
 U141,TPS2553,TPS2553DBVR,GNSS_SOT23_6,False,"TI DBV pin table: 1 IN, 2 GND, 3 EN, 4 FAULT NC, 5 ILIM tied IN, 6 OUT. 50..100 mA limit."
 C151,10n,GRM188R71H103KA01D,SUP_C_0603_1608Metric,False,Local RF bypass at L140 cold end; short ground stitch.
 C152,100n,GRM188R71H104KA93D,Capacitor_SMD__C_0603_1608Metric,False,U141 input bypass.
+R118,10k,RC0603FR-0710KL,Resistor_SMD__R_0603_1608Metric,False,Pi UART RX idle pull-up while U51 is disabled

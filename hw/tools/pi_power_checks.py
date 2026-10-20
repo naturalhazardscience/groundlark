@@ -3,6 +3,7 @@ TPSM53603 and TPS22953 data sheets; Nexperia 2N7002 SOT23 pin table.
 
 These checks do not qualify battery thresholds, startup, thermals or noise.
 """
+from hardware_require import require as _require_hardware
 from collections import Counter
 import math
 
@@ -71,15 +72,41 @@ def budget(current_a=3, switch_ohm=.025, copper_ohm=.05):
                 measured=False)
 
 
+def diode_spreader(board):
+    import pcbnew as p
+    diode=next(f for f in board.GetFootprints() if f.GetReference()=='D130')
+    cathode=next(q for q in diode.Pads() if q.GetNumber()=='1')
+    areas={}
+    for layer in (p.F_Cu,p.B_Cu):
+        polygons=[z.GetFilledPolysList(layer) for z in board.Zones()
+                  if z.GetNetname()=='BAT_PROTECTED' and z.IsOnLayer(layer) and not z.GetIsRuleArea()]
+        connected=[poly for poly in polygons if poly.Contains(cathode.GetPosition())]
+        areas[board.GetLayerName(layer)]=sum(poly.Area()/1e12 for poly in connected)
+        if areas[board.GetLayerName(layer)]<40:raise ValueError('D130 cathode heat-spreading copper missing')
+    vias=[t for t in board.GetTracks() if isinstance(t,p.PCB_VIA) and t.GetNetname()=='BAT_PROTECTED'
+          and 171<=p.ToMM(t.GetPosition().x)<=176 and 66<=p.ToMM(t.GetPosition().y)<=72]
+    if len(vias)<6:raise ValueError('D130 heat-spreading through-vias missing')
+    # This loss is an input-sizing scenario, not a thermal simulation.
+    current=budget()['input_scenario_A']
+    return dict(cathode_copper_area_mm2=areas,through_vias=len(vias),input_scenario_A=current,
+                diode_forward_drop_assumed_V=.5,loss_scenario_W=current*.5,
+                thermal_resistance_measured=False,junction_temperature_C=None,qualified=False)
+
+
 def verify_board(board, spec):
     import pcbnew as p
     pins={(f.GetReference(),q.GetNumber()):q.GetNetname() for f in board.GetFootprints() for q in f.Pads() if q.GetNumber()}
     checks=verify(pins); fps={f.GetReference():f for f in board.GetFootprints()};meta={x['ref']:x for x in spec['parts']}
     for ref,mpn in {'U130':'MSPM0L1106TRHBR','U131':'TPS70933DBVR','U132':'TPSM53603RDAR','U133':'TPS22953DQCR','J130':'1803277','F130':'0466004.NRHF'}.items():
-        assert meta[ref]['mpn']==mpn and not fps[ref].IsDNP(),ref
-    for ref,value in {'C143':'470n','R130':'10k','R131':'2.43k','R135':'1M','R136':'150k'}.items():assert fps[ref].GetValue()==value,ref
-    assert fps['J130'].GetOrientationDegrees()%360==180 and not fps['J130'].IsFlipped()
+        _require_hardware((meta[ref]['mpn']==mpn and not fps[ref].IsDNP()), lambda: (ref))
+    for ref,value in {'C143':'470n','R130':'10k','R131':'2.43k','R135':'1M','R136':'150k'}.items():_require_hardware((fps[ref].GetValue()==value), lambda: (ref))
+    _require_hardware((fps['J130'].GetOrientationDegrees()%360==180 and not fps['J130'].IsFlipped()), lambda: ('pi_power_checks.py:81: hardware validation condition'))
     pads={q.GetNumber():q for q in fps['U133'].Pads() if q.GetNumber()}
-    assert abs(p.ToMM(pads['11'].GetSize().x)-.84)<.001 and abs(p.ToMM(pads['11'].GetSize().y)-2.4)<.001
-    b=budget();assert b['minimum_V']>4.75 and b['maximum_V']<5.25 and b['adc_at_18V']<2.5,b
-    return dict(pin_checks=checks,deliberate_no_connects=len(NC),spare_bcm=[],budget=b,firmware='configuration placeholder; MCU implementation pending',physical_qualification=False)
+    _require_hardware((abs(p.ToMM(pads['11'].GetSize().x)-.84)<.001 and abs(p.ToMM(pads['11'].GetSize().y)-2.4)<.001), lambda: ('pi_power_checks.py:83: hardware validation condition'))
+    from copper_resistance import pi_loop
+    copper=pi_loop(board,board.GetFileName())
+    b=budget(copper_ohm=copper['copper_with_reserve_ohm']+.015)
+    _require_hardware((b['minimum_V']>4.75 and b['maximum_V']<5.25 and b['adc_at_18V']<2.5), lambda: (b))
+    return dict(pin_checks=checks,deliberate_no_connects=len(NC),spare_bcm=[],budget=b,
+                copper_extraction=copper,contact_allocation_ohm=.015,diode_spreader=diode_spreader(board),
+                firmware='prototype implemented; battery policy disabled pending qualification',physical_qualification=False)

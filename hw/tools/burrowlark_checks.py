@@ -1,4 +1,5 @@
 """Burrowlark population boundary, independent of placement/BOM generation."""
+from hardware_require import require as _require_hardware
 
 
 def population(references):
@@ -73,10 +74,10 @@ def array_layout(board):
     supply,ground=Copper(board,'V3_SENSOR'),Copper(board,'GND')
     rows=[]
     for ref,cap in zip(('U2','U7','U8','U9'),('C4','C11','C12','C13')):
-        assert not fps[cap].IsDNP() and fps[cap].GetValue() in ('100nF','100n','0.1uF'),f'{cap}: fitted 100 nF required'
+        _require_hardware((not fps[cap].IsDNP() and fps[cap].GetValue() in ('100nF','100n','0.1uF')), lambda: (f'{cap}: fitted 100 nF required'))
         feed=supply.between(pad(ref,'13'),pad(cap,'1'))
         back=ground.to_stitch(pad(cap,'2'),stitches)
-        assert feed<=4.0,f'{cap}: local supply path {feed:.3f} mm exceeds 4 mm'
-        assert back<=2.0,f'{cap}: ground return {back:.3f} mm exceeds 2 mm'
+        _require_hardware((feed<=4.0), lambda: (f'{cap}: local supply path {feed:.3f} mm exceeds 4 mm'))
+        _require_hardware((back<=2.0), lambda: (f'{cap}: ground return {back:.3f} mm exceeds 2 mm'))
         rows.append(dict(module=ref,capacitor=cap,supply_path_mm=round(feed,4),ground_stitch_path_mm=round(back,4)))
     return dict(bypasses=rows,scope='Native copper geometry; not supply-noise or magnetic cross-talk qualification')

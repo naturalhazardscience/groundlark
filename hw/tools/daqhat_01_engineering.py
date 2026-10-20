@@ -1,4 +1,5 @@
 """Reproducible DAQHAT-01 design calculations. Analytical limits are not bench evidence."""
+from hardware_require import require as _require_hardware
 import json
 import math
 from pathlib import Path
@@ -81,12 +82,12 @@ def main():
     pins = {(f.GetReference(), pad.GetNumber()):pad.GetNetname() for f in board.GetFootprints() for pad in f.Pads()}
     power_checks = power_interfaces(pins)
     for pin, net in {7:'PI_GEO_DRDY_N',13:'PI_IMU1_INT',15:'PI_IMU2_INT',16:'PI_IMU3_INT'}.items():
-        assert pins[('J1',str(pin))] == net, ('Pi acquisition IRQ mapping', pin)
+        _require_hardware((pins[('J1',str(pin))] == net), lambda: (('Pi acquisition IRQ mapping', pin)))
     from geophone_checks import verify
     geo_checks = verify(pins, {f.GetReference():(f.GetOrientationDegrees(), f.IsFlipped()) for f in board.GetFootprints()})
     from fpga_power_checks import budget, verify_board
     converter=verify_board(board,spec)
-    bounds=budget();low,high=bounds["minimum_V"],bounds["maximum_V"]
+    bounds=converter['power_budget'];low,high=bounds["minimum_V"],bounds["maximum_V"]
     from assembly_fit import PI_GAP, RISER_COUNT
     gap = PI_GAP
     report = dict(
@@ -95,8 +96,8 @@ def main():
         mechanical=dict(pi_to_hat_underside_mm=gap, riser="Samtec SSQ-120-02-G-D", riser_count=RISER_COUNT,
                         conservative_clearance_mm=clearance(gap),
                         limitations="1 mm seating tolerance plus 2.2 mm trimmed tail envelope; detailed selected cooler/support checks are in prefab-review.json"))
-    assert 3.201 < low < high < 3.399
-    assert clearance(gap) >= 3
+    _require_hardware((3.201 < low < high < 3.399), lambda: ('daqhat_01_engineering.py:98: hardware validation condition'))
+    _require_hardware((clearance(gap) >= 3), lambda: ('daqhat_01_engineering.py:99: hardware validation condition'))
     (BOARD / "engineering.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
 

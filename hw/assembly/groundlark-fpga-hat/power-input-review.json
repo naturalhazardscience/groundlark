@@ -1,5 +1,5 @@
 {
-  "status": "Pending procurement and numbered supplier-pad review; no fabrication release",
+  "status": "Exact catalog identities and dated stock recorded in canonical registry; numbered supplier placement holds remain; no fabrication release",
   "adapter": {
     "voltage_V": 12,
     "tolerance": 0.05,
@@ -19,145 +19,363 @@
       "reference": "J83",
       "mpn": "PJ-102AH",
       "footprint": "Connector_BarrelJack:BarrelJack_CUI_PJ-102AH_Horizontal",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C3096093",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:49.274672+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/CUI-PJ102AH/C3096093",
+        "status": "available_to_order",
+        "displayed_stock": 1819,
+        "available_order_quantity": 1716,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "0e3ad4b3ec3b9926b755fdd38f72900c82e85f2e153336c93044ea6a90541753",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "CUI",
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401301340_CUI-PJ-102AH_C3096093.pdf"
     },
     {
       "reference": "F80",
-      "mpn": "0467002.NR",
+      "mpn": "0466002.NRHF",
       "footprint": "Fuse:Fuse_1206_3216Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C3105",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:49.981274+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/Littelfuse-0466002NRHF/C3105",
+        "status": "available_to_order",
+        "displayed_stock": 30164,
+        "available_order_quantity": 29646,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "c882f740d195f4447332c0d116e1202cdc7a4e0910f31e39e253afedf88187d4",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "Littelfuse",
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810111920_Littelfuse-0466002-NRHF_C3105.pdf"
     },
     {
       "reference": "D80",
       "mpn": "B340A-13-F",
       "footprint": "Diode_SMD:D_SMA",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C85098",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:50.049530+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/DiodesIncorporated-B340A_13F/C85098",
+        "status": "available_to_order",
+        "displayed_stock": 113431,
+        "available_order_quantity": 110187,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "6dd04b0b7d2e13581fedbd1af21ed9da69c4c0501dd572b781ed867979bb4f99",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "Diodes Incorporated",
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Diodes-Incorporated-B340A-13-F_C85098.pdf"
     },
     {
       "reference": "D81",
       "mpn": "SMAJ15A-13-F",
       "footprint": "Diode_SMD:D_SMA",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C110520",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:50.695991+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/DiodesIncorporated-SMAJ15A_13F/C110520",
+        "status": "available_to_order",
+        "displayed_stock": 12802,
+        "available_order_quantity": 12785,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "8637fe789fb525b2707b0ef0257ff78d201898ee716690edc27c9788208ca1e3",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "Diodes Incorporated",
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Diodes-Incorporated-SMAJ15A-13-F_C110520.pdf"
     },
     {
       "reference": "U80",
       "mpn": "TPSM53603RDAR",
       "footprint": "Package_DFN_QFN:Texas_B3QFN-14-1EP_5x5.5mm_P0.65mm",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C2860943",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:50.700983+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/TexasInstruments-TPSM53603RDAR/C2860943",
+        "status": "available_to_order",
+        "displayed_stock": 1061,
+        "available_order_quantity": 1053,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "24c931dca79942e75f6de6761985dc4980ed416c4cbec49ed0fcf693779980e8",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "Texas Instruments",
+      "manufacturer_evidence": "https://www.ti.com/cn/lit/gpn/tpsm53603"
     },
     {
       "reference": "R120",
       "mpn": "RT0603BRD0710KL",
       "footprint": "Resistor_SMD:R_0603_1608Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C95204",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:51.376551+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/YAGEO-RT0603BRD0710KL/C95204",
+        "status": "available_to_order",
+        "displayed_stock": 2006058,
+        "available_order_quantity": 1180009,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "64548d03f44c502ca553cb2ae9fde8ab40a993e385b495bd8facb0435de01892",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": "daqhat-01-jlcpcb-placement.json",
+      "manufacturer": "YAGEO",
+      "manufacturer_evidence": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/1811082117_YAGEO-RT0603BRD0710KL_C95204.pdf"
     },
     {
       "reference": "R121",
       "mpn": "RT0603BRD074K3L",
       "footprint": "Resistor_SMD:R_0603_1608Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C861441",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:51.348020+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/YAGEO-RT0603BRD074K3L/C861441",
+        "status": "available_to_order",
+        "displayed_stock": 6235,
+        "available_order_quantity": 6198,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "dc119da260238677431917b390a567d631af7aec93de7012e81d21014f8cb784",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "YAGEO",
+      "manufacturer_evidence": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2204130915_YAGEO-RT0603BRD074K3L_C861441.pdf"
     },
     {
       "reference": "R122",
       "mpn": "RC0603FR-07100KL",
       "footprint": "Resistor_SMD:R_0603_1608Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C14675",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:40.723096+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/YAGEO-RC0603FR07100KL/C14675",
+        "status": "available_to_order",
+        "displayed_stock": 8881465,
+        "available_order_quantity": 8425405,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "cdaa7a944b5b989c48badfe4b05214eb2563302f8bc81b52c4e77c53b118b558",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": "daqhat-01-jlcpcb-placement.json",
+      "manufacturer": "YAGEO",
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809281124_YAGEO-RC0603FR-07100KL_C14675.pdf"
     },
     {
       "reference": "R123",
       "mpn": "RC0603FR-0715KL",
       "footprint": "Resistor_SMD:R_0603_1608Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C114661",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:52.308838+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/YAGEO-RC0603FR0715KL/C114661",
+        "status": "available_to_order",
+        "displayed_stock": 330355,
+        "available_order_quantity": 299047,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "4548e38979d4b066487d9bd84a3b52f23e1c48b874bdc0b2380bede5f4229b87",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "YAGEO",
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_YAGEO-RC0603FR-0715KL_C114661.pdf"
     },
     {
       "reference": "R124",
       "mpn": "RT0603BRD0710KL",
       "footprint": "Resistor_SMD:R_0603_1608Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C95204",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:51.376551+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/YAGEO-RT0603BRD0710KL/C95204",
+        "status": "available_to_order",
+        "displayed_stock": 2006058,
+        "available_order_quantity": 1180009,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "64548d03f44c502ca553cb2ae9fde8ab40a993e385b495bd8facb0435de01892",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": "daqhat-01-jlcpcb-placement.json",
+      "manufacturer": "YAGEO",
+      "manufacturer_evidence": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/1811082117_YAGEO-RT0603BRD0710KL_C95204.pdf"
     },
     {
       "reference": "SW80",
       "mpn": "PCM12SMTR",
       "footprint": "Button_Switch_SMD:SW_SPDT_PCM12",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C221841",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:52.058557+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/CK-PCM12SMTR/C221841",
+        "status": "available_to_order",
+        "displayed_stock": 10716,
+        "available_order_quantity": 8889,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "d2b2a6a6ed45216defc858a31f8f7e43f84c5043765b8d715be0114ec5bb5d25",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "C&K",
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_1912111437_C-K-PCM12SMTR_C221841.pdf"
     },
     {
       "reference": "C86",
-      "mpn": "CGA5L1X7R1H106K160AC",
+      "mpn": "CGA5L1X7R1H106KT0Y0N",
       "footprint": "Capacitor_SMD:C_1206_3216Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C531431",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:52.736067+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/TDK-CGA5L1X7R1H106KT0Y0N/C531431",
+        "status": "available_to_order",
+        "displayed_stock": 11040,
+        "available_order_quantity": 8630,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "36375501141cf013f4a861f21107378abfe36aadd0a255ac345fc6e14c4f204c",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "TDK",
+      "manufacturer_evidence": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA5L1X7R1H106K160AC"
     },
     {
       "reference": "C87",
-      "mpn": "CGA5L1X7R1H106K160AC",
+      "mpn": "CGA5L1X7R1H106KT0Y0N",
       "footprint": "Capacitor_SMD:C_1206_3216Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C531431",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:52.736067+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/TDK-CGA5L1X7R1H106KT0Y0N/C531431",
+        "status": "available_to_order",
+        "displayed_stock": 11040,
+        "available_order_quantity": 8630,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "36375501141cf013f4a861f21107378abfe36aadd0a255ac345fc6e14c4f204c",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "TDK",
+      "manufacturer_evidence": "https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=CGA5L1X7R1H106K160AC"
     },
     {
       "reference": "C88",
       "mpn": "GRM188R71H104KA93D",
       "footprint": "Capacitor_SMD:C_0603_1608Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C77055",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:36.954308+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM188R71H104KA93D/C77055",
+        "status": "available_to_order",
+        "displayed_stock": 694216,
+        "available_order_quantity": 506389,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "591032774f015388a854e512ce3985080e39831ac98e3f8714e499710072d22f",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": "daqhat-01-jlcpcb-placement.json",
+      "manufacturer": "Murata Electronics",
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410010301_Murata-Electronics-GRM188R71H104KA93D_C77055.pdf"
     },
     {
       "reference": "C89",
-      "mpn": "EEE-FK1V470P",
+      "mpn": "EEEFK1V470P",
       "footprint": "Capacitor_SMD:CP_Elec_6.3x7.7",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C178565",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:53.031951+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/PANASONIC-EEEFK1V470P/C178565",
+        "status": "available_to_order",
+        "displayed_stock": 11548,
+        "available_order_quantity": 11300,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "5e4e47842a7cb02c6bdfae97b28fed6e93724ffb2c7bb51a80add0e974800244",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "Panasonic",
+      "manufacturer_evidence": "https://industrial.panasonic.com/ww/products/pt/aluminum-cap-smd/models/EEEFK1V470P"
     },
     {
       "reference": "C110",
       "mpn": "GRM32ER71E226KE15L",
       "footprint": "Capacitor_SMD:C_1210_3225Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C21397",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:53.469411+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM32ER71E226KE15L/C21397",
+        "status": "available_to_order",
+        "displayed_stock": 77396,
+        "available_order_quantity": 66932,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "8ab08ffcfd470356b680c9b743850b832ba78dfbe26faebf283423608ca8f7d1",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "Murata Electronics",
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_2308111542_Murata-Electronics-GRM32ER71E226KE15L_C21397.pdf"
     },
     {
       "reference": "C111",
       "mpn": "GRM32ER71E226KE15L",
       "footprint": "Capacitor_SMD:C_1210_3225Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C21397",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:53.469411+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM32ER71E226KE15L/C21397",
+        "status": "available_to_order",
+        "displayed_stock": 77396,
+        "available_order_quantity": 66932,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "8ab08ffcfd470356b680c9b743850b832ba78dfbe26faebf283423608ca8f7d1",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "Murata Electronics",
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_2308111542_Murata-Electronics-GRM32ER71E226KE15L_C21397.pdf"
     },
     {
       "reference": "C112",
       "mpn": "GRM32ER71E226KE15L",
       "footprint": "Capacitor_SMD:C_1210_3225Metric",
-      "catalog_identity": null,
-      "stock_observation": null,
-      "supplier_pad_fixture": null
+      "catalog_identity": "C21397",
+      "stock_observation": {
+        "checked_at": "2026-10-19T22:22:53.469411+00:00",
+        "source_url": "https://jlcpcb.com/partdetail/MurataElectronics-GRM32ER71E226KE15L/C21397",
+        "status": "available_to_order",
+        "displayed_stock": 77396,
+        "available_order_quantity": 66932,
+        "minimum_quantity": 1,
+        "snapshot_sha256": "8ab08ffcfd470356b680c9b743850b832ba78dfbe26faebf283423608ca8f7d1",
+        "scope": "Public JLCPCB stock search response, exact C-code; stock is not reserved.",
+        "catalog_api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList/v2"
+      },
+      "supplier_pad_fixture": null,
+      "manufacturer": "Murata Electronics",
+      "manufacturer_evidence": "https://www.lcsc.com/datasheet/lcsc_datasheet_2308111542_Murata-Electronics-GRM32ER71E226KE15L_C21397.pdf"
     }
-  ]
+  ],
+  "reviewed_on": "2026-10-19",
+  "fabrication_approved": false
 }

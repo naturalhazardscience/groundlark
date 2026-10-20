@@ -7,7 +7,7 @@ side-facing SMA with a 3.3 V active-antenna supply. BCM4 remains geophone DRDY;
 BCM6/13 retain the TI power-supervisor handshake. FPGA interfaces and the
 independent adapter supply remain unchanged. Native checks report zero ERC
 findings, zero DRC findings and zero unconnected items. The complete
-13,058-track/via SES reproduces identical copper. Independent pin/no-connect,
+13,099-track/via SES reproduces identical copper. Independent pin/no-connect,
 power, RF geometry, fabrication and analog-layout checks pass.
 The antenna limiter and local bypasses are routed; ISO1640 side 2 faces GNSS.
 Pi rail calculations include resistor temperature drift and an unmeasured
@@ -43,15 +43,46 @@ The supervisor battery policy stays disabled with unset thresholds; prototype
 target firmware is built and tested with native fixtures. Hardware shutdown
 integration remains unqualified.
 
-The full portable profile executes 26 stages. Its supplier placement acceptance
-gate remains blocked: 52 of 188 placements lack verified numbered supplier pads.
-All 71 catalog identities have dated stock observations; 136 placements fit frozen
+The full portable profile executes 26 stages. All 302 software tests pass.
+The final hardware regression run passes 234 of 235 tests; its sole error is
+the supplier placement acceptance gate. It remains blocked because 52 of 189
+placements lack verified numbered supplier pads.
+All 71 catalog identities have dated stock observations; 137 placements fit frozen
 supplier geometry. Review export tests preserve exceptions rather than clearing
 the release gate. GNSS pin/layout checks include missing bypass and ground-stitch
 faults. No physical
 power, noise, thermal, battery or RF qualification is implied. See
 [power operation](power-supplies.md#pi-supervisor-and-battery-input) and
 [assembly status](jlcpcb-assembly.md).
+
+## Native copper regression checks
+
+`copper_resistance.py` extracts filled native copper and through-barrels with
+an explicit stackup, conductor temperature and plating assumption. Analytical
+series/parallel fixtures, disconnected networks, missing distribution pours
+and missing vias exercise the model independently. Refinement from 0.1 to
+0.05 mm checks the Pi distribution estimate; connector resistance, thermal
+rise and regulator dynamics still require measurement. Model reserve is an
+engineering allocation, not a statistical confidence bound.
+
+The GNSS check reads the actual 0.0994 mm dielectric and 0.17 mm back-layer
+series route, including reference-plane coverage. The uncoated microstrip
+estimate is approximately 49.7 Ω; pads, soldermask and coplanar copper require
+supplier field-solver review. A 0.3 mm route is a regression fault.
+
+The adjacent In2/In3 screen reports parallel signal lengths within three
+dielectric heights of edge separation. Its 5 mm aggregate pair limit is a
+layout regression limit, not a crosstalk acceptance voltage. Perpendicular
+crossings and distant controls are independent fixtures. The existing
+0.1088 mm interlayer gap remains part of the stock stackup; physical signal
+integrity is unqualified.
+
+Hardware-tool checks raise explicit exceptions even under `python -O`.
+Optimization-mode fault tests verify that checks cannot silently disappear.
+The IMU driver disables both I2C and I3C while using SPI and validates those
+registers after configuration. TCA9534 initialization writes a low latch
+before enabling P0/P1 outputs; grounded P2–P7 remain inputs. R118 holds the
+Pi UART receiver high while U51 is disabled.
 
 ## Reproducible checks and release limits
 

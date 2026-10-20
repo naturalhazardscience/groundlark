@@ -3,6 +3,6 @@
   "output": "U80 regulated FPGA_VIN; J80/J81 module VIN/3.3VIN contacts",
   "output_allocation_A": 3,
   "output_hot_loop_limit_ohm": 0.015,
-  "copper": "Front local output pour, broad back distribution, two inner ground planes; all through-vias in SES",
-  "note": "Resistance budget is a qualification target, not extracted or measured; no fabrication approval"
+  "copper": "Front local output pour and bridge across back signal cutouts; continuous Pi back pour and parallel front edge copper; two inner ground planes; all through-vias in native SES",
+  "note": "Native DC mesh at assumed 85 C and 20 um plating; 20% model reserve and separate contact allocations. Physical hot resistance/thermal qualification pending; no fabrication approval"
 }

@@ -2,6 +2,7 @@
 
 Conservative support/port/cooler checks; no ribbons or custom guide remain.
 """
+from hardware_require import require as _require_hardware
 J1_BODY = 8.5  # Megastar ZX-PM2.54-2-20PY, selected JLC assembly socket.
 RISER_BODY = 8.51  # Samtec SSQ-120-02-G-D, external self-nesting riser.
 RISER_COUNT = 2
@@ -33,23 +34,23 @@ def default_obstacles(placements):
 
 
 def review(placements,obstacles=None,supports=PI_SUPPORTS):
-    assert len(supports)==4 and set(supports)==set(PI_SUPPORTS), 'All four straight supports required'
-    assert not any(ref in placements for ref in ('J84','J85','J86','J87','J88','J89')), 'External connectors remain'
+    _require_hardware((len(supports)==4 and set(supports)==set(PI_SUPPORTS)), lambda: ('All four straight supports required'))
+    _require_hardware((not any(ref in placements for ref in ('J84','J85','J86','J87','J88','J89'))), lambda: ('External connectors remain'))
     obstacles=default_obstacles(placements) if obstacles is None else dict(obstacles)
     board_margin={};pi_margin={}
     for i,(x,y) in enumerate(supports):
         post=(x-2.4,y-2.4,PI_TOP,x+2.4,y+2.4,-1.6)
         board_margin[str(i+1)]=min(box_gap(post,other) for other in obstacles.values())-.5
         pi_margin[str(i+1)]=min(box_gap(post,other) for other in PI_OBSTACLES.values())-.5
-        assert board_margin[str(i+1)]>0, ('support-to-HAT',i+1,board_margin[str(i+1)])
-        assert pi_margin[str(i+1)]>0, ('support-to-Pi',i+1,pi_margin[str(i+1)])
+        _require_hardware((board_margin[str(i+1)]>0), lambda: (('support-to-HAT',i+1,board_margin[str(i+1)])))
+        _require_hardware((pi_margin[str(i+1)]>0), lambda: (('support-to-Pi',i+1,pi_margin[str(i+1)])))
     component_margins={}
     for ref,box in obstacles.items():
         if ref=='Pi_GPIO_socket':continue  # Intended mating connection.
         component_margins[ref]=min(box_gap(box,other) for other in PI_OBSTACLES.values())-1
-        assert component_margins[ref]>0, ('HAT-to-Pi',ref,component_margins[ref])
+        _require_hardware((component_margins[ref]>0), lambda: (('HAT-to-Pi',ref,component_margins[ref])))
     plug_margin=MODULE[0]-(14.19+12.22/2+.5)
-    assert plug_margin>0
+    _require_hardware((plug_margin>0), lambda: ('assembly_fit.py:52: hardware validation condition'))
     return dict(status='Four straight-support CAD envelopes pass; first-article fit remains unmeasured',
         pi='Raspberry Pi 4 Model B',pi_supports_xy_mm=supports,omitted_support_xy_mm=None,
         pi_to_hat_underside_mm=PI_GAP,module_surface_gap_mm=8,

@@ -28,9 +28,9 @@ Breaking meaning/units requires a new package and envelope version.
 | --- | --- | --- |
 | 1–3 | DAQHAT-01 LSM6DSO U11–U13 | Signed 16-bit XYZ acceleration/gyro counts; optional signed temperature |
 | 5 | Legacy SCL3300 U20 (removed from current DAQHAT-01) | Signed 16-bit XYZ acceleration and/or angle counts, optional temperature, required 16-bit device status |
-| 6 | Legacy DAQHAT-01 MAX-M10S U21 (absent on DAQHAT-01) | Complete 92-byte UBX NAV-PVT payload, excluding UBX header/checksum |
+| 6 | DAQHAT-01 MAX-M10S U21 | Complete 92-byte UBX NAV-PVT payload, excluding UBX header/checksum |
 | 7 | USB head RM3100 U2 (B1 slot 0; legacy single sensor) | Signed 24-bit XYZ counts, sign-extended into sint32 |
-| 8 | DAQHAT-01 DLVR U23; legacy USB head supported | Four original response bytes, preserving pressure, temperature and status bits |
+| 8 | DAQHAT-01 SDP32 U23; legacy DLVR supported | Nine original SDP3x bytes including CRCs in `sdp3x_response`; legacy four-byte DLVR `response` remains distinct |
 | 9 | DAQHAT-01 ADS122C04 / Racotech vertical | Signed 24-bit ADC count in sint32; required uint8 conversion counter |
 | 17 | Burrowlark SHT45 U6 | Six original temperature/humidity bytes, including both CRC bytes |
 | 18 / 19 / 20 | Burrowlark B1 RM3100 U7 / U8 / U9, slots 1 / 2 / 3 | Signed 24-bit XYZ counts, separately retained |

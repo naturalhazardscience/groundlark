@@ -4,6 +4,7 @@ The module/ground CSVs are schematic transcriptions, not generated CAD netlists.
 The host link uses nine ordinary I/Os; the remaining 149 are no-connects. Dedicated clocks,
 Ethernet PHY pairs and GTP lanes must remain disconnected on this carrier.
 """
+from hardware_require import require as _require_hardware
 from collections import Counter
 from pathlib import Path
 import csv
@@ -37,36 +38,36 @@ def pad(module, number):
 def check(pins):
     module = records('trenz-gpio-module.csv')
     grounds = records('trenz-ground-module.csv')
-    assert len(module) == 158
-    assert Counter(int(r['bank']) for r in module) == {13:30,14:30,15:50,16:48}
-    assert len({(r['module_connector'], r['module_pin']) for r in module}) == 158
+    _require_hardware((len(module) == 158), lambda: ('gpio_audit.py:40: hardware validation condition'))
+    _require_hardware((Counter(int(r['bank']) for r in module) == {13:30,14:30,15:50,16:48}), lambda: ('gpio_audit.py:41: hardware validation condition'))
+    _require_hardware((len({(r['module_connector'], r['module_pin']) for r in module}) == 158), lambda: ('gpio_audit.py:42: hardware validation condition'))
     degree = Counter(pins.values())
     expected = dict(HOST)
     for r in module:
         key = r['module_connector'], int(r['module_pin'])
         net = pins[pad(*key)]
         if key in HOST:
-            assert net == HOST[key], (key, net, HOST[key])
+            _require_hardware((net == HOST[key]), lambda: ((key, net, HOST[key])))
         else:
-            assert net and degree[net] == 1, ('Unused GPIO connected', key, net)
+            _require_hardware((net and degree[net] == 1), lambda: (('Unused GPIO connected', key, net)))
     for r in grounds:
         key = r['module_connector'], int(r['module_pin'])
-        assert key not in expected
+        _require_hardware((key not in expected), lambda: ('gpio_audit.py:54: hardware validation condition'))
         expected[key] = 'GND'
     for connector, assignments in CONTROL.items():
         for number, net in assignments.items():
-            assert (connector, number) not in expected
+            _require_hardware(((connector, number) not in expected), lambda: ('gpio_audit.py:58: hardware validation condition'))
             expected[connector, number] = net
     for connector, count in [('JM1',100), ('JM2',100), ('JM3',60)]:
         for number in range(1,count+1):
             key = connector, number
             net = pins[pad(*key)]
             if key in expected:
-                assert net == expected[key], (key, net, expected[key])
+                _require_hardware((net == expected[key]), lambda: ((key, net, expected[key])))
             else:
-                assert net and degree[net] == 1, ('Reserved or unused pin connected', key, net)
-        assert pins[CARRIER[connector], str(count+1)] == 'GND'
-    assert not any(ref in {f'J{i}' for i in range(84,90)} for ref, _ in pins), 'External expansion/programming header remains'
+                _require_hardware((net and degree[net] == 1), lambda: (('Reserved or unused pin connected', key, net)))
+        _require_hardware((pins[CARRIER[connector], str(count+1)] == 'GND'), lambda: ('gpio_audit.py:68: hardware validation condition'))
+    _require_hardware((not any(ref in {f'J{i}' for i in range(84,90)} for ref, _ in pins)), lambda: ('External expansion/programming header remains'))
     from host_link_checks import verify
     link_checks = verify(pins)
     return {'module_gpio_checks':158, 'module_contact_checks':260,

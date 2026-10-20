@@ -1,13 +1,13 @@
 # JLCPCB assembled DAQHAT-01 HAT
 
 The package targets **one fabricated PCB and one assembled HAT**, the same
-physical board. The current HAT is 140 × 56 mm with 188 fitted placements.
-The current exact-part registry covers all 188 placements with 71 unique JLCPCB
+physical board. The current HAT is 140 × 56 mm with 189 fitted placements.
+The current exact-part registry covers all 189 placements with 71 unique JLCPCB
 catalog identities. Dated live inventory and MOQ observations are recorded in
 the registry. Procurement identities include the revised FPGA power input,
 Pi supervisor, GNSS and SDP32 pressure sensor; older packages are incompatible.
 
-**Assembly hold:** 136 placements have frozen numbered supplier-pad fits;
+**Assembly hold:** 137 placements have frozen numbered supplier-pad fits;
 52 retain explicitly unverified supplier origins/rotations. The complete review
 export includes these exceptions and cannot be submitted as a released assembly.
 The placement release gate rejects unresolved entries. Obtain supplier geometry
@@ -102,7 +102,7 @@ The Pi, Trenz module, external geophone and risers remain outside this PCB BOM.
 | JLCPCB / LCSC part number | `JLCPCB Part #` |
 
 Do not use `Description` as the ordering code. Confirm all 71 nonblank catalog
-identities and all 188 placements survive import.
+identities and all 189 placements survive import.
 
 | References | Assembly selection | Required specification |
 | --- | --- | --- |

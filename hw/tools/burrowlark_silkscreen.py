@@ -1,4 +1,5 @@
 """Apply Burrowlark's authored identity artwork without changing its circuitry."""
+from hardware_require import require as _require_hardware
 import argparse
 import pcbnew as p
 
@@ -34,9 +35,9 @@ def main():
     from replay_trenz import copper
     before = copper(board)
     apply(board, load_layout(name)[name])
-    assert copper(board) == before, 'Silkscreen must not change copper'
+    _require_hardware((copper(board) == before), lambda: ('Silkscreen must not change copper'))
     save_board(path, board)
-    assert copper(p.LoadBoard(str(path))) == before
+    _require_hardware((copper(p.LoadBoard(str(path))) == before), lambda: ('burrowlark_silkscreen.py:39: hardware validation condition'))
     print('Applied Burrowlark identity artwork; copper unchanged')
 
 

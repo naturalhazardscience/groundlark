@@ -3,6 +3,7 @@
 Explicit authoring command: never run as a validation step. Connectivity comes
 only from atopile. It replaces this product's routed board, not other products.
 """
+from hardware_require import require as _require_hardware
 from pathlib import Path
 import collections, csv, json
 import pcbnew as p
@@ -18,7 +19,7 @@ def main():
     folder = board_dir(NAME)
     folder.mkdir(parents=True, exist_ok=True)
     b = p.LoadBoard(str(compiled_dir('skylark')/'skylark.kicad_pcb'))
-    assert {f.GetReference() for f in b.GetFootprints()} == {x['ref'] for x in spec['parts'] if not x['ref'].startswith('H')}, 'Build the authored circuit first'
+    _require_hardware(({f.GetReference() for f in b.GetFootprints()} == {x['ref'] for x in spec['parts'] if not x['ref'].startswith('H')}), lambda: ('Build the authored circuit first'))
     b.SetCopperLayerCount(4)
     for item in [*b.GetTracks(), *b.GetDrawings(), *b.Zones()]:
         b.Delete(item)
@@ -31,8 +32,8 @@ def main():
         source = old.get(ref)
         pins = {x.GetNumber(): x.GetNet() for x in source.Pads() if x.GetNumber()} if source else {}
         fp = p.FootprintLoad(str(library), Path(meta['local_fp']).stem)
-        assert fp, meta['local_fp']
-        assert {x.GetNumber() for x in fp.Pads() if x.GetNumber()} == set(pins), ref
+        _require_hardware((fp), lambda: (meta['local_fp']))
+        _require_hardware(({x.GetNumber() for x in fp.Pads() if x.GetNumber()} == set(pins)), lambda: (ref))
         fp.SetReference(ref)
         fp.SetValue(meta['value'])
         fp.SetFPID(p.LIB_ID('Skylark', Path(meta['local_fp']).stem))

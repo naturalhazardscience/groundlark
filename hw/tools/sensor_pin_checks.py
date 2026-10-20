@@ -1,4 +1,5 @@
 """Frozen shared-sensor pin fixture; independent of current placement and compiled CAD."""
+from hardware_require import require as _require_hardware
 EXPECTED = {'U11': {'1': 'SPI_MISO',
          '2': 'GND',
          '3': 'GND',
@@ -74,5 +75,5 @@ EXPECTED = {'U11': {'1': 'SPI_MISO',
 def verify(pins):
     for ref, mapping in EXPECTED.items():
         for pin, net in mapping.items():
-            assert pins.get((ref, pin)) == net, (ref, pin, net, pins.get((ref, pin)))
+            _require_hardware((pins.get((ref, pin)) == net), lambda: ((ref, pin, net, pins.get((ref, pin)))))
     return sum(map(len, EXPECTED.values()))

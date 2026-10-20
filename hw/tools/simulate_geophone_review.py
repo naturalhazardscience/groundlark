@@ -2,6 +2,7 @@
 
 ADC is not present in this model: recovery assertions concern passive nodes.
 """
+from hardware_require import require as _require_hardware
 from pathlib import Path
 import itertools
 import json
@@ -53,11 +54,11 @@ quit
         log=run.stdout+run.stderr;(out/f'pulse-{number}.log').write_text(log)
         if run.returncode:raise RuntimeError(log)
         values={key:float(value) for key,value in re.findall(r'^(baseline|pulse|recovered|bias_start|bias_final)\s*=\s*([-+0-9.eE]+)',log,re.M)}
-        assert len(values)==5,log
-        assert abs((values['pulse']-values['baseline'])/amplitude-1)<.003,values
-        assert abs(values['recovered']-values['baseline'])<.5e-6,values
-        assert values['bias_start']>.44 and values['bias_start']<rail-.44,values
-        assert abs(values['bias_start']-values['bias_final'])<.015,values
+        _require_hardware((len(values)==5), lambda: (log))
+        _require_hardware((abs((values['pulse']-values['baseline'])/amplitude-1)<.003), lambda: (values))
+        _require_hardware((abs(values['recovered']-values['baseline'])<.5e-6), lambda: (values))
+        _require_hardware((values['bias_start']>.44 and values['bias_start']<rail-.44), lambda: (values))
+        _require_hardware((abs(values['bias_start']-values['bias_final'])<.015), lambda: (values))
         cases.append(dict(rail_v=rail,bulk_cap_f=cap,pulse_v=amplitude,**values,passed=True))
     (out/'results.json').write_text(json.dumps(dict(cases=cases,
         scope='8 passive transient checks with asymmetric resistors/caps and leakage',

@@ -3,6 +3,7 @@
 No vendor transistor ADC/TVS model; no ESD, ADC noise, EMC or sub-hertz
 performance qualification. Component tolerances and sensor damping are swept.
 """
+from hardware_require import require as _require_hardware
 from pathlib import Path
 import json, math, re, subprocess
 ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'hw/groundlark-fpga-hat/simulation/geophone'
@@ -56,11 +57,11 @@ quit
             mechanical=omega**2/math.hypot(wn**2-omega**2,2*damping*wn*omega)
             resistance=coil+2000;load=2e6/(2e6+resistance)
             expected=.0001*23.4*mechanical*load/math.sqrt(1+(omega*resistance*(cap+.5e-9)*load)**2)
-            assert abs(values['amplitude']/expected-1)<1e-4,values
-            assert 1.55 < values['v(vcm)'] < 1.75
-            assert abs(values['v(avdd)']/2-values['v(vcm)'])<1e-5
+            _require_hardware((abs(values['amplitude']/expected-1)<1e-4), lambda: (values))
+            _require_hardware((1.55 < values['v(vcm)'] < 1.75), lambda: ('simulate_geophone.py:60: hardware validation condition'))
+            _require_hardware((abs(values['v(avdd)']/2-values['v(vcm)'])<1e-5), lambda: ('simulate_geophone.py:61: hardware validation condition'))
             # PGA64 worst full-scale output still fits the specified 0.2V rail margin.
-            assert values['v(vcm)']-1.024 > .2 and values['v(vcm)']+1.024 < values['v(avdd)']-.2
+            _require_hardware((values['v(vcm)']-1.024 > .2 and values['v(vcm)']+1.024 < values['v(avdd)']-.2), lambda: ('simulate_geophone.py:63: hardware validation condition'))
             rows.append(dict(case=name,**values,expected_v=expected,passed=True))
     report=dict(cases=rows,scope='15 AC/mechanical/tolerance cases and DC common-mode/PGA headroom checks',
                 limitations='Nominal passive model; ADC digital filter/noise, TVS leakage/ESD, package microphonics, cable EMI and physical installation need measurement.')

@@ -1,16 +1,17 @@
 {
   "generator": "KiCad 9.0.9 native PCB render",
-  "board_sha256": "90cb62eb962f41b9770798add089a8737bcf25457320eaa73ed10d3b4c279aa1",
+  "board_sha256": "e20c411be6e5d23e3cbc883171f6f8140cb34a64f27656e24b5c6b5d3ac3d681",
   "models": "Vendor Trenz STEP; authored Pi, SDP32, power envelopes and manufacturer-dimensioned SMA/MAX-M10S STEP envelopes",
   "physical_fit_qualified": false,
   "sha256": {
-    "3d.png": "8a9b3eef831e4de84b4a8f25bb63f993e66611c10a429299dc4dcba22ac650b1",
-    "3d-bottom.png": "583a102688fb42f6944f9da70d5c5c2cb81be06a1b32e27a77a43fe62615225f",
-    "trenz-mounted.png": "61a75081e3145e702a0af843d9a9c5026f016d18a999265d5ea8068c8c265e14",
-    "pi-trenz-stack-concept.png": "5e776f4ee06730c6a9392424896afa158ccff94b91c2fb42d4037f0002d97d57",
-    "stack-service-envelopes.png": "79ab4c3e0f1afadef3b934936b2f7d0b14a5438a618750a295ca40afb6911a0f",
-    "stack-exploded.png": "9d30ce33c0d2b680a1586f264eb5793bca2502ecbaccdf151595bec908bd3cab"
+    "3d.png": "7e1e13e807eab774355103a8f313f723ee43b9b64b2a969d2bdd6f40317cc62b",
+    "3d-bottom.png": "eee20ffa22f5bfa28694b1e574506134dc1a4d23671001b4eeccd0c7766867e3",
+    "trenz-mounted.png": "2444865d8349024abd87177a2e638949e715f3201cf87aca9c0b72c2dc322ee4",
+    "pi-trenz-stack-concept.png": "f41d5162d8f854913d5fc4d78921c5e489e7058c521567d400829e3fe8911148",
+    "stack-service-envelopes.png": "53c9c7954a65a1d60f5eee2d58ac72bbd5a83418b8bf2234c66018bc659da4af",
+    "stack-exploded.png": "a73ee715586dc398391c8e2547cd50773edbd4bf6d853381a13fac42ed17c148"
   },
   "calibration_access": "TP90-TP93 underside pads; no fitted components or additional enclosure cutouts.",
-  "pressure_model_sha256": "8c2fac308af653c219f8b502c2ed1daa6d3490034d28bb0be4e044907b03a9a0"
+  "pressure_model_sha256": "8c2fac308af653c219f8b502c2ed1daa6d3490034d28bb0be4e044907b03a9a0",
+  "revision": "Power copper and R118; native 3D renders refreshed. Subsequent schematic path pagination preserves rendered geometry."
 }

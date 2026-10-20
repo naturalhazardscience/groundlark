@@ -54,10 +54,10 @@ class AssemblyExportIntegrationTests(unittest.TestCase):
             for name,data in expected.items():
                 self.assertEqual((overlay/name).read_bytes(),data,name)
             self.assertEqual({name:sha(base/name) for name in names},before)
-            self.assertEqual(report['physical_placements'],188)
+            self.assertEqual(report['physical_placements'],189)
             self.assertEqual(report['BOM_lines'],71)
-            self.assertEqual(report['catalog_fitted_components'],136)
-            self.assertEqual(report['pads_checked'],711)
+            self.assertEqual(report['catalog_fitted_components'],137)
+            self.assertEqual(report['pads_checked'],713)
             self.assertEqual(len(report['unverified_placements']),52)
             self.assertFalse(manifest['supplier_placement_complete'])
             self.assertEqual(len(manifest['unverified_placements']),52)
@@ -66,7 +66,7 @@ class AssemblyExportIntegrationTests(unittest.TestCase):
             self.assertIn('C7499354',(overlay/'README.md').read_text())
             self.assertIn('C140950',(overlay/'README.md').read_text())
             purchase=read_csv(overlay/'procurement.csv')
-            self.assertEqual(sum(int(r['Installed_total']) for r in purchase),188)
+            self.assertEqual(sum(int(r['Installed_total']) for r in purchase),189)
             self.assertTrue(all(r['Requested_HATs']=='1' for r in purchase))
             bundle_overlay(overlay,name='assembly.zip')
             with zipfile.ZipFile(overlay/'assembly.zip') as archive:

@@ -3,6 +3,7 @@
 The application/JTAG switch permutation is checked at both ends. Power pins
 and default bias resistors are included; a logical net name alone is insufficient.
 """
+from hardware_require import require as _require_hardware
 from collections import Counter
 
 # Independent purchasing/package fixture: pin connectivity cannot detect a
@@ -18,7 +19,7 @@ PARTS = {
 }
 for i in range(100,107):
     PARTS[f'C{i}']=('100n','GRM188R71H104KA93D','Capacitor_SMD__C_0603_1608Metric')
-for i in range(100,118):
+for i in range(100,119):
     value,mpn=('22','RC0603FR-0722RL') if i<106 else (
         ('100k','RC0603FR-07100KL') if i in (112,114,116,117) else ('10k','RC0603FR-0710KL'))
     PARTS[f'R{i}']=(value,mpn,'Resistor_SMD__R_0603_1608Metric')
@@ -27,17 +28,17 @@ for i in range(100,118):
 def verify_parts(spec, bom, board):
     placement={row['ref']:row for row in spec['parts']}
     rows={row['Reference']:row for row in bom}
-    assert len(rows)==len(bom),'Duplicate BOM reference'
+    _require_hardware((len(rows)==len(bom)), lambda: ('Duplicate BOM reference'))
     footprints={f.GetReference():f for f in board.GetFootprints()}
     for ref,(value,mpn,footprint) in PARTS.items():
         meta,row,physical=placement[ref],rows[ref],footprints[ref]
-        assert (meta['value'],meta['mpn'],meta['local_fp'])==(value,mpn,footprint),('Part variant',ref)
-        assert meta['dnp'] is False,('Required part marked DNP',ref)
-        assert (row['Value'],row['MPN'],row['Footprint'])==(value,mpn,footprint),('BOM part',ref)
-        assert row['DNP']=='False',('BOM DNP',ref)
-        assert not physical.IsDNP(),('PCB DNP',ref)
-        assert physical.GetValue()==value,('PCB value',ref)
-        assert physical.GetFPID().GetLibItemName()==footprint,('PCB package',ref)
+        _require_hardware(((meta['value'],meta['mpn'],meta['local_fp'])==(value,mpn,footprint)), lambda: (('Part variant',ref)))
+        _require_hardware((meta['dnp'] is False), lambda: (('Required part marked DNP',ref)))
+        _require_hardware(((row['Value'],row['MPN'],row['Footprint'])==(value,mpn,footprint)), lambda: (('BOM part',ref)))
+        _require_hardware((row['DNP']=='False'), lambda: (('BOM DNP',ref)))
+        _require_hardware((not physical.IsDNP()), lambda: (('PCB DNP',ref)))
+        _require_hardware((physical.GetValue()==value), lambda: (('PCB value',ref)))
+        _require_hardware((physical.GetFPID().GetLibItemName()==footprint), lambda: (('PCB package',ref)))
     return len(PARTS)
 
 FIXTURE = {
@@ -67,6 +68,7 @@ FIXTURE = {
  'R112':{1:'FPGA_LINK_SCLK',2:'GND'},'R113':{1:'JTAG_TMS',2:'FPGA_3V3'},
  'R114':{1:'JTAG_TCK',2:'GND'},'R115':{1:'JTAG_TDI',2:'FPGA_3V3'},
  'R116':{1:'FPGA_LINK_DQ2',2:'GND'},'R117':{1:'FPGA_LINK_DQ3',2:'GND'},
+ 'R118':{1:'PI_UART_RX',2:'PI_3V3'},
 }
 for i, signal in enumerate(('SCLK','DQ0','DQ1','DQ2','CS_N','DQ3')):
     FIXTURE[f'R{100+i}']={1:'PI_LINK_'+signal,2:'LINK_'+signal}
@@ -77,18 +79,18 @@ for i in range(7):
 def verify(pins):
     for ref, assignments in FIXTURE.items():
         for number, net in assignments.items():
-            assert pins.get((ref,str(number))) == net, (ref,number,net,pins.get((ref,str(number))))
+            _require_hardware((pins.get((ref,str(number))) == net), lambda: ((ref,number,net,pins.get((ref,str(number))))))
     degree=Counter(pins.values())
     for key in [('U101','3'),('U101','6'),('U102','13')]:
-        assert pins[key] and degree[pins[key]] == 1, ('Parking/unused output must be open',key)
+        _require_hardware((pins[key] and degree[pins[key]] == 1), lambda: (('Parking/unused output must be open',key)))
     # Signals on opposite sides of the switches must not be shorted by bypasses.
     for signal in ('SCLK','DQ0','DQ1','DQ2','CS_N','DQ3'):
         net='PI_LINK_'+signal
-        assert degree[net] == 2, ('Pi line has unintended stub or bypass',net)
+        _require_hardware((degree[net] == 2), lambda: (('Pi line has unintended stub or bypass',net)))
     for net, switch_pin, module_pin, bias in [
         ('JTAG_TCK',3,100,('R114','1')),('JTAG_TDI',6,96,('R115','1')),
         ('JTAG_TDO',10,98,None),('JTAG_TMS',13,94,('R113','1'))]:
         expected={('U100',str(switch_pin)),('J81',str(module_pin))}
         if bias:expected.add(bias)
-        assert {key for key,value in pins.items() if value==net} == expected, ('JTAG bypass/stub',net)
+        _require_hardware(({key for key,value in pins.items() if value==net} == expected), lambda: (('JTAG bypass/stub',net)))
     return sum(map(len,FIXTURE.values())) + 13

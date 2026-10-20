@@ -4,6 +4,7 @@ The stock picker skips solving when there are no auto-picked components. This
 entrypoint runs the upstream full solver after graph setup, including bus aliases.
 No installed package is patched and no check is disabled.
 """
+from hardware_require import require as _require_hardware
 import os,sys,subprocess
 from pathlib import Path
 os.environ['CI']='1';os.environ['FBRK_FULL_SOLVER']='1'
@@ -28,7 +29,7 @@ for name in config.selected_builds:
         app=build()
         try:
             params=[node.get_trait(F.Parameters.is_parameter) for node in app.get_children(direct_only=False,types=fabll.Node,required_trait=F.Parameters.is_parameter) if node.get_full_name().split('.')[-1] in {'voltage','resistance','capacitance','rated_voltage'}]
-            assert params,'No numeric electrical constraints found'
+            _require_hardware((params), lambda: ('No numeric electrical constraints found'))
             Solver().simplify_for(*params,terminal=True)
         except Exception as error:
             if negative and 'contradiction' in (type(error).__name__+' '+str(error)).lower():

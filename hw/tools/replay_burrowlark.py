@@ -1,4 +1,5 @@
 """Read-only B1 native SES replay in a temporary checkout; never reroute authoring CAD."""
+from hardware_require import require as _require_hardware
 import json
 from pathlib import Path
 import shutil
@@ -34,7 +35,7 @@ def main():
                     scope='Native copper replay and geometry only; physical coherence/noise unqualified')
         (source/'replay.json').write_text(json.dumps(report,indent=2)+'\n')
         print(report)
-        assert report['copper_identical'] and not report['violations'] and not report['unconnected_items'],report
+        _require_hardware((report['copper_identical'] and not report['violations'] and not report['unconnected_items']), lambda: (report))
 
 
 if __name__=='__main__':main()

@@ -53,14 +53,14 @@ switch access. First-print fit and thermal qualification remain pending.
 ## Pi power supervisor
 
 J130 accepts **8–18 V DC** from an externally protected battery/controller.
-U130 is TI MSPM0L1105TRHBR; U131 powers it continuously while U132/U133 supply
+U130 is TI MSPM0L1106TRHBR; U131 powers it continuously while U132/U133 supply
 and disconnect the Pi through header pins 2/4. The combined Pi/HAT allocation
-is 3 A at nominal 5.149 V, for the Pi 4 stack. Do not simultaneously power the
+is 3 A at nominal 5.115 V, for the Pi 4 stack. Do not simultaneously power the
 Pi through USB-C. Keep J83's separate 12 V FPGA input independent.
 
 Battery thresholds and delays are configurable placeholders, shipped disabled
 in [power-policy.example.json](../../sw/pi/deploy/power-policy.example.json).
-Target MCU firmware and physical power qualification remain pending. An
+Prototype MCU firmware is implemented; physical power qualification remains pending. An
 unprogrammed MCU leaves the Pi off; fitting the JP130 shunt provides manual
 bench operation. Remove it before automatic supervision. See the
 [operating specification](../../docs/power-supplies.md#pi-supervisor-and-battery-input).

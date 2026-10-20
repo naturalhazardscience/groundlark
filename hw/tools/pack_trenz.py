@@ -3,6 +3,7 @@
 Large components and connectors are fixed by the reviewed mechanical layout.
 This modifies placement only, never electrical connectivity.
 """
+from hardware_require import require as _require_hardware
 from pathlib import Path
 import json,math
 import pcbnew as p
@@ -35,7 +36,7 @@ placed=[]
 for ref in fixed:
     bb=bounds(by[ref]);bad=[r for r,b in placed if overlap(bb,b)]
     if bad:raise ValueError(('Fixed placement overlap',ref,bad,bb))
-    assert bb[0]>=.1 and bb[1]>=.1 and bb[2]<=84.9 and bb[3]<=55.9,(ref,bb)
+    _require_hardware((bb[0]>=.1 and bb[1]>=.1 and bb[2]<=84.9 and bb[3]<=55.9), lambda: ((ref,bb)))
     placed.append((ref,bb))
 for m in sorted([m for m in parts if m['ref'] not in fixed],key=lambda m:(0 if m['ref'].startswith('C') else 1,m['ref'])):
     want=desired.get(m['ref'],[50,30]);base=bounds(m,[0,0],0);w=base[2]-base[0];h=base[3]-base[1]

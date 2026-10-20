@@ -5073,6 +5073,26 @@
         "1": "GNSS_LDO",
         "2": "GND"
       }
+    },
+    {
+      "ref": "R118",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "names": {},
+      "xy": [
+        16.5,
+        15.1
+      ],
+      "section": "07-fpga-host-isolation-page-02",
+      "angle": 0,
+      "mpn": "RC0603FR-0710KL",
+      "note": "Pi UART RX idle pull-up while U51 is disabled",
+      "dnp": false,
+      "local_fp": "Resistor_SMD__R_0603_1608Metric",
+      "pins": {
+        "1": "PI_UART_RX",
+        "2": "PI_3V3"
+      }
     }
   ]
 }

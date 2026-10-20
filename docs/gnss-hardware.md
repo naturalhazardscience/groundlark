@@ -6,8 +6,10 @@ at address **0x42**, powered from PI_3V3. TIMEPULSE connects directly to
 power-supervisor handshake. FPGA connections and its separate supply remain
 unchanged. GNSS needs no configured FPGA.
 
-The Pi and GNSS face ISO1640 side 2 (pins 6–8). Its 0.4 V maximum low output
-fits the MAX-M10S 0.63 V low-input limit. The sensor bus faces side 1, whose
+The Pi and GNSS face ISO1640 side 2 (pins 6–8). With an assumed 3.135 V minimum
+host rail and a 0.2 × VCC input-low limit, a 0.4 V isolator output-low allocation
+leaves about 0.227 V static margin. This is a datasheet scenario; confirm rail,
+sink current and bus waveforms on hardware. The sensor bus faces side 1, whose
 0.71 V maximum low output fits the sensors’ 3.3 V input thresholds. Keep the
 C48 sensor-side and C49 Pi-side supply bypass assignments with this orientation.
 
@@ -52,7 +54,11 @@ power inputs. The vented R3 case has no outdoor ingress rating.
 
 The PCB keeps the RF input on B.Cu beside the connector with a ground reference
 on In4.Cu and through-hole SMA grounds. The short RF layout uses the existing
-stock six-layer stack. It has **no controlled-impedance fabrication claim**;
+stock six-layer stack. Its two series traces are 0.17 mm wide over the recorded
+0.0994 mm dielectric; the uncoated microstrip estimate is about 49.7 Ω.
+The native check rejects the previous 0.3 mm width and missing reference copper.
+Soldermask, coplanar copper, pads and connector transitions need field-solver
+review. It has **no controlled-impedance fabrication claim**;
 measure insertion loss/return loss, satellite C/N0, ESD behavior and receiver
 performance with the FPGA and power converters active before release.
 

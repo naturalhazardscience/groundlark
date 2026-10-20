@@ -9,6 +9,13 @@ class AntennaLayoutTests(unittest.TestCase):
   import pcbnew as p
   return p.LoadBoard(str(Path(__file__).resolve().parents[1]/'groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb'))
  def test_native_antenna(self):verify_board(self.load())
+ def test_old_rf_width_fails_real_stack(self):
+  import pcbnew as p
+  from gnss_checks import rf_geometry
+  b=self.load()
+  for t in b.GetTracks():
+   if t.GetNetname()=='GNSS_RF':t.SetWidth(p.FromMM(.3))
+  with self.assertRaisesRegex(ValueError,'RF geometry'):rf_geometry(b)
  def test_bypass_omission(self):
   for ref in ['C151','C152']:
    b=self.load();next(f for f in b.GetFootprints() if f.GetReference()==ref).SetDNP(True)

@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/erc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-19T22:49:06+0000",
+    "date": "2026-10-20T00:34:57+0000",
     "included_severities": [
         "error",
         "warning"
@@ -61,6 +61,11 @@
         {
             "path": "/07-fpga-host-isolation-page-01/",
             "uuid_path": "/de5c43d7-546f-5b4d-b587-d8dfceb38170/3c7206d5-3074-57a7-8bed-d08b36d50c9a",
+            "violations": []
+        },
+        {
+            "path": "/07-fpga-host-isolation-page-02/",
+            "uuid_path": "/de5c43d7-546f-5b4d-b587-d8dfceb38170/e6eb102c-4b2b-5df0-ba47-0e97fb1ad08f",
             "violations": []
         },
         {

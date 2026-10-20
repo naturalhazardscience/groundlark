@@ -11,7 +11,7 @@ class HandednessTests(unittest.TestCase):
         report=audit()['boards']['groundlark-daqhat-01']
         self.assertEqual(report['pi_numbered_positions'],40)
         self.assertEqual(report['Trenz']['module_contact_checks'],260)
-        self.assertEqual(report['supplier_numbered_placements'],188)
+        self.assertEqual(report['supplier_numbered_placements'],189)
 
     def test_mirror_and_row_swap_rejected(self):
         # Official 2.54 mm header fixture: pin 1 is on the inner row.

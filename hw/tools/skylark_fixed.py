@@ -3,6 +3,7 @@
 Run on the placed board before routing remaining signals. All coordinates are
 relative to the outline origin. Native DRC remains required after routing.
 """
+from hardware_require import require as _require_hardware
 import pcbnew as p
 from project_paths import board_dir
 from kicad_support import v, save_board
@@ -11,7 +12,7 @@ from assemble_pcb import export_dsn
 def main():
     folder=board_dir('skylark-usb');path=folder/'skylark-usb.kicad_pcb'
     b=p.LoadBoard(str(path));nets=b.GetNetsByName()
-    assert not b.GetTracks(), 'Apply fixed routes before routing other signals'
+    _require_hardware((not b.GetTracks()), lambda: ('Apply fixed routes before routing other signals'))
     def route(net,pts,width=.15):
         for a,z in zip(pts,pts[1:]):
             t=p.PCB_TRACK(b);t.SetStart(v(a[0]+50,a[1]+50));t.SetEnd(v(z[0]+50,z[1]+50));t.SetWidth(p.FromMM(width));t.SetLayer(p.F_Cu);t.SetNet(nets[net]);t.SetLocked(True);b.Add(t)

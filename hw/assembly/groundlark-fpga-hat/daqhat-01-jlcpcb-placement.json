@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "coordinate_basis": "EasyEDA catalog zero, 10 mil units, Y down; exporter converts to mm Y up and fits numbered pads.",
-  "limitation": "All 188 fitted components inventoried; 136 have frozen numbered supplier pads; 52 remain explicit supplier-placement holds. Native CAD/ERC/DRC cannot close feeder orientation review.",
+  "limitation": "All 189 fitted components inventoried; 137 have frozen numbered supplier pads; 52 remain explicit supplier-placement holds. Native CAD/ERC/DRC cannot close feeder orientation review.",
   "shield_alias_basis": "LSHM S1/S2 are the two GND mounting pads: native J80/J81 pad 101 and J82 pad 61. Both physical centres must pass.",
   "footprints": [
     {
@@ -359,7 +359,8 @@
         "R81",
         "R94",
         "R95",
-        "R97"
+        "R97",
+        "R118"
       ],
       "side": "Top",
       "source_footprints": [

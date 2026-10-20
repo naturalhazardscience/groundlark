@@ -1,4 +1,5 @@
 """Read-only IMU bypass geometry screen; not a parasitic or noise simulation."""
+from hardware_require import require as _require_hardware
 import heapq
 
 PAIRS = [('U11','5','C12'),('U11','8','C13'),
@@ -80,23 +81,23 @@ def review(board):
                 and any(poly.Contains(t.GetPosition()) for poly in planes)]
     rows = []
     for imu, pin, cap in PAIRS:
-        assert not fps[cap].IsDNP(), f'{cap}: bypass capacitor DNP'
-        assert fps[cap].GetValue() in ('100nF','100n','0.1uF'), f'{cap}: expected 100 nF'
+        _require_hardware((not fps[cap].IsDNP()), lambda: (f'{cap}: bypass capacitor DNP'))
+        _require_hardware((fps[cap].GetValue() in ('100nF','100n','0.1uF')), lambda: (f'{cap}: expected 100 nF'))
         a, b, g = pad(imu, pin), pad(cap, '1'), pad(cap, '2')
-        assert a.GetNetname() == b.GetNetname() == 'SENS_3V3', f'{cap}: supply net'
-        assert g.GetNetname() == 'GND', f'{cap}: ground net'
+        _require_hardware((a.GetNetname() == b.GetNetname() == 'SENS_3V3'), lambda: (f'{cap}: supply net'))
+        _require_hardware((g.GetNetname() == 'GND'), lambda: (f'{cap}: ground net'))
         length = supply.between(a, b)
         return_length = ground.to_stitch(g, stitches)
         # Project layout goals, not ST limits and not noise-performance claims.
         limit = 4.0 if pin == '5' else 2.0
-        assert length <= limit, f'{cap}: supply path {length:.3f} mm exceeds {limit} mm'
-        assert return_length <= 2.0, f'{cap}: ground stitch path {return_length:.3f} mm exceeds 2 mm'
+        _require_hardware((length <= limit), lambda: (f'{cap}: supply path {length:.3f} mm exceeds {limit} mm'))
+        _require_hardware((return_length <= 2.0), lambda: (f'{cap}: ground stitch path {return_length:.3f} mm exceeds 2 mm'))
         rows.append(dict(imu=imu, pin=pin, capacitor=cap,
                          supply_xy_mm=round(length,4), supply_limit_mm=limit,
                          ground_track_to_plane_via_mm=round(return_length,4)))
     returns = {ref+'.'+pin: round(ground.to_stitch(pad(ref,pin), stitches),4)
                for ref in ('U11','U12','U13') for pin in ('6','7')}
-    assert max(returns.values()) <= 2.5, f'IMU ground return exceeds 2.5 mm: {returns}'
+    _require_hardware((max(returns.values()) <= 2.5), lambda: (f'IMU ground return exceeds 2.5 mm: {returns}'))
     return dict(bypass_paths=rows, imu_ground_pins_to_plane_via_mm=returns,
                 method='Native track endpoint graph, pad-interior bridges, ground via intersects filled In1.Cu GND',
                 limits=['XY centerline lengths exclude via barrels, pad spreading and plane impedance',

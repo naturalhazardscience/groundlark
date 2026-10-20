@@ -32,6 +32,12 @@ On Linux/macOS, use `sh ./lab.sh build`, `sh ./lab.sh test`, and
 elsewhere. Paths are relative to the launcher, not the current working directory.
 No global Python packages or project virtual environments are installed.
 
+The image's native KiCad interpreter includes hash-pinned NumPy, SciPy,
+Pillow and sexpdata for read-only copper extraction and routing replay.
+`environment/system-requirements.in` records direct versions and
+`environment/system-requirements.txt` records wheel hashes. Rebuild the image
+after changing either; these dependencies do not enter atopile's environment.
+
 Windows Docker Desktop could not bind-mount this machine's `P:` drive. The
 launcher therefore sends an allowlisted source snapshot through Docker's API,
 runs against that copy, and copies reports back. This also works without Docker

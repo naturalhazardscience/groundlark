@@ -4,6 +4,7 @@ KiCad's SES importer is not exposed by the CLI. This small importer accepts only
 through-via/straight-track format and native HDI snapshot used here, checks placement, and fails closed
 on unknown route objects. Run check_design.py afterwards: import is not signoff.
 """
+from hardware_require import require as _require_hardware
 from pathlib import Path
 from project_paths import board_dir
 import sys,re,json
@@ -21,18 +22,18 @@ def main(name):
     b=p.LoadBoard(str(path)); s=sx.load(open(folder/(name+'.ses')))
     native_snapshot=str(s[1]).endswith('.native-full')
     routes=child(s,'routes'); res=child(routes,'resolution')
-    assert str(res[1])=='um'; factor=1000/float(res[2])
+    _require_hardware((str(res[1])=='um'), lambda: ('import_routes.py:24: hardware validation condition')); factor=1000/float(res[2])
     fps={f.GetReference():f for f in b.GetFootprints()}
     for c in children(child(s,'placement'),'component'):
         for pl in children(c,'place'):
             fp=fps[str(pl[1])]; xy=fp.GetPosition()
-            assert abs(xy.x-float(pl[2])*factor)<101 and abs(xy.y+float(pl[3])*factor)<101, pl
-            assert str(pl[4])==('back' if fp.IsFlipped() else 'front'),pl
+            _require_hardware((abs(xy.x-float(pl[2])*factor)<101 and abs(xy.y+float(pl[3])*factor)<101), lambda: (pl))
+            _require_hardware((str(pl[4])==('back' if fp.IsFlipped() else 'front')), lambda: (pl))
             # KiCad's Specctra export represents the rear footprint with the
             # opposite local mirror axis, hence a 180 degree placement offset.
             # Our native snapshots already store KiCad's own orientation.
             angle=float(pl[5])-(180 if fp.IsFlipped() and not native_snapshot else 0)
-            assert abs((fp.GetOrientationDegrees()-angle+180)%360-180)<.001,pl
+            _require_hardware((abs((fp.GetOrientationDegrees()-angle+180)%360-180)<.001), lambda: (pl))
     meta=json.loads((folder/'electrical.json').read_text())
     grounds=meta.get('ground_layers',['In1.Cu',f'In{b.GetCopperLayerCount()-2}.Cu'])
     layers={'F.Cu':p.F_Cu,'B.Cu':p.B_Cu}
@@ -56,18 +57,21 @@ def main(name):
                     if start==end: continue
                     t=p.PCB_TRACK(b);t.SetStart(start);t.SetEnd(end);t.SetWidth(width);t.SetLayer(layer);t.SetNet(ni);t.SetLocked(native_snapshot and any(str(c[1])=='protect' for c in children(obj,'type')));b.Add(t)
             elif typ=='via':
-                m=re.fullmatch(r'(MicroVia|Via)\[(\d+)-(\d+)\]_(\d+):(\d+)_um',str(obj[1]));assert m,obj
+                m=re.fullmatch(r'(MicroVia|Via)\[(\d+)-(\d+)\]_(\d+):(\d+)_um',str(obj[1]));_require_hardware((m), lambda: (obj))
                 micro=m[1]=='MicroVia';a,z,diameter,drill=map(int,m.groups()[1:])
                 order=[p.F_Cu,*[b.GetLayerID(f'In{i}.Cu') for i in range(1,b.GetCopperLayerCount()-1)],p.B_Cu]
                 if micro:
-                    assert native_snapshot and meta.get('hdi') and (a,z) in [(0,1),(len(order)-2,len(order)-1)] and (diameter,drill)==(300,100),obj
-                else:assert (a,z)==(0,len(order)-1) and (diameter,drill) in [(600,300),(450,200),(450,300),(700,300),(800,400)],obj
+                    _require_hardware((native_snapshot and meta.get('hdi') and (a,z) in [(0,1),(len(order)-2,len(order)-1)] and (diameter,drill)==(300,100)), lambda: (obj))
+                else:_require_hardware(((a,z)==(0,len(order)-1) and (diameter,drill) in [(600,300),(450,200),(450,300),(700,300),(800,400)]), lambda: (obj))
                 if meta.get('fabrication',{}).get('process')=='standard-six-layer-through-via':
-                    assert not micro and drill>=300 and diameter-drill>=150,obj
+                    _require_hardware((not micro and drill>=300 and diameter-drill>=150), lambda: (obj))
                 v=p.PCB_VIA(b);v.SetPosition(vec(float(obj[2])*factor,-float(obj[3])*factor));v.SetWidth(diameter*1000);v.SetDrill(drill*1000);v.SetViaType(p.VIATYPE_MICROVIA if micro else p.VIATYPE_THROUGH);v.SetLayerPair(order[a],order[z]);v.SetNet(ni)
                 if native_snapshot:
                     v.SetFrontTentingMode(p.TENTING_MODE_TENTED);v.SetBackTentingMode(p.TENTING_MODE_TENTED)
                     v.SetLocked(any(str(c[1])=='protect' for c in children(obj,'type')))
+                    # Native zone-only stitching vias retain the selected net
+                    # while ground pours are rebuilt before power pours.
+                    v.SetIsFree(any(str(c[1])=='yes' for c in children(obj,'free')))
                 b.Add(v)
             else: raise ValueError(obj)
     size=json.loads((folder/'electrical.json').read_text())['size_mm']

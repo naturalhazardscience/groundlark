@@ -17,8 +17,8 @@
         "reference_and_divider_min_V": 3.2706203558882985,
         "reference_and_divider_max_V": 3.3806912721675157,
         "allocated_A": 3,
-        "loop_ohm": 0.015,
-        "minimum_V": 3.2256203558882985,
+        "loop_ohm": 0.014372287562896678,
+        "minimum_V": 3.2275034931996083,
         "maximum_V": 3.3806912721675157,
         "adapter_V": 12,
         "adapter_tolerance": 0.05,
@@ -26,14 +26,39 @@
         "adapter_scenario_A": 1.029591763265894,
         "limitations": "Reference/divider/DC-drop scenario only; line/load regulation, ripple, startup and transient margins require measurement. 85% efficiency is an input-sizing assumption."
       },
+      "copper_extraction": {
+        "paths": [
+          {
+            "net": "FPGA_VIN",
+            "resistance_ohm": 0.0065812163046800026,
+            "grid_mm": 0.1,
+            "nodes": 229646,
+            "conductor_temperature_C": 85,
+            "barrel_plating_mm": 0.02
+          },
+          {
+            "net": "GND",
+            "resistance_ohm": 0.0012290233310672286,
+            "grid_mm": 0.1,
+            "nodes": 1625789,
+            "conductor_temperature_C": 85,
+            "barrel_plating_mm": 0.02
+          }
+        ],
+        "copper_with_reserve_ohm": 0.009372287562896677,
+        "model_reserve_fraction": 0.2,
+        "contact_allocation_ohm": 0.005,
+        "contacts_measured": false,
+        "thermal_qualified": false
+      },
       "physical_qualification": false
     },
     "setpoint_V": 3.3255813953488373,
     "reference_and_divider_min_V": 3.2706203558882985,
     "reference_and_divider_max_V": 3.3806912721675157,
     "allocated_A": 3,
-    "loop_ohm": 0.015,
-    "minimum_V": 3.2256203558882985,
+    "loop_ohm": 0.014372287562896678,
+    "minimum_V": 3.2275034931996083,
     "maximum_V": 3.3806912721675157,
     "adapter_V": 12,
     "adapter_tolerance": 0.05,

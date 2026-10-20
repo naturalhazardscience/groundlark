@@ -3,6 +3,7 @@
 These are behavioral/passive models, not vendor LDO or sensor silicon models.
 See hw/shared/simulation/README.md for model scope, assumptions and acceptance criteria.
 """
+from hardware_require import require as _require_hardware
 from pathlib import Path
 import subprocess,json,re,itertools,math
 ROOT=Path(__file__).resolve().parents[2]; OUT=ROOT/'hw/shared/simulation';OUT.mkdir(exist_ok=True)
@@ -87,7 +88,7 @@ Cload receiver 0 100p
 budget={'input_max_v':5.25,'regulated_min_v':3.18,'sensor_budget_a':.2,'ambient_max_c':60,'assumed_theta_ja_c_per_w':100}
 budget['ldo_dissipation_w']=(budget['input_max_v']-budget['regulated_min_v'])*budget['sensor_budget_a']
 budget['junction_estimate_c']=budget['ambient_max_c']+budget['assumed_theta_ja_c_per_w']*budget['ldo_dissipation_w']
-assert budget['junction_estimate_c']<125
+_require_hardware((budget['junction_estimate_c']<125), lambda: ('simulate.py:90: hardware validation condition'))
 report={'simulator':subprocess.run(['ngspice','--version'],capture_output=True,text=True).stdout,'cases':results,'power_budget':budget,'status':'PASS — supporting-circuit behavioral models only'}
 (OUT/'results.json').write_text(json.dumps(report,indent=2))
 print(len(results),'ngspice cases PASS; estimated LDO junction',budget['junction_estimate_c'],'C under stated assumptions')

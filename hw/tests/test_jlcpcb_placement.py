@@ -174,8 +174,8 @@ class NativeConnectorTests(unittest.TestCase):
 
     def test_all_bom_placements_have_mapping_or_explicit_exception(self):
         result,audit=self.solve()
-        self.assertEqual(len(result),188)
-        self.assertEqual(sum('pads_checked' in a for a in audit),136)
+        self.assertEqual(len(result),189)
+        self.assertEqual(sum('pads_checked' in a for a in audit),137)
         missing={a['reference'] for a in audit if 'pads_checked' not in a}
         self.assertEqual(len(missing),52)
         self.assertTrue({'J83','F80','U23','U11','U12','U13'} <= missing)

@@ -24,8 +24,8 @@ In programming mode the switch selects dedicated JTAG contacts J81.94/96/98/100,
 not the application balls in the table. R80 keeps the module CPLD's JTAGEN low.
 The complete [contact map](trenz-pin-map.json) includes 149 unused ordinary I/Os;
 the audit checks all 260 module contacts against independent vendor fixtures.
-Sensors retain SPI0, I2C1 and their existing interrupts. The added DLVR U23
-uses I2C1 address 0x28, alongside the 0x20 link expander and 0x40 geophone ADC.
+Sensors retain SPI0, I2C1 and their existing interrupts. SDP32 U23
+uses I2C1 address 0x21, alongside the 0x20 link expander and 0x40 geophone ADC.
 It consumes no additional Pi or FPGA pins; BCM6/13 serve power management; BCM24 carries GNSS PPS. Ethernet is not exposed.
 
 U100/U101 are TMUX1574 bidirectional switches. U102 is a TCA9534 at I2C1 address
@@ -33,6 +33,17 @@ U100/U101 are TMUX1574 bidirectional switches. U102 is a TCA9534 at I2C1 address
 with the request, BCM25 arm and both rail-good signals asserted. BCM25 also
 retains its existing UART-enable role. The link tool owns BCM25 while running;
 do not run a separate UART-enable controller concurrently.
+
+R118 (10 kΩ) pulls PI_UART_RX to PI_3V3 while U51 is disabled. Initialize
+the TCA9534 output latch low before configuring P0/P1 as outputs; grounded
+P2–P7 must remain inputs (configuration register 0xFC). The driver reads back
+the configuration before enabling the link.
+
+The Trenz system-controller MODE signal is firmware dependent. The
+[CPLD v24 description](https://www.trenz-electronic.de/trenzdownloads/Trenz_Electronic/Modules_and_Module_Carriers/4x5/TE0712/REV02/Firmware/TE0712%20CPLD-v24-09_27_2023.pdf)
+marks MODE unused but does not establish its pull setting. Record the fitted
+module's CPLD firmware and verify its input behavior during bring-up; the
+carrier does not rely on an unverified internal MODE pull.
 
 U104/U105 monitor Pi/FPGA 3.3 V with TLV809EA30DBZR supervisors (3.0 V threshold,
 nominal 200 ms release). Each new IC has local 100 nF decoupling. R100–R105 are

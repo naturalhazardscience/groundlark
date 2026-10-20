@@ -1,4 +1,5 @@
 """Rebuild native DAQHAT-01 copper from authored placement + complete SES in a temp tree."""
+from hardware_require import require as _require_hardware
 from pathlib import Path
 from project_paths import board_dir
 import collections
@@ -19,7 +20,7 @@ def copper(board):
         if isinstance(t,p.PCB_VIA):
             q=t.GetPosition()
             records.append(('via',t.GetNetname(),q.x,q.y,t.GetWidth(t.TopLayer()),
-                t.GetDrillValue(),t.GetViaType(),t.TopLayer(),t.BottomLayer(),t.IsLocked()))
+                            t.GetDrillValue(),t.GetViaType(),t.TopLayer(),t.BottomLayer(),t.IsLocked(),t.GetIsFree()))
         else:
             a,z=t.GetStart(),t.GetEnd()
             records.append(('track',t.GetNetname(),t.GetLayer(),t.GetWidth(),
@@ -47,6 +48,6 @@ def main():
         (FOLDER/'replay.json').write_text(json.dumps(report,indent=2)+'\n')
         print(report)
         for row in drc['violations']:print(row['type'],[(i['description'],i.get('pos')) for i in row['items']])
-        assert a==b and not drc['violations'] and not drc['unconnected_items'],report
+        _require_hardware((a==b and not drc['violations'] and not drc['unconnected_items']), lambda: (report))
 
 if __name__=='__main__':main()

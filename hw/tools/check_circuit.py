@@ -1,4 +1,5 @@
 """Independent circuit invariants against the actual atopile-compiled PCB."""
+from hardware_require import require as _require_hardware
 from pathlib import Path
 from project_paths import compiled_dir, load_layout
 from burrowlark_checks import population, array_pins, array_geometry
@@ -7,7 +8,7 @@ import pcbnew as p
 ROOT=Path(__file__).resolve().parents[2]
 def require(pins,ref,expected):
     for pin,net in expected.items():
-        assert pins.get((ref,str(pin)))==net,(ref,pin,pins.get((ref,str(pin))),net)
+        _require_hardware((pins.get((ref,str(pin)))==net), lambda: ((ref,pin,pins.get((ref,str(pin))),net)))
 def main(boards=('groundlark-field-head',)):
     metadata=load_layout(*boards);source=(ROOT/'hw/shared/elec/parts.ato').read_text() + '\n' + (ROOT/'hw/shared/elec/burrowlark.ato').read_text()
     blocks={m[1]:m[2] for m in re.finditer(r'^component (\w+):\n(.*?)(?=^component |\Z)',source,re.M|re.S)}
@@ -18,8 +19,8 @@ def main(boards=('groundlark-field-head',)):
         for part in meta['parts']:
             if not part['type']:continue
             block=blocks[part['type']]
-            assert f'partnumber="{part["mpn"]}"' in block,(part['ref'],'BOM/source MPN mismatch')
-            assert f'footprint="{part["local_fp"]}.kicad_mod"' in block,(part['ref'],'BOM/source footprint mismatch')
+            _require_hardware((f'partnumber="{part["mpn"]}"' in block), lambda: ((part['ref'],'BOM/source MPN mismatch')))
+            _require_hardware((f'footprint="{part["local_fp"]}.kicad_mod"' in block), lambda: ((part['ref'],'BOM/source footprint mismatch')))
         array_pins(pins)
         array_geometry({part['ref']:part for part in meta['parts']}, meta['size'])
         population(f.GetReference() for f in b.GetFootprints())

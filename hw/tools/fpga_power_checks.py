@@ -4,6 +4,7 @@ Sources: TI TPSM53603 SNVSB77B pp. 3, 5, 12-13, 23; Same Sky PJ-102AH
 2024-09-12 p. 2; Digilent Nexys Video reference manual, Power Supplies.
 This does not model the converter control loop or qualify a fabricated board.
 """
+from hardware_require import require as _require_hardware
 from collections import Counter
 
 PINS={
@@ -46,11 +47,11 @@ def budget(top=10000,bottom=4300,resistor_tolerance=.001,loop_ohm=.015,current_a
 
 def verify(pins):
  for key,net in PINS.items():
-  assert pins.get(key)==net,('FPGA power pin',key,pins.get(key),net)
+  _require_hardware((pins.get(key)==net), lambda: (('FPGA power pin',key,pins.get(key),net)))
  counts=Counter(pins.values())
  for key in [('U80','4'),('U80','5'),('U80','13'),('J83','3'),('SW80','3')]:
-  assert pins.get(key) and counts[pins[key]]==1,('Required isolated pin',key)
- assert len({pins['J1','1'],pins['J1','2'],pins['J83','1'],pins['U80','7']})==4,'Pi and external supplies joined'
+  _require_hardware((pins.get(key) and counts[pins[key]]==1), lambda: (('Required isolated pin',key)))
+ _require_hardware((len({pins['J1','1'],pins['J1','2'],pins['J83','1'],pins['U80','7']})==4), lambda: ('Pi and external supplies joined'))
  return len(PINS)
 
 def verify_board(board,spec):
@@ -59,26 +60,29 @@ def verify_board(board,spec):
  pins={(f.GetReference(),q.GetNumber()):q.GetNetname() for f in board.GetFootprints() for q in f.Pads() if q.GetNumber()}
  checks=verify(pins);meta={x['ref']:x for x in spec['parts']}
  for ref,mpn in {'J83':'PJ-102AH','U80':'TPSM53603RDAR','F80':'0466002.NRHF','D80':'B340A-13-F','D81':'SMAJ15A-13-F','R120':'RT0603BRD0710KL','R121':'RT0603BRD074K3L'}.items():
-  assert meta[ref]['mpn']==mpn and not fps[ref].IsDNP(),('Fitted power part',ref)
- assert fps['R120'].GetValue()=='10k' and fps['R121'].GetValue()=='4.30k'
- assert fps['J83'].GetOrientationDegrees()%360==180 and not fps['J83'].IsFlipped()
+  _require_hardware((meta[ref]['mpn']==mpn and not fps[ref].IsDNP()), lambda: (('Fitted power part',ref)))
+ _require_hardware((fps['R120'].GetValue()=='10k' and fps['R121'].GetValue()=='4.30k'), lambda: ('fpga_power_checks.py:63: hardware validation condition'))
+ _require_hardware((fps['J83'].GetOrientationDegrees()%360==180 and not fps['J83'].IsFlipped()), lambda: ('fpga_power_checks.py:64: hardware validation condition'))
  # Same Sky top-view drawing: 6 mm center/sleeve spacing and 4.7/3 mm switch offset.
  expected={'1':(95,14.1),'2':(95,8.1),'3':(90.3,11.1)}
  for q in fps['J83'].Pads():
   x,y=expected[q.GetNumber()];xy=q.GetPosition()
-  assert abs(p.ToMM(xy.x)-50-x)<.001 and abs(p.ToMM(xy.y)-50-y)<.001
+  _require_hardware((abs(p.ToMM(xy.x)-50-x)<.001 and abs(p.ToMM(xy.y)-50-y)<.001), lambda: ('fpga_power_checks.py:69: hardware validation condition'))
  # -Y jack mouth and +Y geophone mating directions are opposite; tall parts
  # stay to the right of the vendor module envelope x=30..80, y=8..48.
- assert p.ToMM(fps['J90'].GetPosition().y)>p.ToMM(fps['J83'].GetPosition().y)
+ _require_hardware((p.ToMM(fps['J90'].GetPosition().y)>p.ToMM(fps['J83'].GetPosition().y)), lambda: ('fpga_power_checks.py:72: hardware validation condition'))
  for ref in ('J83','U80','C89'):
-  assert p.ToMM(fps[ref].GetBoundingBox(False,False).GetLeft())>130
+  _require_hardware((p.ToMM(fps[ref].GetBoundingBox(False,False).GetLeft())>130), lambda: ('fpga_power_checks.py:74: hardware validation condition'))
  thermal=[t for t in board.GetTracks() if isinstance(t,p.PCB_VIA) and t.GetNetname()=='GND' and
           144<=p.ToMM(t.GetPosition().x)<=146 and 81<=p.ToMM(t.GetPosition().y)<=83]
- assert len(thermal)>=9,'Converter thermal/return through-vias missing'
+ _require_hardware((len(thermal)>=9), lambda: ('Converter thermal/return through-vias missing'))
  output=[t for t in board.GetTracks() if isinstance(t,p.PCB_VIA) and t.GetNetname()=='FPGA_VIN' and
          142<=p.ToMM(t.GetPosition().x)<=148 and 84.8<=p.ToMM(t.GetPosition().y)<=86.2]
- assert len(output)>=8,'Parallel converter output through-vias missing'
- for t in thermal+output:assert t.GetViaType()==p.VIATYPE_THROUGH
- b=budget();assert b['minimum_V']>3.201 and b['maximum_V']<3.399
+ _require_hardware((len(output)>=8), lambda: ('Parallel converter output through-vias missing'))
+ for t in thermal+output:_require_hardware((t.GetViaType()==p.VIATYPE_THROUGH), lambda: ('fpga_power_checks.py:81: hardware validation condition'))
+ from copper_resistance import fpga_loop
+ copper=fpga_loop(board,board.GetFileName())
+ b=budget(loop_ohm=copper['copper_with_reserve_ohm']+copper['contact_allocation_ohm'])
+ _require_hardware((b['minimum_V']>3.201 and b['maximum_V']<3.399), lambda: ('FPGA voltage envelope'))
  return dict(pin_checks=checks,thermal_vias=len(thermal),output_vias=len(output),
-             jack_mating_direction='-Y; opposite geophone +Y',power_budget=b,physical_qualification=False)
+             jack_mating_direction='-Y; opposite geophone +Y',power_budget=b,copper_extraction=copper,physical_qualification=False)

@@ -51,9 +51,11 @@ class LSM6DSO:
         # AN5192 UI path: high performance, accelerometer LPF1 only; gyro
         # LPF2, LPF1 bypassed, high-pass disabled. Record filter state as well
         # as ODR so a recording describes its actual bandwidth.
+        # Shared SPI: disable I2C (CTRL4_C bit 2) and I3C (CTRL9_XL bit 1)
+        # before starting conversion; preserve CTRL9_XL's reset DEN_X/Y/Z bits.
         settings = {0x10: odr | accel, 0x11: odr | gyro, 0x12: 0x44,
-                    0x13: 0, 0x15: 0, 0x16: 0, 0x17: 0}
-        for address in (0x12, 0x13, 0x15, 0x16, 0x17, 0x10, 0x11): self.write(address, settings[address])
+                    0x13: 0x04, 0x15: 0, 0x16: 0, 0x17: 0, 0x18: 0xE2}
+        for address in (0x12, 0x13, 0x18, 0x15, 0x16, 0x17, 0x10, 0x11): self.write(address, settings[address])
         for address, value in settings.items():
             if self.reg(address)[0] != value: raise OSError("IMU configuration readback mismatch")
         self.sleep(.1)

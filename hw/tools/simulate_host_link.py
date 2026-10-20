@@ -1,4 +1,5 @@
 """Bounded switch truth-table and lumped RC checks, not TI transistor models."""
+from hardware_require import require as _require_hardware
 from pathlib import Path
 import itertools
 import json
@@ -15,7 +16,7 @@ def run(name,body):
     r=subprocess.run(['ngspice','-b',str(path)],capture_output=True,text=True,timeout=30)
     log=r.stdout+r.stderr
     (OUT/(name+'.log')).write_text(log)
-    assert r.returncode==0,log
+    _require_hardware((r.returncode==0), lambda: (log))
     return {k:float(v) for k,v in re.findall(r'^([a-z][a-z0-9_]*)\s*=\s*([-+0-9.eE]+)',log,re.M)}
 
 # Truth table at valid rail endpoints. The 3.0 V supervisor release and 200 ms
@@ -39,9 +40,9 @@ Rjtag jtag 0 100k
 .tran 1u 10u
 .measure tran app FIND v(app) AT=9u
 .measure tran jtag FIND v(jtag) AT=9u''')
-    assert (m['app']>3.2)==(enabled and not select),m
-    assert (m['jtag']>3.2)==(enabled and bool(select)),m
-    if not enabled:assert max(m.values())<.001,m
+    _require_hardware(((m['app']>3.2)==(enabled and not select)), lambda: (m))
+    _require_hardware(((m['jtag']>3.2)==(enabled and bool(select))), lambda: (m))
+    if not enabled:_require_hardware((max(m.values())<.001), lambda: (m))
     results.append(dict(case=name,measured=m,passed=True))
 
 for direction,driver in [('pi_to_fpga',25),('fpga_to_pi',40)]:
@@ -55,7 +56,7 @@ Cload receiver 0 {load}p
 .tran .5n 900n
 .measure tran rise TRIG v(receiver) VAL=.9603 RISE=1 TARG v(receiver) VAL=2.2407 RISE=1
 .measure tran sample FIND v(receiver) AT=350n''')
-        assert m['rise']<50e-9 and m['sample']>2.31,m
+        _require_hardware((m['rise']<50e-9 and m['sample']>2.31), lambda: (m))
         results.append(dict(case=name,measured=m,passed=True))
 
 (OUT/'results.json').write_text(json.dumps(dict(cases=results,scope=

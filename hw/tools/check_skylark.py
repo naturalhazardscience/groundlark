@@ -3,6 +3,7 @@
 Expected pin functions below are independent manufacturer pin-map fixtures.
 CAD checks do not establish gas detection limits or outdoor qualification.
 """
+from hardware_require import require as _require_hardware
 from pathlib import Path
 import collections, json, math, subprocess, xml.etree.ElementTree as ET
 import pcbnew as p
@@ -17,7 +18,7 @@ def pins(board):
 def review(board):
     actual=pins(board);fps={f.GetReference():f for f in board.GetFootprints()}
     def require(ref,mapping):
-        for pin,net in mapping.items():assert actual.get((ref,str(pin)))==net,(ref,pin,net,actual.get((ref,str(pin))))
+        for pin,net in mapping.items():_require_hardware((actual.get((ref,str(pin)))==net), lambda: ((ref,pin,net,actual.get((ref,str(pin))))))
     require('U1',{1:'V3',7:'NRST',8:'GND',9:'V3',10:'VBUS_SENSE',12:'UART_TX',13:'UART_RX',14:'PM_EN',15:'PM_FAULT_N',16:'PM_SLEEP',17:'PM_RESET',18:'ADC_DRDY_N',19:'ADC_RESET_N',23:'GND',24:'V3',25:'ANA_EN',26:'CLAMP_HOLD',32:'USB_DM',33:'USB_DP',34:'SWDIO',35:'GND',36:'V3',37:'SWCLK',39:'STATUS',42:'SCL',43:'SDA',44:'BOOT0',47:'GND',48:'V3'})
     require('U2',{1:'USB_5V',2:'GND',3:'USB_5V',5:'V3'})
     require('U3',{1:'USB_5V',2:'GND',3:'PM_EN',4:'PM_ILIM',5:'PM_FAULT_N',6:'PM_5V'})
@@ -26,9 +27,9 @@ def review(board):
     require('R74',{1:'CLAMP_HOLD',2:'CLAMP_BASE'})
     require('D4',{1:'USB_5V',3:'GATE_SUPPLY'})
     require('R75',{1:'VZERO',2:'GUARD'})
-    assert fps['Q7'].GetValue()=='MMBT3904LT1G','Reference-following clamp driver'
-    assert fps['D4'].GetValue()=='BAT54LT1G','Clamp supply isolation'
-    for ref in ('Q1','Q2','Q3','Q4'):assert fps[ref].GetValue()=='MMBFJ270','Low-leakage electrode clamp'
+    _require_hardware((fps['Q7'].GetValue()=='MMBT3904LT1G'), lambda: ('Reference-following clamp driver'))
+    _require_hardware((fps['D4'].GetValue()=='BAT54LT1G'), lambda: ('Clamp supply isolation'))
+    for ref in ('Q1','Q2','Q3','Q4'):_require_hardware((fps[ref].GetValue()=='MMBFJ270'), lambda: ('Low-leakage electrode clamp'))
     for ref,el in [(f'C{i}','WE' if i<84 else 'AE') for i in range(80,88)]:
         require(ref,{1:'H2S_'+el+'_SUM',2:'H2S_'+el+'_OUT'})
     require('R72',{1:'ANA_EN',2:'GND'});require('R73',{1:'V3',2:'CLAMP_HOLD'})
@@ -56,39 +57,39 @@ def review(board):
             require(f'C{base+3*j}',{1:gas+'_'+el+'_SUM',2:gas+'_'+el+'_OUT'})
             require(f'R{base+3*j+2}',{1:gas+'_'+el+'_OUT',2:gas+'_'+el+'_ADC'})
             require(f'C{base+3*j+1}',{1:gas+'_'+el+'_ADC',2:'GND'})
-            assert fps[f'R{base+3*j}'].GetValue()=='20R','Electrode load'
-            assert fps[f'R{base+3*j+1}'].GetValue()==f'{gain:g}R','TIA gain'
+            _require_hardware((fps[f'R{base+3*j}'].GetValue()=='20R'), lambda: ('Electrode load'))
+            _require_hardware((fps[f'R{base+3*j+1}'].GetValue()==f'{gain:g}R'), lambda: ('TIA gain'))
         require(f'R{base+6}',{1:gas+'_RE',2:gas+'_RE_FB'})
         require(f'R{base+7}',{1:gas+'_CE_DRV',2:gas+'_CE'})
         require(f'C{base+6}',{1:gas+'_CE_DRV',2:gas+'_RE_FB'})
         # Manufacturer drawing is a bottom view. Mirror X to obtain PCB top.
-        f=fps[cell];assert not f.IsFlipped(),'Cells must face the hood air space'
+        f=fps[cell];_require_hardware((not f.IsFlipped()), lambda: ('Cells must face the hood air space'))
         for x in f.Pads():
             xy=x.GetPosition()-f.GetPosition();expected={'WE':(0,-8.5),'RE':(6.010408,-6.010408),'CE':(-6.010408,-6.010408),'AE':(0,8.5)}[x.GetNumber()]
-            assert math.dist((p.ToMM(xy.x),p.ToMM(xy.y)),expected)<.001,'Gas socket pin geometry'
-            assert abs(p.ToMM(x.GetDrillSize().x)-2.35)<.001,'Socket hole'
+            _require_hardware((math.dist((p.ToMM(xy.x),p.ToMM(xy.y)),expected)<.001), lambda: ('Gas socket pin geometry'))
+            _require_hardware((abs(p.ToMM(x.GetDrillSize().x)-2.35)<.001), lambda: ('Socket hole'))
     degrees=collections.Counter(actual.values())
     nc={'D4':['2'],'J1':['A8','B8'],'J2':['7','8'],'J3':['6','7','8'],'U2':['4'],'U12':['7'],'U1':['2','3','4','5','6','11','20','21','22','27','28','29','30','31','38','40','41','45','46']}
     for ref,nums in nc.items():
-        for num in nums:assert degrees[actual[(ref,num)]]==1,('Deliberate NC connected',ref,num)
-    for ref,value in [('R1','5100R'),('R2','5100R'),('R3','82000R'),('R70','10000R'),('R71','100000R'),('R74','10000R'),('R75','100R')]:assert fps[ref].GetValue()==value,(ref,value)
-    assert len(fps)==132 and not any(f.IsDNP() for f in fps.values())
-    assert board.GetCopperLayerCount()==4
+        for num in nums:_require_hardware((degrees[actual[(ref,num)]]==1), lambda: (('Deliberate NC connected',ref,num)))
+    for ref,value in [('R1','5100R'),('R2','5100R'),('R3','82000R'),('R70','10000R'),('R71','100000R'),('R74','10000R'),('R75','100R')]:_require_hardware((fps[ref].GetValue()==value), lambda: ((ref,value)))
+    _require_hardware((len(fps)==132 and not any(f.IsDNP() for f in fps.values())), lambda: ('check_skylark.py:75: hardware validation condition'))
+    _require_hardware((board.GetCopperLayerCount()==4), lambda: ('check_skylark.py:76: hardware validation condition'))
     # USB signal copper must remain on top, with no signal vias or long stub.
     usb={net:[t for t in board.GetTracks() if t.GetNetname()==net] for net in ['USB_DP','USB_DM']}
     lengths={}
     for net,items in usb.items():
-        assert items and all(t.GetClass()=='PCB_TRACK' and t.GetLayer()==p.F_Cu for t in items),'USB route layer/via'
+        _require_hardware((items and all(t.GetClass()=='PCB_TRACK' and t.GetLayer()==p.F_Cu for t in items)), lambda: ('USB route layer/via'))
         lengths[net]=sum(p.ToMM(t.GetLength()) for t in items)
-        assert lengths[net]<22,'USB excessive length/duplicate copper'
-    assert abs(lengths['USB_DP']-lengths['USB_DM'])<2,'USB branch length difference'
+        _require_hardware((lengths[net]<22), lambda: ('USB excessive length/duplicate copper'))
+    _require_hardware((abs(lengths['USB_DP']-lengths['USB_DM'])<2), lambda: ('USB branch length difference'))
     # Low heat conduction: no inner/bottom copper or vias on the sensor finger.
     for t in board.GetTracks():
         if any(p.ToMM(q.x)>131 and p.ToMM(q.y)>139 for q in (t.GetStart(),t.GetEnd())):
-            assert t.GetClass()=='PCB_TRACK' and t.GetLayer()==p.F_Cu,'Thermal finger copper'
+            _require_hardware((t.GetClass()=='PCB_TRACK' and t.GetLayer()==p.F_Cu), lambda: ('Thermal finger copper'))
     r=82.0
     limits={'min_mA':25230/(r*1.01)**1.016,'nominal_mA':23950/r**.977,'max_mA':22980/(r*.99)**.94}
-    assert limits['max_mA']+50<500,'USB configured power budget'
+    _require_hardware((limits['max_mA']+50<500), lambda: ('USB configured power budget'))
     return {'independent_pin_invariants':'passed','contacts':len(actual),'usb_total_copper_length_mm':lengths,'pms_current_limit':limits,'mechanical_mm':[90,100,1.6],'analog':analog_review(board),'construction':fabrication_review(board)}
 
 def main():
@@ -96,25 +97,25 @@ def main():
     result=review(board)
     result['construction'].update(review_stackup(path.read_text()))
     compiled=p.LoadBoard(str(compiled_dir('skylark')/'skylark.kicad_pcb'))
-    assert pins(compiled)==pins(board),'Compiled/native contacts differ'
+    _require_hardware((pins(compiled)==pins(board)), lambda: ('Compiled/native contacts differ'))
     spec=load_layout(NAME)[NAME];fps={f.GetReference():f for f in board.GetFootprints()}
     for part in spec['parts']:
         f=fps[part['ref']];xy=f.GetPosition()
-        assert math.dist((p.ToMM(xy.x)-50,p.ToMM(xy.y)-50),part['xy'])<.001,'Placement metadata'
-        assert abs((f.GetOrientationDegrees()-part['angle']+180)%360-180)<.001,'Placement angle'
-        assert f.GetValue()==part['value'],'Native/placement value mismatch'
+        _require_hardware((math.dist((p.ToMM(xy.x)-50,p.ToMM(xy.y)-50),part['xy'])<.001), lambda: ('Placement metadata'))
+        _require_hardware((abs((f.GetOrientationDegrees()-part['angle']+180)%360-180)<.001), lambda: ('Placement angle'))
+        _require_hardware((f.GetValue()==part['value']), lambda: ('Native/placement value mismatch'))
     for mode,suffix,output in [('pcb','.kicad_pcb','drc'),('sch','.kicad_sch','erc')]:
         subprocess.run(['kicad-cli',mode,output,'--format','json','-o',str(folder/(output+'.json')),str(folder/(NAME+suffix))],check=True)
     drc=json.loads((folder/'drc.json').read_text());erc=json.loads((folder/'erc.json').read_text())
     errors=[x for x in drc['violations'] if x['severity']=='error']
-    assert not errors and not drc['unconnected_items'],(errors,drc['unconnected_items'])
+    _require_hardware((not errors and not drc['unconnected_items']), lambda: ((errors,drc['unconnected_items'])))
     findings=[x for sheet in erc['sheets'] for x in sheet['violations']]
-    assert not findings,findings
+    _require_hardware((not findings), lambda: (findings))
     subprocess.run(['kicad-cli','sch','export','netlist','--format','kicadxml','-o',str(folder/'schematic-netlist.xml'),str(folder/(NAME+'.kicad_sch'))],check=True)
     sch={(n.get('ref'),n.get('pin')):net.get('name') for net in ET.parse(folder/'schematic-netlist.xml').findall('.//nets/net') for n in net.findall('node')}
     actual=pins(board);degrees=collections.Counter(actual.values())
     for key,net in actual.items():
-        if degrees[net]>1:assert sch.get(key)==net,('Review schematic',key,net,sch.get(key))
+        if degrees[net]>1:_require_hardware((sch.get(key)==net), lambda: (('Review schematic',key,net,sch.get(key))))
     result.update(drc_errors=0,unconnected_items=0,erc_findings=0,drc_warnings=[x['type'] for x in drc['violations']],status='ENGINEERING PROTOTYPE; not fabrication released',limits=['Physical USB enumeration/suspend/eye testing pending','Gas bias must be confirmed for exact SGX AQ variants; noise, calibration and cross-sensitivity not qualified','Physical socket fit, retention, outdoor exposure and enclosure airflow untested','SGX specified pressure range starts at 800 mbar; high-altitude operation requires qualification'])
     (folder/'validation.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
 

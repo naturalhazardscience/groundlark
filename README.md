@@ -16,7 +16,7 @@ Burrowlark USB sensor heads. All share the sensor contracts, simulation tools an
 **Seismic monitoring on a Raspberry Pi.** The active
 [Groundlark FPGA HAT](hw/groundlark-fpga-hat/README.md), model **DAQHAT-01**, is a
 140 × 56 mm, six-layer FR-4 board with three XYZ LSM6DSO IMUs and an ADS122C04
-input for an external Racotech geophone, plus a fitted DLVR infrasound sensor and u-blox MAX-M10S GNSS with a side-facing SMA antenna connector. The stack is **Pi → HAT → Trenz
+input for an external Racotech geophone, plus a fitted SDP32-125PA infrasound sensor and u-blox MAX-M10S GNSS with a side-facing SMA antenna connector. The stack is **Pi → HAT → Trenz
 Artix-7 200T FPGA**. Pi acquisition works independently of a configured FPGA.
 
 The [internal FPGA link](docs/fpga-host-link.md) provides six QSPI wires, UART,
@@ -82,7 +82,7 @@ fasteners and cable dressing are illustrative. [Render provenance](docs/images/s
 RM3100 magnetometers on a 30 mm square grid and an SHT45 temperature/humidity
 sensor. One STM32F042K6 coordinates their measurements and sends each sensor's
 raw data and timing evidence to the Pi over USB-C.
-The DLVR infrasound sensor is fitted on Groundlark DAQHAT-01.
+The SDP32-125PA infrasound sensor is fitted on Groundlark DAQHAT-01.
 
 **Status:** routed prototype hardware, MCU firmware and workbench simulation are
 implemented. Physical USB, synchronization, magnetic cross-talk and noise

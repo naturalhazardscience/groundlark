@@ -17,6 +17,11 @@ The bare element is 25.4 mm diameter × 33 mm high. Its ground-coupled external
 mount must hold it vertically; HAT leveling does not establish the leveling of
 a separately mounted geophone.
 
+Racotech's [RGI-4.5Hz manufacturer listing](https://www.made-in-china.com/showroom/racotech/product-detailkNzJyDsCnQcA/China-Seismic-Geophone-Element-RGI-4-5Hz-.html)
+specifies 0.70 ±10% as typical **open-circuit** damping. No damping shunt is
+fitted. The datasheet specifies 23.4 V/(m/s) sensitivity without a shunt;
+verify the received element and complete cable/input response by measurement.
+
 J90 is horizontal Phoenix Contact **1803280**, MC 1,5/3-G-3,81. Use the matching
 **1803581**, MC 1,5/3-ST-3,81 cable plug. Pin 1 is GEO+, pin 2 GEO−, pin 3 cable shield/GND.
 The mouth faces native board +Y, parallel to the PCB. The original three holes

@@ -56,6 +56,17 @@ thermal sensitivity scenario; the actual copper, enclosure and FPGA heating
 determine the operating temperature. C42 must retain at least 4.7 µF effective
 capacitance for regulator stability.
 
+C86/C87 and C132/C133 retain two 10 µF, 50 V X7R input capacitors per
+converter. TI TPSM53603 §7.3.3/Table 7-2 lists the selected
+TDK CGA5L1X7R1H106K160AC explicitly; the table labels nominal capacitances.
+The procurement registry records its delivered ordering-code equivalence.
+DC bias still reduces effective capacitance: nominal input selection is not
+a measured transient qualification. TI Table 7-1 explicitly specifies
+**effective output capacitance**, including bias and temperature: 43 µF at
+3.3 V and 28 µF at 5 V. Confirm those limits across the selected output parts,
+temperature and tolerance before hardware qualification. See the
+[TPSM53603 datasheet](https://www.ti.com/lit/ds/symlink/tpsm53603.pdf).
+
 ## Pi supervisor and battery input
 
 J130 is a two-pole Phoenix 1803277 header: **pin 1 positive, pin 2 ground**.
@@ -89,14 +100,21 @@ The 10 kΩ / 2.43 kΩ divider sets 5.115 V. Including the reference limit,
 allocated ±20 mV ripple/transient allowance gives about 5.00–5.234 V before
 load-switch and distribution drop. A 25 mΩ switch allowance and **50 mΩ total
 copper/contact loop target** leave approximately 4.772 V at 3 A. This target
-includes the GPIO riser contacts and return path and must be measured. Parallel
-2 mm back/In3 rails run along the extension; local clearance necks and the inner
-left-side feed retain both 5 V contacts. At 8 V input, an assumed 0.5 V diode
+includes the GPIO riser contacts and return path and must be measured. The back-layer pour reaches both Pi 5 V contacts; front copper parallels the
+long extension edge and joins the local U133 output pour through a via array.
+The read-only DC mesh uses native filled copper, the recorded 35/15.2 µm
+outer/inner layers, 20 µm barrel plating and an assumed 85 °C conductor
+temperature. It allocates 35 mΩ to copper including a 20% model reserve and
+15 mΩ to contacts. The FPGA loop allocates 10 mΩ to copper including the same
+reserve and 5 mΩ to contacts; a front-layer bridge crosses the back-pour
+signal cutouts. Mesh estimates are not measured voltage drop or temperature. At 8 V input, an assumed 0.5 V diode
 drop and 85% conversion efficiency imply about 2.41 A input. Neither efficiency
 nor transient/thermal performance is qualified by these calculations. The ±20 mV
 allowance is a bench acceptance limit, not a measured result. At this low-input,
 full-load scenario D130 dissipates about 1.2 W and the converter about 2.7 W at
-85% efficiency. Qualify both in the closed enclosure. F130 is the 1206
+85% efficiency. D130 has connected cathode pours on both outer layers and nine spreading
+vias. Geometry checks require at least 40 mm² per layer and six vias; they
+do not predict junction temperature. Qualify both in the closed enclosure. F130 is the 1206
 Littelfuse 0466004.NRHF; its temperature/current derating and startup I²t must
 be checked with the selected battery and load. Do not assume 3 A output is
 available at every enclosure temperature.
@@ -121,8 +139,10 @@ timers. [power_config.py](../sw/pi/groundlark/power_config.py) validates a compl
 profile, including at least 0.5 V restart hysteresis, voltage limits and bounded
 delays. Loading it performs no I/O and does not program the MCU.
 
-Target MSPM0 firmware, configuration transfer/flash storage and the Pi shutdown
-service are **placeholders for implementation**. The firmware must request an
+Prototype MSPM0 firmware and the Pi shutdown integration are implemented
+with native tests and an ARM build. Battery policy remains disabled until a
+selected battery, configured thresholds and physical behavior are qualified.
+The firmware must request an
 orderly shutdown, wait for acknowledgement or a bounded timeout, cut RUN, wait
 for recharge and a minimum off interval, then restart. Invalid configuration,
 ADC faults and repeated failed boots must leave RUN off. Select thresholds with
@@ -134,7 +154,7 @@ shutdown, recovery hysteresis, output discharge, startup/inrush, standby current
 3 A load/drop, enclosure temperature and geophone noise with the Pi converter
 running. Circuit/CAD tests do not establish those results.
 
-Manufacturer references: [MSPM0L1106](https://www.ti.com/lit/ds/symlink/mspm0l1105.pdf),
+Manufacturer references: [MSPM0L1106](https://www.ti.com/lit/ds/symlink/mspm0l1106.pdf),
 [TPS709](https://www.ti.com/lit/ds/symlink/tps709.pdf),
 [TPSM53603](https://www.ti.com/lit/ds/symlink/tpsm53603.pdf),
 [TPS22953](https://www.ti.com/lit/ds/symlink/tps22953.pdf).

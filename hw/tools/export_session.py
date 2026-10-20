@@ -3,6 +3,7 @@
 This restricted SES snapshot is consumed by import_routes.py. The native KiCad
 board remains authoritative; this is not an autorouter or a fabrication export.
 """
+from hardware_require import require as _require_hardware
 from pathlib import Path
 from project_paths import board_dir
 import sys,collections
@@ -23,13 +24,15 @@ def main(name):
         if isinstance(t,p.PCB_VIA):
             top,bottom=t.TopLayer(),t.BottomLayer();a,z=ordered.index(top),ordered.index(bottom)
             micro=t.GetViaType()==p.VIATYPE_MICROVIA
-            assert micro or t.GetViaType()==p.VIATYPE_THROUGH,'Unsupported blind/buried via'
-            width=t.GetWidth(top);drill=t.GetDrillValue();assert width%1000==drill%1000==0
+            _require_hardware((micro or t.GetViaType()==p.VIATYPE_THROUGH), lambda: ('Unsupported blind/buried via'))
+            width=t.GetWidth(top);drill=t.GetDrillValue();_require_hardware((width%1000==drill%1000==0), lambda: ('export_session.py:27: hardware validation condition'))
             via=f'{"MicroVia" if micro else "Via"}[{a}-{z}]_{width//1000}:{drill//1000}_um'
-            q=t.GetPosition();nets[t.GetNetname()].append([S('via'),via,q.x,-q.y,kind])
+            q=t.GetPosition();record=[S('via'),via,q.x,-q.y,kind]
+            if t.GetIsFree():record.append([S('free'),S('yes')])
+            nets[t.GetNetname()].append(record)
             stacks[via]=[S('padstack'),via,*[[S('shape'),[S('circle'),b.GetLayerName(layer),width]] for layer in ordered[a:z+1]],[S('attach'),S('off')]]
         else:
-            assert t.GetClass()=='PCB_TRACK','Arc snapshot support must be implemented explicitly'
+            _require_hardware((t.GetClass()=='PCB_TRACK'), lambda: ('Arc snapshot support must be implemented explicitly'))
             a,z=t.GetStart(),t.GetEnd();nets[t.GetNetname()].append([S('wire'),[S('path'),b.GetLayerName(t.GetLayer()),t.GetWidth(),a.x,-a.y,z.x,-z.y],kind])
     routes=[S('routes'),[S('resolution'),S('um'),1000],[S('library_out'),*stacks.values()],[S('network_out'),*[[S('net'),net,*nets[net]] for net in sorted(nets)]]]
     session=[S('session'),name+'.native-full',[S('base_design'),name],placement,routes]

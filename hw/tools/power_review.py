@@ -3,6 +3,7 @@
 Allocated currents, source impedance, ramp time and thermal resistance are
 engineering envelopes, not measured loads or guaranteed silicon maxima.
 """
+from hardware_require import require as _require_hardware
 import argparse
 import hashlib
 import json
@@ -55,11 +56,11 @@ def build_report():
     s,sp,sc,sh=native('skylark-usb');g,gp,gc,gh=native('groundlark-daqhat-01')
     for key,net in {('U2','1'):'USB_5V',('U2','5'):'V3',('U3','1'):'USB_5V',
                     ('U3','6'):'PM_5V',('U13','1'):'V3',('U13','6'):'VA_SW'}.items():
-        assert sp[key]==net,('Skylark supply topology',key)
+        _require_hardware((sp[key]==net), lambda: (('Skylark supply topology',key)))
     for key,net in {('J1','2'):'PI_5V',('J1','4'):'PI_5V',('J1','1'):'PI_3V3',
                     ('U40','3'):'PI_5V',('U40','2'):'SENS_3V3',
                     ('J83','1'):'EXT_12V',('F80','2'):'FUSED_12V',('U80','7'):'FPGA_VIN'}.items():
-        assert gp[key]==net,('Groundlark supply topology',key)
+        _require_hardware((gp[key]==net), lambda: (('Groundlark supply topology',key)))
     from fpga_power_checks import verify, budget
     verify(gp)
     import gnss_checks, pi_power_checks
@@ -72,13 +73,13 @@ def build_report():
                 'ADC_digital':.5,'I2C_pullups':1.5,'clamp_LED_monitor':2,
                 'regulator_and_switch_quiescent':.2,'reserve':3.8}
     overhead=sum(skylark_mA.values())/1000
-    assert math.isclose(overhead,.050)
+    _require_hardware((math.isclose(overhead,.050)), lambda: ('power_review.py:75: hardware validation condition'))
     configured=limits['maximum']+overhead
-    assert configured<.500,'USB configured allocation exceeded'
+    _require_hardware((configured<.500), lambda: ('USB configured allocation exceeded'))
     # At attach only the digital rail and directly connected capacitance charge.
     # 20% high-capacitance case, no DC-bias derating credit; LDO transfers charge.
     attach_charge=1.2*(sc('USB_5V')*5.25+sc('V3')*3.366+sc('NRST')*3.366+sc('VBUS_SENSE')*2.625)
-    assert attach_charge<50e-6,'USB attach charge needs inrush limiting review'
+    _require_hardware((attach_charge<50e-6), lambda: ('USB attach charge needs inrush limiting review'))
     ground_5v_mA={'three_IMUs':3,'ADS122C04':2,'ISO1640_side1':10,
                   'translators_switching':10,'bias_and_pullups':5,'LDO_Iq':.5,'SDP32_continuous_max':5.5,'reserve':14,'GNSS_antenna':20,'antenna_LDO_and_reserve':5}
     ground_3v3_mA={'ISO1640_side2':10,'translators_and_muxes':10,'EEPROM_expander_logic':5,
@@ -93,7 +94,7 @@ def build_report():
         limiter_short_dissipation_W=3.366*.1,
         ldo_fault=ldo_heat(5.25,3.234,.1,.000005,200,85),
         fault_telemetry=False,transient_qualified=False)
-    assert antenna_fault['limit_A'][1]<antenna_fault['choke_rating_A']
+    _require_hardware((antenna_fault['limit_A'][1]<antenna_fault['choke_rating_A']), lambda: ('power_review.py:96: hardware validation condition'))
     # Capacitive current scenarios are C*dV/dt, NOT simulated regulator startup.
     ramps=[]
     for t in (.0001,.001,.01):
@@ -110,9 +111,9 @@ def build_report():
     refcap=sc('REF_2V5')
     rtop,rbot=value(s['R20']),value(s['R21'])
     tau=(rtop*rbot/(rtop+rbot))*sc('VMID')
-    assert refcap*1.2<=10e-6,'Reference output capacitor review required'
-    assert tau*1.21*math.log(1000)<.15,'Reference divider startup exceeds 150 ms'
-    assert value(s['R75'])>=100,'Guard capacitive-load isolation'
+    _require_hardware((refcap*1.2<=10e-6), lambda: ('Reference output capacitor review required'))
+    _require_hardware((tau*1.21*math.log(1000)<.15), lambda: ('Reference divider startup exceeds 150 ms'))
+    _require_hardware((value(s['R75'])>=100), lambda: ('Guard capacitive-load isolation'))
     return dict(physical_qualification=False,pcb_sha256={'skylark':sh,'groundlark':gh},
         skylark=dict(allocation_mA=skylark_mA,pm_limit_A=limits,configured_A=configured,
             unconfigured_allocated_A=overhead,usb_allocation_A=.5,attach_charge_C=attach_charge,

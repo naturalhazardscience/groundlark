@@ -1,5 +1,5 @@
 {
-  "source_sha256": "90cb62eb962f41b9770798add089a8737bcf25457320eaa73ed10d3b4c279aa1",
+  "source_sha256": "e20c411be6e5d23e3cbc883171f6f8140cb34a64f27656e24b5c6b5d3ac3d681",
   "copper_layers": 6,
   "stack_copper_layers": [
     "F.Cu",
@@ -20,9 +20,9 @@
     "In4.Cu"
   ],
   "tracks_by_layer": {
-    "F.Cu": 4002,
+    "F.Cu": 4006,
     "B.Cu": 2924,
-    "In2.Cu": 2810,
+    "In2.Cu": 2817,
     "In3.Cu": 2609
   },
   "vias": [
@@ -1248,15 +1248,6 @@
         "B.Cu"
       ],
       "drill_mm": 0.3,
-      "pad_mm": 0.6
-    },
-    {
-      "type": "through",
-      "span": [
-        "F.Cu",
-        "B.Cu"
-      ],
-      "drill_mm": 0.3,
       "pad_mm": 0.7
     },
     {
@@ -1275,70 +1266,7 @@
         "B.Cu"
       ],
       "drill_mm": 0.3,
-      "pad_mm": 0.45
-    },
-    {
-      "type": "through",
-      "span": [
-        "F.Cu",
-        "B.Cu"
-      ],
-      "drill_mm": 0.3,
       "pad_mm": 0.7
-    },
-    {
-      "type": "through",
-      "span": [
-        "F.Cu",
-        "B.Cu"
-      ],
-      "drill_mm": 0.3,
-      "pad_mm": 0.7
-    },
-    {
-      "type": "through",
-      "span": [
-        "F.Cu",
-        "B.Cu"
-      ],
-      "drill_mm": 0.3,
-      "pad_mm": 0.6
-    },
-    {
-      "type": "through",
-      "span": [
-        "F.Cu",
-        "B.Cu"
-      ],
-      "drill_mm": 0.3,
-      "pad_mm": 0.6
-    },
-    {
-      "type": "through",
-      "span": [
-        "F.Cu",
-        "B.Cu"
-      ],
-      "drill_mm": 0.3,
-      "pad_mm": 0.7
-    },
-    {
-      "type": "through",
-      "span": [
-        "F.Cu",
-        "B.Cu"
-      ],
-      "drill_mm": 0.3,
-      "pad_mm": 0.45
-    },
-    {
-      "type": "through",
-      "span": [
-        "F.Cu",
-        "B.Cu"
-      ],
-      "drill_mm": 0.3,
-      "pad_mm": 0.6
     },
     {
       "type": "through",
@@ -1383,6 +1311,132 @@
         "B.Cu"
       ],
       "drill_mm": 0.3,
+      "pad_mm": 0.45
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.6
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.6
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.45
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.6
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.6
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
       "pad_mm": 0.6
     },
     {
@@ -5847,6 +5901,15 @@
         "B.Cu"
       ],
       "drill_mm": 0.3,
+      "pad_mm": 0.6
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
       "pad_mm": 0.45
     },
     {
@@ -5857,6 +5920,15 @@
       ],
       "drill_mm": 0.3,
       "pad_mm": 0.45
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
     },
     {
       "type": "through",
@@ -5883,7 +5955,70 @@
         "B.Cu"
       ],
       "drill_mm": 0.3,
-      "pad_mm": 0.45
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
     },
     {
       "type": "through",
@@ -5946,6 +6081,42 @@
         "B.Cu"
       ],
       "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.45
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
       "pad_mm": 0.45
     },
     {
@@ -5956,6 +6127,42 @@
       ],
       "drill_mm": 0.3,
       "pad_mm": 0.45
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
     },
     {
       "type": "through",
@@ -6009,7 +6216,34 @@
         "B.Cu"
       ],
       "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
       "pad_mm": 0.45
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
     },
     {
       "type": "through",
@@ -6054,7 +6288,43 @@
         "B.Cu"
       ],
       "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
       "pad_mm": 0.45
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
+    },
+    {
+      "type": "through",
+      "span": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "drill_mm": 0.3,
+      "pad_mm": 0.7
     },
     {
       "type": "through",

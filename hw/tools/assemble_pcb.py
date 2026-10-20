@@ -4,6 +4,7 @@ Each product's layout/placement.json contains mechanical placement/BOM presentat
 is read exclusively from the compiled .ato board. Derived schematics are for
 review; electrical changes must be made in hw/<product>/elec/*.ato and rebuilt.
 """
+from hardware_require import require as _require_hardware
 from pathlib import Path
 from project_paths import board_dir, compiled_dir, load_layout
 import json,csv,re,types,shutil,sys,sexpdata as sx
@@ -50,7 +51,7 @@ def export_dsn(b,path,signal_via_mm=(.6,.3),ground_layers=None,track_mm=.15,clea
     if tuple(signal_via_mm)!=(.6,.3):
         import copy
         diameter,drill=[round(x*1000) for x in signal_via_mm]
-        assert diameter>=450 and drill>=200 and diameter-drill>=150
+        _require_hardware((diameter>=450 and drill>=200 and diameter-drill>=150), lambda: ('assemble_pcb.py:53: hardware validation condition'))
         library=next(x for x in tree if isinstance(x,list) and str(x[0])=='library')
         name=f'Via__LB__0-{layers-1}__RB___{diameter}:{drill}_um'
         if not any(isinstance(x,list) and str(x[0])=='padstack' and str(x[1])==name for x in library):
@@ -73,10 +74,10 @@ def main():
         ishat=target=='trenz_hat'
         folder=board_dir(name);folder.mkdir(parents=True,exist_ok=True)
         b=p.LoadBoard(str(compiled_dir(target)/(target+'.kicad_pcb')))
-        assert b.GetFootprints(),'Run ato build first'
+        _require_hardware((b.GetFootprints()), lambda: ('Run ato build first'))
         layers=spec.get('copper_layers',6 if ishat else 4)
         ground_layers=spec.get('ground_layers',['In1.Cu',f'In{layers-2}.Cu'])
-        assert layers in (4,6,8),layers
+        _require_hardware((layers in (4,6,8)), lambda: (layers))
         b.SetCopperLayerCount(layers)
         signal_via=spec.get('signal_via_mm',[.6,.3])
         fab=spec.get('fabrication',{});track_mm=fab.get('min_track_mm',.15);clearance_mm=fab.get('min_clearance_mm',.15)
@@ -90,7 +91,7 @@ def main():
         for meta in spec['parts']:
             meta=dict(meta);typ=meta.pop('type');ref=meta['ref']
             if ref not in fps:
-                assert not typ,('Missing compiled component',ref)
+                _require_hardware((not typ), lambda: (('Missing compiled component',ref)))
                 fp=p.FootprintLoad(str(ROOT/'hw/shared/elec'),meta['local_fp']);fp.SetReference(ref);b.Add(fp)
             else:fp=fps[ref]
             if (target=='field_head' and ref=='J1') or meta['local_fp'].startswith(('PWR_', 'SUP_')) or meta['local_fp']=='Groundlark__SDP32':
@@ -98,13 +99,13 @@ def main():
                 # compiler conversion, retaining each compiled physical pin net.
                 old=fp;pin_nets={pad.GetNumber():pad.GetNet() for pad in old.Pads() if pad.GetNumber()}
                 fp=p.FootprintLoad(str(ROOT/'hw/shared/elec'),meta['local_fp'])
-                assert {pad.GetNumber() for pad in fp.Pads() if pad.GetNumber()}==set(pin_nets)
+                _require_hardware(({pad.GetNumber() for pad in fp.Pads() if pad.GetNumber()}==set(pin_nets)), lambda: ('assemble_pcb.py:101: hardware validation condition'))
                 fp.SetReference(ref);b.Add(fp)
                 for pad in fp.Pads():
                     if pad.GetNumber():pad.SetNet(pin_nets[pad.GetNumber()])
                 b.Delete(old)
             fp.SetPosition(v(50+meta['xy'][0],50+meta['xy'][1]))
-            side=meta.get('side','front');assert side in ('front','back'),side
+            side=meta.get('side','front');_require_hardware((side in ('front','back')), lambda: (side))
             if fp.IsFlipped() != (side=='back'):fp.Flip(fp.GetPosition(),False)
             fp.SetOrientationDegrees(meta['angle'])
             fp.SetValue(meta['value']);fp.SetDNP(meta['dnp'])

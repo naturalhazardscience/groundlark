@@ -765,6 +765,12 @@ module TrenzHat:
     trait r64 has_designator<designator="R64">
     r64.p1 ~ FPGA_RESET_N
     r64.p2 ~ FPGA_3V3
+
+    # Idle-high Pi receiver when the isolated UART translator is disabled.
+    r118 = new IF_R64
+    trait r118 has_designator<designator="R118">
+    r118.p1 ~ PI_UART_RX
+    r118.p2 ~ PI_3V3
     # 2N7002 / 2N7002
     q1 = new IF_Q1
     trait q1 has_designator<designator="Q1">

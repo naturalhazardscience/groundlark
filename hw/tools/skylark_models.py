@@ -3,6 +3,7 @@
 These are simplified authored models, not supplier STEP files. The routed PCB
 and its footprints supply positions and rotations. No circuit/copper is edited.
 """
+from hardware_require import require as _require_hardware
 import math, json, hashlib
 from pathlib import Path
 import pcbnew as p
@@ -65,7 +66,7 @@ def main():
         if not kind or kind=='TP':continue
         if kind.startswith('R_'):kind='R'
         if kind.startswith('C_'):kind='C1206' if '1206' in entry['local_fp'] else 'C0805' if '0805' in entry['local_fp'] else 'C0603'
-        assert kind in shapes, kind
+        _require_hardware((kind in shapes), lambda: (kind))
         fp.Models().clear();m=p.FP_3DMODEL();m.m_Filename='${KIPRJMOD}/../../models/'+kind+'.wrl';m.m_Show=True;fp.Models().push_back(m)
     save_board(str(path),b)
     (DEST/'provenance.json').write_text(json.dumps({'generator':'hw/tools/skylark_models.py','kind':'simplified dimension envelopes, not supplier STEP','cell_body_mm':[31.5,15.5],'socket_rim_above_pcb_mm':4.88,'board_mm':[90,100,1.6],'qualification':'Physical mating, retention, airflow and enclosure fit not qualified.','models':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(DEST.glob('*.wrl'))}},indent=2)+'\n')
