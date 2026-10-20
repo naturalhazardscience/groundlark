@@ -1,9 +1,9 @@
 {
   "kicad": "9.0.9",
   "sha256": {
-    "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "a4f1566e7b993c04e9c302ff2ed2b7fa0e1a4ea6f7f89138e6b8082cca89ae75",
+    "hw/groundlark-fpga-hat/boards/groundlark-daqhat-01/groundlark-daqhat-01.kicad_pcb": "c077525514f035eb8227498309da46716a612a5720111e7324d39617246bec90",
     "hw/groundlark-fpga-hat/layout/placement.json": "d96287995c053d7160639273796328c7f78c1f0f6ea23d97434f4566c3f7f34d",
-    "sw/ui/assets/daqhat-01.glb": "e5549b800dc52627e9968a00310b28ad1846316b6849eb17d44d633be22032db",
+    "sw/ui/assets/daqhat-01.glb": "0c6e50705c9f0b09caa8661a9bfe7b612d571c94c8e87c238f4dc95636736cc2",
     "sw/ui/geophone_scene.py": "65ef0de9df78e2b7c1c4697367f5a5b81486dd95f2fe4f01d9fa6f35b8dd461a",
     "hw/burrowlark-usb/layout/placement.json": "f180ef6b13946e4425e12864c34a310c905ea993b59d379671d8acee6e5ea2e6",
     "sw/ui/main.py": "af2d3138ef9f4510486a717394f27e25d8e28a799bbd37edcdd984af9c48bbb1",
@@ -21,5 +21,6 @@
   "gnss": "MAX-M10S underside package envelope and drawing-based HL-SMA-KWE-02 STEP; native -X antenna. Timing evidence is modeled; physical RF/timing/fit qualification pending.",
   "label_review": "SDP32-125PA at U23 replaces DLVR. Regenerated native GLB plus explicit 8.5 x 5.5 x 4.4 mm two-port scene envelope; placement and model hashes refreshed. Physical fit and pneumatic behavior remain unqualified.",
   "copper_revision": "Continuous Pi power pours, FPGA distribution bridge, D130 heat spreading, 0.17 mm GNSS series tracks and R118 UART idle pull-up. KiCad GLB node inventory and native render checked; physical fit remains unqualified.",
-  "rf_revision": "Compact backside RF branches; L140/L141 use conservative manufacturer-dimensioned STEP envelopes, present in native GLB. Native underside render inspected; physical fit remains unqualified."
+  "rf_revision": "Compact backside RF branches; L140/L141 use conservative manufacturer-dimensioned STEP envelopes, present in native GLB. Native underside render inspected; physical fit remains unqualified.",
+  "signal_routing_revision": "Coupling routes revised without moving components or changing models. GLB regenerated; all 212 nodes, transforms, meshes, accessor bounds, materials and buffer views match the preceding displayed geometry. Native underside and stack renders reviewed."
 }

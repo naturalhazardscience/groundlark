@@ -7,7 +7,7 @@ side-facing SMA with a 3.3 V active-antenna supply. BCM4 remains geophone DRDY;
 BCM6/13 retain the TI power-supervisor handshake. FPGA interfaces and the
 independent adapter supply remain unchanged. Native checks report zero ERC
 findings, zero DRC findings and zero unconnected items. The complete
-13,104-track/via SES reproduces identical copper. Independent pin/no-connect,
+native SES reproduces identical copper. Independent pin/no-connect,
 power, RF geometry, fabrication and analog-layout checks pass.
 The antenna limiter and local bypasses are routed; ISO1640 side 2 faces GNSS.
 Pi rail calculations include resistor temperature drift and an unmeasured
@@ -43,24 +43,20 @@ The supervisor battery policy stays disabled with unset thresholds; prototype
 target firmware is built and tested with native fixtures. Hardware shutdown
 integration remains unqualified.
 
-The full and simulation profiles execute 28 stages. The current simulation run
-completes all 28 stages: 27 pass and the signal-integrity stage fails its coupling
-allocation. Its 270 hardware regression tests and 315
-software tests pass; ERC/DRC report zero violations and native SES replay matches.
-The expanded coupling model introduces an electrical acceptance hold: the current
-board exceeds its 0.20 V allocation. A previous simulation-profile pass predates this gate and does not
-clear it. Current run status and per-stage results are recorded in
-`verification.json` under `portable_lab.run_id`, `profile` and `status`.
-The simulation profile
-excludes one explicitly named procurement release gate and retains native
-geometry, exporter and available supplier-pad checks. The full profile still
-requires all 190 supplier placements to be verified; 53 remain unverified.
-Inventory is excluded; 70 BOM lines have catalog mappings and L140/L141 do not.
-137 placements fit frozen
-supplier geometry. Review export tests preserve exceptions rather than clearing
-the release gate. GNSS pin/layout checks include missing bypass and ground-stitch
-faults. No physical
-power, noise, thermal, battery or RF qualification is implied. See
+The full and simulation profiles execute 28 stages. The revised native routing
+passes the expanded 0.20 V coupling allocation for all 217 evaluated pairs;
+worst excursion is 0.188 V. The RF and conditional pneumatic simulations
+retain their existing assumptions. Current run status and per-stage results
+are recorded in `verification.json` under `portable_lab.run_id`, `profile`
+and `status`.
+
+The full profile requires all 190 supplier placements to be verified; 53 remain
+unverified, while 137 fit frozen numbered supplier geometry. All 72 BOM lines
+have catalog identities, including the Murata L140/L141 substitutions. Whole-BOM
+inventory is excluded. Review export tests preserve placement exceptions rather
+than clearing the release gate. The simulation profile excludes only the named
+supplier-placement release test; a simulation-profile pass is not a full release.
+No physical power, noise, thermal, battery or RF qualification is implied. See
 [power operation](power-supplies.md#pi-supervisor-and-battery-input) and
 [assembly status](jlcpcb-assembly.md).
 

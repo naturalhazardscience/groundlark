@@ -155,13 +155,13 @@ in the [GNSS rail/threshold scenario](gnss-hardware.md), leaving only 27 mV in
 that scenario for other effects. The actual receiver thresholds, output levels,
 ground movement and combined noise budget remain unqualified.
 
-The current board **fails this allocation** on 32 of 233 net pairs
-under the expanded stress model. Worst excursion is 0.736 V on
-IMU3_INT/SPI_MISO; the largest Pi-connected pair is 0.344 V.
-The former 0.43 V / 0.19 V summaries used the narrower parallel-only extraction
-and must not be used as current acceptance evidence. Use the saved
-`coupling.acceptance.failed_pairs` and each pair's worst aggressor/scenario.
-Resolving this electrical hold requires routing changes or a justified,
-independently checked model of the actual drive/termination states. The model
-omits vias, same-layer coupling, whole-net reflections, simultaneous aggressors
-and nonlinear receiver behavior.
+The revised native routing **passes this allocation** for all 217 evaluated net
+pairs. Worst excursion is 0.188 V on FPGA_RESET_N/PI_SPI_MISO, under the
+same extraction, threshold and stress scenarios. Long parallel runs were
+separated; three short runs use outer copper over ground planes, and one
+LINK_DQ2 run changes inner layer. One redundant through-via was removed.
+No components, power pours or stackup settings changed.
+Use the saved `coupling.acceptance` and each pair's worst aggressor/scenario.
+This pass applies to adjacent In2/In3 proximity only. The model omits vias,
+same-layer coupling, whole-net reflections, simultaneous aggressors and
+nonlinear receiver behavior. Physical interface qualification remains open.

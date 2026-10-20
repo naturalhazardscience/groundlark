@@ -1,7 +1,7 @@
 {
   "scope": "pre-fab engineering review; no physical qualification",
   "disposition": "analog and internal-link stack reviewed; physical power/noise/fit and link throughput remain unqualified",
-  "board_sha256": "a4f1566e7b993c04e9c302ff2ed2b7fa0e1a4ea6f7f89138e6b8082cca89ae75",
+  "board_sha256": "c077525514f035eb8227498309da46716a612a5720111e7324d39617246bec90",
   "physical_pin_checks": 51,
   "purchasing_package_checks": 18,
   "analog": {
@@ -506,66 +506,10 @@
     "parallel_pair_totals": [
       {
         "nets": [
-          "IMU3_INT",
-          "SPI_MISO"
-        ],
-        "total_parallel_mm": 4.768718433538236
-      },
-      {
-        "nets": [
-          "I2C_SCL",
-          "I2C_SDA"
-        ],
-        "total_parallel_mm": 2.4713186364528448
-      },
-      {
-        "nets": [
-          "EEP_WP",
-          "FPGA_EN1"
-        ],
-        "total_parallel_mm": 2.4220000000000113
-      },
-      {
-        "nets": [
-          "FPGA_IO_ENABLE",
-          "PI_IMU1_INT"
-        ],
-        "total_parallel_mm": 2.3999999999999773
-      },
-      {
-        "nets": [
-          "GEO_DRDY_N",
-          "I2C_SCL"
-        ],
-        "total_parallel_mm": 1.83492424049174
-      },
-      {
-        "nets": [
           "IMU1_INT",
           "IMU2_INT"
         ],
         "total_parallel_mm": 1.75
-      },
-      {
-        "nets": [
-          "PI_SHUTDOWN_N",
-          "PI_SPI_SCLK"
-        ],
-        "total_parallel_mm": 1.7017938902816592
-      },
-      {
-        "nets": [
-          "ID_SDA",
-          "PI_IMU1_INT"
-        ],
-        "total_parallel_mm": 1.697056274847713
-      },
-      {
-        "nets": [
-          "LINK_DQ1",
-          "PI_IMU3_CS"
-        ],
-        "total_parallel_mm": 1.6793786053180495
       },
       {
         "nets": [
@@ -576,59 +520,17 @@
       },
       {
         "nets": [
-          "FPGA_LINK_CS_N",
-          "LINK_CS_N"
+          "LINK_DQ1",
+          "PI_IMU3_CS"
         ],
-        "total_parallel_mm": 1.6349242404917472
+        "total_parallel_mm": 1.449568901432434
       },
       {
         "nets": [
-          "IMU2_CS",
-          "PI_SPI_MISO"
-        ],
-        "total_parallel_mm": 1.4685028842544443
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "PI_SPI_MISO"
-        ],
-        "total_parallel_mm": 1.4624368670764523
-      },
-      {
-        "nets": [
-          "IMU3_CS",
+          "ID_SDA",
           "PI_IMU1_INT"
         ],
-        "total_parallel_mm": 1.343502884254434
-      },
-      {
-        "nets": [
-          "PI_SHUTDOWN_N",
-          "PI_SPI_MOSI"
-        ],
-        "total_parallel_mm": 1.319461253694092
-      },
-      {
-        "nets": [
-          "I2C_SDA",
-          "LINK_JTAG_SEL"
-        ],
-        "total_parallel_mm": 1.290469875665441
-      },
-      {
-        "nets": [
-          "PI_IMU3_CS",
-          "SPI_MOSI"
-        ],
-        "total_parallel_mm": 1.1667261889578076
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "IMU1_INT"
-        ],
-        "total_parallel_mm": 1.1045941546018407
+        "total_parallel_mm": 1.4142135623730951
       },
       {
         "nets": [
@@ -639,24 +541,10 @@
       },
       {
         "nets": [
-          "PI_GEO_DRDY_N",
-          "PI_I2C_SDA"
+          "FPGA_CONFIG_RESET_N",
+          "PI_SPI_MISO"
         ],
-        "total_parallel_mm": 1.0778174593052101
-      },
-      {
-        "nets": [
-          "GEO_DRDY_N",
-          "GEO_VCM"
-        ],
-        "total_parallel_mm": 1.0606601717798212
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "I2C_SCL"
-        ],
-        "total_parallel_mm": 1.0242640687119287
+        "total_parallel_mm": 0.9192388155425198
       },
       {
         "nets": [
@@ -667,20 +555,6 @@
       },
       {
         "nets": [
-          "PI_IMU3_INT",
-          "PI_SPI_MISO"
-        ],
-        "total_parallel_mm": 0.8838834764831842
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "PI_IMU3_INT"
-        ],
-        "total_parallel_mm": 0.8838834764831842
-      },
-      {
-        "nets": [
           "GEO_VCM",
           "I2C_SDA"
         ],
@@ -688,17 +562,17 @@
       },
       {
         "nets": [
-          "PI_IMU1_INT",
-          "PI_SPI_MOSI"
+          "PI_IMU3_CS",
+          "PI_SPI_SCLK"
         ],
-        "total_parallel_mm": 0.8485281374238639
+        "total_parallel_mm": 0.8485288445306285
       },
       {
         "nets": [
-          "PI_IMU1_CS",
-          "PI_IMU2_CS"
+          "FPGA_RESET_N",
+          "IMU1_INT"
         ],
-        "total_parallel_mm": 0.8285533905932752
+        "total_parallel_mm": 0.8113961030679081
       },
       {
         "nets": [
@@ -709,20 +583,6 @@
       },
       {
         "nets": [
-          "SPI_MOSI",
-          "SPI_SCLK"
-        ],
-        "total_parallel_mm": 0.7999999999999972
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "IMU3_INT"
-        ],
-        "total_parallel_mm": 0.787132034355992
-      },
-      {
-        "nets": [
           "PI_I2C_SCL",
           "SPI_SCLK"
         ],
@@ -730,38 +590,10 @@
       },
       {
         "nets": [
-          "IMU2_CS",
-          "PI_I2C_SDA"
+          "PI_IMU3_CS",
+          "SPI_MOSI"
         ],
-        "total_parallel_mm": 0.7778174593051983
-      },
-      {
-        "nets": [
-          "FPGA_RESET_GPIO",
-          "IMU2_INT"
-        ],
-        "total_parallel_mm": 0.755330085889905
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "PI_I2C_SCL"
-        ],
-        "total_parallel_mm": 0.7346213169088134
-      },
-      {
-        "nets": [
-          "IMU2_INT",
-          "LINK_JTAG_SEL"
-        ],
-        "total_parallel_mm": 0.6717514421272122
-      },
-      {
-        "nets": [
-          "ID_SCL",
-          "SENSOR_OE_N"
-        ],
-        "total_parallel_mm": 0.6272999999999911
+        "total_parallel_mm": 0.7071067811865576
       },
       {
         "nets": [
@@ -772,17 +604,24 @@
       },
       {
         "nets": [
-          "ID_SDA",
-          "PI_IMU3_CS"
+          "FPGA_LINK_DQ3",
+          "IMU1_INT"
         ],
-        "total_parallel_mm": 0.5750899451390177
+        "total_parallel_mm": 0.6000000000000085
       },
       {
         "nets": [
-          "LINK_DQ2",
-          "PI_IMU1_CS"
+          "I2C_SDA",
+          "SPI_SCLK"
         ],
-        "total_parallel_mm": 0.512652416360263
+        "total_parallel_mm": 0.5854844148224635
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "PI_SPI_SCLK"
+        ],
+        "total_parallel_mm": 0.5371320343559701
       },
       {
         "nets": [
@@ -793,10 +632,10 @@
       },
       {
         "nets": [
-          "FPGA_LINK_DQ3",
-          "IMU1_INT"
+          "FPGA_LINK_CS_N",
+          "PI_I2C_SCL"
         ],
-        "total_parallel_mm": 0.4750000000000085
+        "total_parallel_mm": 0.4949754539378798
       },
       {
         "nets": [
@@ -807,17 +646,38 @@
       },
       {
         "nets": [
-          "PI_IMU1_INT",
-          "PI_SPI_SCLK"
+          "IMU1_INT",
+          "PI_SPI_MISO"
         ],
-        "total_parallel_mm": 0.45000000000000284
+        "total_parallel_mm": 0.38890872965260914
       },
       {
         "nets": [
-          "PI_IMU1_CS",
-          "PI_SHUTDOWN_N"
+          "FPGA_RESET_N",
+          "PI_SPI_MISO"
         ],
-        "total_parallel_mm": 0.4242640687119345
+        "total_parallel_mm": 0.37123106012295154
+      },
+      {
+        "nets": [
+          "I2C_SDA",
+          "IMU3_CS"
+        ],
+        "total_parallel_mm": 0.37123106012293083
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "PI_IMU3_CS"
+        ],
+        "total_parallel_mm": 0.3535533905932702
+      },
+      {
+        "nets": [
+          "PI_IMU1_INT",
+          "PI_SPI_SCLK"
+        ],
+        "total_parallel_mm": 0.3500000000000014
       },
       {
         "nets": [
@@ -828,10 +688,10 @@
       },
       {
         "nets": [
-          "FPGA_CONFIG_RESET_N",
-          "PI_IMU3_INT"
+          "ID_SDA",
+          "PI_IMU2_CS"
         ],
-        "total_parallel_mm": 0.3181980515339584
+        "total_parallel_mm": 0.282842712474618
       },
       {
         "nets": [
@@ -846,13 +706,6 @@
           "SPI_MOSI"
         ],
         "total_parallel_mm": 0.25
-      },
-      {
-        "nets": [
-          "JTAG_TDI",
-          "PI_SPI_MISO"
-        ],
-        "total_parallel_mm": 0.24748737341530772
       },
       {
         "nets": [
@@ -884,13 +737,6 @@
       },
       {
         "nets": [
-          "IMU1_CS",
-          "SPI_SCLK"
-        ],
-        "total_parallel_mm": 0.2474873734152876
-      },
-      {
-        "nets": [
           "IMU2_CS",
           "SPI_MOSI"
         ],
@@ -905,17 +751,17 @@
       },
       {
         "nets": [
+          "PI_GEO_DRDY_N",
+          "PI_I2C_SDA"
+        ],
+        "total_parallel_mm": 0.21213203435596228
+      },
+      {
+        "nets": [
           "IMU3_CS",
           "PI_IMU2_INT"
         ],
         "total_parallel_mm": 0.21213203435595215
-      },
-      {
-        "nets": [
-          "IMU2_CS",
-          "PI_IMU3_CS"
-        ],
-        "total_parallel_mm": 0.1767766952966371
       },
       {
         "nets": [
@@ -940,10 +786,10 @@
       },
       {
         "nets": [
-          "PI_GEO_DRDY_N",
-          "PI_IMU3_INT"
+          "FPGA_RESET_GPIO",
+          "IMU1_INT"
         ],
-        "total_parallel_mm": 0.14142135623732155
+        "total_parallel_mm": 0.14999999999999147
       },
       {
         "nets": [
@@ -965,162 +811,15 @@
           "JTAG_TDI"
         ],
         "total_parallel_mm": 0.125
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "FPGA_UART_RX"
-        ],
-        "total_parallel_mm": 0.10606601717797615
       }
     ],
     "signal_pair_totals": [
       {
         "nets": [
-          "IMU3_INT",
-          "SPI_MISO"
-        ],
-        "proximity_mm": 9.46518789433051
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "IMU3_INT"
-        ],
-        "proximity_mm": 5.686929041135777
-      },
-      {
-        "nets": [
-          "I2C_SCL",
-          "I2C_SDA"
-        ],
-        "proximity_mm": 5.138021548441348
-      },
-      {
-        "nets": [
-          "LINK_DQ1",
-          "PI_IMU3_CS"
-        ],
-        "proximity_mm": 5.1013581511200705
-      },
-      {
-        "nets": [
-          "FPGA_IO_ENABLE",
-          "PI_IMU1_INT"
-        ],
-        "proximity_mm": 4.977402599445845
-      },
-      {
-        "nets": [
           "FPGA_RESET_N",
           "PI_SPI_MISO"
         ],
-        "proximity_mm": 4.530781318863648
-      },
-      {
-        "nets": [
-          "SPI_MOSI",
-          "SPI_SCLK"
-        ],
-        "proximity_mm": 4.487084110253907
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "LINK_CS_N"
-        ],
-        "proximity_mm": 4.303384974254682
-      },
-      {
-        "nets": [
-          "LINK_DQ2",
-          "PI_IMU1_CS"
-        ],
-        "proximity_mm": 4.207948136689185
-      },
-      {
-        "nets": [
-          "EEP_WP",
-          "FPGA_EN1"
-        ],
-        "proximity_mm": 3.8204937931134593
-      },
-      {
-        "nets": [
-          "I2C_SDA",
-          "LINK_JTAG_SEL"
-        ],
-        "proximity_mm": 3.8061513137073235
-      },
-      {
-        "nets": [
-          "PI_IMU1_CS",
-          "PI_IMU2_CS"
-        ],
-        "proximity_mm": 3.7165297044024177
-      },
-      {
-        "nets": [
-          "GEO_DRDY_N",
-          "I2C_SCL"
-        ],
-        "proximity_mm": 3.418943646873789
-      },
-      {
-        "nets": [
-          "IMU2_CS",
-          "PI_I2C_SDA"
-        ],
-        "proximity_mm": 3.416600153047268
-      },
-      {
-        "nets": [
-          "PI_IMU2_CS",
-          "PI_SPI_SCLK"
-        ],
-        "proximity_mm": 3.4004784824621677
-      },
-      {
-        "nets": [
-          "LINK_DQ2",
-          "PI_IMU3_CS"
-        ],
-        "proximity_mm": 3.1958196933849985
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "IMU1_INT"
-        ],
-        "proximity_mm": 3.1193733617172725
-      },
-      {
-        "nets": [
-          "PI_SHUTDOWN_N",
-          "PI_SPI_SCLK"
-        ],
-        "proximity_mm": 3.0451204715717424
-      },
-      {
-        "nets": [
-          "I2C_SDA",
-          "SPI_SCLK"
-        ],
-        "proximity_mm": 2.958410227424193
-      },
-      {
-        "nets": [
-          "IMU3_CS",
-          "PI_IMU1_INT"
-        ],
-        "proximity_mm": 2.897923547250214
-      },
-      {
-        "nets": [
-          "IMU2_CS",
-          "PI_SPI_MISO"
-        ],
-        "proximity_mm": 2.8830409149122076
+        "proximity_mm": 3.1372502620446765
       },
       {
         "nets": [
@@ -1131,66 +830,17 @@
       },
       {
         "nets": [
-          "ID_SDA",
-          "PI_IMU1_INT"
-        ],
-        "proximity_mm": 2.760450991432776
-      },
-      {
-        "nets": [
-          "PI_SHUTDOWN_N",
-          "PI_SPI_MOSI"
-        ],
-        "proximity_mm": 2.730390768891508
-      },
-      {
-        "nets": [
-          "PI_GEO_DRDY_N",
-          "PI_I2C_SDA"
-        ],
-        "proximity_mm": 2.7202585043052654
-      },
-      {
-        "nets": [
-          "FPGA_UART_RX",
+          "LINK_DQ1",
           "PI_IMU3_CS"
         ],
-        "proximity_mm": 2.6739030567398703
+        "proximity_mm": 2.661673814068375
       },
       {
         "nets": [
-          "FPGA_RESET_GPIO",
-          "IMU2_INT"
+          "LINK_DQ2",
+          "PI_IMU1_CS"
         ],
-        "proximity_mm": 2.6697180983317366
-      },
-      {
-        "nets": [
-          "FPGA_LINK_CS_N",
-          "PI_I2C_SCL"
-        ],
-        "proximity_mm": 2.5581343209298275
-      },
-      {
-        "nets": [
-          "PI_IMU3_CS",
-          "SPI_MOSI"
-        ],
-        "proximity_mm": 2.534027163190793
-      },
-      {
-        "nets": [
-          "GEO_DRDY_N",
-          "GEO_VCM"
-        ],
-        "proximity_mm": 2.4712945611110504
-      },
-      {
-        "nets": [
-          "ID_SCL",
-          "SENSOR_OE_N"
-        ],
-        "proximity_mm": 2.401112797344168
+        "proximity_mm": 2.5070554739029522
       },
       {
         "nets": [
@@ -1201,6 +851,13 @@
       },
       {
         "nets": [
+          "IMU2_CS",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 2.2844846422082883
+      },
+      {
+        "nets": [
           "LINK_CS_N",
           "PI_IMU2_INT"
         ],
@@ -1208,31 +865,24 @@
       },
       {
         "nets": [
-          "PI_IMU3_INT",
-          "PI_SPI_MISO"
+          "PI_IMU2_CS",
+          "PI_SPI_SCLK"
         ],
-        "proximity_mm": 2.254425208616378
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "PI_IMU3_INT"
-        ],
-        "proximity_mm": 2.2540474451437396
+        "proximity_mm": 2.2461886055833267
       },
       {
         "nets": [
           "LINK_JTAG_SEL",
           "PI_I2C_SDA"
         ],
-        "proximity_mm": 2.2177320343559304
+        "proximity_mm": 2.2000471329452926
       },
       {
         "nets": [
-          "PI_IMU1_INT",
-          "PI_SPI_MOSI"
+          "LINK_CS_N",
+          "LINK_JTAG_SEL"
         ],
-        "proximity_mm": 2.215675803254862
+        "proximity_mm": 2.1930286042113893
       },
       {
         "nets": [
@@ -1243,10 +893,10 @@
       },
       {
         "nets": [
-          "PI_IMU2_CS",
-          "PI_IMU3_CS"
+          "FPGA_RESET_N",
+          "IMU1_INT"
         ],
-        "proximity_mm": 2.1795520041104006
+        "proximity_mm": 2.1554958086908123
       },
       {
         "nets": [
@@ -1264,17 +914,24 @@
       },
       {
         "nets": [
+          "FPGA_CONFIG_RESET_N",
+          "PI_SPI_MISO"
+        ],
+        "proximity_mm": 2.077212869131669
+      },
+      {
+        "nets": [
+          "LINK_DQ2",
+          "PI_IMU3_CS"
+        ],
+        "proximity_mm": 2.0689883476483137
+      },
+      {
+        "nets": [
           "FPGA_UART_TX",
           "PI_UART_TX"
         ],
         "proximity_mm": 2.0393274441824296
-      },
-      {
-        "nets": [
-          "ID_SDA",
-          "PI_IMU3_CS"
-        ],
-        "proximity_mm": 2.0320245214833377
       },
       {
         "nets": [
@@ -1285,6 +942,27 @@
       },
       {
         "nets": [
+          "PI_IMU3_CS",
+          "SPI_MOSI"
+        ],
+        "proximity_mm": 1.9853593535343232
+      },
+      {
+        "nets": [
+          "I2C_SDA",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.968463937453725
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "PI_IMU1_INT"
+        ],
+        "proximity_mm": 1.961676244602187
+      },
+      {
+        "nets": [
           "IMU1_CS",
           "IMU2_INT"
         ],
@@ -1292,10 +970,10 @@
       },
       {
         "nets": [
-          "LINK_CS_N",
-          "LINK_JTAG_SEL"
+          "IMU2_CS",
+          "PI_SPI_MISO"
         ],
-        "proximity_mm": 1.9295556200508932
+        "proximity_mm": 1.9463449419322596
       },
       {
         "nets": [
@@ -1306,24 +984,31 @@
       },
       {
         "nets": [
-          "FPGA_LINK_CS_N",
-          "I2C_SCL"
-        ],
-        "proximity_mm": 1.9070820900003331
-      },
-      {
-        "nets": [
-          "LINK_JTAG_SEL",
-          "PI_IMU3_INT"
-        ],
-        "proximity_mm": 1.9041876544068967
-      },
-      {
-        "nets": [
           "IMU3_CS",
           "SPI_MISO"
         ],
         "proximity_mm": 1.8897483310046532
+      },
+      {
+        "nets": [
+          "PI_IMU3_CS",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 1.874080534814894
+      },
+      {
+        "nets": [
+          "FPGA_LINK_CS_N",
+          "PI_I2C_SCL"
+        ],
+        "proximity_mm": 1.839939885334431
+      },
+      {
+        "nets": [
+          "I2C_SDA",
+          "IMU3_CS"
+        ],
+        "proximity_mm": 1.8106043766482078
       },
       {
         "nets": [
@@ -1334,6 +1019,13 @@
       },
       {
         "nets": [
+          "LINK_JTAG_SEL",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 1.805599999999952
+      },
+      {
+        "nets": [
           "I2C_SDA",
           "PI_IMU3_INT"
         ],
@@ -1341,17 +1033,17 @@
       },
       {
         "nets": [
-          "PI_IMU1_INT",
+          "ID_SDA",
           "PI_SPI_SCLK"
         ],
-        "proximity_mm": 1.7647087571660844
+        "proximity_mm": 1.7356607840339526
       },
       {
         "nets": [
-          "PI_IMU1_CS",
-          "PI_SHUTDOWN_N"
+          "FPGA_RESET_GPIO",
+          "IMU1_INT"
         ],
-        "proximity_mm": 1.760635480593517
+        "proximity_mm": 1.667602038916815
       },
       {
         "nets": [
@@ -1366,13 +1058,6 @@
           "PI_I2C_SDA"
         ],
         "proximity_mm": 1.6279474116443313
-      },
-      {
-        "nets": [
-          "FPGA_CONFIG_RESET_N",
-          "ID_SDA"
-        ],
-        "proximity_mm": 1.5912208468192421
       },
       {
         "nets": [
@@ -1397,38 +1082,10 @@
       },
       {
         "nets": [
-          "JTAG_TDI",
-          "PI_SPI_MISO"
-        ],
-        "proximity_mm": 1.5449500556443803
-      },
-      {
-        "nets": [
           "FPGA_CONFIG_RESET_N",
-          "PI_IMU3_INT"
+          "ID_SDA"
         ],
-        "proximity_mm": 1.5444163818326526
-      },
-      {
-        "nets": [
-          "I2C_SCL",
-          "IMU3_INT"
-        ],
-        "proximity_mm": 1.5242394904143102
-      },
-      {
-        "nets": [
-          "LINK_CS_N",
-          "PI_IMU3_INT"
-        ],
-        "proximity_mm": 1.5154524163601188
-      },
-      {
-        "nets": [
-          "PI_GEO_DRDY_N",
-          "PI_IMU3_INT"
-        ],
-        "proximity_mm": 1.5124194077711453
+        "proximity_mm": 1.54134759630283
       },
       {
         "nets": [
@@ -1436,13 +1093,6 @@
           "SPI_MOSI"
         ],
         "proximity_mm": 1.4959049273067326
-      },
-      {
-        "nets": [
-          "FPGA_LINK_DQ3",
-          "IMU1_INT"
-        ],
-        "proximity_mm": 1.491448691482543
       },
       {
         "nets": [
@@ -1467,10 +1117,10 @@
       },
       {
         "nets": [
-          "I2C_SDA",
-          "IMU3_INT"
+          "FPGA_LINK_DQ3",
+          "IMU1_INT"
         ],
-        "proximity_mm": 1.442441045000157
+        "proximity_mm": 1.4385183091594949
       },
       {
         "nets": [
@@ -1481,10 +1131,17 @@
       },
       {
         "nets": [
-          "FPGA_RESET_N",
-          "FPGA_UART_RX"
+          "PI_GEO_DRDY_N",
+          "PI_I2C_SDA"
         ],
-        "proximity_mm": 1.4175308842047185
+        "proximity_mm": 1.4325826150305239
+      },
+      {
+        "nets": [
+          "JTAG_TDI",
+          "PI_SPI_MISO"
+        ],
+        "proximity_mm": 1.405196344609126
       },
       {
         "nets": [
@@ -1492,20 +1149,6 @@
           "SPI_SCLK"
         ],
         "proximity_mm": 1.401572242539718
-      },
-      {
-        "nets": [
-          "PI_IMU1_INT",
-          "PI_LINK_DQ1"
-        ],
-        "proximity_mm": 1.3785323153475832
-      },
-      {
-        "nets": [
-          "PI_I2C_SDA",
-          "SPI_SCLK"
-        ],
-        "proximity_mm": 1.3781254206128035
       },
       {
         "nets": [
@@ -1523,17 +1166,10 @@
       },
       {
         "nets": [
-          "I2C_SDA",
-          "IMU3_CS"
-        ],
-        "proximity_mm": 1.358553952576469
-      },
-      {
-        "nets": [
-          "JTAG_TCK",
+          "ID_SDA",
           "PI_IMU3_CS"
         ],
-        "proximity_mm": 1.3530047830979657
+        "proximity_mm": 1.35028014153428
       },
       {
         "nets": [
@@ -1555,13 +1191,6 @@
           "FPGA_UART_TX"
         ],
         "proximity_mm": 1.3474626822290854
-      },
-      {
-        "nets": [
-          "ID_SDA",
-          "PI_SPI_MOSI"
-        ],
-        "proximity_mm": 1.3474626822290847
       },
       {
         "nets": [
@@ -1604,13 +1233,6 @@
           "FPGA_UART_RX"
         ],
         "proximity_mm": 1.3121073431697576
-      },
-      {
-        "nets": [
-          "PI_HALTED",
-          "PI_SPI_SCLK"
-        ],
-        "proximity_mm": 1.3121073431697572
       },
       {
         "nets": [
@@ -1670,17 +1292,24 @@
       },
       {
         "nets": [
-          "IMU1_CS",
-          "SPI_SCLK"
-        ],
-        "proximity_mm": 1.2870538403764806
-      },
-      {
-        "nets": [
           "JTAG_TCK",
           "PI_I2C_SDA"
         ],
         "proximity_mm": 1.286375027822189
+      },
+      {
+        "nets": [
+          "PI_IMU3_INT",
+          "PI_SPI_MISO"
+        ],
+        "proximity_mm": 1.284279861092494
+      },
+      {
+        "nets": [
+          "PI_IMU1_INT",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 1.2791387666042366
       },
       {
         "nets": [
@@ -1705,17 +1334,17 @@
       },
       {
         "nets": [
+          "JTAG_TDI",
+          "PI_IMU3_CS"
+        ],
+        "proximity_mm": 1.2658167660490558
+      },
+      {
+        "nets": [
           "FPGA_IO_ENABLE",
           "FPGA_RESET_GPIO"
         ],
         "proximity_mm": 1.2649651042194188
-      },
-      {
-        "nets": [
-          "FPGA_RESET_N",
-          "FPGA_UART_TX"
-        ],
-        "proximity_mm": 1.2603306478731207
       },
       {
         "nets": [
@@ -1747,13 +1376,6 @@
       },
       {
         "nets": [
-          "FPGA_RESET_N",
-          "JTAG_TDI"
-        ],
-        "proximity_mm": 1.2457823430260109
-      },
-      {
-        "nets": [
           "FPGA_UART_RX",
           "LINK_DQ1"
         ],
@@ -1782,6 +1404,20 @@
       },
       {
         "nets": [
+          "PI_IMU3_CS",
+          "PI_SPI_MOSI"
+        ],
+        "proximity_mm": 1.231212434525963
+      },
+      {
+        "nets": [
+          "FPGA_RESET_N",
+          "FPGA_UART_TX"
+        ],
+        "proximity_mm": 1.2300102151074004
+      },
+      {
+        "nets": [
           "FPGA_UART_TX",
           "PI_IMU3_INT"
         ],
@@ -1789,10 +1425,10 @@
       },
       {
         "nets": [
-          "IMU2_CS",
-          "LINK_JTAG_SEL"
+          "FPGA_UART_TX",
+          "PI_IMU3_CS"
         ],
-        "proximity_mm": 1.2198279782157009
+        "proximity_mm": 1.2189092916358049
       },
       {
         "nets": [
@@ -1817,20 +1453,6 @@
       },
       {
         "nets": [
-          "ID_SCL",
-          "JTAG_TMS"
-        ],
-        "proximity_mm": 1.2131230044894354
-      },
-      {
-        "nets": [
-          "JTAG_TMS",
-          "PI_SPI_SCLK"
-        ],
-        "proximity_mm": 1.2108091480608145
-      },
-      {
-        "nets": [
           "I2C_SCL",
           "PI_I2C_SCL"
         ],
@@ -1845,13 +1467,6 @@
       },
       {
         "nets": [
-          "I2C_SDA",
-          "PI_IMU2_INT"
-        ],
-        "proximity_mm": 1.1916734428112554
-      },
-      {
-        "nets": [
           "IMU2_CS",
           "LINK_DQ0"
         ],
@@ -1859,10 +1474,10 @@
       },
       {
         "nets": [
-          "ID_SDA",
-          "LINK_DQ0"
+          "FPGA_RESET_N",
+          "PI_IMU3_INT"
         ],
-        "proximity_mm": 1.181431958213821
+        "proximity_mm": 1.1821698115500117
       },
       {
         "nets": [
@@ -1873,10 +1488,10 @@
       },
       {
         "nets": [
-          "ID_SDA",
-          "SENSOR_OE_N"
+          "PI_SHUTDOWN_N",
+          "PI_SPI_SCLK"
         ],
-        "proximity_mm": 1.162847697479397
+        "proximity_mm": 1.151908036411177
       },
       {
         "nets": [
@@ -1894,13 +1509,6 @@
       },
       {
         "nets": [
-          "PI_SHUTDOWN_N",
-          "SENSOR_OE_N"
-        ],
-        "proximity_mm": 1.145874721449868
-      },
-      {
-        "nets": [
           "FPGA_LINK_CS_N",
           "LINK_DQ3"
         ],
@@ -1915,10 +1523,10 @@
       },
       {
         "nets": [
-          "FPGA_RESET_GPIO",
-          "FPGA_RESET_N"
+          "ID_SDA",
+          "PI_IMU2_CS"
         ],
-        "proximity_mm": 1.1379993067585672
+        "proximity_mm": 1.1342427124745984
       },
       {
         "nets": [
@@ -1936,10 +1544,24 @@
       },
       {
         "nets": [
+          "FPGA_RESET_N",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.129544927064586
+      },
+      {
+        "nets": [
           "FPGA_LINK_DQ3",
           "SPI_SCLK"
         ],
         "proximity_mm": 1.1257112401018692
+      },
+      {
+        "nets": [
+          "FPGA_CONFIG_RESET_N",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 1.1214219182205025
       },
       {
         "nets": [
@@ -1957,10 +1579,10 @@
       },
       {
         "nets": [
-          "JTAG_TCK",
-          "LINK_DQ2"
+          "FPGA_RESET_N",
+          "JTAG_TCK"
         ],
-        "proximity_mm": 1.1140831797215867
+        "proximity_mm": 1.1115274441824212
       },
       {
         "nets": [
@@ -1985,10 +1607,10 @@
       },
       {
         "nets": [
-          "FPGA_RESET_N",
-          "JTAG_TCK"
+          "I2C_SDA",
+          "LINK_JTAG_SEL"
         ],
-        "proximity_mm": 1.1010160728223333
+        "proximity_mm": 1.1026143174062393
       },
       {
         "nets": [
@@ -1999,10 +1621,24 @@
       },
       {
         "nets": [
+          "PI_I2C_SDA",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 1.0939129075763132
+      },
+      {
+        "nets": [
           "IMU1_INT",
           "PI_I2C_SCL"
         ],
         "proximity_mm": 1.0893130393983645
+      },
+      {
+        "nets": [
+          "FPGA_RESET_N",
+          "JTAG_TDI"
+        ],
+        "proximity_mm": 1.0842895909736787
       },
       {
         "nets": [
@@ -2020,10 +1656,10 @@
       },
       {
         "nets": [
-          "LINK_CS_N",
-          "PI_I2C_SDA"
+          "I2C_SCL",
+          "I2C_SDA"
         ],
-        "proximity_mm": 1.0777999999999999
+        "proximity_mm": 1.0778
       },
       {
         "nets": [
@@ -2041,24 +1677,17 @@
       },
       {
         "nets": [
-          "FPGA_RESET_N",
-          "SPI_SCLK"
-        ],
-        "proximity_mm": 1.0739345448052227
-      },
-      {
-        "nets": [
-          "FPGA_UART_TX",
-          "PI_IMU3_CS"
-        ],
-        "proximity_mm": 1.0643247901581705
-      },
-      {
-        "nets": [
           "IMU1_INT",
           "PI_SPI_MISO"
         ],
-        "proximity_mm": 1.0587365956732124
+        "proximity_mm": 1.0713747468304857
+      },
+      {
+        "nets": [
+          "FPGA_RESET_N",
+          "FPGA_UART_RX"
+        ],
+        "proximity_mm": 1.0536844388169126
       },
       {
         "nets": [
@@ -2090,6 +1719,13 @@
       },
       {
         "nets": [
+          "JTAG_TCK",
+          "PI_IMU3_CS"
+        ],
+        "proximity_mm": 1.0277927681189944
+      },
+      {
+        "nets": [
           "FPGA_IO_ENABLE",
           "PI_IMU2_INT"
         ],
@@ -2104,17 +1740,24 @@
       },
       {
         "nets": [
-          "IMU1_INT",
-          "SPI_MISO"
+          "PI_GEO_DRDY_N",
+          "PI_IMU3_INT"
         ],
-        "proximity_mm": 1.0069332895805843
+        "proximity_mm": 1.0165526973518562
       },
       {
         "nets": [
           "LINK_JTAG_SEL",
           "PI_GEO_DRDY_N"
         ],
-        "proximity_mm": 1.0063533905932085
+        "proximity_mm": 1.0165526973518482
+      },
+      {
+        "nets": [
+          "IMU1_INT",
+          "SPI_MISO"
+        ],
+        "proximity_mm": 1.0069332895805843
       },
       {
         "nets": [
@@ -2125,10 +1768,17 @@
       },
       {
         "nets": [
-          "JTAG_TDI",
+          "PI_IMU1_CS",
           "PI_IMU3_CS"
         ],
-        "proximity_mm": 0.9899484687114585
+        "proximity_mm": 0.9899245095820608
+      },
+      {
+        "nets": [
+          "EEP_WP",
+          "FPGA_EN1"
+        ],
+        "proximity_mm": 0.9884446163376392
       },
       {
         "nets": [
@@ -2146,10 +1796,10 @@
       },
       {
         "nets": [
-          "PI_IMU1_CS",
+          "FPGA_UART_RX",
           "PI_IMU3_CS"
         ],
-        "proximity_mm": 0.9853341495197014
+        "proximity_mm": 0.9846414595556802
       },
       {
         "nets": [
@@ -2167,17 +1817,24 @@
       },
       {
         "nets": [
+          "LINK_CS_N",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 0.9726187145297867
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "PI_SPI_MOSI"
+        ],
+        "proximity_mm": 0.9658565594018009
+      },
+      {
+        "nets": [
           "FPGA_CONFIG_RESET_N",
           "IMU3_CS"
         ],
         "proximity_mm": 0.9652963840594986
-      },
-      {
-        "nets": [
-          "IMU2_INT",
-          "LINK_JTAG_SEL"
-        ],
-        "proximity_mm": 0.9611474142440011
       },
       {
         "nets": [
@@ -2195,42 +1852,7 @@
       },
       {
         "nets": [
-          "ID_SCL",
-          "PI_SPI_MOSI"
-        ],
-        "proximity_mm": 0.9527999999999999
-      },
-      {
-        "nets": [
           "FPGA_UART_TX",
-          "PI_SPI_SCLK"
-        ],
-        "proximity_mm": 0.9527999999999999
-      },
-      {
-        "nets": [
-          "ID_SDA",
-          "PI_SPI_SCLK"
-        ],
-        "proximity_mm": 0.9527999999999999
-      },
-      {
-        "nets": [
-          "ID_SCL",
-          "PI_SPI_SCLK"
-        ],
-        "proximity_mm": 0.9527999999999999
-      },
-      {
-        "nets": [
-          "FPGA_UART_TX",
-          "PI_IMU1_CS"
-        ],
-        "proximity_mm": 0.9527999999999999
-      },
-      {
-        "nets": [
-          "ID_SDA",
           "PI_IMU1_CS"
         ],
         "proximity_mm": 0.9527999999999999
@@ -2244,14 +1866,14 @@
       },
       {
         "nets": [
-          "FPGA_UART_TX",
-          "LINK_DQ1"
+          "FPGA_LINK_CS_N",
+          "LINK_CS_N"
         ],
         "proximity_mm": 0.9527999999999999
       },
       {
         "nets": [
-          "ID_SDA",
+          "FPGA_UART_TX",
           "LINK_DQ1"
         ],
         "proximity_mm": 0.9527999999999999
@@ -2266,9 +1888,16 @@
       {
         "nets": [
           "ID_SDA",
-          "JTAG_TMS"
+          "SENSOR_OE_N"
         ],
-        "proximity_mm": 0.9482010880726709
+        "proximity_mm": 0.9494219479558742
+      },
+      {
+        "nets": [
+          "I2C_SDA",
+          "PI_IMU2_INT"
+        ],
+        "proximity_mm": 0.9467339828220194
       },
       {
         "nets": [
@@ -2279,10 +1908,38 @@
       },
       {
         "nets": [
+          "SPI_MOSI",
+          "SPI_SCLK"
+        ],
+        "proximity_mm": 0.9427116882454338
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "JTAG_TMS"
+        ],
+        "proximity_mm": 0.9389315534152894
+      },
+      {
+        "nets": [
           "PI_IMU1_INT",
           "SPI_SCLK"
         ],
         "proximity_mm": 0.9387406371049952
+      },
+      {
+        "nets": [
+          "PI_IMU1_INT",
+          "PI_SPI_MOSI"
+        ],
+        "proximity_mm": 0.9383012972767764
+      },
+      {
+        "nets": [
+          "PI_IMU1_CS",
+          "PI_IMU2_CS"
+        ],
+        "proximity_mm": 0.93512233047027
       },
       {
         "nets": [
@@ -2293,10 +1950,10 @@
       },
       {
         "nets": [
-          "PI_IMU3_CS",
-          "PI_SPI_MOSI"
+          "IMU2_CS",
+          "LINK_JTAG_SEL"
         ],
-        "proximity_mm": 0.933053268366018
+        "proximity_mm": 0.930676976288124
       },
       {
         "nets": [
@@ -2321,6 +1978,27 @@
       },
       {
         "nets": [
+          "LINK_DQ2",
+          "PI_SPI_MOSI"
+        ],
+        "proximity_mm": 0.9278000000000002
+      },
+      {
+        "nets": [
+          "PI_IMU1_INT",
+          "PI_LINK_DQ1"
+        ],
+        "proximity_mm": 0.9278000000000001
+      },
+      {
+        "nets": [
+          "PI_SHUTDOWN_N",
+          "SENSOR_OE_N"
+        ],
+        "proximity_mm": 0.9278000000000001
+      },
+      {
+        "nets": [
           "FPGA_UART_RX",
           "PI_IMU1_CS"
         ],
@@ -2342,13 +2020,6 @@
       },
       {
         "nets": [
-          "ID_SDA",
-          "PI_IMU2_CS"
-        ],
-        "proximity_mm": 0.9278
-      },
-      {
-        "nets": [
           "LINK_JTAG_SEL",
           "SPI_SCLK"
         ],
@@ -2363,17 +2034,38 @@
       },
       {
         "nets": [
-          "IMU3_INT",
-          "LINK_REQUEST"
+          "LINK_DQ3",
+          "SPI_MISO"
         ],
         "proximity_mm": 0.9278
       },
       {
         "nets": [
-          "LINK_DQ3",
-          "SPI_MISO"
+          "ID_SCL",
+          "PI_SPI_MOSI"
         ],
-        "proximity_mm": 0.9278
+        "proximity_mm": 0.9277999999999997
+      },
+      {
+        "nets": [
+          "FPGA_UART_TX",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 0.9277999999999997
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "LINK_DQ1"
+        ],
+        "proximity_mm": 0.9277999999999997
+      },
+      {
+        "nets": [
+          "PI_SHUTDOWN_N",
+          "PI_SPI_MOSI"
+        ],
+        "proximity_mm": 0.9277999999999995
       },
       {
         "nets": [
@@ -2384,31 +2076,17 @@
       },
       {
         "nets": [
-          "FPGA_UART_RX",
-          "PI_SPI_SCLK"
-        ],
-        "proximity_mm": 0.9277999999999995
-      },
-      {
-        "nets": [
-          "JTAG_TDI",
-          "PI_SPI_SCLK"
-        ],
-        "proximity_mm": 0.9277999999999995
-      },
-      {
-        "nets": [
-          "PI_IMU3_CS",
-          "PI_SPI_SCLK"
-        ],
-        "proximity_mm": 0.9277999999999995
-      },
-      {
-        "nets": [
           "JTAG_TMS",
           "PI_IMU1_CS"
         ],
         "proximity_mm": 0.9277999999999995
+      },
+      {
+        "nets": [
+          "FPGA_LINK_DQ3",
+          "PI_IMU3_INT"
+        ],
+        "proximity_mm": 0.9271487052240384
       },
       {
         "nets": [
@@ -2426,15 +2104,36 @@
       },
       {
         "nets": [
-          "FPGA_CONFIG_RESET_N",
-          "PI_SPI_MISO"
+          "PI_HALTED",
+          "PI_SPI_SCLK"
         ],
-        "proximity_mm": 0.9110194077711102
+        "proximity_mm": 0.9174446609406719
       },
       {
         "nets": [
-          "LINK_DQ0",
-          "PI_IMU1_INT"
+          "JTAG_TMS",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "FPGA_UART_RX",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "JTAG_TDI",
+          "PI_SPI_SCLK"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "ID_SCL",
+          "PI_SPI_SCLK"
         ],
         "proximity_mm": 0.9028
       },
@@ -2449,6 +2148,13 @@
         "nets": [
           "JTAG_TDI",
           "PI_IMU2_CS"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "PI_IMU2_CS",
+          "PI_IMU3_CS"
         ],
         "proximity_mm": 0.9028
       },
@@ -2475,10 +2181,38 @@
       },
       {
         "nets": [
+          "LINK_CS_N",
+          "PI_I2C_SDA"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "FPGA_LINK_CS_N",
+          "I2C_SCL"
+        ],
+        "proximity_mm": 0.9028
+      },
+      {
+        "nets": [
+          "FPGA_RESET_GPIO",
+          "IMU2_INT"
+        ],
+        "proximity_mm": 0.9027999999999999
+      },
+      {
+        "nets": [
           "IMU1_CS",
           "IMU1_INT"
         ],
         "proximity_mm": 0.9027999999999999
+      },
+      {
+        "nets": [
+          "LINK_DQ0",
+          "PI_IMU1_INT"
+        ],
+        "proximity_mm": 0.9027999999999997
       },
       {
         "nets": [
@@ -2496,24 +2230,10 @@
       },
       {
         "nets": [
-          "FPGA_LINK_DQ3",
-          "PI_IMU3_INT"
-        ],
-        "proximity_mm": 0.9027999999999659
-      },
-      {
-        "nets": [
           "LINK_DQ2",
           "PI_LINK_DQ1"
         ],
         "proximity_mm": 0.8671219612505843
-      },
-      {
-        "nets": [
-          "IMU2_CS",
-          "PI_IMU3_CS"
-        ],
-        "proximity_mm": 0.7706859869324383
       },
       {
         "nets": [
@@ -2545,6 +2265,20 @@
       },
       {
         "nets": [
+          "FPGA_RESET_N",
+          "IMU2_CS"
+        ],
+        "proximity_mm": 0.37165731601954427
+      },
+      {
+        "nets": [
+          "IMU2_INT",
+          "LINK_JTAG_SEL"
+        ],
+        "proximity_mm": 0.34784968826817475
+      },
+      {
+        "nets": [
           "FPGA_LINK_SCLK",
           "LINK_DQ0"
         ],
@@ -2559,10 +2293,17 @@
       },
       {
         "nets": [
-          "FPGA_RESET_GPIO",
-          "IMU1_INT"
+          "FPGA_RESET_N",
+          "SPI_MOSI"
         ],
-        "proximity_mm": 0.18979289631435184
+        "proximity_mm": 0.061470949533021506
+      },
+      {
+        "nets": [
+          "ID_SDA",
+          "LINK_DQ0"
+        ],
+        "proximity_mm": 0.03733523804664902
       },
       {
         "nets": [
@@ -2573,24 +2314,10 @@
       },
       {
         "nets": [
-          "FPGA_RESET_GPIO",
-          "SPI_MOSI"
-        ],
-        "proximity_mm": 0.01965756851698175
-      },
-      {
-        "nets": [
           "FPGA_UART_RX",
           "JTAG_TMS"
         ],
         "proximity_mm": 0.015321332200076046
-      },
-      {
-        "nets": [
-          "LINK_DQ2",
-          "SPI_MOSI"
-        ],
-        "proximity_mm": 0.009540715070317785
       },
       {
         "nets": [
@@ -2601,13 +2328,13 @@
       },
       {
         "nets": [
-          "IMU1_CS",
-          "PI_IMU3_INT"
+          "FPGA_RESET_GPIO",
+          "SPI_MOSI"
         ],
-        "proximity_mm": 0.00197989898731854
+        "proximity_mm": 0.0013999999999971813
       }
     ],
-    "segment_interval_count": 30241,
+    "segment_interval_count": 18860,
     "method": "Exact round-ended proximity intervals, unioned per In2 segment/opposing net; includes angled crossings and endpoints",
     "qualified": false,
     "limitations": "In2 path length, not a voltage margin. Electrical acceptance is enforced by simulate_signal_integrity.py; vias and whole-net effects remain unmodeled.",

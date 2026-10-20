@@ -22,8 +22,8 @@
       "reference_and_divider_min_V": 3.2706203558882985,
       "reference_and_divider_max_V": 3.3806912721675157,
       "allocated_A": 3,
-      "loop_ohm": 0.014372269776616917,
-      "minimum_V": 3.227503546558448,
+      "loop_ohm": 0.014371179644963428,
+      "minimum_V": 3.227506816953408,
       "maximum_V": 3.3806912721675157,
       "adapter_V": 12,
       "adapter_tolerance": 0.05,
@@ -35,22 +35,22 @@
       "paths": [
         {
           "net": "FPGA_VIN",
-          "resistance_ohm": 0.006581202048178199,
+          "resistance_ohm": 0.006580614985531683,
           "grid_mm": 0.1,
-          "nodes": 229647,
+          "nodes": 229648,
           "conductor_temperature_C": 85,
           "barrel_plating_mm": 0.02
         },
         {
           "net": "GND",
-          "resistance_ohm": 0.0012290227656692326,
+          "resistance_ohm": 0.001228701385271173,
           "grid_mm": 0.1,
-          "nodes": 1625875,
+          "nodes": 1625935,
           "conductor_temperature_C": 85,
           "barrel_plating_mm": 0.02
         }
       ],
-      "copper_with_reserve_ohm": 0.009372269776616917,
+      "copper_with_reserve_ohm": 0.009371179644963427,
       "model_reserve_fraction": 0.2,
       "contact_allocation_ohm": 0.005,
       "contacts_measured": false,
@@ -64,7 +64,7 @@
     "spare_bcm": [],
     "budget": {
       "nominal_V": 5.11522633744856,
-      "minimum_V": 4.773513372078776,
+      "minimum_V": 4.773514605630553,
       "maximum_V": 5.234442772515668,
       "total_A": 3,
       "input_range_V": [
@@ -78,7 +78,7 @@
       ],
       "ripple_transient_allowance_V": 0.02,
       "adc_at_18V": 2.3519122829917762,
-      "copper_budget_ohm": 0.049419369874835015,
+      "copper_budget_ohm": 0.04941895869090932,
       "switch_budget_ohm": 0.025,
       "measured": false
     },
@@ -102,17 +102,17 @@
         },
         {
           "net": "GND",
-          "resistance_ohm": 0.0016417218808923249,
+          "resistance_ohm": 0.0016413792276209138,
           "grid_mm": 0.1,
-          "nodes": 1625875,
+          "nodes": 1625935,
           "conductor_temperature_C": 85,
           "barrel_plating_mm": 0.02
         }
       ],
-      "estimated_copper_loop_ohm": 0.02868280822902918,
+      "estimated_copper_loop_ohm": 0.028682465575757772,
       "model_reserve_fraction": 0.2,
-      "copper_with_reserve_ohm": 0.034419369874835015,
-      "remaining_of_50mohm_for_contacts": 0.015580630125164988,
+      "copper_with_reserve_ohm": 0.03441895869090932,
+      "remaining_of_50mohm_for_contacts": 0.01558104130909068,
       "contacts_measured": false,
       "thermal_qualified": false,
       "method": "DC finite-difference native filled copper at 85 C; idealized pad/via interiors; 20 um barrel plating"
@@ -278,7 +278,7 @@
   "drc_violations": 0,
   "unconnected_items": 0,
   "erc_violations": 0,
-  "tracks_and_vias": 13104,
+  "tracks_and_vias": 13111,
   "copper_layers": 6,
   "microvias": 0,
   "fabrication_process": "standard-six-layer-through-via",

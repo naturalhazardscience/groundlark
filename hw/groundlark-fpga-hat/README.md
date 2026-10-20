@@ -53,8 +53,9 @@ U23 uses the redesigned SDP32-125PA circuit and driver. Supplier geometry remain
 unverified for 53 placements, so the matching Gerber/BOM/CPL package remains a
 review package; see the assembly guide before ordering.
 
-The expanded adjacent-layer coupling model currently fails its 0.20 V allocation.
-The simulation build retains this electrical hold even with inventory excluded.
+The revised signal routing passes the expanded adjacent-layer coupling model: all
+217 evaluated pairs meet the 0.20 V allocation; worst excursion is 0.188 V.
+The full build retains the supplier-placement release gate.
 L141 is a provisional 3.6 nH VNA tuning position; D130 junction-temperature
 qualification remains open. See [simulation scope](../../docs/simulation-validation.md).
 

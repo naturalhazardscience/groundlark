@@ -1,18 +1,18 @@
 {
   "generator": "KiCad 9.0.9 native PCB render",
-  "board_sha256": "a4f1566e7b993c04e9c302ff2ed2b7fa0e1a4ea6f7f89138e6b8082cca89ae75",
+  "board_sha256": "c077525514f035eb8227498309da46716a612a5720111e7324d39617246bec90",
   "models": "Vendor Trenz STEP; authored Pi, SDP32, power envelopes and manufacturer-dimensioned SMA/MAX-M10S STEP envelopes",
   "physical_fit_qualified": false,
   "sha256": {
-    "3d.png": "cc07f8002a3bae77706874ed4bf12a425bdbf754e7356b00f134284c96900bd4",
-    "3d-bottom.png": "e398c7d1aa39cdcfebf9bd327a60fb60acd67d952c15ab5362cb00732c64ee5f",
-    "trenz-mounted.png": "7c0a9038a7e3c008d62682341bd7145f9166a5a870d5976e7ddc8b82282fd95d",
-    "pi-trenz-stack-concept.png": "e353688f5621dad54d75acbe34bd02ec632de706baeeaaedc0b5ccb707624836",
-    "stack-service-envelopes.png": "231018345af04009a10c7428100bac7148b1c0d527cb8ba7b5cd9efabed40c7f",
-    "stack-exploded.png": "a1977aeac716ae9d5ac0803521da028e2a3781365f8fd34ec28bd9a246b76568"
+    "3d.png": "43087a3fedef20ee0656ac828b1b9b2aa63982e4195dab56255a5f4122e2112d",
+    "3d-bottom.png": "1572be063f69d9246dfb7b54124a94ffc2095292ea0df75f4dcb0924e8b01414",
+    "trenz-mounted.png": "d34735916184a8ebcde2b569d621b708005d1451253ff0978cbebc2f2fb5df6a",
+    "pi-trenz-stack-concept.png": "6b795d498ed27fe872e0a9987386933a963c95a8a53145ce168465d12d6ab4bc",
+    "stack-service-envelopes.png": "4ee94599a9f767f8a1ab1e629bd919108f03207da89d44c10c5302241cb86896",
+    "stack-exploded.png": "2bd850f2934dfa267a5eebde9168a60af4203e73c89bbfd93c2d385a0998896a"
   },
   "calibration_access": "TP90-TP93 underside pads; no fitted components or additional enclosure cutouts.",
   "pressure_model_sha256": "8c2fac308af653c219f8b502c2ed1daa6d3490034d28bb0be4e044907b03a9a0",
-  "revision": "Compact backside RF circuit, L140 56 nH and L141 3.6 nH; all native renders regenerated and underside reviewed.",
+  "revision": "Signal coupling routing revision; native copper synchronized into all assembly views and all six renders regenerated. Component poses and model envelopes unchanged.",
   "rf_model_sha256": "d1a078885b88fb6fa6045988deb906c7a38ab533ece3def2bf7db933649b8144"
 }
